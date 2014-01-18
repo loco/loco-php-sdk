@@ -9,9 +9,9 @@
             "summary:": "Test method should always respond 200",
             "httpMethod": "GET",
             "uri" : "ping.json",
+            "responseType" : "class",
             "responseClass" : "Loco\\Api\\Response\\PingResponse",
-            "responseNotes": "Always responds 200",
-            "responseType" : "primitive"
+            "responseNotes": "Always responds 200"
         }
     },
     "models" : {

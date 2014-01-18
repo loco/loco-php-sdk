@@ -53,10 +53,12 @@ class ApiClientTest extends \PHPUnit_Framework_TestCase {
     public function testCommand( ApiClient $client ){
         $command = $client->getCommand('Ping');
         $result = $command->execute();
-        $this->assertContains( 'pong', $result );
-        // try magic methods too
+        $this->assertInstanceof('\Loco\Api\Response\PingResponse', $result );
+        $this->assertEquals( 'pong', $result->ping() );
+        // try magic method too
         $result = $client->Ping();
-        $this->assertContains( 'pong', $result );
+        $this->assertInstanceof('\Loco\Api\Response\PingResponse', $result );
+        $this->assertEquals( 'pong', $result->ping() );
     }
 
     
