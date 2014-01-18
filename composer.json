@@ -1,0 +1,9 @@
+{
+    "name": "loco/loco-sdk-php",
+    "license": "MIT",
+    "type": "project",
+    "description": "Loco API client and utilities for PHP",
+    "require": {
+        "guzzle/guzzle": "~3.7"
+    }
+}
