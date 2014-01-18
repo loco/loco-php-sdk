@@ -31,12 +31,27 @@ class ApiClient extends Client {
 
         // Create a new instance of self
         $client = new self( $config->get('base_url'), $config );
+        
+        // Let config override service description for base_url
+        $service = self::describe();
+        $service->setBaseUrl('');
 
-        // Define Loco service via DSL
-        $config = __DIR__.'/Resources/restapi.json';
-        $client->setDescription( ServiceDescription::factory($config) );
+        return $client->setDescription( $service );
+                
+    }   
 
-        return $client;
-    }    
+    
+    
+    /**
+     * Create/Get Loco API service description
+     * @return ServiceDescription
+     */ 
+    private static function describe(){
 
+        // Define Loco service via DSL in JSON during development
+        return ServiceDescription::factory(__DIR__.'/Resources/restapi.json');
+        
+        // Define Loco service via compiled DSL for speed
+        // run and copy $ Resources/build.php | pbcopy
+    }
 }
