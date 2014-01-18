@@ -5,7 +5,6 @@ namespace Loco\Tests\Api;
 use Loco\Api\ApiClient;
 use Guzzle\Service\Builder\ServiceBuilder;
 
-
 /**
  * Test the API client works.
  */
@@ -36,6 +35,17 @@ class ApiClientTest extends \PHPUnit_Framework_TestCase {
         $response = $request->send();
         $this->assertContains( 'pong', $response->json() );
     }
-    
+
+
+    /**
+     * @depends testServiceBuilder
+     * @expectedException \Guzzle\Http\Exception\BadResponseException
+     */    
+    public function testNotFound( ApiClient $client ){
+        $request = $client->get('ping/not-found.json');
+        $request->send();
+    }
+
     
 }
+
