@@ -62,5 +62,26 @@ class ApiClientTest extends \PHPUnit_Framework_TestCase {
     }
 
     
+    /**
+     * @depends testServiceBuilder
+     */
+    public function testConverter( ApiClient $client ){
+        /* @var $result \Guzzle\Http\Message\Response */
+        $result = $client->Convert( array(
+            'from' => 'json',
+            'to' => 'po',
+            'src' => '{"foo":"bar"}',
+            'domain' => 'test',
+            'locale' => 'fr',
+        ) );
+        $this->assertInstanceOf('\Guzzle\Http\Message\Response', $result );
+        $this->assertRegExp( '/msgid\s+"foo"\s+msgstr\s+"bar"/', (string) $result->getBody() );
+    }
+    
+    
+    
+    
+
+    
 }
 

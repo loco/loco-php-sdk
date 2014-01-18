@@ -7,11 +7,48 @@
     "operations" : {
         "Ping": {
             "summary:": "Test method should always respond 200",
-            "httpMethod": "GET",
             "uri" : "ping.json",
+            "httpMethod": "GET",
             "responseType" : "class",
             "responseClass" : "Loco\\Api\\Response\\PingResponse",
             "responseNotes": "Always responds 200"
+        },
+        "Convert" : {
+            "summary" : "Convert to and from various file formats",
+            "uri" : "convert/{from}/{domain}{.locale}.{to}{?format}",
+            "httpMethod" : "POST",
+            "responseType" : "primitive",
+            "responseNotes" : "Response format is the raw data specified by the file extension",
+            "parameters": {
+                "src": {
+                    "required": true,
+                    "description": "Raw source of file being converted",
+                    "location": "body"
+                },
+                "from" : {
+                    "required": true,
+                    "description": "Source file format being converted",
+                    "location": "uri"
+                },
+                "to" : {
+                    "required": true,
+                    "description": "Target file format being converted to, specified as file extension",
+                    "location": "uri"
+                },
+                "format" : {
+                    "description": "Specific target format for some file types",
+                    "location": "query"
+                },
+                "domain" : {
+                    "default": "messages",
+                    "description": "Domain/namespace applicable to some target formats, defaults to 'messages'",
+                    "location": "uri"
+                },
+                "locale" : {
+                    "description": "Locale of target language pack",
+                    "location": "uri"
+                }
+            }
         }
     },
     "models" : {
