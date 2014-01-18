@@ -21,7 +21,7 @@ class ApiClientTest extends \PHPUnit_Framework_TestCase {
         $jsonfile = __DIR__.'/../../../../config.json';
         $this->assertFileExists( $jsonfile, 'Config not copied from config.json.dist' );
         $builder = ServiceBuilder::factory( $jsonfile );
-        $client = $builder->get('loco_test');
+        $client = $builder->get('loco');
         $this->assertInstanceOf('\Loco\Api\ApiClient', $client );
         return $client;
     }
@@ -54,11 +54,11 @@ class ApiClientTest extends \PHPUnit_Framework_TestCase {
         $command = $client->getCommand('Ping');
         $result = $command->execute();
         $this->assertInstanceof('\Loco\Api\Response\PingResponse', $result );
-        $this->assertEquals( 'pong', $result->ping() );
+        $this->assertEquals( 'pong', (string) $result );
         // try magic method too
         $result = $client->Ping();
         $this->assertInstanceof('\Loco\Api\Response\PingResponse', $result );
-        $this->assertEquals( 'pong', $result->ping() );
+        $this->assertEquals( 'pong', (string) $result );
     }
 
     
@@ -66,7 +66,7 @@ class ApiClientTest extends \PHPUnit_Framework_TestCase {
      * @depends testServiceBuilder
      */
     public function testConverter( ApiClient $client ){
-        /* @var $result \Guzzle\Http\Message\Response */
+        /* @var $result \Loco\Api\Response\ConvertResponse */
         $result = $client->Convert( array(
             'from' => 'json',
             'to' => 'po',
@@ -74,8 +74,8 @@ class ApiClientTest extends \PHPUnit_Framework_TestCase {
             'domain' => 'test',
             'locale' => 'fr',
         ) );
-        $this->assertInstanceOf('\Guzzle\Http\Message\Response', $result );
-        $this->assertRegExp( '/msgid\s+"foo"\s+msgstr\s+"bar"/', (string) $result->getBody() );
+        $this->assertInstanceOf('\Loco\Api\Response\ConvertResponse', $result );
+        $this->assertRegExp( '/msgid\s+"foo"\s+msgstr\s+"bar"/', (string) $result );
     }
     
     

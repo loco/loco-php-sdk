@@ -1,10 +1,9 @@
 {
     "services": {
-        "loco_test": {
+        "loco": {
             "class": "Loco\\Api\\ApiClient",
             "params": {
                 "key": "",
-                "base_url": "https://localise.biz/api"
             }
         }
     }

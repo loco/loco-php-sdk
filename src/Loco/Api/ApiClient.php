@@ -2,13 +2,14 @@
 
 namespace Loco\Api;
 
-
 use Guzzle\Common\Collection;
 use Guzzle\Plugin\Oauth\OauthPlugin;
 use Guzzle\Service\Client;
 use Guzzle\Service\Description\ServiceDescription;
 
-
+/**
+ * @method Ping \Loco\Api\Responses\PingResponse
+ */
 class ApiClient extends Client {
 
     
