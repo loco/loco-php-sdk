@@ -3,69 +3,52 @@
 namespace Loco\Tests\Api;
 
 use Loco\Api\ApiClient;
+use Guzzle\Tests\GuzzleTestCase;
 use Guzzle\Service\Builder\ServiceBuilder;
 
 /**
  * Test the API client works.
  */
-class ApiClientTest extends \PHPUnit_Framework_TestCase {
+class ApiClientTest extends GuzzleTestCase {
     
-    
-    public function testClassValid(){
-        $client = new ApiClient('http://example.com/');
-        $this->assertInstanceOf('\Guzzle\Service\Client', $client );
-    }
-    
-    
-    public function testServiceBuilder(){
-        $jsonfile = __DIR__.'/../../../../config.json';
-        $this->assertFileExists( $jsonfile, 'Config not copied from config.json.dist' );
-        $builder = ServiceBuilder::factory( $jsonfile );
-        $client = $builder->get('loco');
-        $this->assertInstanceOf('\Loco\Api\ApiClient', $client );
-        return $client;
+    /**
+     * @covers Loco\Api\ApiClient::factory
+     */
+    public function testFactoryInitializesClient(){
+        $client = ApiClient::factory( array(
+            'key' => 'dummy',
+        ) );
+        $this->assertEquals('https://localise.biz/api', $client->getBaseUrl() );
+        $this->assertEquals('dummy', $client->getConfig('key') );
     }
     
 
     /**
-     * @depends testServiceBuilder
-     */    
-    public function testPing( ApiClient $client ){
-        $request = $client->get('ping.json');
-        $response = $request->send();
-        $this->assertContains( 'pong', $response->json() );
+     * Live ping test via overloaded service method
+     */
+    public function testPing(){
+        $client = $this->getServiceBuilder()->get('loco');
+        $pong = $client->Ping();
+        $this->assertContains( 'pong', (string) $pong );
     }
 
 
+
     /**
-     * @depends testServiceBuilder
+     * Live 404 test via custom endpoint
      * @expectedException \Guzzle\Http\Exception\BadResponseException
      */    
-    public function testNotFound( ApiClient $client ){
-        $request = $client->get('ping/not-found.json');
-        $request->send();
+    public function testNotFound(){
+        $client = $this->getServiceBuilder()->get('loco');
+        $client->get('ping/not-found.json')->send();
     }
     
     
     /**
-     * @depends testServiceBuilder
+     * Live file converter test
      */
-    public function testCommand( ApiClient $client ){
-        $command = $client->getCommand('Ping');
-        $result = $command->execute();
-        $this->assertInstanceof('\Loco\Api\Response\PingResponse', $result );
-        $this->assertEquals( 'pong', (string) $result );
-        // try magic method too
-        $result = $client->Ping();
-        $this->assertInstanceof('\Loco\Api\Response\PingResponse', $result );
-        $this->assertEquals( 'pong', (string) $result );
-    }
-
-    
-    /**
-     * @depends testServiceBuilder
-     */
-    public function testConverter( ApiClient $client ){
+    public function testConverter(){
+        $client = $this->getServiceBuilder()->get('loco');
         $result = $client->Convert( array(
             'from' => 'json',
             'to' => 'po',
@@ -76,10 +59,6 @@ class ApiClientTest extends \PHPUnit_Framework_TestCase {
         $this->assertInstanceOf('\Loco\Api\Response\ConvertResponse', $result );
         $this->assertRegExp( '/msgid\s+"foo"\s+msgstr\s+"bar"/', (string) $result );
     }
-    
-    
-    
-    
 
     
 }
