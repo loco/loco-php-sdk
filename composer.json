@@ -5,5 +5,11 @@
     "description": "Loco API client and utilities for PHP",
     "require": {
         "guzzle/guzzle": "~3.7"
+    },
+    "autoload": {
+        "psr-0": {
+            "Loco": "src/",
+            "Loco\\Tests": "tests/"
+        }
     }
 }
