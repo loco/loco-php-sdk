@@ -18,8 +18,8 @@ class ApiClientTest extends \PHPUnit_Framework_TestCase {
     
     
     public function testServiceBuilder(){
-        $jsonfile = __DIR__.'/../../../../services.json';
-        $this->assertFileExists( $jsonfile, 'Config not copied from services.json.dist' );
+        $jsonfile = __DIR__.'/../../../../config.json';
+        $this->assertFileExists( $jsonfile, 'Config not copied from config.json.dist' );
         $builder = ServiceBuilder::factory( $jsonfile );
         $client = $builder->get('loco_test');
         $this->assertInstanceOf('\Loco\Api\ApiClient', $client );
@@ -44,6 +44,19 @@ class ApiClientTest extends \PHPUnit_Framework_TestCase {
     public function testNotFound( ApiClient $client ){
         $request = $client->get('ping/not-found.json');
         $request->send();
+    }
+    
+    
+    /**
+     * @depends testServiceBuilder
+     */
+    public function testCommand( ApiClient $client ){
+        $command = $client->getCommand('Ping');
+        $result = $command->execute();
+        $this->assertContains( 'pong', $result );
+        // try magic methods too
+        $result = $client->Ping();
+        $this->assertContains( 'pong', $result );
     }
 
     

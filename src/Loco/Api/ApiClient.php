@@ -32,6 +32,10 @@ class ApiClient extends Client {
         // Create a new instance of self
         $client = new self( $config->get('base_url'), $config );
 
+        // Define Loco service via DSL
+        $config = __DIR__.'/Resources/restapi.json';
+        $client->setDescription( ServiceDescription::factory($config) );
+
         return $client;
     }    
 
