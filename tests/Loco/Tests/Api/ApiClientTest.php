@@ -66,7 +66,6 @@ class ApiClientTest extends \PHPUnit_Framework_TestCase {
      * @depends testServiceBuilder
      */
     public function testConverter( ApiClient $client ){
-        /* @var $result \Loco\Api\Response\ConvertResponse */
         $result = $client->Convert( array(
             'from' => 'json',
             'to' => 'po',
