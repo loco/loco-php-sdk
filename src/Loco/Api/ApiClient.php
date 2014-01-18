@@ -35,6 +35,9 @@ class ApiClient extends Client {
         // Let config override service description for base_url
         $service = self::describe();
         $service->setBaseUrl('');
+        
+        // Prefix Loco identifier to user agent string
+        $client->setUserAgent( $service->getName().'/'.$service->getApiVersion(), true );
 
         return $client->setDescription( $service );
                 

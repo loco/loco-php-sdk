@@ -1,9 +1,9 @@
 {
 
-    "name": "Loco REST API",
-    "apiVersion": 0,
+    "name": "loco-sdk-php",
+    "apiVersion": "1.0",
     "baseUrl" : "https://localise.biz/api",
-    "description": "",
+    "description": "Loco REST API",
     "operations" : {
         "Ping": {
             "summary:": "Test method should always respond 200",
