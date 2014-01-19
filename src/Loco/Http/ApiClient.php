@@ -3,7 +3,6 @@
 namespace Loco\Http;
 
 use Guzzle\Common\Collection;
-use Guzzle\Plugin\Oauth\OauthPlugin;
 use Guzzle\Service\Client;
 use Guzzle\Service\Description\ServiceDescription;
 
