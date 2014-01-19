@@ -3,7 +3,7 @@
     "name": "loco-sdk-php",
     "apiVersion": "1.0",
     "baseUrl" : "https://localise.biz/api",
-    "description": "Loco SDK for PHP, including REST API client",
+    "description": "Loco REST API client",
     "operations" : {
         "Ping": {
             "summary:": "Check the server is up",
