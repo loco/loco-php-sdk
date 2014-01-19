@@ -3,6 +3,8 @@ namespace Loco\Http\Response;
 
 use Guzzle\Service\Command\ResponseClassInterface;
 use Guzzle\Service\Command\OperationCommand;
+use Guzzle\Http\Message\Response;
+
 
 /**
  * responseClass for /api/convert/*
@@ -15,8 +17,13 @@ class ConvertResponse implements ResponseClassInterface {
      * @return ConvertResponse
      */
     public static function fromCommand( OperationCommand $command ) {
+        $response = $command->getResponse();
+        /* @var $response Response */
+        if( 204 === $response->getStatusCode() ){
+            throw new \Exception('No messages extracted from '.$command->get('from').' source');
+        }
         $me = new self;
-        $me->source = $command->getResponse()->getBody()->__toString();
+        $me->source = $response->getBody()->__toString();
         return $me;
     }
     

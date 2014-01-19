@@ -36,8 +36,8 @@ class ApiClientTest extends GuzzleTestCase {
         $plugin->addResponse( new Response( 200, array(), '{"ping":"pang"}' ) );
         $client = $this->getServiceBuilder()->get('loco');
         $client->addSubscriber( $plugin );
-        $pong = $client->Ping();
-        $this->assertEquals( 'pang', $pong->get('ping') );
+        $pong = $client->Ping()->get('ping');
+        $this->assertEquals( 'pang', $pong );
     }
     
 
@@ -53,8 +53,8 @@ class ApiClientTest extends GuzzleTestCase {
         // call Ping()
         $client = clone $this->getServiceBuilder()->get('loco');
         $client->setBaseUrl( $this->getServer()->getUrl() );
-        $pong = $client->Ping();
-        $this->assertEquals( 'pang', $pong->get('ping') );
+        $pong = $client->Ping()->get('ping');
+        $this->assertEquals( 'pang', $pong );
     }
 
 
@@ -65,8 +65,8 @@ class ApiClientTest extends GuzzleTestCase {
      */
     public function testLivePing(){
         $client = $this->getServiceBuilder()->get('loco');
-        $pong = $client->Ping();
-        $this->assertContains( 'pong', $pong->get('ping') );
+        $pong = $client->Ping()->get('ping');
+        $this->assertContains( 'pong', $pong );
     }
 
 
@@ -90,15 +90,24 @@ class ApiClientTest extends GuzzleTestCase {
      */
     public function testLiveConvert(){
         $client = $this->getServiceBuilder()->get('loco');
-        $result = $client->Convert( array(
-            'from' => 'json',
-            'to' => 'po',
-            'src' => '{"foo":"bar"}',
-            'domain' => 'test',
-            'locale' => 'fr',
-        ) );
-        $this->assertInstanceOf('\Loco\Http\Response\ConvertResponse', $result );
-        $this->assertRegExp( '/msgid\s+"foo"\s+msgstr\s+"bar"/', (string) $result );
+        $types = array (
+            'json' => '{"foo":"bar"}',
+            'ios'  => '"foo" = "bar";',
+            'yml'  => 'foo: bar',
+            'xml'  => '<x><y name="foo">bar</y></x>',
+            'php'  => '<?php $foo = "bar";',
+        );
+        foreach( $types as $ext => $sample ){
+            $result = $client->Convert( array(
+                'from'   => $ext,
+                'src'    => $sample,
+                'domain' => 'test',
+                'locale' => 'fr',
+                'to'     => 'po',
+            ) );
+            $this->assertInstanceOf('\Loco\Http\Response\ConvertResponse', $result );
+            $this->assertRegExp( '/msgid\s+"foo"\s+msgstr\s+"bar"/', (string) $result );
+        }
     }
     
 }
