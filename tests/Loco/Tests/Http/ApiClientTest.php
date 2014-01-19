@@ -36,8 +36,8 @@ class ApiClientTest extends GuzzleTestCase {
         $plugin->addResponse( new Response( 200, array(), '{"ping":"pang"}' ) );
         $client = $this->getServiceBuilder()->get('loco');
         $client->addSubscriber( $plugin );
-        $pong = (string) $client->Ping();
-        $this->assertEquals( 'pang', $pong );
+        $pong = $client->Ping();
+        $this->assertEquals( 'pang', $pong->get('ping') );
     }
     
 
@@ -53,8 +53,8 @@ class ApiClientTest extends GuzzleTestCase {
         // call Ping()
         $client = clone $this->getServiceBuilder()->get('loco');
         $client->setBaseUrl( $this->getServer()->getUrl() );
-        $pong = (string) $client->Ping();
-        $this->assertEquals( 'pang', $pong );
+        $pong = $client->Ping();
+        $this->assertEquals( 'pang', $pong->get('ping') );
     }
 
 
@@ -66,7 +66,7 @@ class ApiClientTest extends GuzzleTestCase {
     public function testLivePing(){
         $client = $this->getServiceBuilder()->get('loco');
         $pong = $client->Ping();
-        $this->assertContains( 'pong', (string) $pong );
+        $this->assertContains( 'pong', $pong->get('ping') );
     }
 
 

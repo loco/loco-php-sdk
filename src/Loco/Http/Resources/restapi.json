@@ -9,8 +9,8 @@
             "summary:": "Check the server is up",
             "uri" : "ping.json",
             "httpMethod": "GET",
-            "responseType" : "class",
-            "responseClass" : "Loco\\Http\\Response\\PingResponse",
+            "responseType" : "model",
+            "responseClass" : "PingOutput",
             "responseNotes": "Always responds 200 with 'pong' message"
         },
         "Convert" : {
@@ -53,6 +53,15 @@
         }
     },
     "models" : {
+        "PingOutput" : {
+            "type": "object",
+            "properties": {
+                "ping": {
+                    "type": "string",
+                    "location": "json"
+                }
+            }
+        }
     },
     "includes" : []
 }
