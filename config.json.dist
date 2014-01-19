@@ -3,7 +3,7 @@
         "loco": {
             "class": "Loco\\Http\\ApiClient",
             "params": {
-                "key": "",
+                "key": ""
             }
         }
     }
