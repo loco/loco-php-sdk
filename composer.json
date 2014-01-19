@@ -2,14 +2,13 @@
     "name": "loco/loco-sdk-php",
     "license": "MIT",
     "type": "project",
-    "description": "Loco API client and utilities for PHP",
+    "description": "Loco SDK for PHP, including REST API client",
     "require": {
         "guzzle/guzzle": "~3.7"
     },
     "autoload": {
         "psr-0": {
-            "Loco": "src/",
-            "Loco\\Tests": "tests/"
+            "Loco": "src/"
         }
     }
 }
