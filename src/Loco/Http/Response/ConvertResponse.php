@@ -1,23 +1,22 @@
 <?php
-namespace Loco\Api\Response;
+namespace Loco\Http\Response;
 
 use Guzzle\Service\Command\ResponseClassInterface;
 use Guzzle\Service\Command\OperationCommand;
 
 /**
- * Pointless responseClass for testing /api/ping.json endpoint.
+ * responseClass for /api/convert/*
  */
-class PingResponse implements ResponseClassInterface {
+class ConvertResponse implements ResponseClassInterface {
 
-    private $ping;
+    private $source;
 
     /**
-     * @return PingResponse
+     * @return ConvertResponse
      */
     public static function fromCommand( OperationCommand $command ) {
-        $data = $command->getResponse()->json();
         $me = new self;
-        $me->ping = $data['ping'];
+        $me->source = $command->getResponse()->getBody()->__toString();
         return $me;
     }
     
@@ -25,7 +24,7 @@ class PingResponse implements ResponseClassInterface {
      * @return string
      */
     public function __toString(){
-        return $this->ping;
+        return $this->source;
     }
 
 }

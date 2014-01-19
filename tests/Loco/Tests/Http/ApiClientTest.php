@@ -2,7 +2,7 @@
 
 namespace Loco\Tests\Api;
 
-use Loco\Api\ApiClient;
+use Loco\Http\ApiClient;
 use Guzzle\Tests\GuzzleTestCase;
 use Guzzle\Service\Builder\ServiceBuilder;
 use Guzzle\Http\Message\Response;
@@ -15,7 +15,7 @@ use Guzzle\Plugin\Mock\MockPlugin;
 class ApiClientTest extends GuzzleTestCase {
     
     /**
-     * @covers Loco\Api\ApiClient::factory
+     * @covers Loco\Http\ApiClient::factory
      */
     public function testFactoryInitializesClient(){
         $client = ApiClient::factory( array(
@@ -97,7 +97,7 @@ class ApiClientTest extends GuzzleTestCase {
             'domain' => 'test',
             'locale' => 'fr',
         ) );
-        $this->assertInstanceOf('\Loco\Api\Response\ConvertResponse', $result );
+        $this->assertInstanceOf('\Loco\Http\Response\ConvertResponse', $result );
         $this->assertRegExp( '/msgid\s+"foo"\s+msgstr\s+"bar"/', (string) $result );
     }
     

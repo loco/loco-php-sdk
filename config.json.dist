@@ -1,7 +1,7 @@
 {
     "services": {
         "loco": {
-            "class": "Loco\\Api\\ApiClient",
+            "class": "Loco\\Http\\ApiClient",
             "params": {
                 "key": "",
             }

@@ -1,6 +1,6 @@
 <?php
 
-namespace Loco\Api;
+namespace Loco\Http;
 
 use Guzzle\Common\Collection;
 use Guzzle\Plugin\Oauth\OauthPlugin;
@@ -8,7 +8,7 @@ use Guzzle\Service\Client;
 use Guzzle\Service\Description\ServiceDescription;
 
 /**
- * @method Ping \Loco\Api\Responses\PingResponse
+ * @method Ping \Loco\Http\Responses\PingResponse
  */
 class ApiClient extends Client {
 

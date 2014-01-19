@@ -10,7 +10,7 @@
             "uri" : "ping.json",
             "httpMethod": "GET",
             "responseType" : "class",
-            "responseClass" : "Loco\\Api\\Response\\PingResponse",
+            "responseClass" : "Loco\\Http\\Response\\PingResponse",
             "responseNotes": "Always responds 200"
         },
         "Convert" : {
@@ -18,7 +18,7 @@
             "uri" : "convert/{from}/{domain}{.locale}.{to}{?format}",
             "httpMethod": "POST",
             "responseType": "class",
-            "responseClass" : "Loco\\Api\\Response\\ConvertResponse",
+            "responseClass" : "Loco\\Http\\Response\\ConvertResponse",
             "responseNotes" : "Response format is the raw data specified by the file extension",
             "parameters": {
                 "src": {

@@ -3,7 +3,7 @@
  * Ping the API, just to check everything is working.
  */
 require __DIR__.'/../vendor/autoload.php';
-use Loco\Api\ApiClient;
+use Loco\Http\ApiClient;
 
 $client = ApiClient::factory();
 $pong = $client->Ping();

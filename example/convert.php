@@ -3,7 +3,7 @@
  * Convert an iOS Localizable.strings file to an Android XML file
  */
 require __DIR__.'/../vendor/autoload.php';
-use Loco\Api\ApiClient;
+use Loco\Http\ApiClient;
 
 $client = ApiClient::factory();
 
