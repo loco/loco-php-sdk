@@ -3,15 +3,15 @@
     "name": "loco-sdk-php",
     "apiVersion": "1.0",
     "baseUrl" : "https://localise.biz/api",
-    "description": "Loco REST API",
+    "description": "Loco SDK for PHP, including REST API client",
     "operations" : {
         "Ping": {
-            "summary:": "Test method should always respond 200",
+            "summary:": "Check the server is up",
             "uri" : "ping.json",
             "httpMethod": "GET",
             "responseType" : "class",
             "responseClass" : "Loco\\Http\\Response\\PingResponse",
-            "responseNotes": "Always responds 200"
+            "responseNotes": "Always responds 200 with 'pong' message"
         },
         "Convert" : {
             "summary" : "Convert to and from various file formats",
