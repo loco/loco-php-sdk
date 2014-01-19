@@ -5,15 +5,14 @@
     "baseUrl" : "https://localise.biz/api",
     "description": "Loco REST API client",
     "operations" : {
-        "Ping": {
+        "ping": {
             "summary:": "Check the server is up",
             "uri" : "ping.json",
             "httpMethod": "GET",
-            "responseType" : "model",
             "responseClass" : "PingOutput",
             "responseNotes": "Always responds 200 with 'pong' message"
         },
-        "Convert" : {
+        "convert" : {
             "summary" : "Convert to and from various file formats",
             "uri" : "convert/{from}/{domain}{.locale}.{to}{?format}",
             "httpMethod": "POST",
@@ -50,6 +49,25 @@
                     "location": "uri"
                 }
             }
+        },
+        "authTest": {
+            "summary" : "Check authentication via your Loco API project key",
+            "uri" : "auth/test.json{?key}",
+            "httpMethod": "GET",
+            "responseClass": "AuthTestOutput",
+            "parameters": {
+                "key" : {
+                    "description": "Loco project key",
+                    "required": true,
+                    "location": "query"
+                }
+            },
+            "errorResponses" : [
+                {
+                    "code" : 401, 
+                    "phrase" : "API key is not valid"
+                }
+            ]
         }
     },
     "models" : {
@@ -61,7 +79,20 @@
                     "location": "json"
                 }
             }
+        },
+        "AuthTestOutput" : {
+            "type": "object",
+            "properties": {
+                "status": {
+                    "location": "statusCode",
+                    "type": "integer"
+                }
+            },
+            "additionalProperties": {
+                "location": "json"
+            }
         }
+
     },
     "includes" : []
 }

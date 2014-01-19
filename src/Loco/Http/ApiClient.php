@@ -29,6 +29,11 @@ class ApiClient extends Client {
 
         // Merge in default settings and validate the config
         $config = Collection::fromConfig( $config, $default, $required );
+        
+        // add common command parameters. They should only be appended when required
+        $config->add( Client::COMMAND_PARAMS, array ( 
+            'key' => $config->get('key'),
+        ) );
 
         // Create a new instance of self
         $client = new self( $config->get('base_url'), $config );
@@ -58,4 +63,8 @@ class ApiClient extends Client {
         // Define Loco service via compiled DSL for speed
         // run and copy $ Resources/build.php | pbcopy
     }
+    
+    
+
 }
+

@@ -11,7 +11,7 @@ use Loco\Http\Response\ConvertResponse;
 $client = ApiClient::factory();
 
 /* @var $result ConvertResponse */
-$result = $client->Convert( array(
+$result = $client->convert( array(
     'src'    => file_get_contents(__DIR__.'/sample.xlf'),
     'from'   => 'xlf',
     'to'     => 'yml',

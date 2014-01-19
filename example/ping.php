@@ -10,6 +10,6 @@ use Guzzle\Service\Resource\Model;
 $client = ApiClient::factory();
 
 /* @var $result Model */
-$result = $client->Ping();
+$result = $client->ping();
 
 echo $result->get('ping'), "\n";

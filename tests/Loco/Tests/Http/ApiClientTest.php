@@ -36,7 +36,7 @@ class ApiClientTest extends GuzzleTestCase {
         $plugin->addResponse( new Response( 200, array(), '{"ping":"pang"}' ) );
         $client = $this->getServiceBuilder()->get('loco');
         $client->addSubscriber( $plugin );
-        $pong = $client->Ping()->get('ping');
+        $pong = $client->ping()->get('ping');
         $this->assertEquals( 'pang', $pong );
     }
     
@@ -53,7 +53,7 @@ class ApiClientTest extends GuzzleTestCase {
         // call Ping()
         $client = clone $this->getServiceBuilder()->get('loco');
         $client->setBaseUrl( $this->getServer()->getUrl() );
-        $pong = $client->Ping()->get('ping');
+        $pong = $client->ping()->get('ping');
         $this->assertEquals( 'pang', $pong );
     }
 
@@ -65,7 +65,7 @@ class ApiClientTest extends GuzzleTestCase {
      */
     public function testLivePing(){
         $client = $this->getServiceBuilder()->get('loco');
-        $pong = $client->Ping()->get('ping');
+        $pong = $client->ping()->get('ping');
         $this->assertContains( 'pong', $pong );
     }
 
@@ -98,7 +98,7 @@ class ApiClientTest extends GuzzleTestCase {
             'php'  => '<?php $foo = "bar";',
         );
         foreach( $types as $ext => $sample ){
-            $result = $client->Convert( array(
+            $result = $client->convert( array(
                 'from'   => $ext,
                 'src'    => $sample,
                 'domain' => 'test',
