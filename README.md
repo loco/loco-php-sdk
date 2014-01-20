@@ -1,5 +1,9 @@
 # Loco SDK for PHP
 
+## Version
+
+1.0.0-alpha: Currently in development.
+
 ## Installation
 
 Installation is via [composer](http://getcomposer.org/doc/00-intro.md#using-composer). With composer installed run the following:
