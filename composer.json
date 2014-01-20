@@ -1,9 +1,19 @@
 {
     "name": "loco/loco-sdk-php",
     "license": "MIT",
-    "type": "project",
+    "type": "library",
+    "keywords": ["loco","translation","l10n","languages"],
     "description": "Loco SDK for PHP, including REST API client",
+    "authors": [
+        {
+            "name": "Tim Whitlock",
+            "email": "support at localise dot biz",
+            "homepage": "https://localise.biz/",
+            "role": "Developer"
+        }
+    ],
     "require": {
+        "php": ">=5.3.3",
         "guzzle/guzzle": "~3.7"
     },
     "autoload": {
