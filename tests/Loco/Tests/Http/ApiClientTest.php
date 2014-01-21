@@ -155,6 +155,27 @@ class ApiClientTest extends GuzzleTestCase {
     }
 
 
+    /**
+     * Live test of zip archive
+     * @group live
+     */
+    public function testLiveExportArchive(){
+        $client = $this->getServiceBuilder()->get('loco');
+        $result = $client->exportArchive( array(
+            'to' => 'po',
+        ) );
+        $this->assertInstanceOf('\Loco\Http\Response\ConvertResponse', $result );
+        $bin = (string) $result;
+        // check response is zip file.
+        $tmp = tempnam( sys_get_temp_dir(), 'loco_zip_' );
+        register_shutdown_function( 'unlink', $tmp );
+        file_put_contents( $tmp, $bin );
+        $zip = new \ZipArchive;
+        $res = $zip->open( $tmp, \ZipArchive::CHECKCONS );
+        $this->assertTrue( $res );
+    }
+
+
          
     
 }
