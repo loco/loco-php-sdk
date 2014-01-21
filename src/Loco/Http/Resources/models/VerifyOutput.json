@@ -1,0 +1,12 @@
+{
+    "type": "object",
+    "properties": {
+        "status": {
+            "location": "statusCode",
+            "type": "integer"
+        }
+    },
+    "additionalProperties": {
+        "location": "json"
+    }
+}

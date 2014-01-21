@@ -1,0 +1,19 @@
+{
+    "summary" : "Check authentication via your Loco API project key",
+    "uri" : "auth/test.json{?key}",
+    "httpMethod": "GET",
+    "responseClass": "AuthTestOutput",
+    "parameters": {
+        "key" : {
+            "description": "Loco project key",
+            "required": true,
+            "location": "query"
+        }
+    },
+    "errorResponses" : [
+        {
+            "code" : 401, 
+            "phrase" : "API key is not valid"
+        }
+    ]
+}
