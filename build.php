@@ -1,16 +1,18 @@
 #!/usr/bin/env php
 <?php
 /**
- * Compile separate json files into single PHP service definition
+ * Build configs and docs
  */
- 
-$path = __DIR__.'/service.json';
+
+// Compile separate json files into single Guzzle service definition
+$base = __DIR__.'/src/Loco/Http/Resources';  
+$path = $base.'/service.json';
 $json = file_get_contents( $path );
 $root = json_decode( $json, true );
 
 foreach( array('operations','models') as $dir ){
     $root[$dir] = array();
-    foreach( glob(__DIR__.'/'.$dir.'/*.json') as $_path){
+    foreach( glob($base.'/'.$dir.'/*.json') as $_path){
         $name = pathinfo( $_path, PATHINFO_FILENAME );
         $node = json_decode( file_get_contents($_path), true );
         if( ! is_array($node) ){
@@ -20,8 +22,8 @@ foreach( array('operations','models') as $dir ){
     }
 }
 
-// output PHP array for including
-$target = __DIR__.'/service.php';
+// output PHP array for including from Loco\Http\ApiClient
+$target = $base.'/service.php';
 file_put_contents( $target, "<?php\nreturn ".var_export( $root, 1 ).";\n" );
 
-echo "Ok, PHP service description saved to ",$target,"\n";
+echo "Service description saved to ",$target,"\n";
