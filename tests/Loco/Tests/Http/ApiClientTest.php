@@ -110,5 +110,20 @@ class ApiClientTest extends GuzzleTestCase {
         }
     }
     
+    
+    
+    /**
+     * Live test of configured project key
+     * @group live
+     */
+    public function testLiveAuthVerify(){
+        $client = $this->getServiceBuilder()->get('loco');
+        $model = $client->verify();
+        $this->assertInternalType( 'array', $model->get('user') );
+        $this->assertInternalType( 'array', $model->get('group') );
+        $this->assertInternalType( 'array', $model->get('project') );
+    }   
+         
+    
 }
 

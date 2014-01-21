@@ -63,9 +63,9 @@ return array (
     'verify' => 
     array (
       'summary' => 'Check authentication via your Loco API project key',
-      'uri' => 'auth/test.json{?key}',
+      'uri' => 'auth/verify.json{?key}',
       'httpMethod' => 'GET',
-      'responseClass' => 'AuthTestOutput',
+      'responseClass' => 'VerifyOutput',
       'parameters' => 
       array (
         'key' => 
@@ -104,16 +104,62 @@ return array (
       'type' => 'object',
       'properties' => 
       array (
-        'status' => 
+        'user' => 
         array (
-          'location' => 'statusCode',
-          'type' => 'integer',
+          'type' => 'object',
+          'location' => 'json',
+          'properties' => 
+          array (
+            'id' => 
+            array (
+              'type' => 'integer',
+            ),
+            'name' => 
+            array (
+              'type' => 'string',
+            ),
+            'email' => 
+            array (
+              'type' => 'string',
+            ),
+          ),
+        ),
+        'group' => 
+        array (
+          'type' => 'object',
+          'properties' => 
+          array (
+            'id' => 
+            array (
+              'type' => 'integer',
+            ),
+            'name' => 
+            array (
+              'type' => 'string',
+            ),
+          ),
+        ),
+        'project' => 
+        array (
+          'type' => 'object',
+          'properties' => 
+          array (
+            'id' => 
+            array (
+              'type' => 'integer',
+            ),
+            'name' => 
+            array (
+              'type' => 'string',
+            ),
+            'url' => 
+            array (
+              'type' => 'string',
+            ),
+          ),
         ),
       ),
-      'additionalProperties' => 
-      array (
-        'location' => 'json',
-      ),
+      'additionalProperties' => false,
     ),
   ),
   'includes' => 

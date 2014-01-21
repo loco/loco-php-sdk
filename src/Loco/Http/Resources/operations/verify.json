@@ -1,8 +1,8 @@
 {
     "summary" : "Check authentication via your Loco API project key",
-    "uri" : "auth/test.json{?key}",
+    "uri" : "auth/verify.json{?key}",
     "httpMethod": "GET",
-    "responseClass": "AuthTestOutput",
+    "responseClass": "VerifyOutput",
     "parameters": {
         "key" : {
             "description": "Loco project key",

@@ -1,12 +1,46 @@
 {
     "type": "object",
     "properties": {
-        "status": {
-            "location": "statusCode",
-            "type": "integer"
+        "user" : {
+            "type": "object",
+            "location": "json",
+            "properties": {
+                "id": {
+                    "type": "integer"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "email": {
+                    "type": "string"
+                }
+            }
+        },
+        "group" : {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "integer"
+                },
+                "name": {
+                    "type": "string"
+                }
+            }
+        },
+        "project" : {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "integer"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "url": {
+                    "type": "string"
+                }
+            }
         }
     },
-    "additionalProperties": {
-        "location": "json"
-    }
+    "additionalProperties": false
 }

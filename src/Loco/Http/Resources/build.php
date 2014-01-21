@@ -11,8 +11,11 @@ $root = json_decode( $json, true );
 foreach( array('operations','models') as $dir ){
     $root[$dir] = array();
     foreach( glob(__DIR__.'/'.$dir.'/*.json') as $_path){
-        $node = json_decode( file_get_contents($_path), true );
         $name = pathinfo( $_path, PATHINFO_FILENAME );
+        $node = json_decode( file_get_contents($_path), true );
+        if( ! is_array($node) ){
+            throw new Exception('Bad JSON for "'.$name.'"');
+        }
         $root[$dir][$name] = $node;
     }
 }
