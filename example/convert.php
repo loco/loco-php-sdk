@@ -6,11 +6,11 @@
 require __DIR__.'/../vendor/autoload.php';
 
 use Loco\Http\ApiClient;
-use Loco\Http\Response\ConvertResponse;
+use Loco\Http\Response\RawResponse;
 
 $client = ApiClient::factory();
 
-/* @var $result ConvertResponse */
+/* @var $result RawResponse */
 $result = $client->convert( array(
     'src'    => file_get_contents(__DIR__.'/sample.xlf'),
     'from'   => 'xlf',

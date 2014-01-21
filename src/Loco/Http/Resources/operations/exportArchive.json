@@ -3,7 +3,7 @@
     "uri" : "export/archive/{to}.zip{?format,filter}",
     "httpMethod": "GET",
     "responseType": "class",
-    "responseClass" : "Loco\\Http\\Response\\ConvertResponse",
+    "responseClass" : "Loco\\Http\\Response\\ZipResponse",
     "responseNotes" : "Response is binary Zip file contents",
     "parameters": {
         "key" : {

@@ -3,7 +3,7 @@
     "uri" : "convert/{from}/{domain}{.locale}.{to}{?format}",
     "httpMethod": "POST",
     "responseType": "class",
-    "responseClass" : "Loco\\Http\\Response\\ConvertResponse",
+    "responseClass" : "Loco\\Http\\Response\\RawResponse",
     "responseNotes" : "Response format is the raw data specified by the file extension",
     "parameters": {
         "src": {
@@ -34,5 +34,11 @@
             "description": "Locale of target language pack",
             "location": "uri"
         }
-    }
+    },
+    "errorResponses" : [
+        {
+            "code" : 204, 
+            "phrase" : "No messages could be extracted from source"
+        }
+    ]
 }

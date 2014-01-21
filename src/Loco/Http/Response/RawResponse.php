@@ -7,25 +7,34 @@ use Guzzle\Http\Message\Response;
 
 
 /**
- * responseClass for /api/convert/*
+ * responseClass for endpoints that return raw, unstructured data that will not be unserialized
  */
-class ConvertResponse implements ResponseClassInterface {
+class RawResponse implements ResponseClassInterface {
 
     private $source;
 
     /**
-     * @return ConvertResponse
+     * @return RawResponse
      */
     public static function fromCommand( OperationCommand $command ) {
         $response = $command->getResponse();
-        /* @var $response Response */
         if( 204 === $response->getStatusCode() ){
-            throw new \Exception('No messages extracted from '.$command->get('from').' source');
+            throw new \Exception('Response contains no data');
         }
         $me = new self;
-        $me->source = $response->getBody()->__toString();
-        return $me;
+        return $me->init( $response );
     }
+    
+    
+    /**
+     * Initialize from http response
+     * @return 
+     */
+    protected function init( Response $response ){
+        $this->source = $response->getBody()->__toString();
+        return $this;
+    }  
+    
     
     /**
      * @return string

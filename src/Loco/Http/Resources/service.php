@@ -36,7 +36,7 @@ return array (
       'uri' => 'convert/{from}/{domain}{.locale}.{to}{?format}',
       'httpMethod' => 'POST',
       'responseType' => 'class',
-      'responseClass' => 'Loco\\Http\\Response\\ConvertResponse',
+      'responseClass' => 'Loco\\Http\\Response\\RawResponse',
       'responseNotes' => 'Response format is the raw data specified by the file extension',
       'parameters' => 
       array (
@@ -75,6 +75,14 @@ return array (
           'location' => 'uri',
         ),
       ),
+      'errorResponses' => 
+      array (
+        0 => 
+        array (
+          'code' => 204,
+          'phrase' => 'No messages could be extracted from source',
+        ),
+      ),
     ),
     'exportAll' => 
     array (
@@ -82,7 +90,7 @@ return array (
       'uri' => 'export/all.{to}{?format}',
       'httpMethod' => 'GET',
       'responseType' => 'class',
-      'responseClass' => 'Loco\\Http\\Response\\ConvertResponse',
+      'responseClass' => 'Loco\\Http\\Response\\RawResponse',
       'responseNotes' => 'Response format is the raw data specified by the file extension',
       'parameters' => 
       array (
@@ -116,7 +124,7 @@ return array (
       'uri' => 'export/archive/{to}.zip{?format,filter}',
       'httpMethod' => 'GET',
       'responseType' => 'class',
-      'responseClass' => 'Loco\\Http\\Response\\ConvertResponse',
+      'responseClass' => 'Loco\\Http\\Response\\ZipResponse',
       'responseNotes' => 'Response is binary Zip file contents',
       'parameters' => 
       array (
@@ -150,7 +158,7 @@ return array (
       'uri' => 'export/locale/{locale}.{to}{?format}',
       'httpMethod' => 'GET',
       'responseType' => 'class',
-      'responseClass' => 'Loco\\Http\\Response\\ConvertResponse',
+      'responseClass' => 'Loco\\Http\\Response\\RawResponse',
       'responseNotes' => 'Response format is the raw data specified by the file extension',
       'parameters' => 
       array (

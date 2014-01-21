@@ -105,7 +105,7 @@ class ApiClientTest extends GuzzleTestCase {
                 'locale' => 'fr',
                 'to'     => 'po',
             ) );
-            $this->assertInstanceOf('\Loco\Http\Response\ConvertResponse', $result );
+            $this->assertInstanceOf('\Loco\Http\Response\RawResponse', $result );
             $this->assertRegExp( '/msgid\s+"foo"\s+msgstr\s+"bar"/', (string) $result );
         }
     }
@@ -136,7 +136,7 @@ class ApiClientTest extends GuzzleTestCase {
             'to' => 'pot',
             'locale' => 'en',
         ) );
-        $this->assertInstanceOf('\Loco\Http\Response\ConvertResponse', $result );
+        $this->assertInstanceOf('\Loco\Http\Response\RawResponse', $result );
         $this->assertRegExp( '/msgid\s+""/', (string) $result );
     }   
 
@@ -150,7 +150,7 @@ class ApiClientTest extends GuzzleTestCase {
         $result = $client->exportAll( array(
             'to' => 'tmx',
         ) );
-        $this->assertInstanceOf('\Loco\Http\Response\ConvertResponse', $result );
+        $this->assertInstanceOf('\Loco\Http\Response\RawResponse', $result );
         $this->assertContains( '<!DOCTYPE tmx', (string) $result );
     }
 
@@ -164,15 +164,9 @@ class ApiClientTest extends GuzzleTestCase {
         $result = $client->exportArchive( array(
             'to' => 'po',
         ) );
-        $this->assertInstanceOf('\Loco\Http\Response\ConvertResponse', $result );
-        $bin = (string) $result;
-        // check response is zip file.
-        $tmp = tempnam( sys_get_temp_dir(), 'loco_zip_' );
-        register_shutdown_function( 'unlink', $tmp );
-        file_put_contents( $tmp, $bin );
-        $zip = new \ZipArchive;
-        $res = $zip->open( $tmp, \ZipArchive::CHECKCONS );
-        $this->assertTrue( $res );
+        $this->assertInstanceOf('\Loco\Http\Response\ZipResponse', $result );
+        $zip = $result->getZip();
+        $this->assertInstanceOf('\ZipArchive', $zip );
     }
 
 
