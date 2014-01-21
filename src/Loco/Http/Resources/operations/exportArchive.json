@@ -1,0 +1,28 @@
+{
+    "summary:": "Export all locales to individual files",
+    "uri" : "export/archive/{to}.zip{?format,filter}",
+    "httpMethod": "GET",
+    "responseType": "class",
+    "responseClass" : "Loco\\Http\\Response\\ConvertResponse",
+    "responseNotes" : "Response is binary Zip file contents",
+    "parameters": {
+        "key" : {
+            "required": true,
+            "description": "Loco project key",
+            "location": "query"
+        },
+        "to" : {
+            "required": true,
+            "description": "Target file format being exported, specified as file extension",
+            "location": "uri"
+        },
+        "format" : {
+            "description": "Specific target format for some file types",
+            "location": "query"
+        },
+        "filter" : {
+            "description": "Specify export to be filtered by one or more tags, separated by commas",
+            "location": "query"
+        }
+    }
+}

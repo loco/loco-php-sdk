@@ -118,11 +118,43 @@ class ApiClientTest extends GuzzleTestCase {
      */
     public function testLiveAuthVerify(){
         $client = $this->getServiceBuilder()->get('loco');
-        $model = $client->verify();
+        $model = $client->authVerify();
         $this->assertInternalType( 'array', $model->get('user') );
         $this->assertInternalType( 'array', $model->get('group') );
         $this->assertInternalType( 'array', $model->get('project') );
     }   
+
+    
+    
+    /**
+     * Live test of single locale export
+     * @group live
+     */
+    public function testLiveExportLocale(){
+        $client = $this->getServiceBuilder()->get('loco');
+        $result = $client->exportLocale( array(
+            'to' => 'pot',
+            'locale' => 'en',
+        ) );
+        $this->assertInstanceOf('\Loco\Http\Response\ConvertResponse', $result );
+        $this->assertRegExp( '/msgid\s+""/', (string) $result );
+    }   
+
+
+    /**
+     * Live test of a muilt-locale export in a single file
+     * @group live
+     */
+    public function testLiveExportAll(){
+        $client = $this->getServiceBuilder()->get('loco');
+        $result = $client->exportAll( array(
+            'to' => 'tmx',
+        ) );
+        $this->assertInstanceOf('\Loco\Http\Response\ConvertResponse', $result );
+        $this->assertContains( '<!DOCTYPE tmx', (string) $result );
+    }
+
+
          
     
 }

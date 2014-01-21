@@ -1,5 +1,5 @@
 {
-    "summary" : "Check authentication via your Loco API project key",
+    "summary" : "Verify authentication via your Loco API project key",
     "uri" : "auth/verify.json{?key}",
     "httpMethod": "GET",
     "responseClass": "VerifyOutput",

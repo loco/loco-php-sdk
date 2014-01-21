@@ -1,0 +1,33 @@
+{
+    "summary:": "Export a single locale",
+    "uri" : "export/locale/{locale}.{to}{?format}",
+    "httpMethod": "GET",
+    "responseType": "class",
+    "responseClass" : "Loco\\Http\\Response\\ConvertResponse",
+    "responseNotes" : "Response format is the raw data specified by the file extension",
+    "parameters": {
+        "key" : {
+            "required": true,
+            "description": "Loco project key",
+            "location": "query"
+        },
+        "to" : {
+            "required": true,
+            "description": "Target file format being exported, specified as file extension",
+            "location": "uri"
+        },
+        "locale" : {
+            "required": true,
+            "description": "Locale of target language pack",
+            "location": "uri"
+        },
+        "format" : {
+            "description": "Specific target format for some file types",
+            "location": "query"
+        },
+        "filter" : {
+            "description": "Specify export to be filtered by one or more tags, separated by commas",
+            "location": "query"
+        }
+    }
+}
