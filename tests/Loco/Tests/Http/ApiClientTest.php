@@ -167,6 +167,8 @@ class ApiClientTest extends GuzzleTestCase {
         $this->assertInstanceOf('\Loco\Http\Response\ZipResponse', $result );
         $zip = $result->getZip();
         $this->assertInstanceOf('\ZipArchive', $zip );
+        $this->assertContains( 'Exported', $zip->getArchiveComment() );
+        $zip->close();
     }
 
 
