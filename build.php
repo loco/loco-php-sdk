@@ -1,10 +1,9 @@
 #!/usr/bin/env php
 <?php
 /**
- * Build configs and docs
+ * Compile separate json files into single Guzzle service definition
  */
 
-// Compile separate json files into single Guzzle service definition
 $base = __DIR__.'/src/Loco/Http/Resources';  
 $path = $base.'/service.json';
 $json = file_get_contents( $path );

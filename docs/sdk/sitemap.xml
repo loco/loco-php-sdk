@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<url>
+	<loc>https://localise.biz/docs/sdk/index.html</loc>
+</url>
+<url>
+	<loc>https://localise.biz/docs/sdk/namespace-Loco.html</loc>
+</url>
+<url>
+	<loc>https://localise.biz/docs/sdk/namespace-Loco.Http.html</loc>
+</url>
+<url>
+	<loc>https://localise.biz/docs/sdk/namespace-Loco.Http.Response.html</loc>
+</url>
+
+
+<url>
+	<loc>https://localise.biz/docs/sdk/class-Loco.Http.ApiClient.html</loc>
+</url>
+<url>
+	<loc>https://localise.biz/docs/sdk/class-Loco.Http.Response.RawResponse.html</loc>
+</url>
+<url>
+	<loc>https://localise.biz/docs/sdk/class-Loco.Http.Response.ZipResponse.html</loc>
+</url>
+</urlset>

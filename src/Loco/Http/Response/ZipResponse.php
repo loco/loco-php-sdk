@@ -7,7 +7,7 @@ use Guzzle\Http\Message\Response;
 
 
 /**
- * responseClass for endpoints that return binary zip files
+ * Response class for endpoints that return binary zip files.
  */
 class ZipResponse extends RawResponse implements ResponseClassInterface {
     
@@ -18,6 +18,8 @@ class ZipResponse extends RawResponse implements ResponseClassInterface {
     
 
     /**
+     * Create a response model object from a completed command
+     * @param OperationCommand Command that serialized the request
      * @return ZipResponse
      */
     public static function fromCommand( OperationCommand $command ) {
@@ -28,7 +30,8 @@ class ZipResponse extends RawResponse implements ResponseClassInterface {
     
     
     /**
-     * Get zip archive instance
+     * Get zip archive instance.
+     * @throws \Exception if zip file is invalid
      * @return \ZipArchive
      */
     public function getZip(){

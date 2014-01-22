@@ -1,0 +1,3 @@
+User-agent: *
+Disallow:
+Sitemap: https://localise.biz/docs/sdk/sitemap.xml

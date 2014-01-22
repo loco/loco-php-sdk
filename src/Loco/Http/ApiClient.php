@@ -7,12 +7,14 @@ use Guzzle\Service\Client;
 use Guzzle\Service\Description\ServiceDescription;
 
 /**
- * @method Ping \Loco\Http\Responses\PingResponse
+ * Loco API Client.
  */
 class ApiClient extends Client {
 
     
     /**
+     * Factory method to create a new Loco API client.
+     * @param array|Collection $config Configuration data
      * @return ApiClient
      */
     public static function factory( $config = array() ){
