@@ -7,7 +7,7 @@ use Guzzle\Service\Client;
 use Guzzle\Service\Description\ServiceDescription;
 
 /**
- * Loco API Client.
+ * Loco REST API Client.
  */
 class ApiClient extends Client {
 
