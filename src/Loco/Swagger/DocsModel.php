@@ -1,0 +1,150 @@
+<?php
+
+namespace Loco\Swagger;
+
+use Guzzle\Service\Description\ServiceDescription;
+use Guzzle\Service\Description\Operation;
+
+/**
+ * Models Swagger API declarations and converts to Guzzle service descriptions.
+ */
+class DocsModel {
+    
+    /**
+     * @var ServiceDescription
+     */
+    private $service;    
+
+    
+    /**
+     * Construct with minimum mandatory parameters, name and version.
+     */
+    public function __construct( $name, $apiVersion ){
+        $this->service = new ServiceDescription( compact('name','apiVersion') );
+    }    
+    
+    
+    /**
+     * Get compiled Guzzle service description
+     * @return ServiceDescription
+     */
+    public function getDescription(){
+        return $this->service;
+    }
+    
+    
+    /**
+     * Add a Swagger Api declaration which may consist of multiple operations
+     * @param array consisting of path, description and array of operations
+     * @todo how do we handle responseClass mapping?
+     * @return DocsModel
+     */    
+    public function addSwaggerApi( array $api ){
+        // path is common to all swagger operations and specified as URI
+        $path = $api['path'];
+        // operation keys common to both swagger and guzzle
+        static $common = array (
+            'summary' => '',
+        );
+        // translate swagger -> guzzle 
+        static $trans = array (
+            'method' => 'httpMethod',
+            'type' => 'responseType',
+            'notes' => 'responseNotes',
+        );
+        foreach( $api['operations'] as $op ){
+            $config = $this->transformArray( $op, $common, $trans );
+            $config['uri'] = $path;
+            // handle non-primative response types
+            if( isset($config['responseType']) ){
+                $type = $config['responseType'];
+                // set to model if model matches
+                if( $this->service->getModel($type) ){
+                    $config['responseType'] = 'model';
+                    $config['responseClass'] = $type;
+                }
+                //else if( $this->service->get ... @todo where are response types stored?
+            }
+            // command must have a name, and must be unique across methods
+            if( isset($op['nickname']) ){
+                $config['name'] = $op['nickname'];
+            }
+            // generate naff nickname if not specified
+            else {
+                $method = isset($op['method']) ? $op['method'] : 'GET';
+                $config['name'] = $method.'_'.str_replace('/','_',trim($path,'/') );
+            }
+            // handle parameters
+            if( isset($op['parameters']) ){
+                $config['parameters'] = $this->transformParams( $op['parameters'] );
+            }
+            else {
+                $config['parameters'] = array();
+            }
+            // add operation
+            $operation = new Operation( $config, $this->service );
+            $this->service->addOperation( $operation );
+        }
+        return $this;
+    }
+
+
+
+    /**
+     * Map a swagger parameter to a Guzzle one
+     */
+    private function transformParams( array $params ){
+        // param keys common to both swagger and guzzle
+        static $common = array (
+            'type' => '',
+            'required' => '',
+            'descripton' => '',
+        );
+        // translate swagger -> guzzle 
+        static $trans = array (
+            'paramType' => 'location',
+            'defaultValue' => 'default',
+        );
+        $target = array();
+        foreach( $params as $_param ){
+            $name = $_param['name'];
+            $param = $this->transformArray( $_param, $common, $trans );
+            // location differences 
+            if( isset($param['location']) && 'path' === $param['location'] ){
+                $param['location'] = 'uri';
+                // swagger doesn't allow optional path params
+                if( ! isset($param['required']) ){
+                    $param['required'] = true;
+                }
+            }
+            $target[$name] = $param;
+        }        
+        return $target;
+    }
+
+
+
+    /**
+     * Utility transform an array based on similarities and differences between the two formats.
+     * @param arrray source format (swagger)
+     * @param array keys common to both formats, { key: '', ... }
+     * @param array key translation mappings, { keya: keyb, ... }
+     * @return array target format (guzzle)
+     */
+    private function transformArray( array $swagger, array $common, array $trans ){
+        // initialize with common array keys
+        $guzzle = array_intersect_key( $swagger, $common );
+        // translate other naming differences
+        foreach( $trans as $source => $target ){
+            if( isset($swagger[$source]) ){
+                $guzzle[$target] = $swagger[$source];
+            }
+        }
+        return $guzzle;
+    }
+    
+    
+}
+
+
+

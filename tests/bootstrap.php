@@ -1,6 +1,6 @@
 <?php
 /**
- * PHPUnit bootstrap for Loco tests.
+ * PHPUnit bootstrap for Loco SDK tests.
  */
 
 if ( ! file_exists(dirname(__DIR__).'/vendor') ) {
