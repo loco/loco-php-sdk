@@ -15,7 +15,7 @@ class DocsModelTest extends \PHPUnit_Framework_TestCase {
      * @return DocsModel
      */
     public function testInitializeModel(){
-        $model = new DocsModel( 'test', '1.0' );
+        $model = new DocsModel( 'test', 'A test API', '1.0' );
         $descr = $model->getDescription();
         $this->assertEquals('test', $descr->getName() );
         $this->assertEquals('1.0', $descr->getApiVersion() );

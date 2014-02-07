@@ -19,8 +19,8 @@ class DocsModel {
     /**
      * Construct with minimum mandatory parameters, name and version.
      */
-    public function __construct( $name, $apiVersion ){
-        $this->service = new ServiceDescription( compact('name','apiVersion') );
+    public function __construct( $name, $description, $apiVersion ){
+        $this->service = new ServiceDescription( compact('name','description','apiVersion') );
     }    
     
     
@@ -98,7 +98,7 @@ class DocsModel {
         static $common = array (
             'type' => '',
             'required' => '',
-            'descripton' => '',
+            'description' => '',
         );
         // translate swagger -> guzzle 
         static $trans = array (
@@ -143,6 +143,29 @@ class DocsModel {
         return $guzzle;
     }
     
+    
+    
+    /**
+     * Export service description to JSON
+     * @return string
+     */
+    public function toJson(){
+        $options = 0;
+        if( defined('JSON_PRETTY_PRINT') ){
+            $options |= JSON_PRETTY_PRINT; // <- PHP>=5.4.0
+        }
+        return json_encode( $this->service->toArray(), $options );
+    }    
+
+
+
+    /**
+     * Export service description to PHP array
+     * @return string
+     */
+    public function export(){
+        return var_export( $this->service->toArray(), 1 ); 
+    }    
     
 }
 

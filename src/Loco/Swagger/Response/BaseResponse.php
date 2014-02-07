@@ -61,6 +61,16 @@ abstract class BaseResponse implements ResponseClassInterface {
         }
         return $paths;
     }    
+    
+
+    
+    /**
+     * Get api definitions
+     * @return array
+     */
+    public function getApis(){
+        return $this->get('apis')?:array();
+    }
 
     
 }

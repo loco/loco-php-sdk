@@ -1,284 +1,214 @@
 <?php
 return array (
-  'name' => 'loco-sdk-php',
-  'apiVersion' => '1.0',
-  'baseUrl' => '',
+  'name' => 'loco',
+  'apiVersion' => '1.0.1',
   'description' => 'Loco REST API client',
   'operations' => 
   array (
     'authVerify' => 
     array (
-      'summary' => 'Verify authentication via your Loco API project key',
-      'uri' => 'auth/verify.json{?key}',
       'httpMethod' => 'GET',
-      'responseClass' => 'VerifyOutput',
+      'uri' => '/auth/verify.json',
+      'class' => 'Guzzle\\Service\\Command\\OperationCommand',
+      'responseClass' => 'array',
+      'responseType' => 'primitive',
+      'responseNotes' => 'Loco API keys authenticate your user account for accessing a specific project.<br />
+             This endpoint verifies an API key and returns the authenticated user, account and project.',
+      'summary' => 'Verify an API project key',
       'parameters' => 
       array (
         'key' => 
         array (
-          'description' => 'Loco project key',
           'required' => true,
+          'description' => 'Project API key',
+          'type' => 'string',
           'location' => 'query',
-        ),
-      ),
-      'errorResponses' => 
-      array (
-        0 => 
-        array (
-          'code' => 401,
-          'phrase' => 'API key is not valid',
         ),
       ),
     ),
     'convert' => 
     array (
-      'summary' => 'Convert to and from various file formats',
-      'uri' => 'convert/{from}/{domain}{.locale}.{to}{?format}',
       'httpMethod' => 'POST',
-      'responseType' => 'class',
-      'responseClass' => 'Loco\\Http\\Response\\RawResponse',
-      'responseNotes' => 'Response format is the raw data specified by the file extension',
+      'uri' => '/convert/{from}/{name}.{ext}',
+      'class' => 'Guzzle\\Service\\Command\\OperationCommand',
+      'responseClass' => 'array',
+      'responseType' => 'primitive',
+      'responseNotes' => 'Use this API to convert between language pack file formats without a Loco account.<br /> 
+             Precise options depend on the file formats you\'re converting between.
+             <a href=\'https://localise.biz/free/converter/api\'>See some examples</a>.',
+      'summary' => 'Convert a language pack to another file format',
       'parameters' => 
       array (
         'src' => 
         array (
           'required' => true,
           'description' => 'Raw source of file being converted',
+          'type' => 'string',
           'location' => 'body',
+          'default' => '{"foo":"bar"}',
         ),
         'from' => 
         array (
           'required' => true,
-          'description' => 'Source file format being converted',
+          'description' => 'Source file format being imported',
+          'type' => 'string',
           'location' => 'uri',
+          'default' => 'json',
         ),
-        'to' => 
+        'ext' => 
         array (
           'required' => true,
-          'description' => 'Target file format being converted to, specified as file extension',
+          'description' => 'Target file format being exported, specified as a file extension',
+          'type' => 'string',
           'location' => 'uri',
+          'default' => 'json',
         ),
         'format' => 
         array (
-          'description' => 'Specific target format for some file types',
+          'description' => 'Specific target format, required for some file types',
+          'type' => 'string',
           'location' => 'query',
         ),
-        'domain' => 
+        'name' => 
         array (
-          'default' => 'messages',
-          'description' => 'Domain/namespace applicable to some target formats, defaults to \'messages\'',
+          'description' => 'Domain/namespace, applicable to some file formats',
+          'type' => 'string',
           'location' => 'uri',
+          'default' => 'messages',
         ),
         'locale' => 
         array (
-          'description' => 'Locale of target language pack',
-          'location' => 'uri',
-        ),
-      ),
-      'errorResponses' => 
-      array (
-        0 => 
-        array (
-          'code' => 204,
-          'phrase' => 'No messages could be extracted from source',
-        ),
-      ),
-    ),
-    'exportAll' => 
-    array (
-      'summary:' => 'Export all locales into a multi-locale file format',
-      'uri' => 'export/all.{to}{?format}',
-      'httpMethod' => 'GET',
-      'responseType' => 'class',
-      'responseClass' => 'Loco\\Http\\Response\\RawResponse',
-      'responseNotes' => 'Response format is the raw data specified by the file extension',
-      'parameters' => 
-      array (
-        'key' => 
-        array (
-          'required' => true,
-          'description' => 'Loco project key',
-          'location' => 'query',
-        ),
-        'to' => 
-        array (
-          'required' => true,
-          'description' => 'Multi-locale file format being exported, specified as file extension',
-          'location' => 'uri',
-        ),
-        'format' => 
-        array (
-          'description' => 'Specific target format for some file types',
-          'location' => 'query',
-        ),
-        'filter' => 
-        array (
-          'description' => 'Specify export to be filtered by one or more tags, separated by commas',
-          'location' => 'query',
-        ),
-      ),
-    ),
-    'exportArchive' => 
-    array (
-      'summary:' => 'Export all locales to individual files',
-      'uri' => 'export/archive/{to}.zip{?format,filter}',
-      'httpMethod' => 'GET',
-      'responseType' => 'class',
-      'responseClass' => 'Loco\\Http\\Response\\ZipResponse',
-      'responseNotes' => 'Response is binary Zip file contents',
-      'parameters' => 
-      array (
-        'key' => 
-        array (
-          'required' => true,
-          'description' => 'Loco project key',
-          'location' => 'query',
-        ),
-        'to' => 
-        array (
-          'required' => true,
-          'description' => 'Target file format being exported, specified as file extension',
-          'location' => 'uri',
-        ),
-        'format' => 
-        array (
-          'description' => 'Specific target format for some file types',
-          'location' => 'query',
-        ),
-        'filter' => 
-        array (
-          'description' => 'Specify export to be filtered by one or more tags, separated by commas',
+          'description' => 'Locale of target language pack, required for some formats',
+          'type' => 'string',
           'location' => 'query',
         ),
       ),
     ),
     'exportLocale' => 
     array (
-      'summary:' => 'Export a single locale',
-      'uri' => 'export/locale/{locale}.{to}{?format}',
       'httpMethod' => 'GET',
-      'responseType' => 'class',
-      'responseClass' => 'Loco\\Http\\Response\\RawResponse',
-      'responseNotes' => 'Response format is the raw data specified by the file extension',
+      'uri' => '/export/locale/{locale}.{ext}',
+      'class' => 'Guzzle\\Service\\Command\\OperationCommand',
+      'responseClass' => 'array',
+      'responseType' => 'primitive',
+      'responseNotes' => 'Export translations from your project to a locale-specific language pack.
+           Various export file types are supported with format variations for some types.',
+      'summary' => 'Export a single locale to a language pack.',
       'parameters' => 
       array (
         'key' => 
         array (
           'required' => true,
-          'description' => 'Loco project key',
+          'description' => 'Project API key',
+          'type' => 'string',
           'location' => 'query',
-        ),
-        'to' => 
-        array (
-          'required' => true,
-          'description' => 'Target file format being exported, specified as file extension',
-          'location' => 'uri',
         ),
         'locale' => 
         array (
           'required' => true,
-          'description' => 'Locale of target language pack',
+          'description' => 'Locale to export, specified as short code. e.g. \'en\' or \'en_GB\'',
+          'type' => 'string',
           'location' => 'uri',
+        ),
+        'ext' => 
+        array (
+          'required' => true,
+          'description' => 'Target file type specified as a file extension',
+          'type' => 'string',
+          'location' => 'uri',
+          'default' => 'json',
         ),
         'format' => 
         array (
-          'description' => 'Specific target format for some file types',
+          'description' => 'Specific format, applicable to some file types only',
+          'type' => 'string',
           'location' => 'query',
         ),
         'filter' => 
         array (
-          'description' => 'Specify export to be filtered by one or more tags, separated by commas',
+          'description' => 'Comma-separated list of tags to export subset of assets.',
+          'type' => 'string',
+          'location' => 'query',
+        ),
+        'index' => 
+        array (
+          'description' => 'Override default lookup key in language pack. Leave blank for auto.',
+          'type' => 'string',
+          'location' => 'query',
+        ),
+      ),
+    ),
+    'exportArchive' => 
+    array (
+      'httpMethod' => 'GET',
+      'uri' => '/export/archive/{ext}.zip',
+      'class' => 'Guzzle\\Service\\Command\\OperationCommand',
+      'responseClass' => 'array',
+      'responseType' => 'primitive',
+      'responseNotes' => 'Export all translations from your project to a zip archive of language packs.<br />
+           <br />
+           If you\'re exporting to a file format that supports multiple locales within the same file, you can use the <code>/export/all</code> method ',
+      'summary' => 'Export all locales to a zip archive',
+      'parameters' => 
+      array (
+        'key' => 
+        array (
+          'required' => true,
+          'description' => 'Project API key',
+          'type' => 'string',
+          'location' => 'query',
+        ),
+        'ext' => 
+        array (
+          'required' => true,
+          'description' => 'Target file type specified as a file extension',
+          'type' => 'string',
+          'location' => 'uri',
+          'default' => 'json',
+        ),
+        'format' => 
+        array (
+          'description' => 'Specific format, applicable to some file types only',
+          'type' => 'string',
+          'location' => 'query',
+        ),
+        'filter' => 
+        array (
+          'description' => 'Comma-separated list of tags to export subset of assets.',
+          'type' => 'string',
+          'location' => 'query',
+        ),
+        'index' => 
+        array (
+          'description' => 'Override default lookup key in language pack. Leave blank for auto.',
+          'type' => 'string',
           'location' => 'query',
         ),
       ),
     ),
     'ping' => 
     array (
-      'summary:' => 'Check the server is up',
-      'uri' => 'ping.json',
       'httpMethod' => 'GET',
-      'responseClass' => 'PingOutput',
-      'responseNotes' => 'Always responds 200 with \'pong\' message',
-    ),
-  ),
-  'models' => 
-  array (
-    'PingOutput' => 
-    array (
-      'type' => 'object',
-      'properties' => 
+      'uri' => '/ping.json',
+      'class' => 'Guzzle\\Service\\Command\\OperationCommand',
+      'responseClass' => 'array',
+      'responseType' => 'primitive',
+      'summary' => 'Check the API is up and check API version number',
+      'parameters' => 
       array (
-        'ping' => 
-        array (
-          'type' => 'string',
-          'location' => 'json',
-        ),
       ),
     ),
-    'VerifyOutput' => 
+    'ping404' => 
     array (
-      'type' => 'object',
-      'properties' => 
+      'httpMethod' => 'GET',
+      'uri' => '/ping/not-found.json',
+      'class' => 'Guzzle\\Service\\Command\\OperationCommand',
+      'responseClass' => 'array',
+      'responseType' => 'primitive',
+      'summary' => 'Get a test 404 response',
+      'parameters' => 
       array (
-        'user' => 
-        array (
-          'type' => 'object',
-          'location' => 'json',
-          'properties' => 
-          array (
-            'id' => 
-            array (
-              'type' => 'integer',
-            ),
-            'name' => 
-            array (
-              'type' => 'string',
-            ),
-            'email' => 
-            array (
-              'type' => 'string',
-            ),
-          ),
-        ),
-        'group' => 
-        array (
-          'type' => 'object',
-          'properties' => 
-          array (
-            'id' => 
-            array (
-              'type' => 'integer',
-            ),
-            'name' => 
-            array (
-              'type' => 'string',
-            ),
-          ),
-        ),
-        'project' => 
-        array (
-          'type' => 'object',
-          'properties' => 
-          array (
-            'id' => 
-            array (
-              'type' => 'integer',
-            ),
-            'name' => 
-            array (
-              'type' => 'string',
-            ),
-            'url' => 
-            array (
-              'type' => 'string',
-            ),
-          ),
-        ),
       ),
-      'additionalProperties' => false,
     ),
-  ),
-  'includes' => 
-  array (
   ),
 );

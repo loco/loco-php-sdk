@@ -8,6 +8,8 @@ use Guzzle\Service\Description\ServiceDescription;
 
 /**
  * Client for pulling Swagger docs
+ * @method getResources
+ * @method getDeclaration
  */
 class DocsClient extends Client {
 

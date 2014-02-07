@@ -29,5 +29,4 @@ class ApiDeclaration extends BaseResponse {
         return $this->get('resourcePath')?:'';
     }
     
-    
 }
