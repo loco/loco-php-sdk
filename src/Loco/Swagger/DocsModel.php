@@ -14,7 +14,11 @@ class DocsModel {
      * @var ServiceDescription
      */
     private $service;    
-
+    
+    /**
+     * @var array
+     */    
+    private $responses = array();
     
     /**
      * Construct with minimum mandatory parameters, name and version.
@@ -31,6 +35,22 @@ class DocsModel {
     public function getDescription(){
         return $this->service;
     }
+    
+    
+    
+    /**
+     * Apply a bespoke responseClass to a given method
+     * @return DocsModel
+     */
+    public function registerResponseClass( $name, $class ){
+        $this->responses[$name] = $class;
+        // method may have already been encountered
+        if( $op = $this->service->getOperation( $name ) ){
+            $op->setResponseClass( $class );
+        }
+        return $this;
+    }    
+    
     
     
     /**
@@ -55,24 +75,34 @@ class DocsModel {
         foreach( $api['operations'] as $op ){
             $config = $this->transformArray( $op, $common, $trans );
             $config['uri'] = $path;
-            // handle non-primative response types
-            if( isset($config['responseType']) ){
-                $type = $config['responseType'];
-                // set to model if model matches
-                if( $this->service->getModel($type) ){
-                    $config['responseType'] = 'model';
-                    $config['responseClass'] = $type;
-                }
-                //else if( $this->service->get ... @todo where are response types stored?
-            }
             // command must have a name, and must be unique across methods
             if( isset($op['nickname']) ){
-                $config['name'] = $op['nickname'];
+                $id = $config['name'] = $op['nickname'];
             }
             // generate naff nickname if not specified
             else {
                 $method = isset($op['method']) ? $op['method'] : 'GET';
-                $config['name'] = $method.'_'.str_replace('/','_',trim($path,'/') );
+                $id = $config['name'] = $method.'_'.str_replace('/','_',trim($path,'/') );
+            }
+            // allow response class override
+            if( isset($this->responses[$id]) ){
+                $config['responseType'] = 'class';
+                $config['responseClass'] = $this->responses[$id];
+            }
+            // handle non-primative response types
+            else if( isset($config['responseType']) ){
+                $type = $config['responseType'];
+                // set to primatives
+                static $primatives = array( 'string' => 'string', 'array' => 'array' );
+                if( isset($primatives[$type]) ){
+                    $config['responseType'] = 'primitive';
+                    $config['responseClass'] = $primatives[$type];
+                }
+                // set to model if model matches
+                else if( $this->service->getModel($type) ){
+                    $config['responseType'] = 'model';
+                    $config['responseClass'] = $type;
+                }
             }
             // handle parameters
             if( isset($op['parameters']) ){

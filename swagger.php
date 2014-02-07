@@ -18,10 +18,16 @@ $version = $resources->getApiVersion();
 printf("Loco API version %s\n", $version );
 
 // instantiate Swagger->Guzzle transformer
-$service = new DocsModel( 'loco', 'Loco REST API client', $version );
+$service = new DocsModel( 'loco-php', 'Loco REST API client', $version );
 
-// register custom response classes - meaningless in Swagger terms
-// $service->registerResponseClass('\Loco\Http\Response\RawResponse');
+// register custom response classes
+$raw = '\Loco\Http\Response\RawResponse';
+$zip = '\Loco\Http\Response\ZipResponse';
+// A local class is meaningless in Swagger terms, but very useful in Guzzle
+$service->registerResponseClass('exportArchive', $zip )
+        ->registerResponseClass('exportLocale', $raw )
+        ->registerResponseClass('exportAll', $raw )
+        ->registerResponseClass('convert', $raw );
 
 
 // pull each api declaration and add to service dedcription
@@ -34,6 +40,9 @@ foreach( $resources->getApiPaths() as $path ){
         $service->addSwaggerApi( $api );
     }
 }
+
+
+
 
 // inspect service definition
 // echo $service->toJson();
