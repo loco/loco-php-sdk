@@ -53,7 +53,7 @@ class DocsClientTest extends GuzzleTestCase {
                 ),
             ),
             // single Echo model that would look like { "pong" : "" }
-            'modals' => array (
+            'models' => array (
                 'Echo' => array (
                     'id' => 'Echo',
                     'properties' => array (
@@ -108,11 +108,17 @@ class DocsClientTest extends GuzzleTestCase {
         $plugin = new MockPlugin();
         $plugin->addResponse( new Response( 200, array(), $this->declarationJson ) );
         $client->addSubscriber( $plugin );
-        $api = $client->getDeclaration( array(
+        $declaration = $client->getDeclaration( array(
             'path' => '/ping',
         ) );
-        $this->assertInstanceOf('\Loco\Swagger\Response\ApiDeclaration', $api );
-        $this->assertEquals( '/ping', $api->getResourcePath() );
+        $this->assertInstanceOf('\Loco\Swagger\Response\ApiDeclaration', $declaration );
+        $this->assertEquals( '/ping', $declaration->getResourcePath() );
+        // apis
+        $apis = $declaration->getApis();
+        $this->assertCount( 1, $apis );
+        // models
+        $models = $declaration->getModels();
+        $this->assertCount( 1, $models );
     }    
     
     

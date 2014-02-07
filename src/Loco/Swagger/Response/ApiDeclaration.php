@@ -29,4 +29,14 @@ class ApiDeclaration extends BaseResponse {
         return $this->get('resourcePath')?:'';
     }
     
+
+    
+    /**
+     * Get model definitions
+     * @return array
+     */
+    public function getModels(){
+        return $this->get('models')?:array();
+    }
+    
 }

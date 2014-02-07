@@ -4,6 +4,7 @@ namespace Loco\Swagger;
 
 use Guzzle\Service\Description\ServiceDescription;
 use Guzzle\Service\Description\Operation;
+use Guzzle\Service\Description\Parameter;
 
 /**
  * Models Swagger API declarations and converts to Guzzle service descriptions.
@@ -16,9 +17,11 @@ class DocsModel {
     private $service;    
     
     /**
+     * Registry of custom classes, mapped by method command name
      * @var array
      */    
     private $responses = array();
+
     
     /**
      * Construct with minimum mandatory parameters, name and version.
@@ -51,6 +54,42 @@ class DocsModel {
         return $this;
     }    
     
+    
+    
+    /**
+     * Add a Swagger model definition
+     * @return DocsModel
+     */
+    public function addModel( array $model ){
+        static $common = array(
+            'description' => '',
+        );
+        static $trans = array(
+            'id' => 'name',
+        );
+        $data = $this->transformArray( $model, $common, $trans );
+        // @todo is type always "object"?
+        $data['type'] = 'object';
+        $data['additionalProperties'] = false;
+        // properties
+        if( isset($model['properties']) ){
+            $data['properties'] = $this->transformParams( $model['properties'] );
+            // required params are an external array
+            if( isset($model['required']) ){
+                foreach( $model['required'] as $prop ){
+                    if( isset($data['properties'][$prop]) ){
+                        $data['properties'][$prop]['required'] = true;
+                    }
+                }
+            }
+        }
+        else {
+            $data['properties'] = array();
+        }
+        $this->service->addModel( new Parameter($data) );
+        return $this;
+    }   
+     
     
     
     /**
@@ -136,8 +175,10 @@ class DocsModel {
             'defaultValue' => 'default',
         );
         $target = array();
-        foreach( $params as $_param ){
-            $name = $_param['name'];
+        foreach( $params as $name => $_param ){
+            if( isset($_param['name']) ){    
+                $name = $_param['name'];
+            }
             $param = $this->transformArray( $_param, $common, $trans );
             // location differences 
             if( isset($param['location']) && 'path' === $param['location'] ){

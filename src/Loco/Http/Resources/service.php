@@ -10,8 +10,8 @@ return array (
       'httpMethod' => 'GET',
       'uri' => '/auth/verify.json',
       'class' => 'Guzzle\\Service\\Command\\OperationCommand',
-      'responseClass' => 'array',
-      'responseType' => 'primitive',
+      'responseClass' => 'Creds',
+      'responseType' => 'model',
       'responseNotes' => 'Loco API keys authenticate your user account for accessing a specific project.<br />
              This endpoint verifies an API key and returns the authenticated user, account and project.',
       'summary' => 'Verify an API project key',
@@ -234,8 +234,8 @@ return array (
       'httpMethod' => 'GET',
       'uri' => '/ping.json',
       'class' => 'Guzzle\\Service\\Command\\OperationCommand',
-      'responseClass' => 'array',
-      'responseType' => 'primitive',
+      'responseClass' => 'Echo',
+      'responseType' => 'model',
       'summary' => 'Check the API is up and check API version number',
       'parameters' => 
       array (
@@ -246,11 +246,135 @@ return array (
       'httpMethod' => 'GET',
       'uri' => '/ping/not-found.json',
       'class' => 'Guzzle\\Service\\Command\\OperationCommand',
-      'responseClass' => 'array',
-      'responseType' => 'primitive',
+      'responseClass' => 'Error',
+      'responseType' => 'model',
       'summary' => 'Get a test 404 response',
       'parameters' => 
       array (
+      ),
+    ),
+  ),
+  'models' => 
+  array (
+    'Creds' => 
+    array (
+      'type' => 'object',
+      'additionalProperties' => false,
+      'properties' => 
+      array (
+        'user' => 
+        array (
+          'required' => true,
+          'description' => 'Authenticated user',
+        ),
+        'group' => 
+        array (
+          'required' => true,
+          'description' => 'Authenticated account',
+        ),
+        'project' => 
+        array (
+          'required' => true,
+          'description' => 'Project associated with authentication key',
+        ),
+      ),
+    ),
+    'User' => 
+    array (
+      'type' => 'object',
+      'additionalProperties' => false,
+      'properties' => 
+      array (
+        'id' => 
+        array (
+          'description' => 'User id',
+          'type' => 'integer',
+        ),
+        'name' => 
+        array (
+          'description' => 'Full user name',
+          'type' => 'string',
+        ),
+        'email' => 
+        array (
+          'description' => 'User\'s email address',
+          'type' => 'string',
+        ),
+      ),
+    ),
+    'Group' => 
+    array (
+      'type' => 'object',
+      'additionalProperties' => false,
+      'properties' => 
+      array (
+        'id' => 
+        array (
+          'description' => 'Loco account id',
+          'type' => 'integer',
+        ),
+        'name' => 
+        array (
+          'description' => 'Loco account name',
+          'type' => 'string',
+        ),
+      ),
+    ),
+    'Project' => 
+    array (
+      'type' => 'object',
+      'additionalProperties' => false,
+      'properties' => 
+      array (
+        'id' => 
+        array (
+          'description' => 'Project id',
+          'type' => 'integer',
+        ),
+        'name' => 
+        array (
+          'description' => 'Project name',
+          'type' => 'string',
+        ),
+        'url' => 
+        array (
+          'description' => 'Project dashboard URL',
+          'type' => 'string',
+        ),
+      ),
+    ),
+    'Echo' => 
+    array (
+      'type' => 'object',
+      'additionalProperties' => false,
+      'properties' => 
+      array (
+        'version' => 
+        array (
+          'required' => true,
+          'description' => 'Current API version',
+          'type' => 'string',
+        ),
+      ),
+    ),
+    'Error' => 
+    array (
+      'type' => 'object',
+      'additionalProperties' => false,
+      'properties' => 
+      array (
+        'status' => 
+        array (
+          'required' => true,
+          'description' => 'HTTP status code',
+          'type' => 'integer',
+        ),
+        'error' => 
+        array (
+          'required' => true,
+          'description' => 'Description of error',
+          'type' => 'string',
+        ),
       ),
     ),
   ),

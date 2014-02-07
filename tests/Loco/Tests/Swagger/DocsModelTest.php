@@ -21,11 +21,41 @@ class DocsModelTest extends \PHPUnit_Framework_TestCase {
         $this->assertEquals('1.0', $descr->getApiVersion() );
         return $model;
     }    
+
+
+    
+    /**
+     * Test adding of a model
+     * @depends testInitializeModel
+     * @return DocsModel
+     */    
+    public function testModelAddition( DocsModel $model ){
+        // mock a Swagger model definition with one mandatory property    
+        $def = array(
+            'id' => 'fooType',
+            'properties' => array (
+                'bar' => array(
+                    'type' => 'string',
+                    'description' => 'A test property',
+                ),
+            ),
+            'required' => array(
+                'bar',
+            ),
+        );
+        $model->addModel( $def );
+        $descr = $model->getDescription();
+        $this->assertCount( 1, $descr->getModels() );
+        $foo = $descr->getModel('fooType');
+        $this->assertEquals( 'string', $foo->getProperty('bar')->getType() );
+        return $model;
+    }
+    
     
     
     /**
      * Test adding of an operation with two methods
-     * @depends testInitializeModel
+     * @depends testModelAddition
      * @return DocsModel
      */    
     public function testOperationAddition( DocsModel $model ){

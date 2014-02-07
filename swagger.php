@@ -35,8 +35,12 @@ foreach( $resources->getApiPaths() as $path ){
     printf(" pulling %s ...\n", $path );
     usleep( 250000 );
     $declaration = $client->getDeclaration( compact('path') );
+    foreach ( $declaration->getModels() as $model ) {
+        printf(" + adding model %s ...\n", $model['id'] );
+        $service->addModel( $model );
+    }
     foreach( $declaration->getApis() as $api ){
-        printf(" + adding %s ...\n", $api['path'] );
+        printf(" + adding api %s ...\n", $api['path'] );
         $service->addSwaggerApi( $api );
     }
 }
