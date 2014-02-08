@@ -8,6 +8,8 @@ use Guzzle\Service\Description\ServiceDescription;
 
 /**
  * Loco REST API Client.
+ * 
+ * @usage $client = ApiClient::factory( array( 'key' => 'my-api-key' ) );
  */
 class ApiClient extends Client {
 
