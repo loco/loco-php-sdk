@@ -8,7 +8,7 @@ return array (
     'authVerify' => 
     array (
       'httpMethod' => 'GET',
-      'uri' => '/auth/verify.json',
+      'uri' => '/api/auth/verify.json',
       'class' => 'Guzzle\\Service\\Command\\OperationCommand',
       'responseClass' => 'Creds',
       'responseType' => 'model',
@@ -29,7 +29,7 @@ return array (
     'convert' => 
     array (
       'httpMethod' => 'POST',
-      'uri' => '/convert/{from}/{name}.{ext}',
+      'uri' => '/api/convert/{from}/{name}.{ext}',
       'class' => 'Guzzle\\Service\\Command\\OperationCommand',
       'responseClass' => '\\Loco\\Http\\Response\\RawResponse',
       'responseType' => 'class',
@@ -87,7 +87,7 @@ return array (
     'exportAll' => 
     array (
       'httpMethod' => 'GET',
-      'uri' => '/export/all.{ext}',
+      'uri' => '/api/export/all.{ext}',
       'class' => 'Guzzle\\Service\\Command\\OperationCommand',
       'responseClass' => '\\Loco\\Http\\Response\\RawResponse',
       'responseType' => 'class',
@@ -130,7 +130,7 @@ return array (
     'exportArchive' => 
     array (
       'httpMethod' => 'GET',
-      'uri' => '/export/archive/{ext}.zip',
+      'uri' => '/api/export/archive/{ext}.zip',
       'class' => 'Guzzle\\Service\\Command\\OperationCommand',
       'responseClass' => '\\Loco\\Http\\Response\\ZipResponse',
       'responseType' => 'class',
@@ -178,7 +178,7 @@ return array (
     'exportLocale' => 
     array (
       'httpMethod' => 'GET',
-      'uri' => '/export/locale/{locale}.{ext}',
+      'uri' => '/api/export/locale/{locale}.{ext}',
       'class' => 'Guzzle\\Service\\Command\\OperationCommand',
       'responseClass' => '\\Loco\\Http\\Response\\RawResponse',
       'responseType' => 'class',
@@ -232,7 +232,7 @@ return array (
     'ping' => 
     array (
       'httpMethod' => 'GET',
-      'uri' => '/ping.json',
+      'uri' => '/api/ping.json',
       'class' => 'Guzzle\\Service\\Command\\OperationCommand',
       'responseClass' => 'Echo',
       'responseType' => 'model',
@@ -244,7 +244,7 @@ return array (
     'ping404' => 
     array (
       'httpMethod' => 'GET',
-      'uri' => '/ping/not-found.json',
+      'uri' => '/api/ping/not-found.json',
       'class' => 'Guzzle\\Service\\Command\\OperationCommand',
       'responseClass' => 'Error',
       'responseType' => 'model',
@@ -266,16 +266,19 @@ return array (
         array (
           'required' => true,
           'description' => 'Authenticated user',
+          'location' => 'json',
         ),
         'group' => 
         array (
           'required' => true,
           'description' => 'Authenticated account',
+          'location' => 'json',
         ),
         'project' => 
         array (
           'required' => true,
           'description' => 'Project associated with authentication key',
+          'location' => 'json',
         ),
       ),
     ),
@@ -289,16 +292,19 @@ return array (
         array (
           'description' => 'User id',
           'type' => 'integer',
+          'location' => 'json',
         ),
         'name' => 
         array (
           'description' => 'Full user name',
           'type' => 'string',
+          'location' => 'json',
         ),
         'email' => 
         array (
           'description' => 'User\'s email address',
           'type' => 'string',
+          'location' => 'json',
         ),
       ),
     ),
@@ -312,11 +318,13 @@ return array (
         array (
           'description' => 'Loco account id',
           'type' => 'integer',
+          'location' => 'json',
         ),
         'name' => 
         array (
           'description' => 'Loco account name',
           'type' => 'string',
+          'location' => 'json',
         ),
       ),
     ),
@@ -330,16 +338,19 @@ return array (
         array (
           'description' => 'Project id',
           'type' => 'integer',
+          'location' => 'json',
         ),
         'name' => 
         array (
           'description' => 'Project name',
           'type' => 'string',
+          'location' => 'json',
         ),
         'url' => 
         array (
           'description' => 'Project dashboard URL',
           'type' => 'string',
+          'location' => 'json',
         ),
       ),
     ),
@@ -354,6 +365,7 @@ return array (
           'required' => true,
           'description' => 'Current API version',
           'type' => 'string',
+          'location' => 'json',
         ),
       ),
     ),
@@ -368,12 +380,14 @@ return array (
           'required' => true,
           'description' => 'HTTP status code',
           'type' => 'integer',
+          'location' => 'json',
         ),
         'error' => 
         array (
           'required' => true,
           'description' => 'Description of error',
           'type' => 'string',
+          'location' => 'json',
         ),
       ),
     ),

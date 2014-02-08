@@ -39,9 +39,10 @@ foreach( $resources->getApiPaths() as $path ){
         printf(" + adding model %s ...\n", $model['id'] );
         $service->addModel( $model );
     }
+    $url = $declaration->getBasePath();
     foreach( $declaration->getApis() as $api ){
-        printf(" + adding api %s ...\n", $api['path'] );
-        $service->addSwaggerApi( $api );
+        printf(" + adding api %s%s ...\n", $url, $api['path'] );
+        $service->addSwaggerApi( $api, $url );
     }
 }
 

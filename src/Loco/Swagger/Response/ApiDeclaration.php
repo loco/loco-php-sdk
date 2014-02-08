@@ -22,6 +22,15 @@ class ApiDeclaration extends BaseResponse {
     
     
     /**
+     * Get basePath sepcified outside of api operations
+     * @return string
+     */
+    public function getBasePath(){
+        return $this->get('basePath')?:'';
+    }
+    
+    
+    /**
      * Get resourcePath sepcified outside of api operations
      * @return string
      */

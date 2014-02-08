@@ -21,7 +21,7 @@ class DocsModel {
      * @var array
      */    
     private $responses = array();
-
+    
     
     /**
      * Construct with minimum mandatory parameters, name and version.
@@ -29,7 +29,7 @@ class DocsModel {
     public function __construct( $name, $description, $apiVersion ){
         $this->service = new ServiceDescription( compact('name','description','apiVersion') );
     }    
-    
+     
     
     /**
      * Get compiled Guzzle service description
@@ -68,12 +68,13 @@ class DocsModel {
             'id' => 'name',
         );
         $data = $this->transformArray( $model, $common, $trans );
-        // @todo is type always "object"?
+        // @todo is type always "object" in json with no additional props?
         $data['type'] = 'object';
         $data['additionalProperties'] = false;
         // properties
         if( isset($model['properties']) ){
-            $data['properties'] = $this->transformParams( $model['properties'] );
+            static $defaults = array( 'location' => 'json' );
+            $data['properties'] = $this->transformParams( $model['properties'], $defaults );
             // required params are an external array
             if( isset($model['required']) ){
                 foreach( $model['required'] as $prop ){
@@ -98,9 +99,13 @@ class DocsModel {
      * @todo how do we handle responseClass mapping?
      * @return DocsModel
      */    
-    public function addSwaggerApi( array $api ){
-        // path is common to all swagger operations and specified as URI
-        $path = $api['path'];
+    public function addSwaggerApi( array $api, $basePath = '' ){
+        if( $basePath ){
+            $basePath = parse_url( $basePath, PHP_URL_PATH );
+        }
+        // path is common to all swagger operations and specified relative to basePath
+        // @todo proper uri merge
+        $path = implode( '/', array( rtrim($basePath,'/'), ltrim($api['path'],'/') ) );
         // operation keys common to both swagger and guzzle
         static $common = array (
             'summary' => '',
@@ -150,6 +155,8 @@ class DocsModel {
             else {
                 $config['parameters'] = array();
             }
+            // @todo how to deny additional parameters in command calls?
+            // $config['additionalParameters'] = false;
             // add operation
             $operation = new Operation( $config, $this->service );
             $this->service->addOperation( $operation );
@@ -162,7 +169,7 @@ class DocsModel {
     /**
      * Map a swagger parameter to a Guzzle one
      */
-    private function transformParams( array $params ){
+    private function transformParams( array $params, array $defaults = array() ){
         // param keys common to both swagger and guzzle
         static $common = array (
             'type' => '',
@@ -188,7 +195,7 @@ class DocsModel {
                     $param['required'] = true;
                 }
             }
-            $target[$name] = $param;
+            $target[$name] = $param + $defaults;
         }        
         return $target;
     }
