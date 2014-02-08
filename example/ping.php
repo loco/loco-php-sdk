@@ -4,12 +4,14 @@
  */
 require __DIR__.'/../vendor/autoload.php';
 
-use Loco\Http\ApiClient;
-use Guzzle\Service\Resource\Model;
+$client = Loco\Http\ApiClient::factory();
 
-$client = ApiClient::factory();
-
-/* @var $result Model */
+/* @var $result \Guzzle\Service\Resource\Model */
 $result = $client->ping();
 
-echo $result->get('ping'), "\n";
+if( $version = $result->get('version') ){
+    printf("Ping OK, API version is %s\n", $version );
+}
+else {
+    printf("Ping failed to ping API\n");
+}

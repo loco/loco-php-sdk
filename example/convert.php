@@ -5,17 +5,16 @@
  */
 require __DIR__.'/../vendor/autoload.php';
 
-use Loco\Http\ApiClient;
-use Loco\Http\Response\RawResponse;
+/* @var $client \Loco\Http\ApiClient */
+$client = \Loco\Http\ApiClient::factory();
 
-$client = ApiClient::factory();
-
-/* @var $result RawResponse */
+/* @var $result \Loco\Http\Response\RawResponse */
 $result = $client->convert( array(
     'src'    => file_get_contents(__DIR__.'/sample.xlf'),
     'from'   => 'xlf',
-    'to'     => 'yml',
+    'ext'    => 'yml',
     'locale' => 'es',
+    'format' => 'nested',
 ) );
 
 echo (string) $result;

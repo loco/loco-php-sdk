@@ -4,15 +4,11 @@
  */
 require __DIR__.'/../vendor/autoload.php';
 
-use Loco\Http\ApiClient;
-use Guzzle\Service\Resource\Model;
-use Guzzle\Service\Builder\ServiceBuilder;
-
 // Our project key is in a config file so we instantiate the client via the Guzzle service builder
-$client = ServiceBuilder::factory( __DIR__.'/../config.json' )->get('loco');
+$client = Guzzle\Service\Builder\ServiceBuilder::factory( __DIR__.'/../config.json' )->get('loco');
 
-/* @var $result Model */
-$result = $client->authTest();
+/* @var $result \Guzzle\Service\Resource\Model */
+$result = $client->authVerify();
 
-echo "Authenticated as ",$result['user']['name'],"\n";
-echo "Project name '", $result['project']['name'],"'\n";
+printf("Authenticated as '%s'\n", $result['user']['name'] );
+printf("Project name is '%s'\n",  $result['project']['name'] );
