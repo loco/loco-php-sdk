@@ -1,6 +1,6 @@
 <?php
 /**
- * Auto-generated with Swizzle at 2014-02-08 14:38:25 +0000
+ * Auto-generated with Swizzle at 2014-02-08 14:46:48 +0000
  */
 return array (
   'name' => 'loco',

@@ -2,8 +2,6 @@
 <?php
 /**
  * Build Guzzle service description from remote Swagger definition.
- * 
- * @usage ./build.php > src/Loco/Http/Resources/service.php
  * @see https://github.com/loco-app/swizzle
  */
 
@@ -27,4 +25,8 @@ $service->registerResponseClass('exportArchive', $zip )
 
 $service->build('http://localise.biz/api/docs');        
 
-echo $service->export();
+$phps = $service->export();
+$file = __DIR__.'/src/Loco/Http/Resources/service.php';
+$blen = file_put_contents( $file, $phps );
+
+printf("Wrote service description to %s (%s bytes)\n", $file, $blen );
