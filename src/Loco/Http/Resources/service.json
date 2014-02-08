@@ -1,9 +1,0 @@
-{
-    "name": "loco-sdk-php",
-    "apiVersion": "1.0",
-    "baseUrl" : "",
-    "description": "Loco REST API client",
-    "operations" : {},
-    "models" : {},
-    "includes" : []
-}

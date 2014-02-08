@@ -1,9 +1,0 @@
-{
-    "type": "object",
-    "properties": {
-        "ping": {
-            "type": "string",
-            "location": "json"
-        }
-    }
-}

@@ -1,7 +1,0 @@
-{
-    "summary:": "Check the server is up",
-    "uri" : "ping.json",
-    "httpMethod": "GET",
-    "responseClass" : "PingOutput",
-    "responseNotes": "Always responds 200 with 'pong' message"
-}

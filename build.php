@@ -1,28 +1,30 @@
 #!/usr/bin/env php
 <?php
 /**
- * Compile separate json files into single Guzzle service definition
+ * Build Guzzle service description from remote Swagger definition.
+ * 
+ * @usage ./build.php > src/Loco/Http/Resources/service.php
+ * @see https://github.com/loco-app/swizzle
  */
 
-$base = __DIR__.'/src/Loco/Http/Resources';  
-$path = $base.'/service.json';
-$json = file_get_contents( $path );
-$root = json_decode( $json, true );
-
-foreach( array('operations','models') as $dir ){
-    $root[$dir] = array();
-    foreach( glob($base.'/'.$dir.'/*.json') as $_path){
-        $name = pathinfo( $_path, PATHINFO_FILENAME );
-        $node = json_decode( file_get_contents($_path), true );
-        if( ! is_array($node) ){
-            throw new Exception('Bad JSON for "'.$name.'"');
-        }
-        $root[$dir][$name] = $node;
-    }
+require __DIR__.'/vendor/autoload.php';
+if( ! class_exists('Loco\Utils\Swizzle\Swizzle') ){
+    fwrite( STDERR, "Swizzle not found.\nRun composer install --dev\n" );
+    exit(1);
 }
 
-// output PHP array for including from Loco\Http\ApiClient
-$target = $base.'/service.php';
-file_put_contents( $target, "<?php\nreturn ".var_export( $root, 1 ).";\n" );
+$service = new Loco\Utils\Swizzle\Swizzle( 'loco', 'Loco REST API' );
+$service->verbose( STDERR );
+$service->setDelay( 0 );
 
-echo "Service description saved to ",$target,"\n";
+// Register custom Guzzle response classes
+$raw = '\Loco\Http\Response\RawResponse';
+$zip = '\Loco\Http\Response\ZipResponse';
+$service->registerResponseClass('exportArchive', $zip )
+        ->registerResponseClass('exportLocale', $raw )
+        ->registerResponseClass('exportAll', $raw )
+        ->registerResponseClass('convert', $raw );
+
+$service->build('http://localise.biz/api/docs');        
+
+echo $service->export();

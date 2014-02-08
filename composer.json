@@ -2,12 +2,12 @@
     "name": "loco/loco",
     "license": "MIT",
     "type": "library",
-    "keywords": ["loco","translation","l10n","languages"],
+    "keywords": ["loco","translation","l10n","i18n","languages"],
     "description": "Loco SDK for PHP, including REST API client",
     "authors": [
         {
             "name": "Tim Whitlock",
-            "email": "support at localise dot biz",
+            "email": "support-sdk@localise.biz",
             "homepage": "https://localise.biz/",
             "role": "Developer"
         }
@@ -16,6 +16,9 @@
         "php": ">=5.3.3",
         "guzzle/guzzle": "~3.7"
     },
+    "require-dev" : {
+        "loco/swizzle": "1.0.*@dev"
+    },
     "autoload": {
         "psr-0": {
             "Loco": "src/"
@@ -23,7 +26,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "1.0.x-alpha"
+            "dev-master": "1.0.x-dev"
         }
     }
 }

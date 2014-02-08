@@ -1,4 +1,7 @@
 <?php
+/**
+ * Auto-generated with Swizzle at 2014-02-08 14:38:25 +0000
+ */
 return array (
   'name' => 'loco',
   'apiVersion' => '1.0.1',
