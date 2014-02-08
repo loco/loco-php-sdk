@@ -17,7 +17,7 @@ This SDK includes a REST client for the [Loco API](https://localise.biz/) Other 
 
 The converter API for language pack file formats can be used without a Loco account. Other endpoints are for working with Loco projects and require an API key.
 
-See [https://localise.biz/api](localise.biz/api) for full API documention.
+See [localise.biz/api](https://localise.biz/api) for full API documention.
 
 
 ### Usage
