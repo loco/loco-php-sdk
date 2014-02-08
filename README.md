@@ -1,14 +1,14 @@
 # Loco SDK for PHP
 
-## Version
-
-1.0.0-dev: Currently in development.
-
 ## Installation
 
-Installation is via [composer](http://getcomposer.org/doc/00-intro.md#using-composer).
+Installation is via [Composer](http://getcomposer.org/doc/00-intro.md#using-composer).
 
-    require: { "loco/loco": "1.0.*@dev" }
+Add [loco/loco](https://packagist.org/packages/loco/loco) to your project's composer.json file as follows:
+
+    "require": {
+        "loco/loco": "1.*"
+    }
 
 
 ## REST API Client
