@@ -65,8 +65,10 @@ class ApiClientTest extends GuzzleTestCase {
      */
     public function testLivePing(){
         $client = $this->getServiceBuilder()->get('loco');
-        $version = $client->ping()->get('version');
-        $this->assertContains( '1.0.1', $version );
+        $sdk_version = $client->getVersion();
+        $this->assertEquals( '1.0.1', $sdk_version, 'Service description is not expected version' );
+        $api_version = $client->ping()->get('version');
+        $this->assertEquals( $sdk_version, $api_version, 'Live API version does not match local SDK version' );
     }
 
 
