@@ -1,8 +1,8 @@
 <?php
 return array (
-  'name' => 'loco-php',
+  'name' => 'loco',
   'apiVersion' => '1.0.1',
-  'description' => 'Loco REST API client',
+  'description' => 'Loco REST API',
   'operations' => 
   array (
     'authVerify' => 

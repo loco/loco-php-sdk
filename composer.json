@@ -1,5 +1,5 @@
 {
-    "name": "loco/loco-sdk-php",
+    "name": "loco/loco",
     "license": "MIT",
     "type": "library",
     "keywords": ["loco","translation","l10n","languages"],
