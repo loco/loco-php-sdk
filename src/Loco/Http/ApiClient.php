@@ -49,5 +49,14 @@ class ApiClient extends Client {
                 
     }   
 
+
+    /**
+     * Get API version that service was built against.
+     * @return string
+     */
+    public function getVersion(){
+        return $this->getDescription()->getApiVersion();
+    }
+
 }
 
