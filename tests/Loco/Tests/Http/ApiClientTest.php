@@ -33,11 +33,11 @@ class ApiClientTest extends GuzzleTestCase {
      */
     public function testMockPing(){
         $plugin = new MockPlugin();
-        $plugin->addResponse( new Response( 200, array(), '{"ping":"pang"}' ) );
+        $plugin->addResponse( new Response( 200, array(), '{"version":"1.1"}' ) );
         $client = $this->getServiceBuilder()->get('loco');
         $client->addSubscriber( $plugin );
-        $pong = $client->ping()->get('ping');
-        $this->assertEquals( 'pang', $pong );
+        $version = $client->ping()->get('version');
+        $this->assertEquals( '1.1', $version );
     }
     
 
@@ -48,13 +48,13 @@ class ApiClientTest extends GuzzleTestCase {
      */
     public function testNodePing(){
         // set up fake response for ping via node server
-        $http = "HTTP/1.1 200 OK\r\nContent-Length: 15\r\n\r\n{\"ping\":\"pang\"}";
+        $http = "HTTP/1.1 200 OK\r\nContent-Length: 17\r\n\r\n{\"version\":\"1.1\"}";
         $this->getServer()->enqueue( $http );
         // call Ping()
         $client = clone $this->getServiceBuilder()->get('loco');
         $client->setBaseUrl( $this->getServer()->getUrl() );
-        $pong = $client->ping()->get('ping');
-        $this->assertEquals( 'pang', $pong );
+        $version = $client->ping()->get('version');
+        $this->assertEquals( '1.1', $version );
     }
 
 
@@ -65,8 +65,8 @@ class ApiClientTest extends GuzzleTestCase {
      */
     public function testLivePing(){
         $client = $this->getServiceBuilder()->get('loco');
-        $pong = $client->ping()->get('ping');
-        $this->assertContains( 'pong', $pong );
+        $version = $client->ping()->get('version');
+        $this->assertContains( '1.0.1', $version );
     }
 
 
@@ -103,7 +103,7 @@ class ApiClientTest extends GuzzleTestCase {
                 'src'    => $sample,
                 'domain' => 'test',
                 'locale' => 'fr',
-                'to'     => 'po',
+                'ext'    => 'po',
             ) );
             $this->assertInstanceOf('\Loco\Http\Response\RawResponse', $result );
             $this->assertRegExp( '/msgid\s+"foo"\s+msgstr\s+"bar"/', (string) $result );
@@ -133,7 +133,7 @@ class ApiClientTest extends GuzzleTestCase {
     public function testLiveExportLocale(){
         $client = $this->getServiceBuilder()->get('loco');
         $result = $client->exportLocale( array(
-            'to' => 'pot',
+            'ext' => 'pot',
             'locale' => 'en',
         ) );
         $this->assertInstanceOf('\Loco\Http\Response\RawResponse', $result );
@@ -148,7 +148,7 @@ class ApiClientTest extends GuzzleTestCase {
     public function testLiveExportAll(){
         $client = $this->getServiceBuilder()->get('loco');
         $result = $client->exportAll( array(
-            'to' => 'tmx',
+            'ext' => 'tmx',
         ) );
         $this->assertInstanceOf('\Loco\Http\Response\RawResponse', $result );
         $this->assertContains( '<!DOCTYPE tmx', (string) $result );
