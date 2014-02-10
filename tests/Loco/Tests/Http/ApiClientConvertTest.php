@@ -499,10 +499,10 @@ class ApiClientConvertTest extends ApiClientTest {
      * Test php parse from symfony format
      * @todo implement symfony import parser that handles plural formats
      * @depends testExportSymfony
-     *
+     */
     public function testImportSymfony( $sourcefile ){
-        $this->checkValidJson( $this->convert( $sourcefile, 'php', 'json', '', false ), true );
-    }*/
+        $this->checkValidJson( $this->convert( $sourcefile, 'symfony', 'json', '', false ), true );
+    }
     
     
     /**
@@ -511,7 +511,6 @@ class ApiClientConvertTest extends ApiClientTest {
      */
     public function testImportCodeIgniter( $sourcefile ){
         $this->checkValidJson( $this->convert( $sourcefile, 'php', 'json', '', false ), false, '', 'test_' );
-        // @todo handle CI namespace resolution
     }
             
     
