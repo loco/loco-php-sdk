@@ -23,7 +23,7 @@ $service->registerResponseClass('exportArchive', $zip )
         ->registerResponseClass('exportAll', $raw )
         ->registerResponseClass('convert', $raw );
 
-$service->build('https://localise.biz/api/docs');        
+$service->build('https://ssl.loco.192.168.0.7.xip.io/api/docs');        
 
 $phps = $service->export();
 $file = __DIR__.'/src/Loco/Http/Resources/service.php';

@@ -1,6 +1,6 @@
 <?php
 /**
- * Auto-generated with Swizzle at 2014-02-10 18:42:57 +0000
+ * Auto-generated with Swizzle at 2014-02-10 19:33:31 +0000
  */
 return array (
   'name' => 'loco',
@@ -238,6 +238,25 @@ return array (
         ),
       ),
     ),
+    'locales' => 
+    array (
+      'httpMethod' => 'GET',
+      'uri' => '/api/locales.json',
+      'class' => 'Guzzle\\Service\\Command\\OperationCommand',
+      'responseClass' => 'array',
+      'responseType' => 'primitive',
+      'summary' => 'List all locales in currently authenticated project',
+      'parameters' => 
+      array (
+        'key' => 
+        array (
+          'required' => true,
+          'description' => 'Project API key',
+          'type' => 'string',
+          'location' => 'query',
+        ),
+      ),
+    ),
     'ping' => 
     array (
       'httpMethod' => 'GET',
@@ -358,6 +377,32 @@ return array (
         'url' => 
         array (
           'description' => 'Project dashboard URL',
+          'type' => 'string',
+          'location' => 'json',
+        ),
+      ),
+    ),
+    'Locale' => 
+    array (
+      'type' => 'object',
+      'additionalProperties' => false,
+      'properties' => 
+      array (
+        'id' => 
+        array (
+          'description' => 'Locale id specific to project',
+          'type' => 'integer',
+          'location' => 'json',
+        ),
+        'code' => 
+        array (
+          'description' => 'Locale short code',
+          'type' => 'string',
+          'location' => 'json',
+        ),
+        'name' => 
+        array (
+          'description' => 'Full locale name',
           'type' => 'string',
           'location' => 'json',
         ),
