@@ -6,10 +6,11 @@ Installation is via [Composer](http://getcomposer.org/doc/00-intro.md#using-comp
 
 Add the latest stable version of [loco/loco](https://packagist.org/packages/loco/loco) to your project's composer.json file as follows:
 
-    "require": {
-        "loco/loco": "~1.0"
-    }
-
+```json
+"require": {
+  "loco/loco": "~1.0"
+}
+```
 
 If you want to install straight from Github you'll have to write your own [autoloader](https://gist.github.com/jwage/221634) for now.
 
@@ -23,9 +24,29 @@ The converter API for language pack file formats can be used without a Loco acco
 See [localise.biz/api](https://localise.biz/api) for full API documention.
 
 
-### Usage
+### Client Usage
 
-See examples directory.
+Basic usage of the client is to construct with your API key and call API methods directly on it. The following example simply verifies your credentials:
 
-Proper docs coming soon.
+```php
+$client = Loco\Http\ApiClient::factory( array( 'key' => 'yourkeyhere' ) );
+$result = $client->authVerify();
+printf("Authenticated as '%s'\n", $result['user']['name'] );
+```
+
+The Loco API client is built on [Guzzle](http://docs.guzzlephp.org/), so you can use its factory methods to pass in your API key from your site configuration. You could create your client from a JSON config [like our example](https://github.com/loco-app/loco-php-sdk/blob/master/config.json.dist) as follows:
+
+```php
+$client = Guzzle\Service\Builder\ServiceBuilder::factory('/path/to/config.json' )->get('loco');
+```
+
+Most responses are Guzzle models, which behave much like arrays. The above example fetches `$result['user']` although `$result` is actually an instance of [Guzzle\Service\Resource\Model](http://api.guzzlephp.org/class-Guzzle.Service.Resource.Model.html).
+
+Check the [Loco API documentation](https://localise.biz/api) to see what model is returned from each end point.
+
+
+
+
+See the [example](https://github.com/loco-app/loco-php-sdk/tree/master/example) directory for more working code examples.
+
 
