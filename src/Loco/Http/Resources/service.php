@@ -1,10 +1,10 @@
 <?php
 /**
- * Auto-generated with Swizzle at 2014-02-08 14:46:48 +0000
+ * Auto-generated with Swizzle at 2014-02-10 17:22:44 +0000
  */
 return array (
   'name' => 'loco',
-  'apiVersion' => '1.0.1',
+  'apiVersion' => '1.0.2',
   'description' => 'Loco REST API',
   'operations' => 
   array (
