@@ -1,6 +1,6 @@
 <?php
 /**
- * Auto-generated with Swizzle at 2014-02-10 17:22:44 +0000
+ * Auto-generated with Swizzle at 2014-02-10 18:42:57 +0000
  */
 return array (
   'name' => 'loco',
@@ -81,7 +81,13 @@ return array (
         ),
         'locale' => 
         array (
-          'description' => 'Locale of target language pack, required for some formats',
+          'description' => 'Locale of target language pack, required in most cases',
+          'type' => 'string',
+          'location' => 'query',
+        ),
+        'native' => 
+        array (
+          'description' => 'Optional source locale, not required in many cases',
           'type' => 'string',
           'location' => 'query',
         ),
