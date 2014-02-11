@@ -23,7 +23,6 @@ class ApiClient extends Client {
        
         // Provide a hash of default client configuration options
         $default = array (
-            'base_url' => 'https://localise.biz/api',
             'key' => '',
         );
 
@@ -39,10 +38,15 @@ class ApiClient extends Client {
         ) );
 
         // Create a new instance of self
-        $client = new self( $config->get('base_url'), $config );
+        $client = new self( '', $config );
 
         // describe service from included php file.
         $service = ServiceDescription::factory( __DIR__.'/Resources/service.php');
+        
+        // allow override of base_url after it's been set by service description
+        if( $baseUrl = $config->get('base_url') ){
+            $service->setBaseUrl( $baseUrl );
+        }
         
         // Prefix Loco identifier to user agent string
         $client->setUserAgent( $service->getName().'/'.$service->getApiVersion(), true );
