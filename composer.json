@@ -18,7 +18,7 @@
         "guzzle/guzzle": "~3.7"
     },
     "require-dev" : {
-        "loco/swizzle": "1.0.*@dev"
+        "loco/swizzle": "dev-master"
     },
     "autoload": {
         "psr-0": {

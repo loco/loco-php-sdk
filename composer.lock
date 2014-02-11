@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "9617c705f1de2ea7b23b62f248b93520",
+    "hash": "5cefd9520f1d7a9f4f9966156e93d10f",
     "packages": [
         {
             "name": "guzzle/guzzle",
@@ -159,12 +159,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/loco-app/swizzle.git",
-                "reference": "2492a0c25b4d518b6925d8951c0e6d4df00b0dfd"
+                "reference": "acfc252ee6e566214e1040413292bac3cf8bf348"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/loco-app/swizzle/zipball/2492a0c25b4d518b6925d8951c0e6d4df00b0dfd",
-                "reference": "2492a0c25b4d518b6925d8951c0e6d4df00b0dfd",
+                "url": "https://api.github.com/repos/loco-app/swizzle/zipball/acfc252ee6e566214e1040413292bac3cf8bf348",
+                "reference": "acfc252ee6e566214e1040413292bac3cf8bf348",
                 "shasum": ""
             },
             "require": {
@@ -202,7 +202,7 @@
                 "api",
                 "swagger"
             ],
-            "time": "2014-02-08 14:09:08"
+            "time": "2014-02-11 21:51:09"
         },
         {
             "name": "monolog/monolog",
