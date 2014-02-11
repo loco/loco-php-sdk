@@ -31,8 +31,9 @@ class ApiClientTest extends GuzzleTestCase {
     public function testFactoryInitializesClient(){
         $client = ApiClient::factory( array(
             'key' => 'dummy',
+            'base_url' => 'https://localise.biz/api',
         ) );
-        $this->assertEquals('https://localise.biz/api', $client->getBaseUrl() );
+        $this->assertEquals( 'https://localise.biz/api', $client->getBaseUrl() );
         $this->assertEquals('dummy', $client->getConfig('key') );
         return $client;
     }
