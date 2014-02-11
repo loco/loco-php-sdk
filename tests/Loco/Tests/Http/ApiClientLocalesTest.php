@@ -15,12 +15,20 @@ class ApiClientLocalesTest  extends ApiClientTest {
     
     public function testLocalesList(){
         $client = $this->getClient();
-        $list = $client->locales();
-        // model would be a typed array model, except not supported in Guzzle.
-        //$this->assertInstanceOf( '\Guzzle\Service\Resource\Model', $list );
-        $this->assertInternalType('array', $list );
         
-        $locale = $list[0]; 
+        // top level is list model
+        $locales = $client->locales();
+        $this->assertInstanceOf( '\Guzzle\Service\Resource\Model', $locales );
+        
+        // deeper properties are all cast to arrays
+        $locale = $locales->get('source');
+        $this->assertInternalType('array', $locale );
+
+        $targets = $locales->get('targets');
+        $this->assertInternalType('array', $targets );
+        
+        $locale = $targets[0]; 
+        $this->assertInternalType('array', $locale );
         $this->assertArrayHasKey('code', $locale );
     }
     
