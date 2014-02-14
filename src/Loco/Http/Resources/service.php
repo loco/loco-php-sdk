@@ -1,10 +1,11 @@
 <?php
 /**
- * Auto-generated with Swizzle at 2014-02-10 19:33:31 +0000
+ * Auto-generated with Swizzle at 2014-02-14 18:57:49 +0000
  */
 return array (
   'name' => 'loco',
   'apiVersion' => '1.0.2',
+  'baseUrl' => 'https://ssl.loco.192.168.0.7.xip.io/',
   'description' => 'Loco REST API',
   'operations' => 
   array (
@@ -26,6 +27,14 @@ return array (
           'description' => 'Project API key',
           'type' => 'string',
           'location' => 'query',
+        ),
+      ),
+      'errorResponses' => 
+      array (
+        0 => 
+        array (
+          'code' => 401,
+          'phrase' => 'Invalid API key',
         ),
       ),
     ),
@@ -56,6 +65,22 @@ return array (
           'description' => 'Source file format being imported',
           'type' => 'string',
           'location' => 'uri',
+          'enum' => 
+          array (
+            0 => 'json',
+            1 => 'mo',
+            2 => 'php',
+            3 => 'po',
+            4 => 'properties',
+            5 => 'resx',
+            6 => 'strings',
+            7 => 'symfony',
+            8 => 'tmx',
+            9 => 'ts',
+            10 => 'xlf',
+            11 => 'xml',
+            12 => 'yml',
+          ),
           'default' => 'json',
         ),
         'ext' => 
@@ -64,6 +89,26 @@ return array (
           'description' => 'Target file format being exported, specified as a file extension',
           'type' => 'string',
           'location' => 'uri',
+          'enum' => 
+          array (
+            0 => 'csv',
+            1 => 'html',
+            2 => 'js',
+            3 => 'json',
+            4 => 'mo',
+            5 => 'phps',
+            6 => 'po',
+            7 => 'pot',
+            8 => 'properties',
+            9 => 'resx',
+            10 => 'sql',
+            11 => 'strings',
+            12 => 'tmx',
+            13 => 'ts',
+            14 => 'xlf',
+            15 => 'xml',
+            16 => 'yml',
+          ),
           'default' => 'json',
         ),
         'format' => 
@@ -71,6 +116,19 @@ return array (
           'description' => 'Specific target format, required for some file types',
           'type' => 'string',
           'location' => 'query',
+          'enum' => 
+          array (
+            0 => '',
+            1 => 'symfony',
+            2 => 'zend',
+            3 => 'codeigniter',
+            4 => 'constants',
+            5 => 'chrome',
+            6 => 'nested',
+            7 => 'java',
+            8 => 'tizen',
+            9 => 'gettext',
+          ),
         ),
         'name' => 
         array (
@@ -90,6 +148,19 @@ return array (
           'description' => 'Optional source locale, not required in many cases',
           'type' => 'string',
           'location' => 'query',
+        ),
+      ),
+      'errorResponses' => 
+      array (
+        0 => 
+        array (
+          'code' => 204,
+          'phrase' => 'No messages could be extracted from source',
+        ),
+        1 => 
+        array (
+          'code' => 422,
+          'phrase' => 'Empty or invalid source data',
         ),
       ),
     ),
@@ -113,6 +184,15 @@ return array (
           'description' => 'Target file type specified as a file extension',
           'type' => 'string',
           'location' => 'uri',
+          'enum' => 
+          array (
+            0 => 'csv',
+            1 => 'html',
+            2 => 'sql',
+            3 => 'tmx',
+            4 => 'xlf',
+            5 => 'yml',
+          ),
           'default' => 'yml',
         ),
         'key' => 
@@ -133,6 +213,20 @@ return array (
           'description' => 'Override default lookup key in language pack. Leave blank for auto.',
           'type' => 'string',
           'location' => 'query',
+          'enum' => 
+          array (
+            0 => 'id',
+            1 => 'name',
+            2 => 'text',
+          ),
+        ),
+      ),
+      'errorResponses' => 
+      array (
+        0 => 
+        array (
+          'code' => 401,
+          'phrase' => 'Invalid API key',
         ),
       ),
     ),
@@ -162,6 +256,25 @@ return array (
           'description' => 'Target file type specified as a file extension',
           'type' => 'string',
           'location' => 'uri',
+          'enum' => 
+          array (
+            0 => 'csv',
+            1 => 'html',
+            2 => 'js',
+            3 => 'json',
+            4 => 'mo',
+            5 => 'phps',
+            6 => 'po',
+            7 => 'pot',
+            8 => 'resx',
+            9 => 'sql',
+            10 => 'strings',
+            11 => 'tmx',
+            12 => 'ts',
+            13 => 'xlf',
+            14 => 'xml',
+            15 => 'yml',
+          ),
           'default' => 'json',
         ),
         'format' => 
@@ -169,6 +282,17 @@ return array (
           'description' => 'Specific format, applicable to some file types only',
           'type' => 'string',
           'location' => 'query',
+          'enum' => 
+          array (
+            0 => 'symfony',
+            1 => 'zend',
+            2 => 'codeigniter',
+            3 => 'constants',
+            4 => 'chrome',
+            5 => 'nested',
+            6 => 'java',
+            7 => 'tizen',
+          ),
         ),
         'filter' => 
         array (
@@ -181,6 +305,20 @@ return array (
           'description' => 'Override default lookup key in language pack. Leave blank for auto.',
           'type' => 'string',
           'location' => 'query',
+          'enum' => 
+          array (
+            0 => 'id',
+            1 => 'name',
+            2 => 'text',
+          ),
+        ),
+      ),
+      'errorResponses' => 
+      array (
+        0 => 
+        array (
+          'code' => 401,
+          'phrase' => 'Invalid API key',
         ),
       ),
     ),
@@ -216,6 +354,25 @@ return array (
           'description' => 'Target file type specified as a file extension',
           'type' => 'string',
           'location' => 'uri',
+          'enum' => 
+          array (
+            0 => 'csv',
+            1 => 'html',
+            2 => 'js',
+            3 => 'json',
+            4 => 'mo',
+            5 => 'phps',
+            6 => 'po',
+            7 => 'pot',
+            8 => 'resx',
+            9 => 'sql',
+            10 => 'strings',
+            11 => 'tmx',
+            12 => 'ts',
+            13 => 'xlf',
+            14 => 'xml',
+            15 => 'yml',
+          ),
           'default' => 'json',
         ),
         'format' => 
@@ -223,6 +380,17 @@ return array (
           'description' => 'Specific format, applicable to some file types only',
           'type' => 'string',
           'location' => 'query',
+          'enum' => 
+          array (
+            0 => 'symfony',
+            1 => 'zend',
+            2 => 'codeigniter',
+            3 => 'constants',
+            4 => 'chrome',
+            5 => 'nested',
+            6 => 'java',
+            7 => 'tizen',
+          ),
         ),
         'filter' => 
         array (
@@ -235,6 +403,20 @@ return array (
           'description' => 'Override default lookup key in language pack. Leave blank for auto.',
           'type' => 'string',
           'location' => 'query',
+          'enum' => 
+          array (
+            0 => 'id',
+            1 => 'name',
+            2 => 'text',
+          ),
+        ),
+      ),
+      'errorResponses' => 
+      array (
+        0 => 
+        array (
+          'code' => 401,
+          'phrase' => 'Invalid API key',
         ),
       ),
     ),
@@ -243,8 +425,8 @@ return array (
       'httpMethod' => 'GET',
       'uri' => '/api/locales.json',
       'class' => 'Guzzle\\Service\\Command\\OperationCommand',
-      'responseClass' => 'array',
-      'responseType' => 'primitive',
+      'responseClass' => 'ProjectLocales',
+      'responseType' => 'model',
       'summary' => 'List all locales in currently authenticated project',
       'parameters' => 
       array (
@@ -254,6 +436,14 @@ return array (
           'description' => 'Project API key',
           'type' => 'string',
           'location' => 'query',
+        ),
+      ),
+      'errorResponses' => 
+      array (
+        0 => 
+        array (
+          'code' => 401,
+          'phrase' => 'Invalid API key',
         ),
       ),
     ),
@@ -284,28 +474,48 @@ return array (
   ),
   'models' => 
   array (
-    'Creds' => 
+    'Project' => 
     array (
       'type' => 'object',
       'additionalProperties' => false,
       'properties' => 
       array (
-        'user' => 
+        'id' => 
         array (
-          'required' => true,
-          'description' => 'Authenticated user',
+          'description' => 'Project id',
+          'type' => 'integer',
           'location' => 'json',
         ),
-        'group' => 
+        'name' => 
         array (
-          'required' => true,
-          'description' => 'Authenticated account',
+          'description' => 'Project name',
+          'type' => 'string',
           'location' => 'json',
         ),
-        'project' => 
+        'url' => 
         array (
-          'required' => true,
-          'description' => 'Project associated with authentication key',
+          'description' => 'Project dashboard URL',
+          'type' => 'string',
+          'location' => 'json',
+        ),
+      ),
+    ),
+    'Group' => 
+    array (
+      'type' => 'object',
+      'additionalProperties' => false,
+      'properties' => 
+      array (
+        'id' => 
+        array (
+          'description' => 'Loco account id',
+          'type' => 'integer',
+          'location' => 'json',
+        ),
+        'name' => 
+        array (
+          'description' => 'Loco account name',
+          'type' => 'string',
           'location' => 'json',
         ),
       ),
@@ -336,48 +546,31 @@ return array (
         ),
       ),
     ),
-    'Group' => 
+    'Creds' => 
     array (
       'type' => 'object',
       'additionalProperties' => false,
       'properties' => 
       array (
-        'id' => 
+        'user' => 
         array (
-          'description' => 'Loco account id',
-          'type' => 'integer',
+          'required' => true,
+          'description' => 'Authenticated user',
+          'type' => 'null',
           'location' => 'json',
         ),
-        'name' => 
+        'group' => 
         array (
-          'description' => 'Loco account name',
-          'type' => 'string',
+          'required' => true,
+          'description' => 'Authenticated account',
+          'type' => 'null',
           'location' => 'json',
         ),
-      ),
-    ),
-    'Project' => 
-    array (
-      'type' => 'object',
-      'additionalProperties' => false,
-      'properties' => 
-      array (
-        'id' => 
+        'project' => 
         array (
-          'description' => 'Project id',
-          'type' => 'integer',
-          'location' => 'json',
-        ),
-        'name' => 
-        array (
-          'description' => 'Project name',
-          'type' => 'string',
-          'location' => 'json',
-        ),
-        'url' => 
-        array (
-          'description' => 'Project dashboard URL',
-          'type' => 'string',
+          'required' => true,
+          'description' => 'Project associated with authentication key',
+          'type' => 'null',
           'location' => 'json',
         ),
       ),
@@ -388,16 +581,16 @@ return array (
       'additionalProperties' => false,
       'properties' => 
       array (
-        'id' => 
-        array (
-          'description' => 'Locale id specific to project',
-          'type' => 'integer',
-          'location' => 'json',
-        ),
         'code' => 
         array (
           'description' => 'Locale short code',
           'type' => 'string',
+          'location' => 'json',
+        ),
+        'default' => 
+        array (
+          'description' => 'Whether native/source locale of project',
+          'type' => 'boolean',
           'location' => 'json',
         ),
         'name' => 
@@ -406,20 +599,63 @@ return array (
           'type' => 'string',
           'location' => 'json',
         ),
+        'plurals' => 
+        array (
+          'description' => 'Plural forms',
+          'type' => 'null',
+          'location' => 'json',
+        ),
       ),
     ),
-    'Echo' => 
+    'ProjectLocales' => 
     array (
       'type' => 'object',
       'additionalProperties' => false,
       'properties' => 
       array (
-        'version' => 
+        'source' => 
         array (
-          'required' => true,
-          'description' => 'Current API version',
-          'type' => 'string',
+          'description' => 'Source locale',
+          'type' => 'null',
           'location' => 'json',
+        ),
+        'targets' => 
+        array (
+          'description' => 'Source locale',
+          'type' => 'array',
+          'location' => 'json',
+          'items' => 
+          array (
+            'type' => 'object',
+            'additionalProperties' => false,
+            'properties' => 
+            array (
+              'code' => 
+              array (
+                'description' => 'Locale short code',
+                'type' => 'string',
+                'location' => 'json',
+              ),
+              'default' => 
+              array (
+                'description' => 'Whether native/source locale of project',
+                'type' => 'boolean',
+                'location' => 'json',
+              ),
+              'name' => 
+              array (
+                'description' => 'Full locale name',
+                'type' => 'string',
+                'location' => 'json',
+              ),
+              'plurals' => 
+              array (
+                'description' => 'Plural forms',
+                'type' => 'null',
+                'location' => 'json',
+              ),
+            ),
+          ),
         ),
       ),
     ),
@@ -440,6 +676,21 @@ return array (
         array (
           'required' => true,
           'description' => 'Description of error',
+          'type' => 'string',
+          'location' => 'json',
+        ),
+      ),
+    ),
+    'Echo' => 
+    array (
+      'type' => 'object',
+      'additionalProperties' => false,
+      'properties' => 
+      array (
+        'version' => 
+        array (
+          'required' => true,
+          'description' => 'Current API version',
           'type' => 'string',
           'location' => 'json',
         ),
