@@ -1,6 +1,6 @@
 <?php
 /**
- * Auto-generated with Swizzle at 2014-02-14 18:57:49 +0000
+ * Auto-generated with Swizzle at 2014-02-15 00:10:07 +0000
  */
 return array (
   'name' => 'loco',
@@ -556,24 +556,88 @@ return array (
         array (
           'required' => true,
           'description' => 'Authenticated user',
-          'type' => 'null',
+          'type' => 'object',
           'location' => 'json',
+          'additionalProperties' => false,
+          'properties' => 
+          array (
+            'id' => 
+            array (
+              'description' => 'User id',
+              'type' => 'integer',
+              'location' => 'json',
+            ),
+            'name' => 
+            array (
+              'description' => 'Full user name',
+              'type' => 'string',
+              'location' => 'json',
+            ),
+            'email' => 
+            array (
+              'description' => 'User\'s email address',
+              'type' => 'string',
+              'location' => 'json',
+            ),
+          ),
         ),
         'group' => 
         array (
           'required' => true,
           'description' => 'Authenticated account',
-          'type' => 'null',
+          'type' => 'object',
           'location' => 'json',
+          'additionalProperties' => false,
+          'properties' => 
+          array (
+            'id' => 
+            array (
+              'description' => 'Loco account id',
+              'type' => 'integer',
+              'location' => 'json',
+            ),
+            'name' => 
+            array (
+              'description' => 'Loco account name',
+              'type' => 'string',
+              'location' => 'json',
+            ),
+          ),
         ),
         'project' => 
         array (
           'required' => true,
           'description' => 'Project associated with authentication key',
-          'type' => 'null',
+          'type' => 'object',
           'location' => 'json',
+          'additionalProperties' => false,
+          'properties' => 
+          array (
+            'id' => 
+            array (
+              'description' => 'Project id',
+              'type' => 'integer',
+              'location' => 'json',
+            ),
+            'name' => 
+            array (
+              'description' => 'Project name',
+              'type' => 'string',
+              'location' => 'json',
+            ),
+            'url' => 
+            array (
+              'description' => 'Project dashboard URL',
+              'type' => 'string',
+              'location' => 'json',
+            ),
+          ),
         ),
       ),
+    ),
+    'anon_type_string' => 
+    array (
+      'type' => 'string',
     ),
     'Locale' => 
     array (
@@ -587,7 +651,7 @@ return array (
           'type' => 'string',
           'location' => 'json',
         ),
-        'default' => 
+        'native' => 
         array (
           'description' => 'Whether native/source locale of project',
           'type' => 'boolean',
@@ -602,8 +666,12 @@ return array (
         'plurals' => 
         array (
           'description' => 'Plural forms',
-          'type' => 'null',
+          'type' => 'array',
           'location' => 'json',
+          'items' => 
+          array (
+            'type' => 'string',
+          ),
         ),
       ),
     ),
@@ -616,12 +684,44 @@ return array (
         'source' => 
         array (
           'description' => 'Source locale',
-          'type' => 'null',
+          'type' => 'object',
           'location' => 'json',
+          'additionalProperties' => false,
+          'properties' => 
+          array (
+            'code' => 
+            array (
+              'description' => 'Locale short code',
+              'type' => 'string',
+              'location' => 'json',
+            ),
+            'native' => 
+            array (
+              'description' => 'Whether native/source locale of project',
+              'type' => 'boolean',
+              'location' => 'json',
+            ),
+            'name' => 
+            array (
+              'description' => 'Full locale name',
+              'type' => 'string',
+              'location' => 'json',
+            ),
+            'plurals' => 
+            array (
+              'description' => 'Plural forms',
+              'type' => 'array',
+              'location' => 'json',
+              'items' => 
+              array (
+                'type' => 'string',
+              ),
+            ),
+          ),
         ),
         'targets' => 
         array (
-          'description' => 'Source locale',
+          'description' => 'Target locales',
           'type' => 'array',
           'location' => 'json',
           'items' => 
@@ -636,7 +736,7 @@ return array (
                 'type' => 'string',
                 'location' => 'json',
               ),
-              'default' => 
+              'native' => 
               array (
                 'description' => 'Whether native/source locale of project',
                 'type' => 'boolean',
@@ -651,8 +751,12 @@ return array (
               'plurals' => 
               array (
                 'description' => 'Plural forms',
-                'type' => 'null',
+                'type' => 'array',
                 'location' => 'json',
+                'items' => 
+                array (
+                  'type' => 'string',
+                ),
               ),
             ),
           ),
