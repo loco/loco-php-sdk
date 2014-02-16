@@ -78,6 +78,23 @@ class ApiClientLocalesTest  extends ApiClientTest {
     }
     
     
+    
+    /**
+     * patchLocale with failure
+     * @depends testLocaleCreate
+     * @expectedException \Guzzle\Http\Exception\ClientErrorResponseException
+     */
+    public function testLocalePatchFailure( $code ){
+        $client = $this->getClient();
+        $update = array (
+            'plurals' => ['ruins','everything'], // <- read-only property
+            'locale' => $code,
+        );
+        $client->patchLocale( $update );
+    }
+         
+    
+    
     /**
      * deleteLocale
      * @depends testLocalePatch
