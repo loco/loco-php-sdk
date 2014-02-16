@@ -7,6 +7,7 @@ use Loco\Http\ApiClient;
 /**
  * Test the live /ping API.
  * @group live
+ * @group ping
  */
 class ApiClientPingTest  extends ApiClientTest {
     

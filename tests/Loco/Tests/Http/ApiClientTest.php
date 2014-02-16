@@ -41,7 +41,7 @@ class ApiClientTest extends GuzzleTestCase {
 
     
     /**
-     * Fake ping with Mock response
+     * Fake ping with mock response
      * @group mock
      * @depends testFactoryInitializesClient
      */
@@ -51,6 +51,21 @@ class ApiClientTest extends GuzzleTestCase {
         $client->addSubscriber( $plugin );
         $version = $client->ping()->get('version');
         $this->assertEquals( '1.1', $version );
+    }
+
+
+    
+    /**
+     * Fake an invalid ping
+     * @group mock
+     * @depends testFactoryInitializesClient
+     * @expectedException \Guzzle\Service\Exception\ValidationException
+     */
+    public function testMockInvalidPing( ApiClient $client ){
+        $plugin = new MockPlugin();
+        $plugin->addResponse( new Response( 200, array(), '{"fail":true}' ) );
+        $client->addSubscriber( $plugin );
+        $client->ping();
     }
     
 
