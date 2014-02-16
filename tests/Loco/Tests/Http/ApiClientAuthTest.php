@@ -7,6 +7,7 @@ use Loco\Http\ApiClient;
 /**
  * Test the live /auth API.
  * @group live
+ * @group auth
  */
 class ApiClientAuthTest  extends ApiClientTest {
     

@@ -1,6 +1,6 @@
 <?php
 /**
- * Auto-generated with Swizzle at 2014-02-16 15:44:24 +0000
+ * Auto-generated with Swizzle at 2014-02-16 17:41:03 +0000
  */
 return array (
   'name' => 'loco',
@@ -13,7 +13,7 @@ return array (
     array (
       'httpMethod' => 'GET',
       'uri' => '/api/auth/verify.json',
-      'class' => 'Guzzle\\Service\\Command\\OperationCommand',
+      'class' => '\\Loco\\Http\\Command\\StrictCommand',
       'responseClass' => 'Creds',
       'responseType' => 'model',
       'responseNotes' => 'Loco API keys authenticate your user account for accessing a specific project.<br />
@@ -42,7 +42,7 @@ return array (
     array (
       'httpMethod' => 'POST',
       'uri' => '/api/convert/{from}/{name}.{ext}',
-      'class' => 'Guzzle\\Service\\Command\\OperationCommand',
+      'class' => '\\Loco\\Http\\Command\\StrictCommand',
       'responseClass' => '\\Loco\\Http\\Response\\RawResponse',
       'responseType' => 'class',
       'responseNotes' => 'Use this API to convert between language pack file formats without a Loco account.<br /> 
@@ -168,7 +168,7 @@ return array (
     array (
       'httpMethod' => 'GET',
       'uri' => '/api/export/all.{ext}',
-      'class' => 'Guzzle\\Service\\Command\\OperationCommand',
+      'class' => '\\Loco\\Http\\Command\\StrictCommand',
       'responseClass' => '\\Loco\\Http\\Response\\RawResponse',
       'responseType' => 'class',
       'responseNotes' => 'Export all translations from your project to a multi-locale language pack.<br />
@@ -234,7 +234,7 @@ return array (
     array (
       'httpMethod' => 'GET',
       'uri' => '/api/export/archive/{ext}.zip',
-      'class' => 'Guzzle\\Service\\Command\\OperationCommand',
+      'class' => '\\Loco\\Http\\Command\\StrictCommand',
       'responseClass' => '\\Loco\\Http\\Response\\ZipResponse',
       'responseType' => 'class',
       'responseNotes' => 'Export all translations from your project to a zip archive of language packs.<br />
@@ -326,7 +326,7 @@ return array (
     array (
       'httpMethod' => 'GET',
       'uri' => '/api/export/locale/{locale}.{ext}',
-      'class' => 'Guzzle\\Service\\Command\\OperationCommand',
+      'class' => '\\Loco\\Http\\Command\\StrictCommand',
       'responseClass' => '\\Loco\\Http\\Response\\RawResponse',
       'responseType' => 'class',
       'responseNotes' => 'Export translations from your project to a locale-specific language pack.
@@ -424,10 +424,10 @@ return array (
     array (
       'httpMethod' => 'GET',
       'uri' => '/api/locales.json',
-      'class' => 'Guzzle\\Service\\Command\\OperationCommand',
-      'responseClass' => 'ProjectLocales',
-      'responseType' => 'model',
-      'responseNotes' => 'Lists all locales in currently authenticated project. The response is split into your source locale and all other target locales.',
+      'class' => '\\Loco\\Http\\Command\\StrictCommand',
+      'responseClass' => 'array',
+      'responseType' => 'primitive',
+      'responseNotes' => 'Lists all locales in currently authenticated project. Your native/source language will always be the first in the list',
       'summary' => 'List all locales in your project',
       'parameters' => 
       array (
@@ -452,7 +452,7 @@ return array (
     array (
       'httpMethod' => 'GET',
       'uri' => '/api/locales/{locale}.json',
-      'class' => 'Guzzle\\Service\\Command\\OperationCommand',
+      'class' => '\\Loco\\Http\\Command\\StrictCommand',
       'responseClass' => 'Locale',
       'responseType' => 'model',
       'responseNotes' => 'Gets a single locale in currently authenticated project',
@@ -492,7 +492,7 @@ return array (
     array (
       'httpMethod' => 'DELETE',
       'uri' => '/api/locales/{locale}.json',
-      'class' => 'Guzzle\\Service\\Command\\OperationCommand',
+      'class' => '\\Loco\\Http\\Command\\StrictCommand',
       'responseClass' => 'Success',
       'responseType' => 'model',
       'responseNotes' => '<p>Delete a locale from currently authenticated project.</p>
@@ -539,7 +539,7 @@ return array (
     array (
       'httpMethod' => 'POST',
       'uri' => '/api/locales/{locale}.json',
-      'class' => 'Guzzle\\Service\\Command\\OperationCommand',
+      'class' => '\\Loco\\Http\\Command\\StrictCommand',
       'responseClass' => 'Locale',
       'responseType' => 'model',
       'responseNotes' => '<p>Adds a new locale to the currently authenticated project.</p>
@@ -582,7 +582,7 @@ return array (
     array (
       'httpMethod' => 'PATCH',
       'uri' => '/api/locales/{locale}.json',
-      'class' => 'Guzzle\\Service\\Command\\OperationCommand',
+      'class' => '\\Loco\\Http\\Command\\StrictCommand',
       'responseClass' => 'Locale',
       'responseType' => 'model',
       'responseNotes' => '<p>Modifies the properties of a locale in the currently authenticated project.</p>
@@ -660,7 +660,7 @@ return array (
     array (
       'httpMethod' => 'GET',
       'uri' => '/api/ping.json',
-      'class' => 'Guzzle\\Service\\Command\\OperationCommand',
+      'class' => '\\Loco\\Http\\Command\\StrictCommand',
       'responseClass' => 'Echo',
       'responseType' => 'model',
       'responseNotes' => 'Checks the API is up and returns the API version number',
@@ -673,7 +673,7 @@ return array (
     array (
       'httpMethod' => 'GET',
       'uri' => '/api/ping/not-found.json',
-      'class' => 'Guzzle\\Service\\Command\\OperationCommand',
+      'class' => '\\Loco\\Http\\Command\\StrictCommand',
       'responseClass' => 'Error',
       'responseType' => 'model',
       'summary' => 'Get a test 404 response',
@@ -765,7 +765,6 @@ return array (
         'user' => 
         array (
           'required' => true,
-          'description' => 'Authenticated user',
           'type' => 'object',
           'location' => 'json',
           'additionalProperties' => false,
@@ -794,7 +793,6 @@ return array (
         'group' => 
         array (
           'required' => true,
-          'description' => 'Authenticated account',
           'type' => 'object',
           'location' => 'json',
           'additionalProperties' => false,
@@ -817,7 +815,6 @@ return array (
         'project' => 
         array (
           'required' => true,
-          'description' => 'Project associated with authentication key',
           'type' => 'object',
           'location' => 'json',
           'additionalProperties' => false,
@@ -913,112 +910,6 @@ return array (
           'description' => 'Descriptive success message',
           'type' => 'string',
           'location' => 'json',
-        ),
-      ),
-    ),
-    'ProjectLocales' => 
-    array (
-      'type' => 'object',
-      'additionalProperties' => false,
-      'properties' => 
-      array (
-        'source' => 
-        array (
-          'description' => 'Source locale',
-          'type' => 'object',
-          'location' => 'json',
-          'additionalProperties' => false,
-          'properties' => 
-          array (
-            'code' => 
-            array (
-              'description' => 'Locale short code',
-              'type' => 'string',
-              'location' => 'json',
-            ),
-            'native' => 
-            array (
-              'description' => 'Whether native/source locale of project',
-              'type' => 'boolean',
-              'location' => 'json',
-            ),
-            'name' => 
-            array (
-              'description' => 'Full locale name',
-              'type' => 'string',
-              'location' => 'json',
-            ),
-            'plurals' => 
-            array (
-              'description' => 'Plural forms',
-              'type' => 'array',
-              'location' => 'json',
-              'enum' => 
-              array (
-                0 => 'zero',
-                1 => 'one',
-                2 => 'two',
-                3 => 'few',
-                4 => 'many',
-                5 => 'other',
-              ),
-              'items' => 
-              array (
-                'type' => 'string',
-              ),
-            ),
-          ),
-        ),
-        'targets' => 
-        array (
-          'description' => 'Target locales',
-          'type' => 'array',
-          'location' => 'json',
-          'items' => 
-          array (
-            'type' => 'object',
-            'additionalProperties' => false,
-            'properties' => 
-            array (
-              'code' => 
-              array (
-                'description' => 'Locale short code',
-                'type' => 'string',
-                'location' => 'json',
-              ),
-              'native' => 
-              array (
-                'description' => 'Whether native/source locale of project',
-                'type' => 'boolean',
-                'location' => 'json',
-              ),
-              'name' => 
-              array (
-                'description' => 'Full locale name',
-                'type' => 'string',
-                'location' => 'json',
-              ),
-              'plurals' => 
-              array (
-                'description' => 'Plural forms',
-                'type' => 'array',
-                'location' => 'json',
-                'enum' => 
-                array (
-                  0 => 'zero',
-                  1 => 'one',
-                  2 => 'two',
-                  3 => 'few',
-                  4 => 'many',
-                  5 => 'other',
-                ),
-                'items' => 
-                array (
-                  'type' => 'string',
-                ),
-              ),
-            ),
-          ),
         ),
       ),
     ),

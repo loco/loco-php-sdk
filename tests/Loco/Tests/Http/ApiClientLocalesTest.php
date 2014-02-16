@@ -18,19 +18,11 @@ class ApiClientLocalesTest  extends ApiClientTest {
      */
     public function testLocalesList(){
         $client = $this->getClient();
-        
-        // top level is list model
+        // top level is array
         $locales = $client->getLocales();
-        $this->assertInstanceOf( '\Guzzle\Service\Resource\Model', $locales );
-        
-        // deeper properties are all cast to arrays
-        $locale = $locales->get('source');
-        $this->assertInternalType('array', $locale );
-
-        $targets = $locales->get('targets');
-        $this->assertInternalType('array', $targets );
-        
-        $locale = $targets[0]; 
+        $this->assertInternalType('array', $locales );
+        // items are instances of Locale model, but Guzzle won't validate due to primitive being top level.
+        $locale = $locales[0]; 
         $this->assertInternalType('array', $locale );
         $this->assertArrayHasKey('code', $locale );
         
