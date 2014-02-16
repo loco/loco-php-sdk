@@ -58,6 +58,7 @@ class ApiClientTest extends GuzzleTestCase {
     /**
      * Fake an invalid ping
      * @group mock
+     * @group strict
      * @depends testFactoryInitializesClient
      * @expectedException \Guzzle\Service\Exception\ValidationException
      */
