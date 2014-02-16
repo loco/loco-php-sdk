@@ -58,7 +58,8 @@ class ApiClientLocalesTest  extends ApiClientTest {
      * createLocale
      */
     public function testLocaleCreate(){
-        $code = 'en_GB+test';    
+        $rand = substr( md5( microtime() ), 0, 5 );
+        $code = 'en_GB+'.$rand;    
         $client = $this->getClient();
         $model = $client->createLocale( array( 'locale' => $code ) );
         $this->assertInstanceOf( '\Guzzle\Service\Resource\Model', $model );
@@ -76,8 +77,9 @@ class ApiClientLocalesTest  extends ApiClientTest {
         $client = $this->getClient();
         $update = array (
             'name' => 'Renamed OK',
+            'locale' => $code,
         );
-        $model = $client->patchLocale( array( 'data' => $update, 'locale' => $code ) );
+        $model = $client->patchLocale( $update );
         $this->assertInstanceOf( '\Guzzle\Service\Resource\Model', $model );
         $this->assertEquals( 'Renamed OK', $model['name'] );
         return $code;
