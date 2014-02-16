@@ -1,6 +1,6 @@
 <?php
 /**
- * Auto-generated with Swizzle at 2014-02-16 02:03:01 +0000
+ * Auto-generated with Swizzle at 2014-02-16 15:44:24 +0000
  */
 return array (
   'name' => 'loco',
@@ -111,6 +111,13 @@ return array (
           ),
           'default' => 'json',
         ),
+        'name' => 
+        array (
+          'description' => 'Domain/namespace, applicable to some file formats',
+          'type' => 'string',
+          'location' => 'uri',
+          'default' => 'messages',
+        ),
         'format' => 
         array (
           'description' => 'Specific target format, required for some file types',
@@ -129,13 +136,6 @@ return array (
             8 => 'tizen',
             9 => 'gettext',
           ),
-        ),
-        'name' => 
-        array (
-          'description' => 'Domain/namespace, applicable to some file formats',
-          'type' => 'string',
-          'location' => 'uri',
-          'default' => 'messages',
         ),
         'locale' => 
         array (
@@ -250,33 +250,6 @@ return array (
           'type' => 'string',
           'location' => 'query',
         ),
-        'ext' => 
-        array (
-          'required' => true,
-          'description' => 'Target file type specified as a file extension',
-          'type' => 'string',
-          'location' => 'uri',
-          'enum' => 
-          array (
-            0 => 'csv',
-            1 => 'html',
-            2 => 'js',
-            3 => 'json',
-            4 => 'mo',
-            5 => 'phps',
-            6 => 'po',
-            7 => 'pot',
-            8 => 'resx',
-            9 => 'sql',
-            10 => 'strings',
-            11 => 'tmx',
-            12 => 'ts',
-            13 => 'xlf',
-            14 => 'xml',
-            15 => 'yml',
-          ),
-          'default' => 'json',
-        ),
         'format' => 
         array (
           'description' => 'Specific format, applicable to some file types only',
@@ -312,6 +285,33 @@ return array (
             2 => 'text',
           ),
         ),
+        'ext' => 
+        array (
+          'required' => true,
+          'description' => 'Target file type specified as a file extension',
+          'type' => 'string',
+          'location' => 'uri',
+          'enum' => 
+          array (
+            0 => 'csv',
+            1 => 'html',
+            2 => 'js',
+            3 => 'json',
+            4 => 'mo',
+            5 => 'phps',
+            6 => 'po',
+            7 => 'pot',
+            8 => 'resx',
+            9 => 'sql',
+            10 => 'strings',
+            11 => 'tmx',
+            12 => 'ts',
+            13 => 'xlf',
+            14 => 'xml',
+            15 => 'yml',
+          ),
+          'default' => 'json',
+        ),
       ),
       'errorResponses' => 
       array (
@@ -340,6 +340,41 @@ return array (
           'description' => 'Project API key',
           'type' => 'string',
           'location' => 'query',
+        ),
+        'format' => 
+        array (
+          'description' => 'Specific format, applicable to some file types only',
+          'type' => 'string',
+          'location' => 'query',
+          'enum' => 
+          array (
+            0 => 'symfony',
+            1 => 'zend',
+            2 => 'codeigniter',
+            3 => 'constants',
+            4 => 'chrome',
+            5 => 'nested',
+            6 => 'java',
+            7 => 'tizen',
+          ),
+        ),
+        'filter' => 
+        array (
+          'description' => 'Comma-separated list of tags to export subset of assets.',
+          'type' => 'string',
+          'location' => 'query',
+        ),
+        'index' => 
+        array (
+          'description' => 'Override default lookup key in language pack. Leave blank for auto.',
+          'type' => 'string',
+          'location' => 'query',
+          'enum' => 
+          array (
+            0 => 'id',
+            1 => 'name',
+            2 => 'text',
+          ),
         ),
         'locale' => 
         array (
@@ -374,41 +409,6 @@ return array (
             15 => 'yml',
           ),
           'default' => 'json',
-        ),
-        'format' => 
-        array (
-          'description' => 'Specific format, applicable to some file types only',
-          'type' => 'string',
-          'location' => 'query',
-          'enum' => 
-          array (
-            0 => 'symfony',
-            1 => 'zend',
-            2 => 'codeigniter',
-            3 => 'constants',
-            4 => 'chrome',
-            5 => 'nested',
-            6 => 'java',
-            7 => 'tizen',
-          ),
-        ),
-        'filter' => 
-        array (
-          'description' => 'Comma-separated list of tags to export subset of assets.',
-          'type' => 'string',
-          'location' => 'query',
-        ),
-        'index' => 
-        array (
-          'description' => 'Override default lookup key in language pack. Leave blank for auto.',
-          'type' => 'string',
-          'location' => 'query',
-          'enum' => 
-          array (
-            0 => 'id',
-            1 => 'name',
-            2 => 'text',
-          ),
         ),
       ),
       'errorResponses' => 
@@ -590,12 +590,42 @@ return array (
       'summary' => 'Modify a project locale',
       'parameters' => 
       array (
-        'data' => 
+        'code' => 
         array (
-          'required' => true,
-          'description' => 'Partial locale data to update',
+          'description' => 'Locale short code',
           'type' => 'string',
-          'location' => 'body',
+          'location' => 'json',
+        ),
+        'native' => 
+        array (
+          'description' => 'Whether native/source locale of project',
+          'type' => 'boolean',
+          'location' => 'json',
+        ),
+        'name' => 
+        array (
+          'description' => 'Full locale name',
+          'type' => 'string',
+          'location' => 'json',
+        ),
+        'plurals' => 
+        array (
+          'description' => 'Plural forms',
+          'type' => 'array',
+          'location' => 'json',
+          'enum' => 
+          array (
+            0 => 'zero',
+            1 => 'one',
+            2 => 'two',
+            3 => 'few',
+            4 => 'many',
+            5 => 'other',
+          ),
+          'items' => 
+          array (
+            'type' => 'string',
+          ),
         ),
         'locale' => 
         array (

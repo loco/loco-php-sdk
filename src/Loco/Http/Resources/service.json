@@ -1,0 +1,876 @@
+{
+    "name": "loco",
+    "apiVersion": "1.0.2",
+    "baseUrl": "https:\/\/ssl.loco.192.168.0.7.xip.io\/",
+    "description": "Loco REST API",
+    "operations": {
+        "authVerify": {
+            "httpMethod": "GET",
+            "uri": "\/api\/auth\/verify.json",
+            "class": "Guzzle\\Service\\Command\\OperationCommand",
+            "responseClass": "Creds",
+            "responseType": "model",
+            "responseNotes": "Loco API keys authenticate your user account for accessing a specific project.<br \/>\n             This endpoint verifies an API key and returns the authenticated user, account and project.",
+            "summary": "Verify an API project key",
+            "parameters": {
+                "key": {
+                    "required": true,
+                    "description": "Project API key",
+                    "type": "string",
+                    "location": "query"
+                }
+            },
+            "errorResponses": [
+                {
+                    "code": 401,
+                    "phrase": "Invalid API key"
+                }
+            ]
+        },
+        "convert": {
+            "httpMethod": "POST",
+            "uri": "\/api\/convert\/{from}\/{name}.{ext}",
+            "class": "Guzzle\\Service\\Command\\OperationCommand",
+            "responseClass": "\\Loco\\Http\\Response\\RawResponse",
+            "responseType": "class",
+            "responseNotes": "Use this API to convert between language pack file formats without a Loco account.<br \/> \n             Precise options depend on the file formats you're converting between.\n             <a href='https:\/\/localise.biz\/free\/converter\/api'>See some examples<\/a>.",
+            "summary": "Convert a language pack to another file format",
+            "parameters": {
+                "src": {
+                    "required": true,
+                    "description": "Raw source of file being converted",
+                    "type": "string",
+                    "location": "body",
+                    "default": "{\"foo\":\"bar\"}"
+                },
+                "from": {
+                    "required": true,
+                    "description": "Source file format being imported",
+                    "type": "string",
+                    "location": "uri",
+                    "enum": [
+                        "json",
+                        "mo",
+                        "php",
+                        "po",
+                        "properties",
+                        "resx",
+                        "strings",
+                        "symfony",
+                        "tmx",
+                        "ts",
+                        "xlf",
+                        "xml",
+                        "yml"
+                    ],
+                    "default": "json"
+                },
+                "ext": {
+                    "required": true,
+                    "description": "Target file format being exported, specified as a file extension",
+                    "type": "string",
+                    "location": "uri",
+                    "enum": [
+                        "csv",
+                        "html",
+                        "js",
+                        "json",
+                        "mo",
+                        "phps",
+                        "po",
+                        "pot",
+                        "properties",
+                        "resx",
+                        "sql",
+                        "strings",
+                        "tmx",
+                        "ts",
+                        "xlf",
+                        "xml",
+                        "yml"
+                    ],
+                    "default": "json"
+                },
+                "name": {
+                    "description": "Domain\/namespace, applicable to some file formats",
+                    "type": "string",
+                    "location": "uri",
+                    "default": "messages"
+                },
+                "format": {
+                    "description": "Specific target format, required for some file types",
+                    "type": "string",
+                    "location": "query",
+                    "enum": [
+                        "",
+                        "symfony",
+                        "zend",
+                        "codeigniter",
+                        "constants",
+                        "chrome",
+                        "nested",
+                        "java",
+                        "tizen",
+                        "gettext"
+                    ]
+                },
+                "locale": {
+                    "description": "Locale of target language pack, required in most cases",
+                    "type": "string",
+                    "location": "query"
+                },
+                "native": {
+                    "description": "Optional source locale, not required in many cases",
+                    "type": "string",
+                    "location": "query"
+                }
+            },
+            "errorResponses": [
+                {
+                    "code": 204,
+                    "phrase": "No messages could be extracted from source"
+                },
+                {
+                    "code": 422,
+                    "phrase": "Empty or invalid source data"
+                }
+            ]
+        },
+        "exportAll": {
+            "httpMethod": "GET",
+            "uri": "\/api\/export\/all.{ext}",
+            "class": "Guzzle\\Service\\Command\\OperationCommand",
+            "responseClass": "\\Loco\\Http\\Response\\RawResponse",
+            "responseType": "class",
+            "responseNotes": "Export all translations from your project to a multi-locale language pack.<br \/>\n           <br \/>\n           Note that not all formats support multiple locales in the same file. See <code>\/export\/archive<\/code> for exporting separate files,\n           and <code>\/export\/locale<\/code> for exporting one language at a time.",
+            "summary": "Export your whole project to a multi-locale language pack",
+            "parameters": {
+                "ext": {
+                    "required": true,
+                    "description": "Target file type specified as a file extension",
+                    "type": "string",
+                    "location": "uri",
+                    "enum": [
+                        "csv",
+                        "html",
+                        "sql",
+                        "tmx",
+                        "xlf",
+                        "yml"
+                    ],
+                    "default": "yml"
+                },
+                "key": {
+                    "required": true,
+                    "description": "Project API key",
+                    "type": "string",
+                    "location": "query"
+                },
+                "filter": {
+                    "description": "Comma-separated list of tags to export subset of assets.",
+                    "type": "string",
+                    "location": "query"
+                },
+                "index": {
+                    "description": "Override default lookup key in language pack. Leave blank for auto.",
+                    "type": "string",
+                    "location": "query",
+                    "enum": [
+                        "id",
+                        "name",
+                        "text"
+                    ]
+                }
+            },
+            "errorResponses": [
+                {
+                    "code": 401,
+                    "phrase": "Invalid API key"
+                }
+            ]
+        },
+        "exportArchive": {
+            "httpMethod": "GET",
+            "uri": "\/api\/export\/archive\/{ext}.zip",
+            "class": "Guzzle\\Service\\Command\\OperationCommand",
+            "responseClass": "\\Loco\\Http\\Response\\ZipResponse",
+            "responseType": "class",
+            "responseNotes": "Export all translations from your project to a zip archive of language packs.<br \/>\n           <br \/>\n           If you're exporting to a file format that supports multiple locales within the same file, you can use the <code>\/export\/all<\/code> method ",
+            "summary": "Export all locales to a zip archive",
+            "parameters": {
+                "key": {
+                    "required": true,
+                    "description": "Project API key",
+                    "type": "string",
+                    "location": "query"
+                },
+                "format": {
+                    "description": "Specific format, applicable to some file types only",
+                    "type": "string",
+                    "location": "query",
+                    "enum": [
+                        "symfony",
+                        "zend",
+                        "codeigniter",
+                        "constants",
+                        "chrome",
+                        "nested",
+                        "java",
+                        "tizen"
+                    ]
+                },
+                "filter": {
+                    "description": "Comma-separated list of tags to export subset of assets.",
+                    "type": "string",
+                    "location": "query"
+                },
+                "index": {
+                    "description": "Override default lookup key in language pack. Leave blank for auto.",
+                    "type": "string",
+                    "location": "query",
+                    "enum": [
+                        "id",
+                        "name",
+                        "text"
+                    ]
+                },
+                "ext": {
+                    "required": true,
+                    "description": "Target file type specified as a file extension",
+                    "type": "string",
+                    "location": "uri",
+                    "enum": [
+                        "csv",
+                        "html",
+                        "js",
+                        "json",
+                        "mo",
+                        "phps",
+                        "po",
+                        "pot",
+                        "resx",
+                        "sql",
+                        "strings",
+                        "tmx",
+                        "ts",
+                        "xlf",
+                        "xml",
+                        "yml"
+                    ],
+                    "default": "json"
+                }
+            },
+            "errorResponses": [
+                {
+                    "code": 401,
+                    "phrase": "Invalid API key"
+                }
+            ]
+        },
+        "exportLocale": {
+            "httpMethod": "GET",
+            "uri": "\/api\/export\/locale\/{locale}.{ext}",
+            "class": "Guzzle\\Service\\Command\\OperationCommand",
+            "responseClass": "\\Loco\\Http\\Response\\RawResponse",
+            "responseType": "class",
+            "responseNotes": "Export translations from your project to a locale-specific language pack.\n           Various export file types are supported with format variations for some types.",
+            "summary": "Export a single locale to a language pack.",
+            "parameters": {
+                "key": {
+                    "required": true,
+                    "description": "Project API key",
+                    "type": "string",
+                    "location": "query"
+                },
+                "format": {
+                    "description": "Specific format, applicable to some file types only",
+                    "type": "string",
+                    "location": "query",
+                    "enum": [
+                        "symfony",
+                        "zend",
+                        "codeigniter",
+                        "constants",
+                        "chrome",
+                        "nested",
+                        "java",
+                        "tizen"
+                    ]
+                },
+                "filter": {
+                    "description": "Comma-separated list of tags to export subset of assets.",
+                    "type": "string",
+                    "location": "query"
+                },
+                "index": {
+                    "description": "Override default lookup key in language pack. Leave blank for auto.",
+                    "type": "string",
+                    "location": "query",
+                    "enum": [
+                        "id",
+                        "name",
+                        "text"
+                    ]
+                },
+                "locale": {
+                    "required": true,
+                    "description": "Locale to export, specified as short code. e.g. 'en' or 'en_GB'",
+                    "type": "string",
+                    "location": "uri"
+                },
+                "ext": {
+                    "required": true,
+                    "description": "Target file type specified as a file extension",
+                    "type": "string",
+                    "location": "uri",
+                    "enum": [
+                        "csv",
+                        "html",
+                        "js",
+                        "json",
+                        "mo",
+                        "phps",
+                        "po",
+                        "pot",
+                        "resx",
+                        "sql",
+                        "strings",
+                        "tmx",
+                        "ts",
+                        "xlf",
+                        "xml",
+                        "yml"
+                    ],
+                    "default": "json"
+                }
+            },
+            "errorResponses": [
+                {
+                    "code": 401,
+                    "phrase": "Invalid API key"
+                }
+            ]
+        },
+        "getLocales": {
+            "httpMethod": "GET",
+            "uri": "\/api\/locales.json",
+            "class": "Guzzle\\Service\\Command\\OperationCommand",
+            "responseClass": "ProjectLocales",
+            "responseType": "model",
+            "responseNotes": "Lists all locales in currently authenticated project. The response is split into your source locale and all other target locales.",
+            "summary": "List all locales in your project",
+            "parameters": {
+                "key": {
+                    "required": true,
+                    "description": "Project API key",
+                    "type": "string",
+                    "location": "query"
+                }
+            },
+            "errorResponses": [
+                {
+                    "code": 401,
+                    "phrase": "Invalid API key"
+                }
+            ]
+        },
+        "getLocale": {
+            "httpMethod": "GET",
+            "uri": "\/api\/locales\/{locale}.json",
+            "class": "Guzzle\\Service\\Command\\OperationCommand",
+            "responseClass": "Locale",
+            "responseType": "model",
+            "responseNotes": "Gets a single locale in currently authenticated project",
+            "summary": "Get a project locale",
+            "parameters": {
+                "locale": {
+                    "required": true,
+                    "description": "Short code of project locale, e.g. 'fr' or 'fr_CH'",
+                    "type": "string",
+                    "location": "uri"
+                },
+                "key": {
+                    "required": true,
+                    "description": "Project API key",
+                    "type": "string",
+                    "location": "query"
+                }
+            },
+            "errorResponses": [
+                {
+                    "code": 401,
+                    "phrase": "Invalid API key"
+                },
+                {
+                    "code": 404,
+                    "phrase": "Locale not in project"
+                }
+            ]
+        },
+        "deleteLocale": {
+            "httpMethod": "DELETE",
+            "uri": "\/api\/locales\/{locale}.json",
+            "class": "Guzzle\\Service\\Command\\OperationCommand",
+            "responseClass": "Success",
+            "responseType": "model",
+            "responseNotes": "<p>Delete a locale from currently authenticated project.<\/p>\n             <p><strong>Warning<\/strong>: This will permanently delete any translations made in the specified locale across your project<\/p>\n             <p>Note that you cannot delete your native\/source locale.<\/p>",
+            "summary": "Delete a project locale",
+            "parameters": {
+                "locale": {
+                    "required": true,
+                    "description": "Short code of project locale, e.g. 'fr' or 'fr_CH'",
+                    "type": "string",
+                    "location": "uri"
+                },
+                "key": {
+                    "required": true,
+                    "description": "Project API key",
+                    "type": "string",
+                    "location": "query"
+                }
+            },
+            "errorResponses": [
+                {
+                    "code": 401,
+                    "phrase": "Invalid API key"
+                },
+                {
+                    "code": 404,
+                    "phrase": "Locale not in project"
+                },
+                {
+                    "code": 403,
+                    "phrase": "Insufficient privileges"
+                }
+            ]
+        },
+        "createLocale": {
+            "httpMethod": "POST",
+            "uri": "\/api\/locales\/{locale}.json",
+            "class": "Guzzle\\Service\\Command\\OperationCommand",
+            "responseClass": "Locale",
+            "responseType": "model",
+            "responseNotes": "<p>Adds a new locale to the currently authenticated project.<\/p>\n             <p>Note that if the locale already exists in the project, it will just be returned and not duplicated.<\/p>\n             <p>Be warned that Loco will try to make sense of whatever you pass as {locale}. If you put junk in, you'll get junk out.\n                Read about <a href=\"http:\/\/help.localise.biz\/customer\/portal\/articles\/656019-what-s-a-locale-\">Loco locales<\/a> in our support centre.<\/p>",
+            "summary": "Add a new project locale",
+            "parameters": {
+                "locale": {
+                    "required": true,
+                    "description": "Short code of project locale, e.g. 'fr' or 'fr_CH'",
+                    "type": "string",
+                    "location": "uri"
+                },
+                "key": {
+                    "required": true,
+                    "description": "Project API key",
+                    "type": "string",
+                    "location": "query"
+                }
+            },
+            "errorResponses": [
+                {
+                    "code": 401,
+                    "phrase": "Invalid API key"
+                },
+                {
+                    "code": 403,
+                    "phrase": "Insufficient privileges"
+                }
+            ]
+        },
+        "patchLocale": {
+            "httpMethod": "PATCH",
+            "uri": "\/api\/locales\/{locale}.json",
+            "class": "Guzzle\\Service\\Command\\OperationCommand",
+            "responseClass": "Locale",
+            "responseType": "model",
+            "responseNotes": "<p>Modifies the properties of a locale in the currently authenticated project.<\/p>\n             <p>The full, modified locale object is returned.<\/p>",
+            "summary": "Modify a project locale",
+            "parameters": {
+                "code": {
+                    "description": "Locale short code",
+                    "type": "string",
+                    "location": "json"
+                },
+                "native": {
+                    "description": "Whether native\/source locale of project",
+                    "type": "boolean",
+                    "location": "json"
+                },
+                "name": {
+                    "description": "Full locale name",
+                    "type": "string",
+                    "location": "json"
+                },
+                "plurals": {
+                    "description": "Plural forms",
+                    "type": "array",
+                    "location": "json",
+                    "enum": [
+                        "zero",
+                        "one",
+                        "two",
+                        "few",
+                        "many",
+                        "other"
+                    ],
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "locale": {
+                    "required": true,
+                    "description": "Short code of project locale, e.g. 'fr' or 'fr_CH'",
+                    "type": "string",
+                    "location": "uri"
+                },
+                "key": {
+                    "required": true,
+                    "description": "Project API key",
+                    "type": "string",
+                    "location": "query"
+                }
+            },
+            "errorResponses": [
+                {
+                    "code": 401,
+                    "phrase": "Invalid API key"
+                },
+                {
+                    "code": 403,
+                    "phrase": "Insufficient privileges"
+                }
+            ]
+        },
+        "ping": {
+            "httpMethod": "GET",
+            "uri": "\/api\/ping.json",
+            "class": "Guzzle\\Service\\Command\\OperationCommand",
+            "responseClass": "Echo",
+            "responseType": "model",
+            "responseNotes": "Checks the API is up and returns the API version number",
+            "summary": "Check the API is up",
+            "parameters": [
+
+            ]
+        },
+        "ping404": {
+            "httpMethod": "GET",
+            "uri": "\/api\/ping\/not-found.json",
+            "class": "Guzzle\\Service\\Command\\OperationCommand",
+            "responseClass": "Error",
+            "responseType": "model",
+            "summary": "Get a test 404 response",
+            "parameters": [
+
+            ]
+        }
+    },
+    "models": {
+        "User": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "id": {
+                    "description": "User id",
+                    "type": "integer",
+                    "location": "json"
+                },
+                "name": {
+                    "description": "Full user name",
+                    "type": "string",
+                    "location": "json"
+                },
+                "email": {
+                    "description": "User's email address",
+                    "type": "string",
+                    "location": "json"
+                }
+            }
+        },
+        "Group": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "id": {
+                    "description": "Loco account id",
+                    "type": "integer",
+                    "location": "json"
+                },
+                "name": {
+                    "description": "Loco account name",
+                    "type": "string",
+                    "location": "json"
+                }
+            }
+        },
+        "Project": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "id": {
+                    "description": "Project id",
+                    "type": "integer",
+                    "location": "json"
+                },
+                "name": {
+                    "description": "Project name",
+                    "type": "string",
+                    "location": "json"
+                },
+                "url": {
+                    "description": "Project dashboard URL",
+                    "type": "string",
+                    "location": "json"
+                }
+            }
+        },
+        "Creds": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "user": {
+                    "required": true,
+                    "description": "Authenticated user",
+                    "type": "object",
+                    "location": "json",
+                    "additionalProperties": false,
+                    "properties": {
+                        "id": {
+                            "description": "User id",
+                            "type": "integer",
+                            "location": "json"
+                        },
+                        "name": {
+                            "description": "Full user name",
+                            "type": "string",
+                            "location": "json"
+                        },
+                        "email": {
+                            "description": "User's email address",
+                            "type": "string",
+                            "location": "json"
+                        }
+                    }
+                },
+                "group": {
+                    "required": true,
+                    "description": "Authenticated account",
+                    "type": "object",
+                    "location": "json",
+                    "additionalProperties": false,
+                    "properties": {
+                        "id": {
+                            "description": "Loco account id",
+                            "type": "integer",
+                            "location": "json"
+                        },
+                        "name": {
+                            "description": "Loco account name",
+                            "type": "string",
+                            "location": "json"
+                        }
+                    }
+                },
+                "project": {
+                    "required": true,
+                    "description": "Project associated with authentication key",
+                    "type": "object",
+                    "location": "json",
+                    "additionalProperties": false,
+                    "properties": {
+                        "id": {
+                            "description": "Project id",
+                            "type": "integer",
+                            "location": "json"
+                        },
+                        "name": {
+                            "description": "Project name",
+                            "type": "string",
+                            "location": "json"
+                        },
+                        "url": {
+                            "description": "Project dashboard URL",
+                            "type": "string",
+                            "location": "json"
+                        }
+                    }
+                }
+            }
+        },
+        "anon_type_string": {
+            "type": "string"
+        },
+        "Locale": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "code": {
+                    "description": "Locale short code",
+                    "type": "string",
+                    "location": "json"
+                },
+                "native": {
+                    "description": "Whether native\/source locale of project",
+                    "type": "boolean",
+                    "location": "json"
+                },
+                "name": {
+                    "description": "Full locale name",
+                    "type": "string",
+                    "location": "json"
+                },
+                "plurals": {
+                    "description": "Plural forms",
+                    "type": "array",
+                    "location": "json",
+                    "enum": [
+                        "zero",
+                        "one",
+                        "two",
+                        "few",
+                        "many",
+                        "other"
+                    ],
+                    "items": {
+                        "type": "string"
+                    }
+                }
+            }
+        },
+        "Success": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "status": {
+                    "required": true,
+                    "description": "HTTP status 2xx code",
+                    "type": "integer",
+                    "location": "json"
+                },
+                "message": {
+                    "required": true,
+                    "description": "Descriptive success message",
+                    "type": "string",
+                    "location": "json"
+                }
+            }
+        },
+        "ProjectLocales": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "source": {
+                    "description": "Source locale",
+                    "type": "object",
+                    "location": "json",
+                    "additionalProperties": false,
+                    "properties": {
+                        "code": {
+                            "description": "Locale short code",
+                            "type": "string",
+                            "location": "json"
+                        },
+                        "native": {
+                            "description": "Whether native\/source locale of project",
+                            "type": "boolean",
+                            "location": "json"
+                        },
+                        "name": {
+                            "description": "Full locale name",
+                            "type": "string",
+                            "location": "json"
+                        },
+                        "plurals": {
+                            "description": "Plural forms",
+                            "type": "array",
+                            "location": "json",
+                            "enum": [
+                                "zero",
+                                "one",
+                                "two",
+                                "few",
+                                "many",
+                                "other"
+                            ],
+                            "items": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                },
+                "targets": {
+                    "description": "Target locales",
+                    "type": "array",
+                    "location": "json",
+                    "items": {
+                        "type": "object",
+                        "additionalProperties": false,
+                        "properties": {
+                            "code": {
+                                "description": "Locale short code",
+                                "type": "string",
+                                "location": "json"
+                            },
+                            "native": {
+                                "description": "Whether native\/source locale of project",
+                                "type": "boolean",
+                                "location": "json"
+                            },
+                            "name": {
+                                "description": "Full locale name",
+                                "type": "string",
+                                "location": "json"
+                            },
+                            "plurals": {
+                                "description": "Plural forms",
+                                "type": "array",
+                                "location": "json",
+                                "enum": [
+                                    "zero",
+                                    "one",
+                                    "two",
+                                    "few",
+                                    "many",
+                                    "other"
+                                ],
+                                "items": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "Echo": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "version": {
+                    "required": true,
+                    "description": "Current API version",
+                    "type": "string",
+                    "location": "json"
+                }
+            }
+        },
+        "Error": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "status": {
+                    "required": true,
+                    "description": "HTTP status code",
+                    "type": "integer",
+                    "location": "json"
+                },
+                "error": {
+                    "required": true,
+                    "description": "Description of error",
+                    "type": "string",
+                    "location": "json"
+                }
+            }
+        }
+    }
+}
