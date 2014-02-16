@@ -1,6 +1,6 @@
 <?php
 /**
- * Auto-generated with Swizzle at 2014-02-16 17:41:03 +0000
+ * Auto-generated with Swizzle at 2014-02-16 19:24:18 +0000
  */
 return array (
   'name' => 'loco',
@@ -610,21 +610,44 @@ return array (
         ),
         'plurals' => 
         array (
-          'description' => 'Plural forms',
-          'type' => 'array',
+          'type' => 'object',
           'location' => 'json',
-          'enum' => 
+          'additionalProperties' => false,
+          'properties' => 
           array (
-            0 => 'zero',
-            1 => 'one',
-            2 => 'two',
-            3 => 'few',
-            4 => 'many',
-            5 => 'other',
-          ),
-          'items' => 
-          array (
-            'type' => 'string',
+            'forms' => 
+            array (
+              'description' => 'Read only plural form names, see <a href="http://unicode.org/reports/tr35/tr35-numbers.html#Language_Plural_Rules">Unicode tr35</a>.',
+              'type' => 'array',
+              'location' => 'json',
+              'enum' => 
+              array (
+                0 => 'zero',
+                1 => 'one',
+                2 => 'two',
+                3 => 'few',
+                4 => 'many',
+                5 => 'other',
+              ),
+              'items' => 
+              array (
+                'type' => 'string',
+              ),
+            ),
+            'length' => 
+            array (
+              'description' => 'Number of plural forms',
+              'type' => 'integer',
+              'location' => 'json',
+              'minimum' => 1,
+              'maximum' => 6,
+            ),
+            'equation' => 
+            array (
+              'description' => 'Gettext-style plural form equation taking multiplier <code>n</code> to yield plural form offset <code>0 - length-1</code>.',
+              'type' => 'string',
+              'location' => 'json',
+            ),
           ),
         ),
         'locale' => 
@@ -842,9 +865,72 @@ return array (
         ),
       ),
     ),
+    'Success' => 
+    array (
+      'type' => 'object',
+      'additionalProperties' => false,
+      'properties' => 
+      array (
+        'status' => 
+        array (
+          'required' => true,
+          'description' => 'HTTP status 2xx code',
+          'type' => 'integer',
+          'location' => 'json',
+        ),
+        'message' => 
+        array (
+          'required' => true,
+          'description' => 'Descriptive success message',
+          'type' => 'string',
+          'location' => 'json',
+        ),
+      ),
+    ),
     'anon_type_string' => 
     array (
       'type' => 'string',
+    ),
+    'Plurals' => 
+    array (
+      'type' => 'object',
+      'additionalProperties' => false,
+      'properties' => 
+      array (
+        'forms' => 
+        array (
+          'description' => 'Read only plural form names, see <a href="http://unicode.org/reports/tr35/tr35-numbers.html#Language_Plural_Rules">Unicode tr35</a>.',
+          'type' => 'array',
+          'location' => 'json',
+          'enum' => 
+          array (
+            0 => 'zero',
+            1 => 'one',
+            2 => 'two',
+            3 => 'few',
+            4 => 'many',
+            5 => 'other',
+          ),
+          'items' => 
+          array (
+            'type' => 'string',
+          ),
+        ),
+        'length' => 
+        array (
+          'description' => 'Number of plural forms',
+          'type' => 'integer',
+          'location' => 'json',
+          'minimum' => 1,
+          'maximum' => 6,
+        ),
+        'equation' => 
+        array (
+          'description' => 'Gettext-style plural form equation taking multiplier <code>n</code> to yield plural form offset <code>0 - length-1</code>.',
+          'type' => 'string',
+          'location' => 'json',
+        ),
+      ),
     ),
     'Locale' => 
     array (
@@ -872,44 +958,45 @@ return array (
         ),
         'plurals' => 
         array (
-          'description' => 'Plural forms',
-          'type' => 'array',
+          'type' => 'object',
           'location' => 'json',
-          'enum' => 
+          'additionalProperties' => false,
+          'properties' => 
           array (
-            0 => 'zero',
-            1 => 'one',
-            2 => 'two',
-            3 => 'few',
-            4 => 'many',
-            5 => 'other',
+            'forms' => 
+            array (
+              'description' => 'Read only plural form names, see <a href="http://unicode.org/reports/tr35/tr35-numbers.html#Language_Plural_Rules">Unicode tr35</a>.',
+              'type' => 'array',
+              'location' => 'json',
+              'enum' => 
+              array (
+                0 => 'zero',
+                1 => 'one',
+                2 => 'two',
+                3 => 'few',
+                4 => 'many',
+                5 => 'other',
+              ),
+              'items' => 
+              array (
+                'type' => 'string',
+              ),
+            ),
+            'length' => 
+            array (
+              'description' => 'Number of plural forms',
+              'type' => 'integer',
+              'location' => 'json',
+              'minimum' => 1,
+              'maximum' => 6,
+            ),
+            'equation' => 
+            array (
+              'description' => 'Gettext-style plural form equation taking multiplier <code>n</code> to yield plural form offset <code>0 - length-1</code>.',
+              'type' => 'string',
+              'location' => 'json',
+            ),
           ),
-          'items' => 
-          array (
-            'type' => 'string',
-          ),
-        ),
-      ),
-    ),
-    'Success' => 
-    array (
-      'type' => 'object',
-      'additionalProperties' => false,
-      'properties' => 
-      array (
-        'status' => 
-        array (
-          'required' => true,
-          'description' => 'HTTP status 2xx code',
-          'type' => 'integer',
-          'location' => 'json',
-        ),
-        'message' => 
-        array (
-          'required' => true,
-          'description' => 'Descriptive success message',
-          'type' => 'string',
-          'location' => 'json',
         ),
       ),
     ),

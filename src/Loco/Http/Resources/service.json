@@ -502,19 +502,38 @@
                     "location": "json"
                 },
                 "plurals": {
-                    "description": "Plural forms",
-                    "type": "array",
+                    "type": "object",
                     "location": "json",
-                    "enum": [
-                        "zero",
-                        "one",
-                        "two",
-                        "few",
-                        "many",
-                        "other"
-                    ],
-                    "items": {
-                        "type": "string"
+                    "additionalProperties": false,
+                    "properties": {
+                        "forms": {
+                            "description": "Read only plural form names, see <a href=\"http:\/\/unicode.org\/reports\/tr35\/tr35-numbers.html#Language_Plural_Rules\">Unicode tr35<\/a>.",
+                            "type": "array",
+                            "location": "json",
+                            "enum": [
+                                "zero",
+                                "one",
+                                "two",
+                                "few",
+                                "many",
+                                "other"
+                            ],
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "length": {
+                            "description": "Number of plural forms",
+                            "type": "integer",
+                            "location": "json",
+                            "minimum": 1,
+                            "maximum": 6
+                        },
+                        "equation": {
+                            "description": "Gettext-style plural form equation taking multiplier <code>n<\/code> to yield plural form offset <code>0 - length-1<\/code>.",
+                            "type": "string",
+                            "location": "json"
+                        }
                     }
                 },
                 "locale": {
@@ -694,8 +713,60 @@
                 }
             }
         },
+        "Success": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "status": {
+                    "required": true,
+                    "description": "HTTP status 2xx code",
+                    "type": "integer",
+                    "location": "json"
+                },
+                "message": {
+                    "required": true,
+                    "description": "Descriptive success message",
+                    "type": "string",
+                    "location": "json"
+                }
+            }
+        },
         "anon_type_string": {
             "type": "string"
+        },
+        "Plurals": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "forms": {
+                    "description": "Read only plural form names, see <a href=\"http:\/\/unicode.org\/reports\/tr35\/tr35-numbers.html#Language_Plural_Rules\">Unicode tr35<\/a>.",
+                    "type": "array",
+                    "location": "json",
+                    "enum": [
+                        "zero",
+                        "one",
+                        "two",
+                        "few",
+                        "many",
+                        "other"
+                    ],
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "length": {
+                    "description": "Number of plural forms",
+                    "type": "integer",
+                    "location": "json",
+                    "minimum": 1,
+                    "maximum": 6
+                },
+                "equation": {
+                    "description": "Gettext-style plural form equation taking multiplier <code>n<\/code> to yield plural form offset <code>0 - length-1<\/code>.",
+                    "type": "string",
+                    "location": "json"
+                }
+            }
         },
         "Locale": {
             "type": "object",
@@ -717,38 +788,39 @@
                     "location": "json"
                 },
                 "plurals": {
-                    "description": "Plural forms",
-                    "type": "array",
+                    "type": "object",
                     "location": "json",
-                    "enum": [
-                        "zero",
-                        "one",
-                        "two",
-                        "few",
-                        "many",
-                        "other"
-                    ],
-                    "items": {
-                        "type": "string"
+                    "additionalProperties": false,
+                    "properties": {
+                        "forms": {
+                            "description": "Read only plural form names, see <a href=\"http:\/\/unicode.org\/reports\/tr35\/tr35-numbers.html#Language_Plural_Rules\">Unicode tr35<\/a>.",
+                            "type": "array",
+                            "location": "json",
+                            "enum": [
+                                "zero",
+                                "one",
+                                "two",
+                                "few",
+                                "many",
+                                "other"
+                            ],
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "length": {
+                            "description": "Number of plural forms",
+                            "type": "integer",
+                            "location": "json",
+                            "minimum": 1,
+                            "maximum": 6
+                        },
+                        "equation": {
+                            "description": "Gettext-style plural form equation taking multiplier <code>n<\/code> to yield plural form offset <code>0 - length-1<\/code>.",
+                            "type": "string",
+                            "location": "json"
+                        }
                     }
-                }
-            }
-        },
-        "Success": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "status": {
-                    "required": true,
-                    "description": "HTTP status 2xx code",
-                    "type": "integer",
-                    "location": "json"
-                },
-                "message": {
-                    "required": true,
-                    "description": "Descriptive success message",
-                    "type": "string",
-                    "location": "json"
                 }
             }
         },

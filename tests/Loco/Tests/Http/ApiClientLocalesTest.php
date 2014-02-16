@@ -87,7 +87,7 @@ class ApiClientLocalesTest  extends ApiClientTest {
     public function testLocalePatchFailure( $code ){
         $client = $this->getClient();
         $update = array (
-            'plurals' => ['ruins','everything'], // <- read-only property
+            'plurals' => array( 'length' => 1, 'equation' => '0' ), // <- read-only property
             'locale' => $code,
         );
         $client->patchLocale( $update );

@@ -288,7 +288,7 @@ class ApiClientConvertTest extends ApiClientTest {
     */
     public function testExportJSGettext(){
         $js = $this->convert('test-fr_FR.po', 'po', 'js', 'gettext' );
-        $this->assertContains('{"lang":"French","plural-forms":"nplurals=2; plural=n == 1 ? 0 : 1"}', $js );
+        $this->assertContains('{"lang":"French","plural-forms":"nplurals=2;', $js );
         $this->assertContains('["examples","exemple","exemples"]', $js );
         return 'export/test-fr_FR.gettext.js';
     }    
