@@ -1,6 +1,6 @@
 <?php
 /**
- * Auto-generated with Swizzle at 2014-02-16 01:24:08 +0000
+ * Auto-generated with Swizzle at 2014-02-16 02:03:01 +0000
  */
 return array (
   'name' => 'loco',
@@ -590,9 +590,10 @@ return array (
       'summary' => 'Modify a project locale',
       'parameters' => 
       array (
-        0 => 
+        'data' => 
         array (
           'required' => true,
+          'description' => 'Partial locale data to update',
           'type' => 'string',
           'location' => 'body',
         ),

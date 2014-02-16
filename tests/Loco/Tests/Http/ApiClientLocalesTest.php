@@ -13,6 +13,9 @@ use Guzzle\Service\Resource\Model;
 class ApiClientLocalesTest  extends ApiClientTest {
     
     
+    /**
+     * getLocales
+     */
     public function testLocalesList(){
         $client = $this->getClient();
         
@@ -30,8 +33,71 @@ class ApiClientLocalesTest  extends ApiClientTest {
         $locale = $targets[0]; 
         $this->assertInternalType('array', $locale );
         $this->assertArrayHasKey('code', $locale );
+        
+        return $locale;
     }
     
+    
+    
+    /**
+     * getLocale
+     * @depends testLocalesList
+     */
+    public function testLocaleGet( array $locale ){
+        $client = $this->getClient();
+        $model = $client->getLocale( array( 'locale' => $locale['code'] ) );
+        $this->assertInstanceOf( '\Guzzle\Service\Resource\Model', $model );
+        $code = $model['code'];
+        $this->assertEquals( $locale['code'], $code );
+        return $code;
+    }    
+
+
+
+    /**
+     * createLocale
+     */
+    public function testLocaleCreate(){
+        $code = 'en_GB+test';    
+        $client = $this->getClient();
+        $model = $client->createLocale( array( 'locale' => $code ) );
+        $this->assertInstanceOf( '\Guzzle\Service\Resource\Model', $model );
+        $this->assertEquals( $code, $model['code'] );
+        $this->assertEquals( 'English (UK)', $model['name'] );
+        return $code;
+    }
+
+    
+    /**
+     * patchLocale
+     * @depends testLocaleCreate
+     */
+    public function testLocalePatch( $code ){
+        $client = $this->getClient();
+        $update = array (
+            'name' => 'Renamed OK',
+        );
+        $model = $client->patchLocale( array( 'data' => $update, 'locale' => $code ) );
+        $this->assertInstanceOf( '\Guzzle\Service\Resource\Model', $model );
+        $this->assertEquals( 'Renamed OK', $model['name'] );
+        return $code;
+    }
+    
+    
+    /**
+     * deleteLocale
+     * @depends testLocalePatch
+     */
+    public function testLocaleDelete( $code ){
+        $client = $this->getClient();
+        $model = $client->deleteLocale( array( 'locale' => $code ) );
+        $this->assertInstanceOf( '\Guzzle\Service\Resource\Model', $model );
+        $this->assertEquals( 200, $model['status'] );
+        return $code;
+    }   
+
+
+     
     
 }
 
