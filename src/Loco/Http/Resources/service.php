@@ -1,6 +1,6 @@
 <?php
 /**
- * Auto-generated with Swizzle at 2014-02-15 00:10:07 +0000
+ * Auto-generated with Swizzle at 2014-02-16 01:24:08 +0000
  */
 return array (
   'name' => 'loco',
@@ -420,14 +420,15 @@ return array (
         ),
       ),
     ),
-    'locales' => 
+    'getLocales' => 
     array (
       'httpMethod' => 'GET',
       'uri' => '/api/locales.json',
       'class' => 'Guzzle\\Service\\Command\\OperationCommand',
       'responseClass' => 'ProjectLocales',
       'responseType' => 'model',
-      'summary' => 'List all locales in currently authenticated project',
+      'responseNotes' => 'Lists all locales in currently authenticated project. The response is split into your source locale and all other target locales.',
+      'summary' => 'List all locales in your project',
       'parameters' => 
       array (
         'key' => 
@@ -447,6 +448,183 @@ return array (
         ),
       ),
     ),
+    'getLocale' => 
+    array (
+      'httpMethod' => 'GET',
+      'uri' => '/api/locales/{locale}.json',
+      'class' => 'Guzzle\\Service\\Command\\OperationCommand',
+      'responseClass' => 'Locale',
+      'responseType' => 'model',
+      'responseNotes' => 'Gets a single locale in currently authenticated project',
+      'summary' => 'Get a project locale',
+      'parameters' => 
+      array (
+        'locale' => 
+        array (
+          'required' => true,
+          'description' => 'Short code of project locale, e.g. \'fr\' or \'fr_CH\'',
+          'type' => 'string',
+          'location' => 'uri',
+        ),
+        'key' => 
+        array (
+          'required' => true,
+          'description' => 'Project API key',
+          'type' => 'string',
+          'location' => 'query',
+        ),
+      ),
+      'errorResponses' => 
+      array (
+        0 => 
+        array (
+          'code' => 401,
+          'phrase' => 'Invalid API key',
+        ),
+        1 => 
+        array (
+          'code' => 404,
+          'phrase' => 'Locale not in project',
+        ),
+      ),
+    ),
+    'deleteLocale' => 
+    array (
+      'httpMethod' => 'DELETE',
+      'uri' => '/api/locales/{locale}.json',
+      'class' => 'Guzzle\\Service\\Command\\OperationCommand',
+      'responseClass' => 'Success',
+      'responseType' => 'model',
+      'responseNotes' => '<p>Delete a locale from currently authenticated project.</p>
+             <p><strong>Warning</strong>: This will permanently delete any translations made in the specified locale across your project</p>
+             <p>Note that you cannot delete your native/source locale.</p>',
+      'summary' => 'Delete a project locale',
+      'parameters' => 
+      array (
+        'locale' => 
+        array (
+          'required' => true,
+          'description' => 'Short code of project locale, e.g. \'fr\' or \'fr_CH\'',
+          'type' => 'string',
+          'location' => 'uri',
+        ),
+        'key' => 
+        array (
+          'required' => true,
+          'description' => 'Project API key',
+          'type' => 'string',
+          'location' => 'query',
+        ),
+      ),
+      'errorResponses' => 
+      array (
+        0 => 
+        array (
+          'code' => 401,
+          'phrase' => 'Invalid API key',
+        ),
+        1 => 
+        array (
+          'code' => 404,
+          'phrase' => 'Locale not in project',
+        ),
+        2 => 
+        array (
+          'code' => 403,
+          'phrase' => 'Insufficient privileges',
+        ),
+      ),
+    ),
+    'createLocale' => 
+    array (
+      'httpMethod' => 'POST',
+      'uri' => '/api/locales/{locale}.json',
+      'class' => 'Guzzle\\Service\\Command\\OperationCommand',
+      'responseClass' => 'Locale',
+      'responseType' => 'model',
+      'responseNotes' => '<p>Adds a new locale to the currently authenticated project.</p>
+             <p>Note that if the locale already exists in the project, it will just be returned and not duplicated.</p>
+             <p>Be warned that Loco will try to make sense of whatever you pass as {locale}. If you put junk in, you\'ll get junk out.
+                Read about <a href="http://help.localise.biz/customer/portal/articles/656019-what-s-a-locale-">Loco locales</a> in our support centre.</p>',
+      'summary' => 'Add a new project locale',
+      'parameters' => 
+      array (
+        'locale' => 
+        array (
+          'required' => true,
+          'description' => 'Short code of project locale, e.g. \'fr\' or \'fr_CH\'',
+          'type' => 'string',
+          'location' => 'uri',
+        ),
+        'key' => 
+        array (
+          'required' => true,
+          'description' => 'Project API key',
+          'type' => 'string',
+          'location' => 'query',
+        ),
+      ),
+      'errorResponses' => 
+      array (
+        0 => 
+        array (
+          'code' => 401,
+          'phrase' => 'Invalid API key',
+        ),
+        1 => 
+        array (
+          'code' => 403,
+          'phrase' => 'Insufficient privileges',
+        ),
+      ),
+    ),
+    'patchLocale' => 
+    array (
+      'httpMethod' => 'PATCH',
+      'uri' => '/api/locales/{locale}.json',
+      'class' => 'Guzzle\\Service\\Command\\OperationCommand',
+      'responseClass' => 'Locale',
+      'responseType' => 'model',
+      'responseNotes' => '<p>Modifies the properties of a locale in the currently authenticated project.</p>
+             <p>The full, modified locale object is returned.</p>',
+      'summary' => 'Modify a project locale',
+      'parameters' => 
+      array (
+        0 => 
+        array (
+          'required' => true,
+          'type' => 'string',
+          'location' => 'body',
+        ),
+        'locale' => 
+        array (
+          'required' => true,
+          'description' => 'Short code of project locale, e.g. \'fr\' or \'fr_CH\'',
+          'type' => 'string',
+          'location' => 'uri',
+        ),
+        'key' => 
+        array (
+          'required' => true,
+          'description' => 'Project API key',
+          'type' => 'string',
+          'location' => 'query',
+        ),
+      ),
+      'errorResponses' => 
+      array (
+        0 => 
+        array (
+          'code' => 401,
+          'phrase' => 'Invalid API key',
+        ),
+        1 => 
+        array (
+          'code' => 403,
+          'phrase' => 'Insufficient privileges',
+        ),
+      ),
+    ),
     'ping' => 
     array (
       'httpMethod' => 'GET',
@@ -454,7 +632,8 @@ return array (
       'class' => 'Guzzle\\Service\\Command\\OperationCommand',
       'responseClass' => 'Echo',
       'responseType' => 'model',
-      'summary' => 'Check the API is up and check API version number',
+      'responseNotes' => 'Checks the API is up and returns the API version number',
+      'summary' => 'Check the API is up',
       'parameters' => 
       array (
       ),
@@ -474,7 +653,7 @@ return array (
   ),
   'models' => 
   array (
-    'Project' => 
+    'User' => 
     array (
       'type' => 'object',
       'additionalProperties' => false,
@@ -482,19 +661,19 @@ return array (
       array (
         'id' => 
         array (
-          'description' => 'Project id',
+          'description' => 'User id',
           'type' => 'integer',
           'location' => 'json',
         ),
         'name' => 
         array (
-          'description' => 'Project name',
+          'description' => 'Full user name',
           'type' => 'string',
           'location' => 'json',
         ),
-        'url' => 
+        'email' => 
         array (
-          'description' => 'Project dashboard URL',
+          'description' => 'User\'s email address',
           'type' => 'string',
           'location' => 'json',
         ),
@@ -520,7 +699,7 @@ return array (
         ),
       ),
     ),
-    'User' => 
+    'Project' => 
     array (
       'type' => 'object',
       'additionalProperties' => false,
@@ -528,19 +707,19 @@ return array (
       array (
         'id' => 
         array (
-          'description' => 'User id',
+          'description' => 'Project id',
           'type' => 'integer',
           'location' => 'json',
         ),
         'name' => 
         array (
-          'description' => 'Full user name',
+          'description' => 'Project name',
           'type' => 'string',
           'location' => 'json',
         ),
-        'email' => 
+        'url' => 
         array (
-          'description' => 'User\'s email address',
+          'description' => 'Project dashboard URL',
           'type' => 'string',
           'location' => 'json',
         ),
@@ -668,10 +847,41 @@ return array (
           'description' => 'Plural forms',
           'type' => 'array',
           'location' => 'json',
+          'enum' => 
+          array (
+            0 => 'zero',
+            1 => 'one',
+            2 => 'two',
+            3 => 'few',
+            4 => 'many',
+            5 => 'other',
+          ),
           'items' => 
           array (
             'type' => 'string',
           ),
+        ),
+      ),
+    ),
+    'Success' => 
+    array (
+      'type' => 'object',
+      'additionalProperties' => false,
+      'properties' => 
+      array (
+        'status' => 
+        array (
+          'required' => true,
+          'description' => 'HTTP status 2xx code',
+          'type' => 'integer',
+          'location' => 'json',
+        ),
+        'message' => 
+        array (
+          'required' => true,
+          'description' => 'Descriptive success message',
+          'type' => 'string',
+          'location' => 'json',
         ),
       ),
     ),
@@ -712,6 +922,15 @@ return array (
               'description' => 'Plural forms',
               'type' => 'array',
               'location' => 'json',
+              'enum' => 
+              array (
+                0 => 'zero',
+                1 => 'one',
+                2 => 'two',
+                3 => 'few',
+                4 => 'many',
+                5 => 'other',
+              ),
               'items' => 
               array (
                 'type' => 'string',
@@ -753,6 +972,15 @@ return array (
                 'description' => 'Plural forms',
                 'type' => 'array',
                 'location' => 'json',
+                'enum' => 
+                array (
+                  0 => 'zero',
+                  1 => 'one',
+                  2 => 'two',
+                  3 => 'few',
+                  4 => 'many',
+                  5 => 'other',
+                ),
                 'items' => 
                 array (
                   'type' => 'string',
@@ -760,6 +988,21 @@ return array (
               ),
             ),
           ),
+        ),
+      ),
+    ),
+    'Echo' => 
+    array (
+      'type' => 'object',
+      'additionalProperties' => false,
+      'properties' => 
+      array (
+        'version' => 
+        array (
+          'required' => true,
+          'description' => 'Current API version',
+          'type' => 'string',
+          'location' => 'json',
         ),
       ),
     ),
@@ -780,21 +1023,6 @@ return array (
         array (
           'required' => true,
           'description' => 'Description of error',
-          'type' => 'string',
-          'location' => 'json',
-        ),
-      ),
-    ),
-    'Echo' => 
-    array (
-      'type' => 'object',
-      'additionalProperties' => false,
-      'properties' => 
-      array (
-        'version' => 
-        array (
-          'required' => true,
-          'description' => 'Current API version',
           'type' => 'string',
           'location' => 'json',
         ),

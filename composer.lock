@@ -161,12 +161,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/loco-app/swizzle.git",
-                "reference": "8ef4b530c47452adbf0689d7473abe003891f309"
+                "reference": "d6aab4c8e8adbdce7c87a868fba4cf338fcf45dd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/loco-app/swizzle/zipball/8ef4b530c47452adbf0689d7473abe003891f309",
-                "reference": "8ef4b530c47452adbf0689d7473abe003891f309",
+                "url": "https://api.github.com/repos/loco-app/swizzle/zipball/d6aab4c8e8adbdce7c87a868fba4cf338fcf45dd",
+                "reference": "d6aab4c8e8adbdce7c87a868fba4cf338fcf45dd",
                 "shasum": ""
             },
             "require": {
@@ -204,7 +204,7 @@
                 "api",
                 "swagger"
             ],
-            "time": "2014-02-14 23:16:50"
+            "time": "2014-02-16 01:04:51"
         },
         {
             "name": "monolog/monolog",

@@ -17,7 +17,7 @@ class ApiClientLocalesTest  extends ApiClientTest {
         $client = $this->getClient();
         
         // top level is list model
-        $locales = $client->locales();
+        $locales = $client->getLocales();
         $this->assertInstanceOf( '\Guzzle\Service\Resource\Model', $locales );
         
         // deeper properties are all cast to arrays
