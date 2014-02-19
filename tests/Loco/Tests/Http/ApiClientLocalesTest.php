@@ -104,7 +104,6 @@ class ApiClientLocalesTest  extends ApiClientTest {
         $model = $client->deleteLocale( array( 'locale' => $code ) );
         $this->assertInstanceOf( '\Guzzle\Service\Resource\Model', $model );
         $this->assertEquals( 200, $model['status'] );
-        return $code;
     }   
 
 

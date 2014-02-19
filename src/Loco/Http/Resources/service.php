@@ -1,19 +1,201 @@
 <?php
 /**
- * Auto-generated with Swizzle at 2014-02-16 20:17:27 +0000
+ * Auto-generated with Swizzle at 2014-02-19 00:39:34 +0000
  */
 return array (
   'name' => 'loco',
-  'apiVersion' => '1.0.2',
-  'baseUrl' => 'https://localise.biz/',
+  'apiVersion' => '1.0.3',
+  'baseUrl' => 'https://ssl.loco.192.168.0.7.xip.io/',
   'description' => 'Loco REST API',
   'operations' => 
   array (
+    'getAssets' => 
+    array (
+      'httpMethod' => 'GET',
+      'uri' => '/api/assets.json',
+      'class' => '\\Loco\\Http\\Command\\StrictCommand',
+      'responseClass' => 'array',
+      'responseType' => 'primitive',
+      'summary' => 'List all translatable assets in your project',
+      'parameters' => 
+      array (
+        'filter' => 
+        array (
+          'description' => 'Comma-separated list of tags to filter subset of assets.',
+          'type' => 'string',
+          'location' => 'query',
+        ),
+        'key' => 
+        array (
+          'required' => true,
+          'description' => 'Project API key',
+          'type' => 'string',
+          'location' => 'query',
+        ),
+      ),
+      'errorResponses' => 
+      array (
+        0 => 
+        array (
+          'code' => 401,
+          'phrase' => 'Invalid API key',
+        ),
+      ),
+    ),
+    'createAsset' => 
+    array (
+      'httpMethod' => 'POST',
+      'uri' => '/api/assets.json',
+      'class' => '\\Loco\\Http\\Command\\StrictCommand',
+      'responseClass' => 'Asset',
+      'responseType' => 'model',
+      'responseNotes' => '<p>Adds a new asset to the currently authenticated project.</p>',
+      'summary' => 'Add a new translatable asset',
+      'parameters' => 
+      array (
+        'name' => 
+        array (
+          'required' => true,
+          'description' => 'Source text or just a name describing what the asset is',
+          'type' => 'string',
+          'location' => 'postField',
+        ),
+        'id' => 
+        array (
+          'description' => 'Optional machine friendly ID if you want something specific',
+          'type' => 'string',
+          'location' => 'postField',
+        ),
+        'type' => 
+        array (
+          'required' => true,
+          'description' => 'Media type, defaults to plain old text',
+          'type' => 'string',
+          'location' => 'postField',
+          'enum' => 
+          array (
+            0 => 'text',
+            1 => 'html',
+            2 => 'image',
+            3 => 'audio',
+            4 => 'video',
+            5 => 'bin',
+          ),
+          'default' => 'text',
+        ),
+        'key' => 
+        array (
+          'required' => true,
+          'description' => 'Project API key',
+          'type' => 'string',
+          'location' => 'query',
+        ),
+      ),
+      'errorResponses' => 
+      array (
+        0 => 
+        array (
+          'code' => 401,
+          'phrase' => 'Invalid API key',
+        ),
+        1 => 
+        array (
+          'code' => 403,
+          'phrase' => 'Insufficient privileges',
+        ),
+      ),
+    ),
+    'getAsset' => 
+    array (
+      'httpMethod' => 'GET',
+      'uri' => '/api/assets/{id}.json',
+      'class' => '\\Loco\\Http\\Command\\StrictCommand',
+      'responseClass' => 'Asset',
+      'responseType' => 'model',
+      'responseNotes' => 'Gets a single asset in currently authenticated project',
+      'summary' => 'Get a project asset',
+      'parameters' => 
+      array (
+        'id' => 
+        array (
+          'required' => true,
+          'description' => 'Asset ID',
+          'type' => 'string',
+          'location' => 'uri',
+        ),
+        'key' => 
+        array (
+          'required' => true,
+          'description' => 'Project API key',
+          'type' => 'string',
+          'location' => 'query',
+        ),
+      ),
+      'errorResponses' => 
+      array (
+        0 => 
+        array (
+          'code' => 401,
+          'phrase' => 'Invalid API key',
+        ),
+        1 => 
+        array (
+          'code' => 404,
+          'phrase' => 'Asset not in project',
+        ),
+      ),
+    ),
+    'deleteAsset' => 
+    array (
+      'httpMethod' => 'DELETE',
+      'uri' => '/api/assets/{id}.json',
+      'class' => '\\Loco\\Http\\Command\\StrictCommand',
+      'responseClass' => 'Success',
+      'responseType' => 'model',
+      'responseNotes' => '<p>Deletes an asset from the currently authenticated project.</p>
+             <p><strong>Warning</strong>: This will permanently delete all translations made of this asset across all locales</p>',
+      'summary' => 'Delete an asset permanently',
+      'parameters' => 
+      array (
+        'id' => 
+        array (
+          'required' => true,
+          'description' => 'Asset ID',
+          'type' => 'string',
+          'location' => 'uri',
+        ),
+        'key' => 
+        array (
+          'required' => true,
+          'description' => 'Project API key',
+          'type' => 'string',
+          'location' => 'query',
+        ),
+      ),
+      'errorResponses' => 
+      array (
+        0 => 
+        array (
+          'code' => 401,
+          'phrase' => 'Invalid API key',
+        ),
+        1 => 
+        array (
+          'code' => 404,
+          'phrase' => 'Asset not in project',
+        ),
+        2 => 
+        array (
+          'code' => 403,
+          'phrase' => 'Insufficient privileges',
+        ),
+      ),
+    ),
     'authVerify' => 
     array (
       'httpMethod' => 'GET',
       'uri' => '/api/auth/verify.json',
-      'class' => 'Guzzle\\Service\\Command\\OperationCommand',
+      'class' => '\\Loco\\Http\\Command\\StrictCommand',
       'responseClass' => 'Creds',
       'responseType' => 'model',
       'responseNotes' => 'Loco API keys authenticate your user account for accessing a specific project.<br />
@@ -42,7 +224,7 @@ return array (
     array (
       'httpMethod' => 'POST',
       'uri' => '/api/convert/{from}/{name}.{ext}',
-      'class' => 'Guzzle\\Service\\Command\\OperationCommand',
+      'class' => '\\Loco\\Http\\Command\\StrictCommand',
       'responseClass' => '\\Loco\\Http\\Response\\RawResponse',
       'responseType' => 'class',
       'responseNotes' => 'Use this API to convert between language pack file formats without a Loco account.<br /> 
@@ -168,7 +350,7 @@ return array (
     array (
       'httpMethod' => 'GET',
       'uri' => '/api/export/all.{ext}',
-      'class' => 'Guzzle\\Service\\Command\\OperationCommand',
+      'class' => '\\Loco\\Http\\Command\\StrictCommand',
       'responseClass' => '\\Loco\\Http\\Response\\RawResponse',
       'responseType' => 'class',
       'responseNotes' => 'Export all translations from your project to a multi-locale language pack.<br />
@@ -204,7 +386,7 @@ return array (
         ),
         'filter' => 
         array (
-          'description' => 'Comma-separated list of tags to export subset of assets.',
+          'description' => 'Comma-separated list of tags to filter subset of assets.',
           'type' => 'string',
           'location' => 'query',
         ),
@@ -234,7 +416,7 @@ return array (
     array (
       'httpMethod' => 'GET',
       'uri' => '/api/export/archive/{ext}.zip',
-      'class' => 'Guzzle\\Service\\Command\\OperationCommand',
+      'class' => '\\Loco\\Http\\Command\\StrictCommand',
       'responseClass' => '\\Loco\\Http\\Response\\ZipResponse',
       'responseType' => 'class',
       'responseNotes' => 'Export all translations from your project to a zip archive of language packs.<br />
@@ -269,7 +451,7 @@ return array (
         ),
         'filter' => 
         array (
-          'description' => 'Comma-separated list of tags to export subset of assets.',
+          'description' => 'Comma-separated list of tags to filter subset of assets.',
           'type' => 'string',
           'location' => 'query',
         ),
@@ -326,7 +508,7 @@ return array (
     array (
       'httpMethod' => 'GET',
       'uri' => '/api/export/locale/{locale}.{ext}',
-      'class' => 'Guzzle\\Service\\Command\\OperationCommand',
+      'class' => '\\Loco\\Http\\Command\\StrictCommand',
       'responseClass' => '\\Loco\\Http\\Response\\RawResponse',
       'responseType' => 'class',
       'responseNotes' => 'Export translations from your project to a locale-specific language pack.
@@ -360,7 +542,7 @@ return array (
         ),
         'filter' => 
         array (
-          'description' => 'Comma-separated list of tags to export subset of assets.',
+          'description' => 'Comma-separated list of tags to filter subset of assets.',
           'type' => 'string',
           'location' => 'query',
         ),
@@ -424,7 +606,7 @@ return array (
     array (
       'httpMethod' => 'GET',
       'uri' => '/api/locales.json',
-      'class' => 'Guzzle\\Service\\Command\\OperationCommand',
+      'class' => '\\Loco\\Http\\Command\\StrictCommand',
       'responseClass' => 'array',
       'responseType' => 'primitive',
       'responseNotes' => 'Lists all locales in currently authenticated project. Your native/source language will always be the first in the list',
@@ -448,11 +630,52 @@ return array (
         ),
       ),
     ),
+    'createLocale' => 
+    array (
+      'httpMethod' => 'POST',
+      'uri' => '/api/locales.json',
+      'class' => '\\Loco\\Http\\Command\\StrictCommand',
+      'responseClass' => 'Locale',
+      'responseType' => 'model',
+      'responseNotes' => '<p>Adds a new locale to the currently authenticated project.</p>
+             <p>Note that if the locale already exists in the project, it will just be returned and not duplicated.</p>',
+      'summary' => 'Add a new project locale',
+      'parameters' => 
+      array (
+        'code' => 
+        array (
+          'required' => true,
+          'description' => 'Short code of locale to create, e.g. \'fr\' or \'fr_FR\'',
+          'type' => 'string',
+          'location' => 'postField',
+        ),
+        'key' => 
+        array (
+          'required' => true,
+          'description' => 'Project API key',
+          'type' => 'string',
+          'location' => 'query',
+        ),
+      ),
+      'errorResponses' => 
+      array (
+        0 => 
+        array (
+          'code' => 401,
+          'phrase' => 'Invalid API key',
+        ),
+        1 => 
+        array (
+          'code' => 403,
+          'phrase' => 'Insufficient privileges',
+        ),
+      ),
+    ),
     'getLocale' => 
     array (
       'httpMethod' => 'GET',
       'uri' => '/api/locales/{locale}.json',
-      'class' => 'Guzzle\\Service\\Command\\OperationCommand',
+      'class' => '\\Loco\\Http\\Command\\StrictCommand',
       'responseClass' => 'Locale',
       'responseType' => 'model',
       'responseNotes' => 'Gets a single locale in currently authenticated project',
@@ -492,7 +715,7 @@ return array (
     array (
       'httpMethod' => 'DELETE',
       'uri' => '/api/locales/{locale}.json',
-      'class' => 'Guzzle\\Service\\Command\\OperationCommand',
+      'class' => '\\Loco\\Http\\Command\\StrictCommand',
       'responseClass' => 'Success',
       'responseType' => 'model',
       'responseNotes' => '<p>Delete a locale from currently authenticated project.</p>
@@ -535,54 +758,11 @@ return array (
         ),
       ),
     ),
-    'createLocale' => 
-    array (
-      'httpMethod' => 'POST',
-      'uri' => '/api/locales/{locale}.json',
-      'class' => 'Guzzle\\Service\\Command\\OperationCommand',
-      'responseClass' => 'Locale',
-      'responseType' => 'model',
-      'responseNotes' => '<p>Adds a new locale to the currently authenticated project.</p>
-             <p>Note that if the locale already exists in the project, it will just be returned and not duplicated.</p>
-             <p>Be warned that Loco will try to make sense of whatever you pass as {locale}. If you put junk in, you\'ll get junk out.
-                Read about <a href="http://help.localise.biz/customer/portal/articles/656019-what-s-a-locale-">Loco locales</a> in our support centre.</p>',
-      'summary' => 'Add a new project locale',
-      'parameters' => 
-      array (
-        'locale' => 
-        array (
-          'required' => true,
-          'description' => 'Short code of project locale, e.g. \'fr\' or \'fr_CH\'',
-          'type' => 'string',
-          'location' => 'uri',
-        ),
-        'key' => 
-        array (
-          'required' => true,
-          'description' => 'Project API key',
-          'type' => 'string',
-          'location' => 'query',
-        ),
-      ),
-      'errorResponses' => 
-      array (
-        0 => 
-        array (
-          'code' => 401,
-          'phrase' => 'Invalid API key',
-        ),
-        1 => 
-        array (
-          'code' => 403,
-          'phrase' => 'Insufficient privileges',
-        ),
-      ),
-    ),
     'patchLocale' => 
     array (
       'httpMethod' => 'PATCH',
       'uri' => '/api/locales/{locale}.json',
-      'class' => 'Guzzle\\Service\\Command\\OperationCommand',
+      'class' => '\\Loco\\Http\\Command\\StrictCommand',
       'responseClass' => 'Locale',
       'responseType' => 'model',
       'responseNotes' => '<p>Modifies the properties of a locale in the currently authenticated project.</p>
@@ -677,13 +857,18 @@ return array (
           'code' => 403,
           'phrase' => 'Insufficient privileges',
         ),
+        2 => 
+        array (
+          'code' => 404,
+          'phrase' => 'Locale not in project',
+        ),
       ),
     ),
     'ping' => 
     array (
       'httpMethod' => 'GET',
       'uri' => '/api/ping.json',
-      'class' => 'Guzzle\\Service\\Command\\OperationCommand',
+      'class' => '\\Loco\\Http\\Command\\StrictCommand',
       'responseClass' => 'Echo',
       'responseType' => 'model',
       'responseNotes' => 'Checks the API is up and returns the API version number',
@@ -696,7 +881,7 @@ return array (
     array (
       'httpMethod' => 'GET',
       'uri' => '/api/ping/not-found.json',
-      'class' => 'Guzzle\\Service\\Command\\OperationCommand',
+      'class' => '\\Loco\\Http\\Command\\StrictCommand',
       'responseClass' => 'Error',
       'responseType' => 'model',
       'summary' => 'Get a test 404 response',
@@ -707,6 +892,88 @@ return array (
   ),
   'models' => 
   array (
+    'Asset' => 
+    array (
+      'type' => 'object',
+      'additionalProperties' => false,
+      'properties' => 
+      array (
+        'id' => 
+        array (
+          'description' => 'Machine friendly name',
+          'type' => 'string',
+          'location' => 'json',
+        ),
+        'type' => 
+        array (
+          'description' => 'Broad content type, defaults to plain text',
+          'type' => 'string',
+          'location' => 'json',
+          'enum' => 
+          array (
+            0 => 'text',
+            1 => 'html',
+            2 => 'image',
+            3 => 'audio',
+            4 => 'video',
+            5 => 'bin',
+          ),
+        ),
+        'name' => 
+        array (
+          'description' => 'Human friendly name',
+          'type' => 'string',
+          'location' => 'json',
+        ),
+        'context' => 
+        array (
+          'description' => 'Optional context descriptor',
+          'type' => 'string',
+          'location' => 'json',
+        ),
+        'modified' => 
+        array (
+          'description' => 'Time last modified in UTC',
+          'type' => 'string',
+          'format' => 'date-time',
+          'location' => 'json',
+        ),
+        'translated' => 
+        array (
+          'description' => 'Number of completed translations',
+          'type' => 'integer',
+          'location' => 'json',
+        ),
+        'untranslated' => 
+        array (
+          'description' => 'Number of incomplete translations',
+          'type' => 'integer',
+          'location' => 'json',
+        ),
+      ),
+    ),
+    'Success' => 
+    array (
+      'type' => 'object',
+      'additionalProperties' => false,
+      'properties' => 
+      array (
+        'status' => 
+        array (
+          'required' => true,
+          'description' => 'HTTP status 2xx code',
+          'type' => 'integer',
+          'location' => 'json',
+        ),
+        'message' => 
+        array (
+          'required' => true,
+          'description' => 'Descriptive success message',
+          'type' => 'string',
+          'location' => 'json',
+        ),
+      ),
+    ),
     'User' => 
     array (
       'type' => 'object',
@@ -862,28 +1129,6 @@ return array (
               'location' => 'json',
             ),
           ),
-        ),
-      ),
-    ),
-    'Success' => 
-    array (
-      'type' => 'object',
-      'additionalProperties' => false,
-      'properties' => 
-      array (
-        'status' => 
-        array (
-          'required' => true,
-          'description' => 'HTTP status 2xx code',
-          'type' => 'integer',
-          'location' => 'json',
-        ),
-        'message' => 
-        array (
-          'required' => true,
-          'description' => 'Descriptive success message',
-          'type' => 'string',
-          'location' => 'json',
         ),
       ),
     ),

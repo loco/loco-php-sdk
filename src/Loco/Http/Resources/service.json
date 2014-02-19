@@ -1,13 +1,163 @@
 {
     "name": "loco",
-    "apiVersion": "1.0.2",
-    "baseUrl": "https:\/\/localise.biz\/",
+    "apiVersion": "1.0.3",
+    "baseUrl": "https:\/\/ssl.loco.192.168.0.7.xip.io\/",
     "description": "Loco REST API",
     "operations": {
+        "getAssets": {
+            "httpMethod": "GET",
+            "uri": "\/api\/assets.json",
+            "class": "\\Loco\\Http\\Command\\StrictCommand",
+            "responseClass": "array",
+            "responseType": "primitive",
+            "summary": "List all translatable assets in your project",
+            "parameters": {
+                "filter": {
+                    "description": "Comma-separated list of tags to filter subset of assets.",
+                    "type": "string",
+                    "location": "query"
+                },
+                "key": {
+                    "required": true,
+                    "description": "Project API key",
+                    "type": "string",
+                    "location": "query"
+                }
+            },
+            "errorResponses": [
+                {
+                    "code": 401,
+                    "phrase": "Invalid API key"
+                }
+            ]
+        },
+        "createAsset": {
+            "httpMethod": "POST",
+            "uri": "\/api\/assets.json",
+            "class": "\\Loco\\Http\\Command\\StrictCommand",
+            "responseClass": "Asset",
+            "responseType": "model",
+            "responseNotes": "<p>Adds a new asset to the currently authenticated project.<\/p>",
+            "summary": "Add a new translatable asset",
+            "parameters": {
+                "name": {
+                    "required": true,
+                    "description": "Source text or just a name describing what the asset is",
+                    "type": "string",
+                    "location": "postField"
+                },
+                "id": {
+                    "description": "Optional machine friendly ID if you want something specific",
+                    "type": "string",
+                    "location": "postField"
+                },
+                "type": {
+                    "required": true,
+                    "description": "Media type, defaults to plain old text",
+                    "type": "string",
+                    "location": "postField",
+                    "enum": [
+                        "text",
+                        "html",
+                        "image",
+                        "audio",
+                        "video",
+                        "bin"
+                    ],
+                    "default": "text"
+                },
+                "key": {
+                    "required": true,
+                    "description": "Project API key",
+                    "type": "string",
+                    "location": "query"
+                }
+            },
+            "errorResponses": [
+                {
+                    "code": 401,
+                    "phrase": "Invalid API key"
+                },
+                {
+                    "code": 403,
+                    "phrase": "Insufficient privileges"
+                }
+            ]
+        },
+        "getAsset": {
+            "httpMethod": "GET",
+            "uri": "\/api\/assets\/{id}.json",
+            "class": "\\Loco\\Http\\Command\\StrictCommand",
+            "responseClass": "Asset",
+            "responseType": "model",
+            "responseNotes": "Gets a single asset in currently authenticated project",
+            "summary": "Get a project asset",
+            "parameters": {
+                "id": {
+                    "required": true,
+                    "description": "Asset ID",
+                    "type": "string",
+                    "location": "uri"
+                },
+                "key": {
+                    "required": true,
+                    "description": "Project API key",
+                    "type": "string",
+                    "location": "query"
+                }
+            },
+            "errorResponses": [
+                {
+                    "code": 401,
+                    "phrase": "Invalid API key"
+                },
+                {
+                    "code": 404,
+                    "phrase": "Asset not in project"
+                }
+            ]
+        },
+        "deleteAsset": {
+            "httpMethod": "DELETE",
+            "uri": "\/api\/assets\/{id}.json",
+            "class": "\\Loco\\Http\\Command\\StrictCommand",
+            "responseClass": "Success",
+            "responseType": "model",
+            "responseNotes": "<p>Deletes an asset from the currently authenticated project.<\/p>\n             <p><strong>Warning<\/strong>: This will permanently delete all translations made of this asset across all locales<\/p>",
+            "summary": "Delete an asset permanently",
+            "parameters": {
+                "id": {
+                    "required": true,
+                    "description": "Asset ID",
+                    "type": "string",
+                    "location": "uri"
+                },
+                "key": {
+                    "required": true,
+                    "description": "Project API key",
+                    "type": "string",
+                    "location": "query"
+                }
+            },
+            "errorResponses": [
+                {
+                    "code": 401,
+                    "phrase": "Invalid API key"
+                },
+                {
+                    "code": 404,
+                    "phrase": "Asset not in project"
+                },
+                {
+                    "code": 403,
+                    "phrase": "Insufficient privileges"
+                }
+            ]
+        },
         "authVerify": {
             "httpMethod": "GET",
             "uri": "\/api\/auth\/verify.json",
-            "class": "Guzzle\\Service\\Command\\OperationCommand",
+            "class": "\\Loco\\Http\\Command\\StrictCommand",
             "responseClass": "Creds",
             "responseType": "model",
             "responseNotes": "Loco API keys authenticate your user account for accessing a specific project.<br \/>\n             This endpoint verifies an API key and returns the authenticated user, account and project.",
@@ -30,7 +180,7 @@
         "convert": {
             "httpMethod": "POST",
             "uri": "\/api\/convert\/{from}\/{name}.{ext}",
-            "class": "Guzzle\\Service\\Command\\OperationCommand",
+            "class": "\\Loco\\Http\\Command\\StrictCommand",
             "responseClass": "\\Loco\\Http\\Response\\RawResponse",
             "responseType": "class",
             "responseNotes": "Use this API to convert between language pack file formats without a Loco account.<br \/> \n             Precise options depend on the file formats you're converting between.\n             <a href='https:\/\/localise.biz\/free\/converter\/api'>See some examples<\/a>.",
@@ -139,7 +289,7 @@
         "exportAll": {
             "httpMethod": "GET",
             "uri": "\/api\/export\/all.{ext}",
-            "class": "Guzzle\\Service\\Command\\OperationCommand",
+            "class": "\\Loco\\Http\\Command\\StrictCommand",
             "responseClass": "\\Loco\\Http\\Response\\RawResponse",
             "responseType": "class",
             "responseNotes": "Export all translations from your project to a multi-locale language pack.<br \/>\n           <br \/>\n           Note that not all formats support multiple locales in the same file. See <code>\/export\/archive<\/code> for exporting separate files,\n           and <code>\/export\/locale<\/code> for exporting one language at a time.",
@@ -167,7 +317,7 @@
                     "location": "query"
                 },
                 "filter": {
-                    "description": "Comma-separated list of tags to export subset of assets.",
+                    "description": "Comma-separated list of tags to filter subset of assets.",
                     "type": "string",
                     "location": "query"
                 },
@@ -192,7 +342,7 @@
         "exportArchive": {
             "httpMethod": "GET",
             "uri": "\/api\/export\/archive\/{ext}.zip",
-            "class": "Guzzle\\Service\\Command\\OperationCommand",
+            "class": "\\Loco\\Http\\Command\\StrictCommand",
             "responseClass": "\\Loco\\Http\\Response\\ZipResponse",
             "responseType": "class",
             "responseNotes": "Export all translations from your project to a zip archive of language packs.<br \/>\n           <br \/>\n           If you're exporting to a file format that supports multiple locales within the same file, you can use the <code>\/export\/all<\/code> method ",
@@ -220,7 +370,7 @@
                     ]
                 },
                 "filter": {
-                    "description": "Comma-separated list of tags to export subset of assets.",
+                    "description": "Comma-separated list of tags to filter subset of assets.",
                     "type": "string",
                     "location": "query"
                 },
@@ -270,7 +420,7 @@
         "exportLocale": {
             "httpMethod": "GET",
             "uri": "\/api\/export\/locale\/{locale}.{ext}",
-            "class": "Guzzle\\Service\\Command\\OperationCommand",
+            "class": "\\Loco\\Http\\Command\\StrictCommand",
             "responseClass": "\\Loco\\Http\\Response\\RawResponse",
             "responseType": "class",
             "responseNotes": "Export translations from your project to a locale-specific language pack.\n           Various export file types are supported with format variations for some types.",
@@ -298,7 +448,7 @@
                     ]
                 },
                 "filter": {
-                    "description": "Comma-separated list of tags to export subset of assets.",
+                    "description": "Comma-separated list of tags to filter subset of assets.",
                     "type": "string",
                     "location": "query"
                 },
@@ -354,7 +504,7 @@
         "getLocales": {
             "httpMethod": "GET",
             "uri": "\/api\/locales.json",
-            "class": "Guzzle\\Service\\Command\\OperationCommand",
+            "class": "\\Loco\\Http\\Command\\StrictCommand",
             "responseClass": "array",
             "responseType": "primitive",
             "responseNotes": "Lists all locales in currently authenticated project. Your native\/source language will always be the first in the list",
@@ -374,10 +524,43 @@
                 }
             ]
         },
+        "createLocale": {
+            "httpMethod": "POST",
+            "uri": "\/api\/locales.json",
+            "class": "\\Loco\\Http\\Command\\StrictCommand",
+            "responseClass": "Locale",
+            "responseType": "model",
+            "responseNotes": "<p>Adds a new locale to the currently authenticated project.<\/p>\n             <p>Note that if the locale already exists in the project, it will just be returned and not duplicated.<\/p>",
+            "summary": "Add a new project locale",
+            "parameters": {
+                "code": {
+                    "required": true,
+                    "description": "Short code of locale to create, e.g. 'fr' or 'fr_FR'",
+                    "type": "string",
+                    "location": "postField"
+                },
+                "key": {
+                    "required": true,
+                    "description": "Project API key",
+                    "type": "string",
+                    "location": "query"
+                }
+            },
+            "errorResponses": [
+                {
+                    "code": 401,
+                    "phrase": "Invalid API key"
+                },
+                {
+                    "code": 403,
+                    "phrase": "Insufficient privileges"
+                }
+            ]
+        },
         "getLocale": {
             "httpMethod": "GET",
             "uri": "\/api\/locales\/{locale}.json",
-            "class": "Guzzle\\Service\\Command\\OperationCommand",
+            "class": "\\Loco\\Http\\Command\\StrictCommand",
             "responseClass": "Locale",
             "responseType": "model",
             "responseNotes": "Gets a single locale in currently authenticated project",
@@ -410,7 +593,7 @@
         "deleteLocale": {
             "httpMethod": "DELETE",
             "uri": "\/api\/locales\/{locale}.json",
-            "class": "Guzzle\\Service\\Command\\OperationCommand",
+            "class": "\\Loco\\Http\\Command\\StrictCommand",
             "responseClass": "Success",
             "responseType": "model",
             "responseNotes": "<p>Delete a locale from currently authenticated project.<\/p>\n             <p><strong>Warning<\/strong>: This will permanently delete any translations made in the specified locale across your project<\/p>\n             <p>Note that you cannot delete your native\/source locale.<\/p>",
@@ -444,43 +627,10 @@
                 }
             ]
         },
-        "createLocale": {
-            "httpMethod": "POST",
-            "uri": "\/api\/locales\/{locale}.json",
-            "class": "Guzzle\\Service\\Command\\OperationCommand",
-            "responseClass": "Locale",
-            "responseType": "model",
-            "responseNotes": "<p>Adds a new locale to the currently authenticated project.<\/p>\n             <p>Note that if the locale already exists in the project, it will just be returned and not duplicated.<\/p>\n             <p>Be warned that Loco will try to make sense of whatever you pass as {locale}. If you put junk in, you'll get junk out.\n                Read about <a href=\"http:\/\/help.localise.biz\/customer\/portal\/articles\/656019-what-s-a-locale-\">Loco locales<\/a> in our support centre.<\/p>",
-            "summary": "Add a new project locale",
-            "parameters": {
-                "locale": {
-                    "required": true,
-                    "description": "Short code of project locale, e.g. 'fr' or 'fr_CH'",
-                    "type": "string",
-                    "location": "uri"
-                },
-                "key": {
-                    "required": true,
-                    "description": "Project API key",
-                    "type": "string",
-                    "location": "query"
-                }
-            },
-            "errorResponses": [
-                {
-                    "code": 401,
-                    "phrase": "Invalid API key"
-                },
-                {
-                    "code": 403,
-                    "phrase": "Insufficient privileges"
-                }
-            ]
-        },
         "patchLocale": {
             "httpMethod": "PATCH",
             "uri": "\/api\/locales\/{locale}.json",
-            "class": "Guzzle\\Service\\Command\\OperationCommand",
+            "class": "\\Loco\\Http\\Command\\StrictCommand",
             "responseClass": "Locale",
             "responseType": "model",
             "responseNotes": "<p>Modifies the properties of a locale in the currently authenticated project.<\/p>\n             <p>The full, modified locale object is returned.<\/p>",
@@ -557,13 +707,17 @@
                 {
                     "code": 403,
                     "phrase": "Insufficient privileges"
+                },
+                {
+                    "code": 404,
+                    "phrase": "Locale not in project"
                 }
             ]
         },
         "ping": {
             "httpMethod": "GET",
             "uri": "\/api\/ping.json",
-            "class": "Guzzle\\Service\\Command\\OperationCommand",
+            "class": "\\Loco\\Http\\Command\\StrictCommand",
             "responseClass": "Echo",
             "responseType": "model",
             "responseNotes": "Checks the API is up and returns the API version number",
@@ -575,7 +729,7 @@
         "ping404": {
             "httpMethod": "GET",
             "uri": "\/api\/ping\/not-found.json",
-            "class": "Guzzle\\Service\\Command\\OperationCommand",
+            "class": "\\Loco\\Http\\Command\\StrictCommand",
             "responseClass": "Error",
             "responseType": "model",
             "summary": "Get a test 404 response",
@@ -585,6 +739,74 @@
         }
     },
     "models": {
+        "Asset": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "id": {
+                    "description": "Machine friendly name",
+                    "type": "string",
+                    "location": "json"
+                },
+                "type": {
+                    "description": "Broad content type, defaults to plain text",
+                    "type": "string",
+                    "location": "json",
+                    "enum": [
+                        "text",
+                        "html",
+                        "image",
+                        "audio",
+                        "video",
+                        "bin"
+                    ]
+                },
+                "name": {
+                    "description": "Human friendly name",
+                    "type": "string",
+                    "location": "json"
+                },
+                "context": {
+                    "description": "Optional context descriptor",
+                    "type": "string",
+                    "location": "json"
+                },
+                "modified": {
+                    "description": "Time last modified in UTC",
+                    "type": "string",
+                    "format": "date-time",
+                    "location": "json"
+                },
+                "translated": {
+                    "description": "Number of completed translations",
+                    "type": "integer",
+                    "location": "json"
+                },
+                "untranslated": {
+                    "description": "Number of incomplete translations",
+                    "type": "integer",
+                    "location": "json"
+                }
+            }
+        },
+        "Success": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "status": {
+                    "required": true,
+                    "description": "HTTP status 2xx code",
+                    "type": "integer",
+                    "location": "json"
+                },
+                "message": {
+                    "required": true,
+                    "description": "Descriptive success message",
+                    "type": "string",
+                    "location": "json"
+                }
+            }
+        },
         "User": {
             "type": "object",
             "additionalProperties": false,
@@ -710,24 +932,6 @@
                             "location": "json"
                         }
                     }
-                }
-            }
-        },
-        "Success": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "status": {
-                    "required": true,
-                    "description": "HTTP status 2xx code",
-                    "type": "integer",
-                    "location": "json"
-                },
-                "message": {
-                    "required": true,
-                    "description": "Descriptive success message",
-                    "type": "string",
-                    "location": "json"
                 }
             }
         },
