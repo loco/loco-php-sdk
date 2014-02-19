@@ -1,11 +1,11 @@
 <?php
 /**
- * Auto-generated with Swizzle at 2014-02-19 00:39:34 +0000
+ * Auto-generated with Swizzle at 2014-02-19 11:49:57 +0000
  */
 return array (
-  'name' => 'loco',
+  'name' => 'Loco',
   'apiVersion' => '1.0.3',
-  'baseUrl' => 'https://ssl.loco.192.168.0.7.xip.io/',
+  'baseUrl' => 'https://localise.biz/',
   'description' => 'Loco REST API',
   'operations' => 
   array (
@@ -13,7 +13,7 @@ return array (
     array (
       'httpMethod' => 'GET',
       'uri' => '/api/assets.json',
-      'class' => '\\Loco\\Http\\Command\\StrictCommand',
+      'class' => 'Guzzle\\Service\\Command\\OperationCommand',
       'responseClass' => 'array',
       'responseType' => 'primitive',
       'summary' => 'List all translatable assets in your project',
@@ -46,7 +46,7 @@ return array (
     array (
       'httpMethod' => 'POST',
       'uri' => '/api/assets.json',
-      'class' => '\\Loco\\Http\\Command\\StrictCommand',
+      'class' => 'Guzzle\\Service\\Command\\OperationCommand',
       'responseClass' => 'Asset',
       'responseType' => 'model',
       'responseNotes' => '<p>Adds a new asset to the currently authenticated project.</p>',
@@ -109,7 +109,7 @@ return array (
     array (
       'httpMethod' => 'GET',
       'uri' => '/api/assets/{id}.json',
-      'class' => '\\Loco\\Http\\Command\\StrictCommand',
+      'class' => 'Guzzle\\Service\\Command\\OperationCommand',
       'responseClass' => 'Asset',
       'responseType' => 'model',
       'responseNotes' => 'Gets a single asset in currently authenticated project',
@@ -149,11 +149,11 @@ return array (
     array (
       'httpMethod' => 'DELETE',
       'uri' => '/api/assets/{id}.json',
-      'class' => '\\Loco\\Http\\Command\\StrictCommand',
+      'class' => 'Guzzle\\Service\\Command\\OperationCommand',
       'responseClass' => 'Success',
       'responseType' => 'model',
       'responseNotes' => '<p>Deletes an asset from the currently authenticated project.</p>
-             <p><strong>Warning</strong>: This will permanently delete all translations made of this asset across all locales</p>',
+           <p><strong>Warning</strong>: This will permanently delete all translations made of this asset across all locales</p>',
       'summary' => 'Delete an asset permanently',
       'parameters' => 
       array (
@@ -195,7 +195,7 @@ return array (
     array (
       'httpMethod' => 'GET',
       'uri' => '/api/auth/verify.json',
-      'class' => '\\Loco\\Http\\Command\\StrictCommand',
+      'class' => 'Guzzle\\Service\\Command\\OperationCommand',
       'responseClass' => 'Creds',
       'responseType' => 'model',
       'responseNotes' => 'Loco API keys authenticate your user account for accessing a specific project.<br />
@@ -224,7 +224,7 @@ return array (
     array (
       'httpMethod' => 'POST',
       'uri' => '/api/convert/{from}/{name}.{ext}',
-      'class' => '\\Loco\\Http\\Command\\StrictCommand',
+      'class' => 'Guzzle\\Service\\Command\\OperationCommand',
       'responseClass' => '\\Loco\\Http\\Response\\RawResponse',
       'responseType' => 'class',
       'responseNotes' => 'Use this API to convert between language pack file formats without a Loco account.<br /> 
@@ -350,7 +350,7 @@ return array (
     array (
       'httpMethod' => 'GET',
       'uri' => '/api/export/all.{ext}',
-      'class' => '\\Loco\\Http\\Command\\StrictCommand',
+      'class' => 'Guzzle\\Service\\Command\\OperationCommand',
       'responseClass' => '\\Loco\\Http\\Response\\RawResponse',
       'responseType' => 'class',
       'responseNotes' => 'Export all translations from your project to a multi-locale language pack.<br />
@@ -416,7 +416,7 @@ return array (
     array (
       'httpMethod' => 'GET',
       'uri' => '/api/export/archive/{ext}.zip',
-      'class' => '\\Loco\\Http\\Command\\StrictCommand',
+      'class' => 'Guzzle\\Service\\Command\\OperationCommand',
       'responseClass' => '\\Loco\\Http\\Response\\ZipResponse',
       'responseType' => 'class',
       'responseNotes' => 'Export all translations from your project to a zip archive of language packs.<br />
@@ -508,7 +508,7 @@ return array (
     array (
       'httpMethod' => 'GET',
       'uri' => '/api/export/locale/{locale}.{ext}',
-      'class' => '\\Loco\\Http\\Command\\StrictCommand',
+      'class' => 'Guzzle\\Service\\Command\\OperationCommand',
       'responseClass' => '\\Loco\\Http\\Response\\RawResponse',
       'responseType' => 'class',
       'responseNotes' => 'Export translations from your project to a locale-specific language pack.
@@ -606,7 +606,7 @@ return array (
     array (
       'httpMethod' => 'GET',
       'uri' => '/api/locales.json',
-      'class' => '\\Loco\\Http\\Command\\StrictCommand',
+      'class' => 'Guzzle\\Service\\Command\\OperationCommand',
       'responseClass' => 'array',
       'responseType' => 'primitive',
       'responseNotes' => 'Lists all locales in currently authenticated project. Your native/source language will always be the first in the list',
@@ -634,11 +634,11 @@ return array (
     array (
       'httpMethod' => 'POST',
       'uri' => '/api/locales.json',
-      'class' => '\\Loco\\Http\\Command\\StrictCommand',
+      'class' => 'Guzzle\\Service\\Command\\OperationCommand',
       'responseClass' => 'Locale',
       'responseType' => 'model',
       'responseNotes' => '<p>Adds a new locale to the currently authenticated project.</p>
-             <p>Note that if the locale already exists in the project, it will just be returned and not duplicated.</p>',
+           <p>Note that if the locale already exists in the project, it will just be returned and not duplicated.</p>',
       'summary' => 'Add a new project locale',
       'parameters' => 
       array (
@@ -675,7 +675,7 @@ return array (
     array (
       'httpMethod' => 'GET',
       'uri' => '/api/locales/{locale}.json',
-      'class' => '\\Loco\\Http\\Command\\StrictCommand',
+      'class' => 'Guzzle\\Service\\Command\\OperationCommand',
       'responseClass' => 'Locale',
       'responseType' => 'model',
       'responseNotes' => 'Gets a single locale in currently authenticated project',
@@ -711,62 +711,15 @@ return array (
         ),
       ),
     ),
-    'deleteLocale' => 
-    array (
-      'httpMethod' => 'DELETE',
-      'uri' => '/api/locales/{locale}.json',
-      'class' => '\\Loco\\Http\\Command\\StrictCommand',
-      'responseClass' => 'Success',
-      'responseType' => 'model',
-      'responseNotes' => '<p>Delete a locale from currently authenticated project.</p>
-             <p><strong>Warning</strong>: This will permanently delete any translations made in the specified locale across your project</p>
-             <p>Note that you cannot delete your native/source locale.</p>',
-      'summary' => 'Delete a project locale',
-      'parameters' => 
-      array (
-        'locale' => 
-        array (
-          'required' => true,
-          'description' => 'Short code of project locale, e.g. \'fr\' or \'fr_CH\'',
-          'type' => 'string',
-          'location' => 'uri',
-        ),
-        'key' => 
-        array (
-          'required' => true,
-          'description' => 'Project API key',
-          'type' => 'string',
-          'location' => 'query',
-        ),
-      ),
-      'errorResponses' => 
-      array (
-        0 => 
-        array (
-          'code' => 401,
-          'phrase' => 'Invalid API key',
-        ),
-        1 => 
-        array (
-          'code' => 404,
-          'phrase' => 'Locale not in project',
-        ),
-        2 => 
-        array (
-          'code' => 403,
-          'phrase' => 'Insufficient privileges',
-        ),
-      ),
-    ),
     'patchLocale' => 
     array (
       'httpMethod' => 'PATCH',
       'uri' => '/api/locales/{locale}.json',
-      'class' => '\\Loco\\Http\\Command\\StrictCommand',
+      'class' => 'Guzzle\\Service\\Command\\OperationCommand',
       'responseClass' => 'Locale',
       'responseType' => 'model',
       'responseNotes' => '<p>Modifies the properties of a locale in the currently authenticated project.</p>
-             <p>The full, modified locale object is returned.</p>',
+           <p>The full, modified locale object is returned.</p>',
       'summary' => 'Modify a project locale',
       'parameters' => 
       array (
@@ -864,11 +817,58 @@ return array (
         ),
       ),
     ),
+    'deleteLocale' => 
+    array (
+      'httpMethod' => 'DELETE',
+      'uri' => '/api/locales/{locale}.json',
+      'class' => 'Guzzle\\Service\\Command\\OperationCommand',
+      'responseClass' => 'Success',
+      'responseType' => 'model',
+      'responseNotes' => '<p>Delete a locale from currently authenticated project.</p>
+           <p><strong>Warning</strong>: This will permanently delete any translations made in the specified locale across your project</p>
+           <p>Note that you cannot delete your native/source locale.</p>',
+      'summary' => 'Delete a project locale',
+      'parameters' => 
+      array (
+        'locale' => 
+        array (
+          'required' => true,
+          'description' => 'Short code of project locale, e.g. \'fr\' or \'fr_CH\'',
+          'type' => 'string',
+          'location' => 'uri',
+        ),
+        'key' => 
+        array (
+          'required' => true,
+          'description' => 'Project API key',
+          'type' => 'string',
+          'location' => 'query',
+        ),
+      ),
+      'errorResponses' => 
+      array (
+        0 => 
+        array (
+          'code' => 401,
+          'phrase' => 'Invalid API key',
+        ),
+        1 => 
+        array (
+          'code' => 404,
+          'phrase' => 'Locale not in project',
+        ),
+        2 => 
+        array (
+          'code' => 403,
+          'phrase' => 'Insufficient privileges',
+        ),
+      ),
+    ),
     'ping' => 
     array (
       'httpMethod' => 'GET',
       'uri' => '/api/ping.json',
-      'class' => '\\Loco\\Http\\Command\\StrictCommand',
+      'class' => 'Guzzle\\Service\\Command\\OperationCommand',
       'responseClass' => 'Echo',
       'responseType' => 'model',
       'responseNotes' => 'Checks the API is up and returns the API version number',
@@ -881,7 +881,7 @@ return array (
     array (
       'httpMethod' => 'GET',
       'uri' => '/api/ping/not-found.json',
-      'class' => '\\Loco\\Http\\Command\\StrictCommand',
+      'class' => 'Guzzle\\Service\\Command\\OperationCommand',
       'responseClass' => 'Error',
       'responseType' => 'model',
       'summary' => 'Get a test 404 response',

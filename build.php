@@ -12,7 +12,7 @@ if( ! class_exists('Loco\Utils\Swizzle\Swizzle') ){
     exit(1);
 }
 
-$builder = new Loco\Utils\Swizzle\Swizzle( 'loco', 'Loco REST API' );
+$builder = new Loco\Utils\Swizzle\Swizzle( 'Loco', 'Loco REST API' );
 $builder->verbose( STDERR );
 $builder->setDelay( 0 );
 
