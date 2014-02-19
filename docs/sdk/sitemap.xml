@@ -10,12 +10,21 @@
 	<loc>https://localise.biz/docs/sdk/namespace-Loco.Http.html</loc>
 </url>
 <url>
+	<loc>https://localise.biz/docs/sdk/namespace-Loco.Http.Command.html</loc>
+</url>
+<url>
 	<loc>https://localise.biz/docs/sdk/namespace-Loco.Http.Response.html</loc>
 </url>
 
 
 <url>
 	<loc>https://localise.biz/docs/sdk/class-Loco.Http.ApiClient.html</loc>
+</url>
+<url>
+	<loc>https://localise.biz/docs/sdk/class-Loco.Http.Command.StrictCommand.html</loc>
+</url>
+<url>
+	<loc>https://localise.biz/docs/sdk/class-Loco.Http.Command.StrictResponseParser.html</loc>
 </url>
 <url>
 	<loc>https://localise.biz/docs/sdk/class-Loco.Http.Response.RawResponse.html</loc>
