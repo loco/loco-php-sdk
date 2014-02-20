@@ -1,6 +1,6 @@
 <?php
 /**
- * Auto-generated with Swizzle at 2014-02-19 11:49:57 +0000
+ * Auto-generated with Swizzle at 2014-02-20 00:16:35 +0000
  */
 return array (
   'name' => 'Loco',
@@ -9,188 +9,6 @@ return array (
   'description' => 'Loco REST API',
   'operations' => 
   array (
-    'getAssets' => 
-    array (
-      'httpMethod' => 'GET',
-      'uri' => '/api/assets.json',
-      'class' => 'Guzzle\\Service\\Command\\OperationCommand',
-      'responseClass' => 'array',
-      'responseType' => 'primitive',
-      'summary' => 'List all translatable assets in your project',
-      'parameters' => 
-      array (
-        'filter' => 
-        array (
-          'description' => 'Comma-separated list of tags to filter subset of assets.',
-          'type' => 'string',
-          'location' => 'query',
-        ),
-        'key' => 
-        array (
-          'required' => true,
-          'description' => 'Project API key',
-          'type' => 'string',
-          'location' => 'query',
-        ),
-      ),
-      'errorResponses' => 
-      array (
-        0 => 
-        array (
-          'code' => 401,
-          'phrase' => 'Invalid API key',
-        ),
-      ),
-    ),
-    'createAsset' => 
-    array (
-      'httpMethod' => 'POST',
-      'uri' => '/api/assets.json',
-      'class' => 'Guzzle\\Service\\Command\\OperationCommand',
-      'responseClass' => 'Asset',
-      'responseType' => 'model',
-      'responseNotes' => '<p>Adds a new asset to the currently authenticated project.</p>',
-      'summary' => 'Add a new translatable asset',
-      'parameters' => 
-      array (
-        'name' => 
-        array (
-          'required' => true,
-          'description' => 'Source text or just a name describing what the asset is',
-          'type' => 'string',
-          'location' => 'postField',
-        ),
-        'id' => 
-        array (
-          'description' => 'Optional machine friendly ID if you want something specific',
-          'type' => 'string',
-          'location' => 'postField',
-        ),
-        'type' => 
-        array (
-          'required' => true,
-          'description' => 'Media type, defaults to plain old text',
-          'type' => 'string',
-          'location' => 'postField',
-          'enum' => 
-          array (
-            0 => 'text',
-            1 => 'html',
-            2 => 'image',
-            3 => 'audio',
-            4 => 'video',
-            5 => 'bin',
-          ),
-          'default' => 'text',
-        ),
-        'key' => 
-        array (
-          'required' => true,
-          'description' => 'Project API key',
-          'type' => 'string',
-          'location' => 'query',
-        ),
-      ),
-      'errorResponses' => 
-      array (
-        0 => 
-        array (
-          'code' => 401,
-          'phrase' => 'Invalid API key',
-        ),
-        1 => 
-        array (
-          'code' => 403,
-          'phrase' => 'Insufficient privileges',
-        ),
-      ),
-    ),
-    'getAsset' => 
-    array (
-      'httpMethod' => 'GET',
-      'uri' => '/api/assets/{id}.json',
-      'class' => 'Guzzle\\Service\\Command\\OperationCommand',
-      'responseClass' => 'Asset',
-      'responseType' => 'model',
-      'responseNotes' => 'Gets a single asset in currently authenticated project',
-      'summary' => 'Get a project asset',
-      'parameters' => 
-      array (
-        'id' => 
-        array (
-          'required' => true,
-          'description' => 'Asset ID',
-          'type' => 'string',
-          'location' => 'uri',
-        ),
-        'key' => 
-        array (
-          'required' => true,
-          'description' => 'Project API key',
-          'type' => 'string',
-          'location' => 'query',
-        ),
-      ),
-      'errorResponses' => 
-      array (
-        0 => 
-        array (
-          'code' => 401,
-          'phrase' => 'Invalid API key',
-        ),
-        1 => 
-        array (
-          'code' => 404,
-          'phrase' => 'Asset not in project',
-        ),
-      ),
-    ),
-    'deleteAsset' => 
-    array (
-      'httpMethod' => 'DELETE',
-      'uri' => '/api/assets/{id}.json',
-      'class' => 'Guzzle\\Service\\Command\\OperationCommand',
-      'responseClass' => 'Success',
-      'responseType' => 'model',
-      'responseNotes' => '<p>Deletes an asset from the currently authenticated project.</p>
-           <p><strong>Warning</strong>: This will permanently delete all translations made of this asset across all locales</p>',
-      'summary' => 'Delete an asset permanently',
-      'parameters' => 
-      array (
-        'id' => 
-        array (
-          'required' => true,
-          'description' => 'Asset ID',
-          'type' => 'string',
-          'location' => 'uri',
-        ),
-        'key' => 
-        array (
-          'required' => true,
-          'description' => 'Project API key',
-          'type' => 'string',
-          'location' => 'query',
-        ),
-      ),
-      'errorResponses' => 
-      array (
-        0 => 
-        array (
-          'code' => 401,
-          'phrase' => 'Invalid API key',
-        ),
-        1 => 
-        array (
-          'code' => 404,
-          'phrase' => 'Asset not in project',
-        ),
-        2 => 
-        array (
-          'code' => 403,
-          'phrase' => 'Insufficient privileges',
-        ),
-      ),
-    ),
     'authVerify' => 
     array (
       'httpMethod' => 'GET',
@@ -217,132 +35,6 @@ return array (
         array (
           'code' => 401,
           'phrase' => 'Invalid API key',
-        ),
-      ),
-    ),
-    'convert' => 
-    array (
-      'httpMethod' => 'POST',
-      'uri' => '/api/convert/{from}/{name}.{ext}',
-      'class' => 'Guzzle\\Service\\Command\\OperationCommand',
-      'responseClass' => '\\Loco\\Http\\Response\\RawResponse',
-      'responseType' => 'class',
-      'responseNotes' => 'Use this API to convert between language pack file formats without a Loco account.<br /> 
-             Precise options depend on the file formats you\'re converting between.
-             <a href=\'https://localise.biz/free/converter/api\'>See some examples</a>.',
-      'summary' => 'Convert a language pack to another file format',
-      'parameters' => 
-      array (
-        'src' => 
-        array (
-          'required' => true,
-          'description' => 'Raw source of file being converted',
-          'type' => 'string',
-          'location' => 'body',
-          'default' => '{"foo":"bar"}',
-        ),
-        'from' => 
-        array (
-          'required' => true,
-          'description' => 'Source file format being imported',
-          'type' => 'string',
-          'location' => 'uri',
-          'enum' => 
-          array (
-            0 => 'json',
-            1 => 'mo',
-            2 => 'php',
-            3 => 'po',
-            4 => 'properties',
-            5 => 'resx',
-            6 => 'strings',
-            7 => 'symfony',
-            8 => 'tmx',
-            9 => 'ts',
-            10 => 'xlf',
-            11 => 'xml',
-            12 => 'yml',
-          ),
-          'default' => 'json',
-        ),
-        'ext' => 
-        array (
-          'required' => true,
-          'description' => 'Target file format being exported, specified as a file extension',
-          'type' => 'string',
-          'location' => 'uri',
-          'enum' => 
-          array (
-            0 => 'csv',
-            1 => 'html',
-            2 => 'js',
-            3 => 'json',
-            4 => 'mo',
-            5 => 'phps',
-            6 => 'po',
-            7 => 'pot',
-            8 => 'properties',
-            9 => 'resx',
-            10 => 'sql',
-            11 => 'strings',
-            12 => 'tmx',
-            13 => 'ts',
-            14 => 'xlf',
-            15 => 'xml',
-            16 => 'yml',
-          ),
-          'default' => 'json',
-        ),
-        'name' => 
-        array (
-          'description' => 'Domain/namespace, applicable to some file formats',
-          'type' => 'string',
-          'location' => 'uri',
-          'default' => 'messages',
-        ),
-        'format' => 
-        array (
-          'description' => 'Specific target format, required for some file types',
-          'type' => 'string',
-          'location' => 'query',
-          'enum' => 
-          array (
-            0 => '',
-            1 => 'symfony',
-            2 => 'zend',
-            3 => 'codeigniter',
-            4 => 'constants',
-            5 => 'chrome',
-            6 => 'nested',
-            7 => 'java',
-            8 => 'tizen',
-            9 => 'gettext',
-          ),
-        ),
-        'locale' => 
-        array (
-          'description' => 'Locale of target language pack, required in most cases',
-          'type' => 'string',
-          'location' => 'query',
-        ),
-        'native' => 
-        array (
-          'description' => 'Optional source locale, not required in many cases',
-          'type' => 'string',
-          'location' => 'query',
-        ),
-      ),
-      'errorResponses' => 
-      array (
-        0 => 
-        array (
-          'code' => 204,
-          'phrase' => 'No messages could be extracted from source',
-        ),
-        1 => 
-        array (
-          'code' => 422,
-          'phrase' => 'Empty or invalid source data',
         ),
       ),
     ),
@@ -602,6 +294,240 @@ return array (
         ),
       ),
     ),
+    'getAssets' => 
+    array (
+      'httpMethod' => 'GET',
+      'uri' => '/api/assets.json',
+      'class' => 'Guzzle\\Service\\Command\\OperationCommand',
+      'responseClass' => 'array',
+      'responseType' => 'primitive',
+      'summary' => 'List all translatable assets in your project',
+      'parameters' => 
+      array (
+        'key' => 
+        array (
+          'required' => true,
+          'description' => 'Project API key',
+          'type' => 'string',
+          'location' => 'query',
+        ),
+        'filter' => 
+        array (
+          'description' => 'Comma-separated list of tags to filter subset of assets.',
+          'type' => 'string',
+          'location' => 'query',
+        ),
+      ),
+      'errorResponses' => 
+      array (
+        0 => 
+        array (
+          'code' => 401,
+          'phrase' => 'Invalid API key',
+        ),
+      ),
+    ),
+    'createAsset' => 
+    array (
+      'httpMethod' => 'POST',
+      'uri' => '/api/assets.json',
+      'class' => 'Guzzle\\Service\\Command\\OperationCommand',
+      'responseClass' => 'Asset',
+      'responseType' => 'model',
+      'responseNotes' => '<p>Adds a new asset to the currently authenticated project.</p>',
+      'summary' => 'Add a new translatable asset',
+      'parameters' => 
+      array (
+        'name' => 
+        array (
+          'required' => true,
+          'description' => 'Source text or just a name describing what the asset is',
+          'type' => 'string',
+          'location' => 'postField',
+        ),
+        'id' => 
+        array (
+          'description' => 'Optional machine friendly ID if you want something specific',
+          'type' => 'string',
+          'location' => 'postField',
+        ),
+        'type' => 
+        array (
+          'required' => true,
+          'description' => 'Media type, defaults to plain old text',
+          'type' => 'string',
+          'location' => 'postField',
+          'enum' => 
+          array (
+            0 => 'text',
+            1 => 'html',
+            2 => 'image',
+            3 => 'audio',
+            4 => 'video',
+            5 => 'bin',
+          ),
+          'default' => 'text',
+        ),
+        'key' => 
+        array (
+          'required' => true,
+          'description' => 'Project API key',
+          'type' => 'string',
+          'location' => 'query',
+        ),
+      ),
+      'errorResponses' => 
+      array (
+        0 => 
+        array (
+          'code' => 401,
+          'phrase' => 'Invalid API key',
+        ),
+        1 => 
+        array (
+          'code' => 403,
+          'phrase' => 'Insufficient privileges',
+        ),
+      ),
+    ),
+    'getAsset' => 
+    array (
+      'httpMethod' => 'GET',
+      'uri' => '/api/assets/{id}.json',
+      'class' => 'Guzzle\\Service\\Command\\OperationCommand',
+      'responseClass' => 'Asset',
+      'responseType' => 'model',
+      'responseNotes' => 'Gets a single asset in currently authenticated project',
+      'summary' => 'Get a project asset',
+      'parameters' => 
+      array (
+        'key' => 
+        array (
+          'required' => true,
+          'description' => 'Project API key',
+          'type' => 'string',
+          'location' => 'query',
+        ),
+        'id' => 
+        array (
+          'required' => true,
+          'description' => 'Asset ID',
+          'type' => 'string',
+          'location' => 'uri',
+        ),
+      ),
+      'errorResponses' => 
+      array (
+        0 => 
+        array (
+          'code' => 401,
+          'phrase' => 'Invalid API key',
+        ),
+        1 => 
+        array (
+          'code' => 404,
+          'phrase' => 'Asset not in project',
+        ),
+      ),
+    ),
+    'deleteAsset' => 
+    array (
+      'httpMethod' => 'DELETE',
+      'uri' => '/api/assets/{id}.json',
+      'class' => 'Guzzle\\Service\\Command\\OperationCommand',
+      'responseClass' => 'Success',
+      'responseType' => 'model',
+      'responseNotes' => '<p>Deletes an asset from the currently authenticated project.</p>
+           <p><strong>Warning</strong>: This will permanently delete all translations made of this asset across all locales</p>',
+      'summary' => 'Delete an asset permanently',
+      'parameters' => 
+      array (
+        'key' => 
+        array (
+          'required' => true,
+          'description' => 'Project API key',
+          'type' => 'string',
+          'location' => 'query',
+        ),
+        'id' => 
+        array (
+          'required' => true,
+          'description' => 'Asset ID',
+          'type' => 'string',
+          'location' => 'uri',
+        ),
+      ),
+      'errorResponses' => 
+      array (
+        0 => 
+        array (
+          'code' => 401,
+          'phrase' => 'Invalid API key',
+        ),
+        1 => 
+        array (
+          'code' => 404,
+          'phrase' => 'Asset not in project',
+        ),
+        2 => 
+        array (
+          'code' => 403,
+          'phrase' => 'Insufficient privileges',
+        ),
+      ),
+    ),
+    'tagAsset' => 
+    array (
+      'httpMethod' => 'POST',
+      'uri' => '/api/assets/{id}/tags.json',
+      'class' => 'Guzzle\\Service\\Command\\OperationCommand',
+      'responseClass' => 'Asset',
+      'responseType' => 'model',
+      'responseNotes' => '<p>Tags an asset with a new or existing term. If the tag doesn\'t exist it will be created.</p>',
+      'summary' => 'Tag an asset',
+      'parameters' => 
+      array (
+        'name' => 
+        array (
+          'required' => true,
+          'description' => 'Name of new or existing tag',
+          'type' => 'string',
+          'location' => 'postField',
+        ),
+        'key' => 
+        array (
+          'required' => true,
+          'description' => 'Project API key',
+          'type' => 'string',
+          'location' => 'query',
+        ),
+        'id' => 
+        array (
+          'required' => true,
+          'description' => 'Asset ID',
+          'type' => 'string',
+          'location' => 'uri',
+        ),
+      ),
+      'errorResponses' => 
+      array (
+        0 => 
+        array (
+          'code' => 401,
+          'phrase' => 'Invalid API key',
+        ),
+        1 => 
+        array (
+          'code' => 404,
+          'phrase' => 'Asset not in project',
+        ),
+        2 => 
+        array (
+          'code' => 403,
+          'phrase' => 'Insufficient privileges',
+        ),
+      ),
+    ),
     'getLocales' => 
     array (
       'httpMethod' => 'GET',
@@ -682,19 +608,19 @@ return array (
       'summary' => 'Get a project locale',
       'parameters' => 
       array (
-        'locale' => 
-        array (
-          'required' => true,
-          'description' => 'Short code of project locale, e.g. \'fr\' or \'fr_CH\'',
-          'type' => 'string',
-          'location' => 'uri',
-        ),
         'key' => 
         array (
           'required' => true,
           'description' => 'Project API key',
           'type' => 'string',
           'location' => 'query',
+        ),
+        'locale' => 
+        array (
+          'required' => true,
+          'description' => 'Short code of project locale, e.g. \'fr\' or \'fr_CH\'',
+          'type' => 'string',
+          'location' => 'uri',
         ),
       ),
       'errorResponses' => 
@@ -783,19 +709,19 @@ return array (
             ),
           ),
         ),
-        'locale' => 
-        array (
-          'required' => true,
-          'description' => 'Short code of project locale, e.g. \'fr\' or \'fr_CH\'',
-          'type' => 'string',
-          'location' => 'uri',
-        ),
         'key' => 
         array (
           'required' => true,
           'description' => 'Project API key',
           'type' => 'string',
           'location' => 'query',
+        ),
+        'locale' => 
+        array (
+          'required' => true,
+          'description' => 'Short code of project locale, e.g. \'fr\' or \'fr_CH\'',
+          'type' => 'string',
+          'location' => 'uri',
         ),
       ),
       'errorResponses' => 
@@ -830,19 +756,19 @@ return array (
       'summary' => 'Delete a project locale',
       'parameters' => 
       array (
-        'locale' => 
-        array (
-          'required' => true,
-          'description' => 'Short code of project locale, e.g. \'fr\' or \'fr_CH\'',
-          'type' => 'string',
-          'location' => 'uri',
-        ),
         'key' => 
         array (
           'required' => true,
           'description' => 'Project API key',
           'type' => 'string',
           'location' => 'query',
+        ),
+        'locale' => 
+        array (
+          'required' => true,
+          'description' => 'Short code of project locale, e.g. \'fr\' or \'fr_CH\'',
+          'type' => 'string',
+          'location' => 'uri',
         ),
       ),
       'errorResponses' => 
@@ -889,91 +815,135 @@ return array (
       array (
       ),
     ),
-  ),
-  'models' => 
-  array (
-    'Asset' => 
+    'convert' => 
     array (
-      'type' => 'object',
-      'additionalProperties' => false,
-      'properties' => 
+      'httpMethod' => 'POST',
+      'uri' => '/api/convert/{from}/{name}.{ext}',
+      'class' => 'Guzzle\\Service\\Command\\OperationCommand',
+      'responseClass' => '\\Loco\\Http\\Response\\RawResponse',
+      'responseType' => 'class',
+      'responseNotes' => 'Use this API to convert between language pack file formats without a Loco account.<br /> 
+             Precise options depend on the file formats you\'re converting between.
+             <a href=\'https://localise.biz/free/converter/api\'>See some examples</a>.',
+      'summary' => 'Convert a language pack to another file format',
+      'parameters' => 
       array (
-        'id' => 
+        'src' => 
         array (
-          'description' => 'Machine friendly name',
+          'required' => true,
+          'description' => 'Raw source of file being converted',
           'type' => 'string',
-          'location' => 'json',
+          'location' => 'body',
+          'default' => '{"foo":"bar"}',
         ),
-        'type' => 
+        'from' => 
         array (
-          'description' => 'Broad content type, defaults to plain text',
+          'required' => true,
+          'description' => 'Source file format being imported',
           'type' => 'string',
-          'location' => 'json',
+          'location' => 'uri',
           'enum' => 
           array (
-            0 => 'text',
-            1 => 'html',
-            2 => 'image',
-            3 => 'audio',
-            4 => 'video',
-            5 => 'bin',
+            0 => 'json',
+            1 => 'mo',
+            2 => 'php',
+            3 => 'po',
+            4 => 'properties',
+            5 => 'resx',
+            6 => 'strings',
+            7 => 'symfony',
+            8 => 'tmx',
+            9 => 'ts',
+            10 => 'xlf',
+            11 => 'xml',
+            12 => 'yml',
           ),
+          'default' => 'json',
+        ),
+        'ext' => 
+        array (
+          'required' => true,
+          'description' => 'Target file format being exported, specified as a file extension',
+          'type' => 'string',
+          'location' => 'uri',
+          'enum' => 
+          array (
+            0 => 'csv',
+            1 => 'html',
+            2 => 'js',
+            3 => 'json',
+            4 => 'mo',
+            5 => 'phps',
+            6 => 'po',
+            7 => 'pot',
+            8 => 'properties',
+            9 => 'resx',
+            10 => 'sql',
+            11 => 'strings',
+            12 => 'tmx',
+            13 => 'ts',
+            14 => 'xlf',
+            15 => 'xml',
+            16 => 'yml',
+          ),
+          'default' => 'json',
         ),
         'name' => 
         array (
-          'description' => 'Human friendly name',
+          'description' => 'Domain/namespace, applicable to some file formats',
           'type' => 'string',
-          'location' => 'json',
+          'location' => 'uri',
+          'default' => 'messages',
         ),
-        'context' => 
+        'format' => 
         array (
-          'description' => 'Optional context descriptor',
+          'description' => 'Specific target format, required for some file types',
           'type' => 'string',
-          'location' => 'json',
+          'location' => 'query',
+          'enum' => 
+          array (
+            0 => '',
+            1 => 'symfony',
+            2 => 'zend',
+            3 => 'codeigniter',
+            4 => 'constants',
+            5 => 'chrome',
+            6 => 'nested',
+            7 => 'java',
+            8 => 'tizen',
+            9 => 'gettext',
+          ),
         ),
-        'modified' => 
+        'locale' => 
         array (
-          'description' => 'Time last modified in UTC',
+          'description' => 'Locale of target language pack, required in most cases',
           'type' => 'string',
-          'format' => 'date-time',
-          'location' => 'json',
+          'location' => 'query',
         ),
-        'translated' => 
+        'native' => 
         array (
-          'description' => 'Number of completed translations',
-          'type' => 'integer',
-          'location' => 'json',
-        ),
-        'untranslated' => 
-        array (
-          'description' => 'Number of incomplete translations',
-          'type' => 'integer',
-          'location' => 'json',
+          'description' => 'Optional source locale, not required in many cases',
+          'type' => 'string',
+          'location' => 'query',
         ),
       ),
-    ),
-    'Success' => 
-    array (
-      'type' => 'object',
-      'additionalProperties' => false,
-      'properties' => 
+      'errorResponses' => 
       array (
-        'status' => 
+        0 => 
         array (
-          'required' => true,
-          'description' => 'HTTP status 2xx code',
-          'type' => 'integer',
-          'location' => 'json',
+          'code' => 204,
+          'phrase' => 'No messages could be extracted from source',
         ),
-        'message' => 
+        1 => 
         array (
-          'required' => true,
-          'description' => 'Descriptive success message',
-          'type' => 'string',
-          'location' => 'json',
+          'code' => 422,
+          'phrase' => 'Empty or invalid source data',
         ),
       ),
     ),
+  ),
+  'models' => 
+  array (
     'User' => 
     array (
       'type' => 'object',
@@ -1135,6 +1105,98 @@ return array (
     'anon_type_string' => 
     array (
       'type' => 'string',
+    ),
+    'Asset' => 
+    array (
+      'type' => 'object',
+      'additionalProperties' => false,
+      'properties' => 
+      array (
+        'id' => 
+        array (
+          'description' => 'Machine friendly name',
+          'type' => 'string',
+          'location' => 'json',
+        ),
+        'type' => 
+        array (
+          'description' => 'Broad content type, defaults to plain text',
+          'type' => 'string',
+          'location' => 'json',
+          'enum' => 
+          array (
+            0 => 'text',
+            1 => 'html',
+            2 => 'image',
+            3 => 'audio',
+            4 => 'video',
+            5 => 'bin',
+          ),
+        ),
+        'name' => 
+        array (
+          'description' => 'Human friendly name',
+          'type' => 'string',
+          'location' => 'json',
+        ),
+        'context' => 
+        array (
+          'description' => 'Optional context descriptor',
+          'type' => 'string',
+          'location' => 'json',
+        ),
+        'modified' => 
+        array (
+          'description' => 'Time last modified in UTC',
+          'type' => 'string',
+          'format' => 'date-time',
+          'location' => 'json',
+        ),
+        'translated' => 
+        array (
+          'description' => 'Number of completed translations',
+          'type' => 'integer',
+          'location' => 'json',
+        ),
+        'untranslated' => 
+        array (
+          'description' => 'Number of incomplete translations',
+          'type' => 'integer',
+          'location' => 'json',
+        ),
+        'tags' => 
+        array (
+          'description' => 'Machine friendly asset tags',
+          'type' => 'array',
+          'location' => 'json',
+          'items' => 
+          array (
+            'type' => 'string',
+          ),
+        ),
+      ),
+    ),
+    'Success' => 
+    array (
+      'type' => 'object',
+      'additionalProperties' => false,
+      'properties' => 
+      array (
+        'status' => 
+        array (
+          'required' => true,
+          'description' => 'HTTP status 2xx code',
+          'type' => 'integer',
+          'location' => 'json',
+        ),
+        'message' => 
+        array (
+          'required' => true,
+          'description' => 'Descriptive success message',
+          'type' => 'string',
+          'location' => 'json',
+        ),
+      ),
     ),
     'Plurals' => 
     array (

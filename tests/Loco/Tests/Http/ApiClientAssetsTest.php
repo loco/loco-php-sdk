@@ -62,6 +62,21 @@ class ApiClientAssetsTest  extends ApiClientTest {
     
     
     /**
+     * tagAsset
+     * @depends testAssetCreate
+     */
+    public function testAssetTag( $slug ){
+        $name = 'Test tag';
+        $client = $this->getClient();
+        $model = $client->tagAsset( array( 'id' => $slug, 'name' => $name ) );
+        $this->assertInstanceOf( '\Guzzle\Service\Resource\Model', $model );
+        $this->assertInternalType( 'array', $model['tags'] );
+        $this->assertContains( 'test-tag', $model['tags'] );
+    }
+
+    
+    
+    /**
      * patchAsset
      * @depends testAssetCreate
      */
