@@ -81,8 +81,11 @@ class ApiClientAssetsTest  extends ApiClientTest {
      * @depends testAssetCreate
      */
     public function testAssetPatch( $slug ){
-        // @todo PATCH test
-        $this->assertTrue( true );
+        $name = 'Renamed OK';
+        $client = $this->getClient();
+        $model = $client->patchAsset( array( 'id' => $slug, 'name' => $name ) );
+        $this->assertInstanceOf( '\Guzzle\Service\Resource\Model', $model );
+        $this->assertEquals( $name, $model['name'] );
         return $slug;
     }
     
@@ -91,11 +94,12 @@ class ApiClientAssetsTest  extends ApiClientTest {
     /**
      * patchAsset with failure
      * @depends testAssetCreate
-     * #expectedException \Guzzle\Http\Exception\ClientErrorResponseException
+     * @expectedException \Guzzle\Http\Exception\ClientErrorResponseException
      */
-    public function testAssetPatchFailure( $slug ){
-        // @todo PATCH file
-        $this->assertTrue( true );
+    public function testAssetPatchRejectsReadonly( $slug ){
+        $client = $this->getClient();
+        $model = $client->patchAsset( array( 'id' => $slug, 'translated' => 0 ) );
+        $client->patchAsset( $update );
     }
          
     
