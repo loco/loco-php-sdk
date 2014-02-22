@@ -4,7 +4,7 @@
     "type": "library",
     "keywords": ["loco","translation","l10n","i18n","languages"],
     "description": "Loco SDK for PHP, including REST API client",
-    "homepage" : "https://github.com/loco-app/loco-php-sdk",
+    "homepage" : "https://github.com/loco/loco-php-sdk",
     "authors": [
         {
             "name": "Tim Whitlock",
