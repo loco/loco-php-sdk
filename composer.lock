@@ -161,12 +161,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/loco/swizzle.git",
-                "reference": "5babc27fb34df3b17ea0127c0ac84ddcd1db3605"
+                "reference": "82ad0a91586dd4b91000e53b27ccd05d141f1a58"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/loco/swizzle/zipball/5babc27fb34df3b17ea0127c0ac84ddcd1db3605",
-                "reference": "5babc27fb34df3b17ea0127c0ac84ddcd1db3605",
+                "url": "https://api.github.com/repos/loco/swizzle/zipball/82ad0a91586dd4b91000e53b27ccd05d141f1a58",
+                "reference": "82ad0a91586dd4b91000e53b27ccd05d141f1a58",
                 "shasum": ""
             },
             "require": {
@@ -204,7 +204,7 @@
                 "api",
                 "swagger"
             ],
-            "time": "2014-02-22 10:57:22"
+            "time": "2014-02-22 11:10:53"
         },
         {
             "name": "monolog/monolog",

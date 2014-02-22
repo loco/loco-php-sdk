@@ -1,11 +1,11 @@
 <?php
 /**
- * Auto-generated with Swizzle at 2014-02-20 00:16:35 +0000
+ * Auto-generated with Swizzle at 2014-02-22 11:47:20 +0000
  */
 return array (
   'name' => 'Loco',
   'apiVersion' => '1.0.3',
-  'baseUrl' => 'https://localise.biz/',
+  'baseUrl' => 'https://ssl.loco.192.168.0.7.xip.io/',
   'description' => 'Loco REST API',
   'operations' => 
   array (
@@ -13,7 +13,7 @@ return array (
     array (
       'httpMethod' => 'GET',
       'uri' => '/api/auth/verify.json',
-      'class' => 'Guzzle\\Service\\Command\\OperationCommand',
+      'class' => '\\Loco\\Http\\Command\\StrictCommand',
       'responseClass' => 'Creds',
       'responseType' => 'model',
       'responseNotes' => 'Loco API keys authenticate your user account for accessing a specific project.<br />
@@ -42,7 +42,7 @@ return array (
     array (
       'httpMethod' => 'GET',
       'uri' => '/api/export/all.{ext}',
-      'class' => 'Guzzle\\Service\\Command\\OperationCommand',
+      'class' => '\\Loco\\Http\\Command\\StrictCommand',
       'responseClass' => '\\Loco\\Http\\Response\\RawResponse',
       'responseType' => 'class',
       'responseNotes' => 'Export all translations from your project to a multi-locale language pack.<br />
@@ -108,7 +108,7 @@ return array (
     array (
       'httpMethod' => 'GET',
       'uri' => '/api/export/archive/{ext}.zip',
-      'class' => 'Guzzle\\Service\\Command\\OperationCommand',
+      'class' => '\\Loco\\Http\\Command\\StrictCommand',
       'responseClass' => '\\Loco\\Http\\Response\\ZipResponse',
       'responseType' => 'class',
       'responseNotes' => 'Export all translations from your project to a zip archive of language packs.<br />
@@ -200,7 +200,7 @@ return array (
     array (
       'httpMethod' => 'GET',
       'uri' => '/api/export/locale/{locale}.{ext}',
-      'class' => 'Guzzle\\Service\\Command\\OperationCommand',
+      'class' => '\\Loco\\Http\\Command\\StrictCommand',
       'responseClass' => '\\Loco\\Http\\Response\\RawResponse',
       'responseType' => 'class',
       'responseNotes' => 'Export translations from your project to a locale-specific language pack.
@@ -298,7 +298,7 @@ return array (
     array (
       'httpMethod' => 'GET',
       'uri' => '/api/assets.json',
-      'class' => 'Guzzle\\Service\\Command\\OperationCommand',
+      'class' => '\\Loco\\Http\\Command\\StrictCommand',
       'responseClass' => 'array',
       'responseType' => 'primitive',
       'summary' => 'List all translatable assets in your project',
@@ -331,7 +331,7 @@ return array (
     array (
       'httpMethod' => 'POST',
       'uri' => '/api/assets.json',
-      'class' => 'Guzzle\\Service\\Command\\OperationCommand',
+      'class' => '\\Loco\\Http\\Command\\StrictCommand',
       'responseClass' => 'Asset',
       'responseType' => 'model',
       'responseNotes' => '<p>Adds a new asset to the currently authenticated project.</p>',
@@ -394,7 +394,7 @@ return array (
     array (
       'httpMethod' => 'GET',
       'uri' => '/api/assets/{id}.json',
-      'class' => 'Guzzle\\Service\\Command\\OperationCommand',
+      'class' => '\\Loco\\Http\\Command\\StrictCommand',
       'responseClass' => 'Asset',
       'responseType' => 'model',
       'responseNotes' => 'Gets a single asset in currently authenticated project',
@@ -434,7 +434,7 @@ return array (
     array (
       'httpMethod' => 'DELETE',
       'uri' => '/api/assets/{id}.json',
-      'class' => 'Guzzle\\Service\\Command\\OperationCommand',
+      'class' => '\\Loco\\Http\\Command\\StrictCommand',
       'responseClass' => 'Success',
       'responseType' => 'model',
       'responseNotes' => '<p>Deletes an asset from the currently authenticated project.</p>
@@ -480,7 +480,7 @@ return array (
     array (
       'httpMethod' => 'POST',
       'uri' => '/api/assets/{id}/tags.json',
-      'class' => 'Guzzle\\Service\\Command\\OperationCommand',
+      'class' => '\\Loco\\Http\\Command\\StrictCommand',
       'responseClass' => 'Asset',
       'responseType' => 'model',
       'responseNotes' => '<p>Tags an asset with a new or existing term. If the tag doesn\'t exist it will be created.</p>',
@@ -532,7 +532,7 @@ return array (
     array (
       'httpMethod' => 'GET',
       'uri' => '/api/locales.json',
-      'class' => 'Guzzle\\Service\\Command\\OperationCommand',
+      'class' => '\\Loco\\Http\\Command\\StrictCommand',
       'responseClass' => 'array',
       'responseType' => 'primitive',
       'responseNotes' => 'Lists all locales in currently authenticated project. Your native/source language will always be the first in the list',
@@ -560,7 +560,7 @@ return array (
     array (
       'httpMethod' => 'POST',
       'uri' => '/api/locales.json',
-      'class' => 'Guzzle\\Service\\Command\\OperationCommand',
+      'class' => '\\Loco\\Http\\Command\\StrictCommand',
       'responseClass' => 'Locale',
       'responseType' => 'model',
       'responseNotes' => '<p>Adds a new locale to the currently authenticated project.</p>
@@ -601,7 +601,7 @@ return array (
     array (
       'httpMethod' => 'GET',
       'uri' => '/api/locales/{locale}.json',
-      'class' => 'Guzzle\\Service\\Command\\OperationCommand',
+      'class' => '\\Loco\\Http\\Command\\StrictCommand',
       'responseClass' => 'Locale',
       'responseType' => 'model',
       'responseNotes' => 'Gets a single locale in currently authenticated project',
@@ -641,7 +641,7 @@ return array (
     array (
       'httpMethod' => 'PATCH',
       'uri' => '/api/locales/{locale}.json',
-      'class' => 'Guzzle\\Service\\Command\\OperationCommand',
+      'class' => '\\Loco\\Http\\Command\\StrictCommand',
       'responseClass' => 'Locale',
       'responseType' => 'model',
       'responseNotes' => '<p>Modifies the properties of a locale in the currently authenticated project.</p>
@@ -747,7 +747,7 @@ return array (
     array (
       'httpMethod' => 'DELETE',
       'uri' => '/api/locales/{locale}.json',
-      'class' => 'Guzzle\\Service\\Command\\OperationCommand',
+      'class' => '\\Loco\\Http\\Command\\StrictCommand',
       'responseClass' => 'Success',
       'responseType' => 'model',
       'responseNotes' => '<p>Delete a locale from currently authenticated project.</p>
@@ -790,11 +790,68 @@ return array (
         ),
       ),
     ),
+    'getTranslation' => 
+    array (
+      'httpMethod' => 'GET',
+      'uri' => '/api/translations/{id}/{locale}.json',
+      'class' => '\\Loco\\Http\\Command\\StrictCommand',
+      'responseClass' => 'Translation',
+      'responseType' => 'model',
+      'responseNotes' => 'Gets a single translation in currently authenticated project',
+      'summary' => 'Get a single translation',
+      'parameters' => 
+      array (
+        'key' => 
+        array (
+          'required' => true,
+          'description' => 'Project API key',
+          'type' => 'string',
+          'location' => 'query',
+        ),
+        'id' => 
+        array (
+          'required' => true,
+          'description' => 'Asset ID',
+          'type' => 'string',
+          'location' => 'uri',
+        ),
+        'locale' => 
+        array (
+          'required' => true,
+          'description' => 'Short code of project locale, e.g. \'fr\' or \'fr_CH\'',
+          'type' => 'string',
+          'location' => 'uri',
+        ),
+      ),
+      'errorResponses' => 
+      array (
+        0 => 
+        array (
+          'code' => 401,
+          'phrase' => 'Invalid API key',
+        ),
+        1 => 
+        array (
+          'code' => 404,
+          'phrase' => 'Asset not in project',
+        ),
+        2 => 
+        array (
+          'code' => 404,
+          'phrase' => 'Locale not in project',
+        ),
+        3 => 
+        array (
+          'code' => 404,
+          'phrase' => 'Asset not translated in locale',
+        ),
+      ),
+    ),
     'ping' => 
     array (
       'httpMethod' => 'GET',
       'uri' => '/api/ping.json',
-      'class' => 'Guzzle\\Service\\Command\\OperationCommand',
+      'class' => '\\Loco\\Http\\Command\\StrictCommand',
       'responseClass' => 'Echo',
       'responseType' => 'model',
       'responseNotes' => 'Checks the API is up and returns the API version number',
@@ -807,7 +864,7 @@ return array (
     array (
       'httpMethod' => 'GET',
       'uri' => '/api/ping/not-found.json',
-      'class' => 'Guzzle\\Service\\Command\\OperationCommand',
+      'class' => '\\Loco\\Http\\Command\\StrictCommand',
       'responseClass' => 'Error',
       'responseType' => 'model',
       'summary' => 'Get a test 404 response',
@@ -819,7 +876,7 @@ return array (
     array (
       'httpMethod' => 'POST',
       'uri' => '/api/convert/{from}/{name}.{ext}',
-      'class' => 'Guzzle\\Service\\Command\\OperationCommand',
+      'class' => '\\Loco\\Http\\Command\\StrictCommand',
       'responseClass' => '\\Loco\\Http\\Response\\RawResponse',
       'responseType' => 'class',
       'responseNotes' => 'Use this API to convert between language pack file formats without a Loco account.<br /> 
@@ -1302,6 +1359,114 @@ return array (
               'description' => 'Gettext-style plural form equation taking multiplier <code>n</code> to yield plural form offset <code>0 - length-1</code>.',
               'type' => 'string',
               'location' => 'json',
+            ),
+          ),
+        ),
+      ),
+    ),
+    'Translation' => 
+    array (
+      'type' => 'object',
+      'additionalProperties' => false,
+      'properties' => 
+      array (
+        'type' => 
+        array (
+          'description' => 'More specific asset type, e.g. text/plain, image/jpeg',
+          'type' => 'string',
+          'location' => 'json',
+        ),
+        'translation' => 
+        array (
+          'description' => 'Translated text in specified locale',
+          'type' => 'string',
+          'location' => 'json',
+        ),
+        'revision' => 
+        array (
+          'description' => 'Revision number, the number of edits made',
+          'type' => 'integer',
+          'location' => 'json',
+        ),
+        'comments' => 
+        array (
+          'description' => 'Number of comments available',
+          'type' => 'integer',
+          'location' => 'json',
+        ),
+        'modified' => 
+        array (
+          'description' => 'Time last modified in UTC',
+          'type' => 'string',
+          'format' => 'date-time',
+          'location' => 'json',
+        ),
+        'locale' => 
+        array (
+          'type' => 'object',
+          'location' => 'json',
+          'additionalProperties' => false,
+          'properties' => 
+          array (
+            'code' => 
+            array (
+              'description' => 'Locale short code',
+              'type' => 'string',
+              'location' => 'json',
+            ),
+            'native' => 
+            array (
+              'description' => 'Whether native/source locale of project',
+              'type' => 'boolean',
+              'location' => 'json',
+            ),
+            'name' => 
+            array (
+              'description' => 'Full locale name',
+              'type' => 'string',
+              'location' => 'json',
+            ),
+            'plurals' => 
+            array (
+              'type' => 'object',
+              'location' => 'json',
+              'additionalProperties' => false,
+              'properties' => 
+              array (
+                'forms' => 
+                array (
+                  'description' => 'Read only plural form names, see <a href="http://unicode.org/reports/tr35/tr35-numbers.html#Language_Plural_Rules">Unicode tr35</a>.',
+                  'type' => 'array',
+                  'location' => 'json',
+                  'enum' => 
+                  array (
+                    0 => 'zero',
+                    1 => 'one',
+                    2 => 'two',
+                    3 => 'few',
+                    4 => 'many',
+                    5 => 'other',
+                  ),
+                  'items' => 
+                  array (
+                    'type' => 'string',
+                  ),
+                ),
+                'length' => 
+                array (
+                  'description' => 'Number of plural forms',
+                  'type' => 'integer',
+                  'location' => 'json',
+                  'minimum' => 1,
+                  'maximum' => 6,
+                ),
+                'equation' => 
+                array (
+                  'description' => 'Gettext-style plural form equation taking multiplier <code>n</code> to yield plural form offset <code>0 - length-1</code>.',
+                  'type' => 'string',
+                  'location' => 'json',
+                ),
+              ),
             ),
           ),
         ),

@@ -1,13 +1,13 @@
 {
     "name": "Loco",
     "apiVersion": "1.0.3",
-    "baseUrl": "https:\/\/localise.biz\/",
+    "baseUrl": "https:\/\/ssl.loco.192.168.0.7.xip.io\/",
     "description": "Loco REST API",
     "operations": {
         "authVerify": {
             "httpMethod": "GET",
             "uri": "\/api\/auth\/verify.json",
-            "class": "Guzzle\\Service\\Command\\OperationCommand",
+            "class": "\\Loco\\Http\\Command\\StrictCommand",
             "responseClass": "Creds",
             "responseType": "model",
             "responseNotes": "Loco API keys authenticate your user account for accessing a specific project.<br \/>\n             This endpoint verifies an API key and returns the authenticated user, account and project.",
@@ -30,7 +30,7 @@
         "exportAll": {
             "httpMethod": "GET",
             "uri": "\/api\/export\/all.{ext}",
-            "class": "Guzzle\\Service\\Command\\OperationCommand",
+            "class": "\\Loco\\Http\\Command\\StrictCommand",
             "responseClass": "\\Loco\\Http\\Response\\RawResponse",
             "responseType": "class",
             "responseNotes": "Export all translations from your project to a multi-locale language pack.<br \/>\n           <br \/>\n           Note that not all formats support multiple locales in the same file. See <code>\/export\/archive<\/code> for exporting separate files,\n           and <code>\/export\/locale<\/code> for exporting one language at a time.",
@@ -83,7 +83,7 @@
         "exportArchive": {
             "httpMethod": "GET",
             "uri": "\/api\/export\/archive\/{ext}.zip",
-            "class": "Guzzle\\Service\\Command\\OperationCommand",
+            "class": "\\Loco\\Http\\Command\\StrictCommand",
             "responseClass": "\\Loco\\Http\\Response\\ZipResponse",
             "responseType": "class",
             "responseNotes": "Export all translations from your project to a zip archive of language packs.<br \/>\n           <br \/>\n           If you're exporting to a file format that supports multiple locales within the same file, you can use the <code>\/export\/all<\/code> method ",
@@ -161,7 +161,7 @@
         "exportLocale": {
             "httpMethod": "GET",
             "uri": "\/api\/export\/locale\/{locale}.{ext}",
-            "class": "Guzzle\\Service\\Command\\OperationCommand",
+            "class": "\\Loco\\Http\\Command\\StrictCommand",
             "responseClass": "\\Loco\\Http\\Response\\RawResponse",
             "responseType": "class",
             "responseNotes": "Export translations from your project to a locale-specific language pack.\n           Various export file types are supported with format variations for some types.",
@@ -245,7 +245,7 @@
         "getAssets": {
             "httpMethod": "GET",
             "uri": "\/api\/assets.json",
-            "class": "Guzzle\\Service\\Command\\OperationCommand",
+            "class": "\\Loco\\Http\\Command\\StrictCommand",
             "responseClass": "array",
             "responseType": "primitive",
             "summary": "List all translatable assets in your project",
@@ -272,7 +272,7 @@
         "createAsset": {
             "httpMethod": "POST",
             "uri": "\/api\/assets.json",
-            "class": "Guzzle\\Service\\Command\\OperationCommand",
+            "class": "\\Loco\\Http\\Command\\StrictCommand",
             "responseClass": "Asset",
             "responseType": "model",
             "responseNotes": "<p>Adds a new asset to the currently authenticated project.<\/p>",
@@ -325,7 +325,7 @@
         "getAsset": {
             "httpMethod": "GET",
             "uri": "\/api\/assets\/{id}.json",
-            "class": "Guzzle\\Service\\Command\\OperationCommand",
+            "class": "\\Loco\\Http\\Command\\StrictCommand",
             "responseClass": "Asset",
             "responseType": "model",
             "responseNotes": "Gets a single asset in currently authenticated project",
@@ -358,7 +358,7 @@
         "deleteAsset": {
             "httpMethod": "DELETE",
             "uri": "\/api\/assets\/{id}.json",
-            "class": "Guzzle\\Service\\Command\\OperationCommand",
+            "class": "\\Loco\\Http\\Command\\StrictCommand",
             "responseClass": "Success",
             "responseType": "model",
             "responseNotes": "<p>Deletes an asset from the currently authenticated project.<\/p>\n           <p><strong>Warning<\/strong>: This will permanently delete all translations made of this asset across all locales<\/p>",
@@ -395,7 +395,7 @@
         "tagAsset": {
             "httpMethod": "POST",
             "uri": "\/api\/assets\/{id}\/tags.json",
-            "class": "Guzzle\\Service\\Command\\OperationCommand",
+            "class": "\\Loco\\Http\\Command\\StrictCommand",
             "responseClass": "Asset",
             "responseType": "model",
             "responseNotes": "<p>Tags an asset with a new or existing term. If the tag doesn't exist it will be created.<\/p>",
@@ -438,7 +438,7 @@
         "getLocales": {
             "httpMethod": "GET",
             "uri": "\/api\/locales.json",
-            "class": "Guzzle\\Service\\Command\\OperationCommand",
+            "class": "\\Loco\\Http\\Command\\StrictCommand",
             "responseClass": "array",
             "responseType": "primitive",
             "responseNotes": "Lists all locales in currently authenticated project. Your native\/source language will always be the first in the list",
@@ -461,7 +461,7 @@
         "createLocale": {
             "httpMethod": "POST",
             "uri": "\/api\/locales.json",
-            "class": "Guzzle\\Service\\Command\\OperationCommand",
+            "class": "\\Loco\\Http\\Command\\StrictCommand",
             "responseClass": "Locale",
             "responseType": "model",
             "responseNotes": "<p>Adds a new locale to the currently authenticated project.<\/p>\n           <p>Note that if the locale already exists in the project, it will just be returned and not duplicated.<\/p>",
@@ -494,7 +494,7 @@
         "getLocale": {
             "httpMethod": "GET",
             "uri": "\/api\/locales\/{locale}.json",
-            "class": "Guzzle\\Service\\Command\\OperationCommand",
+            "class": "\\Loco\\Http\\Command\\StrictCommand",
             "responseClass": "Locale",
             "responseType": "model",
             "responseNotes": "Gets a single locale in currently authenticated project",
@@ -527,7 +527,7 @@
         "patchLocale": {
             "httpMethod": "PATCH",
             "uri": "\/api\/locales\/{locale}.json",
-            "class": "Guzzle\\Service\\Command\\OperationCommand",
+            "class": "\\Loco\\Http\\Command\\StrictCommand",
             "responseClass": "Locale",
             "responseType": "model",
             "responseNotes": "<p>Modifies the properties of a locale in the currently authenticated project.<\/p>\n           <p>The full, modified locale object is returned.<\/p>",
@@ -614,7 +614,7 @@
         "deleteLocale": {
             "httpMethod": "DELETE",
             "uri": "\/api\/locales\/{locale}.json",
-            "class": "Guzzle\\Service\\Command\\OperationCommand",
+            "class": "\\Loco\\Http\\Command\\StrictCommand",
             "responseClass": "Success",
             "responseType": "model",
             "responseNotes": "<p>Delete a locale from currently authenticated project.<\/p>\n           <p><strong>Warning<\/strong>: This will permanently delete any translations made in the specified locale across your project<\/p>\n           <p>Note that you cannot delete your native\/source locale.<\/p>",
@@ -648,10 +648,57 @@
                 }
             ]
         },
+        "getTranslation": {
+            "httpMethod": "GET",
+            "uri": "\/api\/translations\/{id}\/{locale}.json",
+            "class": "\\Loco\\Http\\Command\\StrictCommand",
+            "responseClass": "Translation",
+            "responseType": "model",
+            "responseNotes": "Gets a single translation in currently authenticated project",
+            "summary": "Get a single translation",
+            "parameters": {
+                "key": {
+                    "required": true,
+                    "description": "Project API key",
+                    "type": "string",
+                    "location": "query"
+                },
+                "id": {
+                    "required": true,
+                    "description": "Asset ID",
+                    "type": "string",
+                    "location": "uri"
+                },
+                "locale": {
+                    "required": true,
+                    "description": "Short code of project locale, e.g. 'fr' or 'fr_CH'",
+                    "type": "string",
+                    "location": "uri"
+                }
+            },
+            "errorResponses": [
+                {
+                    "code": 401,
+                    "phrase": "Invalid API key"
+                },
+                {
+                    "code": 404,
+                    "phrase": "Asset not in project"
+                },
+                {
+                    "code": 404,
+                    "phrase": "Locale not in project"
+                },
+                {
+                    "code": 404,
+                    "phrase": "Asset not translated in locale"
+                }
+            ]
+        },
         "ping": {
             "httpMethod": "GET",
             "uri": "\/api\/ping.json",
-            "class": "Guzzle\\Service\\Command\\OperationCommand",
+            "class": "\\Loco\\Http\\Command\\StrictCommand",
             "responseClass": "Echo",
             "responseType": "model",
             "responseNotes": "Checks the API is up and returns the API version number",
@@ -663,7 +710,7 @@
         "ping404": {
             "httpMethod": "GET",
             "uri": "\/api\/ping\/not-found.json",
-            "class": "Guzzle\\Service\\Command\\OperationCommand",
+            "class": "\\Loco\\Http\\Command\\StrictCommand",
             "responseClass": "Error",
             "responseType": "model",
             "summary": "Get a test 404 response",
@@ -674,7 +721,7 @@
         "convert": {
             "httpMethod": "POST",
             "uri": "\/api\/convert\/{from}\/{name}.{ext}",
-            "class": "Guzzle\\Service\\Command\\OperationCommand",
+            "class": "\\Loco\\Http\\Command\\StrictCommand",
             "responseClass": "\\Loco\\Http\\Response\\RawResponse",
             "responseType": "class",
             "responseNotes": "Use this API to convert between language pack file formats without a Loco account.<br \/> \n             Precise options depend on the file formats you're converting between.\n             <a href='https:\/\/localise.biz\/free\/converter\/api'>See some examples<\/a>.",
@@ -1074,6 +1121,95 @@
                             "description": "Gettext-style plural form equation taking multiplier <code>n<\/code> to yield plural form offset <code>0 - length-1<\/code>.",
                             "type": "string",
                             "location": "json"
+                        }
+                    }
+                }
+            }
+        },
+        "Translation": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "type": {
+                    "description": "More specific asset type, e.g. text\/plain, image\/jpeg",
+                    "type": "string",
+                    "location": "json"
+                },
+                "translation": {
+                    "description": "Translated text in specified locale",
+                    "type": "string",
+                    "location": "json"
+                },
+                "revision": {
+                    "description": "Revision number, the number of edits made",
+                    "type": "integer",
+                    "location": "json"
+                },
+                "comments": {
+                    "description": "Number of comments available",
+                    "type": "integer",
+                    "location": "json"
+                },
+                "modified": {
+                    "description": "Time last modified in UTC",
+                    "type": "string",
+                    "format": "date-time",
+                    "location": "json"
+                },
+                "locale": {
+                    "type": "object",
+                    "location": "json",
+                    "additionalProperties": false,
+                    "properties": {
+                        "code": {
+                            "description": "Locale short code",
+                            "type": "string",
+                            "location": "json"
+                        },
+                        "native": {
+                            "description": "Whether native\/source locale of project",
+                            "type": "boolean",
+                            "location": "json"
+                        },
+                        "name": {
+                            "description": "Full locale name",
+                            "type": "string",
+                            "location": "json"
+                        },
+                        "plurals": {
+                            "type": "object",
+                            "location": "json",
+                            "additionalProperties": false,
+                            "properties": {
+                                "forms": {
+                                    "description": "Read only plural form names, see <a href=\"http:\/\/unicode.org\/reports\/tr35\/tr35-numbers.html#Language_Plural_Rules\">Unicode tr35<\/a>.",
+                                    "type": "array",
+                                    "location": "json",
+                                    "enum": [
+                                        "zero",
+                                        "one",
+                                        "two",
+                                        "few",
+                                        "many",
+                                        "other"
+                                    ],
+                                    "items": {
+                                        "type": "string"
+                                    }
+                                },
+                                "length": {
+                                    "description": "Number of plural forms",
+                                    "type": "integer",
+                                    "location": "json",
+                                    "minimum": 1,
+                                    "maximum": 6
+                                },
+                                "equation": {
+                                    "description": "Gettext-style plural form equation taking multiplier <code>n<\/code> to yield plural form offset <code>0 - length-1<\/code>.",
+                                    "type": "string",
+                                    "location": "json"
+                                }
+                            }
                         }
                     }
                 }
