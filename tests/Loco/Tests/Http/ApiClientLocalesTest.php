@@ -80,15 +80,46 @@ class ApiClientLocalesTest  extends ApiClientTest {
     
     
     /**
-     * patchLocale with failure
+     * patchLocale with failure trying to change a read only property
      * @depends testLocaleCreate
      * @expectedException \Guzzle\Http\Exception\ClientErrorResponseException
      */
-    public function testLocalePatchFailure( $code ){
+    public function testLocalePatchRejectsReadonly( $code ){
         $client = $this->getClient();
         $update = array (
-            'plurals' => array( 'length' => 1, 'equation' => '0' ), // <- read-only property
             'locale' => $code,
+            'plurals' => array( 'length' => 1 ),
+        );
+        $client->patchLocale( $update );
+    }
+    
+    
+    
+    /**
+     * patchLocale with failure trying to set a non-existant property
+     * @depends testLocaleCreate
+     * @expectedException \Guzzle\Http\Exception\ClientErrorResponseException
+     */
+    public function testLocalePatchRejectsUnknown( $code ){
+        $client = $this->getClient();
+        $update = array (
+            'locale' => $code,
+            'rubbish' => 1,
+        );
+        $client->patchLocale( $update );
+    }
+    
+    
+    
+    /**
+     * patchLocale with harmless attempt to set read-only property as same value
+     * @depends testLocaleCreate
+     */
+    public function testLocalePatchPassesThroughReadonly( $code ){
+        $client = $this->getClient();
+        $update = array (
+            'locale' => $code,
+            'native' => false, // <- would fail if set to true
         );
         $client->patchLocale( $update );
     }
