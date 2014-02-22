@@ -98,8 +98,18 @@ class ApiClientAssetsTest  extends ApiClientTest {
      */
     public function testAssetPatchRejectsReadonly( $slug ){
         $client = $this->getClient();
-        $model = $client->patchAsset( array( 'id' => $slug, 'translated' => 0 ) );
-        $client->patchAsset( $update );
+        $client->patchAsset( array( 'id' => $slug, 'translated' => 0 ) );
+    }
+    
+    
+    
+    /**
+     * patchAsset with harmless attempt to set read-only property as same value
+     * @depends testAssetCreate
+     */
+    public function testAssetPatchPassesThroughReadonly( $slug ){
+        $client = $this->getClient();
+        $client->patchAsset( array( 'id' => $slug, 'translated' => 1 ) );
     }
          
     

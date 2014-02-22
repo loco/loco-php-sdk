@@ -1,6 +1,6 @@
 {
     "name": "Loco",
-    "apiVersion": "1.0.3",
+    "apiVersion": "1.0.4",
     "baseUrl": "https:\/\/ssl.loco.192.168.0.7.xip.io\/",
     "description": "Loco REST API",
     "operations": {
@@ -355,6 +355,96 @@
                 }
             ]
         },
+        "patchAsset": {
+            "httpMethod": "PATCH",
+            "uri": "\/api\/assets\/{id}.json",
+            "class": "\\Loco\\Http\\Command\\StrictCommand",
+            "responseClass": "Asset",
+            "responseType": "model",
+            "responseNotes": "<p>Modifies the properties of an asset in the currently authenticated project.<\/p>\n           <p>The full, modified asset object is returned.<\/p>",
+            "summary": "Modify a single asset",
+            "parameters": {
+                "id_json": {
+                    "description": "Machine friendly name",
+                    "type": "string",
+                    "location": "json",
+                    "sentAs": "id"
+                },
+                "type": {
+                    "description": "Broad content type, defaults to plain text",
+                    "type": "string",
+                    "location": "json",
+                    "enum": [
+                        "text",
+                        "html",
+                        "image",
+                        "audio",
+                        "video",
+                        "bin"
+                    ]
+                },
+                "name": {
+                    "description": "Human friendly name",
+                    "type": "string",
+                    "location": "json"
+                },
+                "context": {
+                    "description": "Optional context descriptor",
+                    "type": "string",
+                    "location": "json"
+                },
+                "modified": {
+                    "description": "Time last modified in UTC",
+                    "type": "string",
+                    "format": "date-time",
+                    "location": "json"
+                },
+                "translated": {
+                    "description": "Number of completed translations",
+                    "type": "integer",
+                    "location": "json"
+                },
+                "untranslated": {
+                    "description": "Number of incomplete translations",
+                    "type": "integer",
+                    "location": "json"
+                },
+                "tags": {
+                    "description": "Machine friendly asset tags",
+                    "type": "array",
+                    "location": "json",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "key": {
+                    "required": true,
+                    "description": "Project API key",
+                    "type": "string",
+                    "location": "query"
+                },
+                "id": {
+                    "required": true,
+                    "description": "Asset ID",
+                    "type": "string",
+                    "location": "uri"
+                }
+            },
+            "errorResponses": [
+                {
+                    "code": 401,
+                    "phrase": "Invalid API key"
+                },
+                {
+                    "code": 403,
+                    "phrase": "Insufficient privileges"
+                },
+                {
+                    "code": 404,
+                    "phrase": "Asset not in project"
+                }
+            ]
+        },
         "deleteAsset": {
             "httpMethod": "DELETE",
             "uri": "\/api\/assets\/{id}.json",
@@ -539,12 +629,12 @@
                     "location": "json"
                 },
                 "native": {
-                    "description": "Whether native\/source locale of project",
+                    "description": "Whether the source locale of project (read-only)",
                     "type": "boolean",
                     "location": "json"
                 },
                 "name": {
-                    "description": "Full locale name",
+                    "description": "Friendly display name",
                     "type": "string",
                     "location": "json"
                 },
@@ -1080,12 +1170,12 @@
                     "location": "json"
                 },
                 "native": {
-                    "description": "Whether native\/source locale of project",
+                    "description": "Whether the source locale of project (read-only)",
                     "type": "boolean",
                     "location": "json"
                 },
                 "name": {
-                    "description": "Full locale name",
+                    "description": "Friendly display name",
                     "type": "string",
                     "location": "json"
                 },
@@ -1167,12 +1257,12 @@
                             "location": "json"
                         },
                         "native": {
-                            "description": "Whether native\/source locale of project",
+                            "description": "Whether the source locale of project (read-only)",
                             "type": "boolean",
                             "location": "json"
                         },
                         "name": {
-                            "description": "Full locale name",
+                            "description": "Friendly display name",
                             "type": "string",
                             "location": "json"
                         },

@@ -1,10 +1,10 @@
 <?php
 /**
- * Auto-generated with Swizzle at 2014-02-22 11:47:20 +0000
+ * Auto-generated with Swizzle at 2014-02-22 13:39:34 +0000
  */
 return array (
   'name' => 'Loco',
-  'apiVersion' => '1.0.3',
+  'apiVersion' => '1.0.4',
   'baseUrl' => 'https://ssl.loco.192.168.0.7.xip.io/',
   'description' => 'Loco REST API',
   'operations' => 
@@ -430,6 +430,115 @@ return array (
         ),
       ),
     ),
+    'patchAsset' => 
+    array (
+      'httpMethod' => 'PATCH',
+      'uri' => '/api/assets/{id}.json',
+      'class' => '\\Loco\\Http\\Command\\StrictCommand',
+      'responseClass' => 'Asset',
+      'responseType' => 'model',
+      'responseNotes' => '<p>Modifies the properties of an asset in the currently authenticated project.</p>
+           <p>The full, modified asset object is returned.</p>',
+      'summary' => 'Modify a single asset',
+      'parameters' => 
+      array (
+        'id_json' => 
+        array (
+          'description' => 'Machine friendly name',
+          'type' => 'string',
+          'location' => 'json',
+          'sentAs' => 'id',
+        ),
+        'type' => 
+        array (
+          'description' => 'Broad content type, defaults to plain text',
+          'type' => 'string',
+          'location' => 'json',
+          'enum' => 
+          array (
+            0 => 'text',
+            1 => 'html',
+            2 => 'image',
+            3 => 'audio',
+            4 => 'video',
+            5 => 'bin',
+          ),
+        ),
+        'name' => 
+        array (
+          'description' => 'Human friendly name',
+          'type' => 'string',
+          'location' => 'json',
+        ),
+        'context' => 
+        array (
+          'description' => 'Optional context descriptor',
+          'type' => 'string',
+          'location' => 'json',
+        ),
+        'modified' => 
+        array (
+          'description' => 'Time last modified in UTC',
+          'type' => 'string',
+          'format' => 'date-time',
+          'location' => 'json',
+        ),
+        'translated' => 
+        array (
+          'description' => 'Number of completed translations',
+          'type' => 'integer',
+          'location' => 'json',
+        ),
+        'untranslated' => 
+        array (
+          'description' => 'Number of incomplete translations',
+          'type' => 'integer',
+          'location' => 'json',
+        ),
+        'tags' => 
+        array (
+          'description' => 'Machine friendly asset tags',
+          'type' => 'array',
+          'location' => 'json',
+          'items' => 
+          array (
+            'type' => 'string',
+          ),
+        ),
+        'key' => 
+        array (
+          'required' => true,
+          'description' => 'Project API key',
+          'type' => 'string',
+          'location' => 'query',
+        ),
+        'id' => 
+        array (
+          'required' => true,
+          'description' => 'Asset ID',
+          'type' => 'string',
+          'location' => 'uri',
+        ),
+      ),
+      'errorResponses' => 
+      array (
+        0 => 
+        array (
+          'code' => 401,
+          'phrase' => 'Invalid API key',
+        ),
+        1 => 
+        array (
+          'code' => 403,
+          'phrase' => 'Insufficient privileges',
+        ),
+        2 => 
+        array (
+          'code' => 404,
+          'phrase' => 'Asset not in project',
+        ),
+      ),
+    ),
     'deleteAsset' => 
     array (
       'httpMethod' => 'DELETE',
@@ -657,13 +766,13 @@ return array (
         ),
         'native' => 
         array (
-          'description' => 'Whether native/source locale of project',
+          'description' => 'Whether the source locale of project (read-only)',
           'type' => 'boolean',
           'location' => 'json',
         ),
         'name' => 
         array (
-          'description' => 'Full locale name',
+          'description' => 'Friendly display name',
           'type' => 'string',
           'location' => 'json',
         ),
@@ -1310,13 +1419,13 @@ return array (
         ),
         'native' => 
         array (
-          'description' => 'Whether native/source locale of project',
+          'description' => 'Whether the source locale of project (read-only)',
           'type' => 'boolean',
           'location' => 'json',
         ),
         'name' => 
         array (
-          'description' => 'Full locale name',
+          'description' => 'Friendly display name',
           'type' => 'string',
           'location' => 'json',
         ),
@@ -1416,13 +1525,13 @@ return array (
             ),
             'native' => 
             array (
-              'description' => 'Whether native/source locale of project',
+              'description' => 'Whether the source locale of project (read-only)',
               'type' => 'boolean',
               'location' => 'json',
             ),
             'name' => 
             array (
-              'description' => 'Full locale name',
+              'description' => 'Friendly display name',
               'type' => 'string',
               'location' => 'json',
             ),
