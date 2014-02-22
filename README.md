@@ -34,7 +34,7 @@ $result = $client->authVerify();
 printf("Authenticated as '%s'\n", $result['user']['name'] );
 ```
 
-The Loco API client is built on [Guzzle](http://docs.guzzlephp.org/), so you can use its factory methods to pass in your API key from your site configuration. You could create your client from a JSON config [like our example](https://github.com/loco-app/loco-php-sdk/blob/master/config.json.dist) as follows:
+The Loco API client is built on [Guzzle](http://docs.guzzlephp.org/), so you can use its factory methods to pass in your API key from your site configuration. You could create your client from a JSON config [like our example](https://github.com/loco/loco-php-sdk/blob/master/config.json.dist) as follows:
 
 ```php
 $client = Guzzle\Service\Builder\ServiceBuilder::factory('/path/to/config.json' )->get('loco');
@@ -47,6 +47,6 @@ Check the [Loco API documentation](https://localise.biz/api) to see what model i
 
 
 
-See the [example](https://github.com/loco-app/loco-php-sdk/tree/master/example) directory for more working code examples.
+See the [example](https://github.com/loco/loco-php-sdk/tree/master/example) directory for more working code examples.
 
 

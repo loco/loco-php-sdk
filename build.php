@@ -2,7 +2,7 @@
 <?php
 /**
  * Build Guzzle service description from remote Swagger definition.
- * @see https://github.com/loco-app/swizzle
+ * @see https://github.com/loco/swizzle
  */
 
 require __DIR__.'/vendor/autoload.php';

@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "5cefd9520f1d7a9f4f9966156e93d10f",
+    "hash": "108379e9e3d6a2a553b19db728df0a1c",
     "packages": [
         {
             "name": "guzzle/guzzle",
@@ -160,13 +160,13 @@
             "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "https://github.com/loco-app/swizzle.git",
-                "reference": "7a3df428d0c6f96311e78e2c291af597125ae03d"
+                "url": "https://github.com/loco/swizzle.git",
+                "reference": "5babc27fb34df3b17ea0127c0ac84ddcd1db3605"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/loco-app/swizzle/zipball/7a3df428d0c6f96311e78e2c291af597125ae03d",
-                "reference": "7a3df428d0c6f96311e78e2c291af597125ae03d",
+                "url": "https://api.github.com/repos/loco/swizzle/zipball/5babc27fb34df3b17ea0127c0ac84ddcd1db3605",
+                "reference": "5babc27fb34df3b17ea0127c0ac84ddcd1db3605",
                 "shasum": ""
             },
             "require": {
@@ -192,19 +192,19 @@
             "authors": [
                 {
                     "name": "Tim Whitlock",
-                    "email": "support-swizzle@localise.biz",
+                    "email": "support-sdk@localise.biz",
                     "homepage": "https://localise.biz/",
                     "role": "Developer"
                 }
             ],
             "description": "Build Guzzle service descriptions from Swagger compliant APIs",
-            "homepage": "https://github.com/loco-app/swizzle",
+            "homepage": "https://github.com/loco/swizzle",
             "keywords": [
                 "Guzzle",
                 "api",
                 "swagger"
             ],
-            "time": "2014-02-16 16:45:47"
+            "time": "2014-02-22 10:57:22"
         },
         {
             "name": "monolog/monolog",
