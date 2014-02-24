@@ -1,11 +1,11 @@
 <?php
 /**
- * Auto-generated with Swizzle at 2014-02-22 13:39:34 +0000
+ * Auto-generated with Swizzle at 2014-02-24 14:11:38 +0000
  */
 return array (
   'name' => 'Loco',
   'apiVersion' => '1.0.4',
-  'baseUrl' => 'https://ssl.loco.192.168.0.7.xip.io/',
+  'baseUrl' => 'https://localise.biz/',
   'description' => 'Loco REST API',
   'operations' => 
   array (
@@ -13,7 +13,7 @@ return array (
     array (
       'httpMethod' => 'GET',
       'uri' => '/api/auth/verify.json',
-      'class' => '\\Loco\\Http\\Command\\StrictCommand',
+      'class' => 'Guzzle\\Service\\Command\\OperationCommand',
       'responseClass' => 'Creds',
       'responseType' => 'model',
       'responseNotes' => 'Loco API keys authenticate your user account for accessing a specific project.<br />
@@ -42,7 +42,7 @@ return array (
     array (
       'httpMethod' => 'GET',
       'uri' => '/api/export/all.{ext}',
-      'class' => '\\Loco\\Http\\Command\\StrictCommand',
+      'class' => 'Guzzle\\Service\\Command\\OperationCommand',
       'responseClass' => '\\Loco\\Http\\Response\\RawResponse',
       'responseType' => 'class',
       'responseNotes' => 'Export all translations from your project to a multi-locale language pack.<br />
@@ -108,7 +108,7 @@ return array (
     array (
       'httpMethod' => 'GET',
       'uri' => '/api/export/archive/{ext}.zip',
-      'class' => '\\Loco\\Http\\Command\\StrictCommand',
+      'class' => 'Guzzle\\Service\\Command\\OperationCommand',
       'responseClass' => '\\Loco\\Http\\Response\\ZipResponse',
       'responseType' => 'class',
       'responseNotes' => 'Export all translations from your project to a zip archive of language packs.<br />
@@ -200,7 +200,7 @@ return array (
     array (
       'httpMethod' => 'GET',
       'uri' => '/api/export/locale/{locale}.{ext}',
-      'class' => '\\Loco\\Http\\Command\\StrictCommand',
+      'class' => 'Guzzle\\Service\\Command\\OperationCommand',
       'responseClass' => '\\Loco\\Http\\Response\\RawResponse',
       'responseType' => 'class',
       'responseNotes' => 'Export translations from your project to a locale-specific language pack.
@@ -298,7 +298,7 @@ return array (
     array (
       'httpMethod' => 'GET',
       'uri' => '/api/assets.json',
-      'class' => '\\Loco\\Http\\Command\\StrictCommand',
+      'class' => 'Guzzle\\Service\\Command\\OperationCommand',
       'responseClass' => 'array',
       'responseType' => 'primitive',
       'summary' => 'List all translatable assets in your project',
@@ -331,10 +331,13 @@ return array (
     array (
       'httpMethod' => 'POST',
       'uri' => '/api/assets.json',
-      'class' => '\\Loco\\Http\\Command\\StrictCommand',
+      'class' => 'Guzzle\\Service\\Command\\OperationCommand',
       'responseClass' => 'Asset',
       'responseType' => 'model',
-      'responseNotes' => '<p>Adds a new asset to the currently authenticated project.</p>',
+      'responseNotes' => '<p>Adds a new asset to the currently authenticated project.</p>
+           <p>If the asset is created successfully the response will be 201 (created).</p>
+           <p>If you specify the asset ID and it clashes with an existing asset the response will be 409 (conflict).</p>
+           <p>If another asset exists with the same name and you <strong>haven\'t specified the ID</strong>, a new asset will be created with a unique id.</p>',
       'summary' => 'Add a new translatable asset',
       'parameters' => 
       array (
@@ -350,6 +353,7 @@ return array (
           'description' => 'Optional machine friendly ID if you want something specific',
           'type' => 'string',
           'location' => 'postField',
+          'default' => '',
         ),
         'type' => 
         array (
@@ -380,10 +384,15 @@ return array (
       array (
         0 => 
         array (
+          'code' => 201,
+          'phrase' => 'Asset created',
+        ),
+        1 => 
+        array (
           'code' => 401,
           'phrase' => 'Invalid API key',
         ),
-        1 => 
+        2 => 
         array (
           'code' => 403,
           'phrase' => 'Insufficient privileges',
@@ -394,7 +403,7 @@ return array (
     array (
       'httpMethod' => 'GET',
       'uri' => '/api/assets/{id}.json',
-      'class' => '\\Loco\\Http\\Command\\StrictCommand',
+      'class' => 'Guzzle\\Service\\Command\\OperationCommand',
       'responseClass' => 'Asset',
       'responseType' => 'model',
       'responseNotes' => 'Gets a single asset in currently authenticated project',
@@ -434,7 +443,7 @@ return array (
     array (
       'httpMethod' => 'PATCH',
       'uri' => '/api/assets/{id}.json',
-      'class' => '\\Loco\\Http\\Command\\StrictCommand',
+      'class' => 'Guzzle\\Service\\Command\\OperationCommand',
       'responseClass' => 'Asset',
       'responseType' => 'model',
       'responseNotes' => '<p>Modifies the properties of an asset in the currently authenticated project.</p>
@@ -543,7 +552,7 @@ return array (
     array (
       'httpMethod' => 'DELETE',
       'uri' => '/api/assets/{id}.json',
-      'class' => '\\Loco\\Http\\Command\\StrictCommand',
+      'class' => 'Guzzle\\Service\\Command\\OperationCommand',
       'responseClass' => 'Success',
       'responseType' => 'model',
       'responseNotes' => '<p>Deletes an asset from the currently authenticated project.</p>
@@ -589,7 +598,7 @@ return array (
     array (
       'httpMethod' => 'POST',
       'uri' => '/api/assets/{id}/tags.json',
-      'class' => '\\Loco\\Http\\Command\\StrictCommand',
+      'class' => 'Guzzle\\Service\\Command\\OperationCommand',
       'responseClass' => 'Asset',
       'responseType' => 'model',
       'responseNotes' => '<p>Tags an asset with a new or existing term. If the tag doesn\'t exist it will be created.</p>',
@@ -641,7 +650,7 @@ return array (
     array (
       'httpMethod' => 'GET',
       'uri' => '/api/locales.json',
-      'class' => '\\Loco\\Http\\Command\\StrictCommand',
+      'class' => 'Guzzle\\Service\\Command\\OperationCommand',
       'responseClass' => 'array',
       'responseType' => 'primitive',
       'responseNotes' => 'Lists all locales in currently authenticated project. Your native/source language will always be the first in the list',
@@ -669,11 +678,12 @@ return array (
     array (
       'httpMethod' => 'POST',
       'uri' => '/api/locales.json',
-      'class' => '\\Loco\\Http\\Command\\StrictCommand',
+      'class' => 'Guzzle\\Service\\Command\\OperationCommand',
       'responseClass' => 'Locale',
       'responseType' => 'model',
       'responseNotes' => '<p>Adds a new locale to the currently authenticated project.</p>
-           <p>Note that if the locale already exists in the project, it will just be returned and not duplicated.</p>',
+           <p>If the locale is created successfully the response will be 201 (created).</p>
+           <p>If the locale already exists the response will be 409 (conflict).</p>',
       'summary' => 'Add a new project locale',
       'parameters' => 
       array (
@@ -696,10 +706,20 @@ return array (
       array (
         0 => 
         array (
+          'code' => 409,
+          'phrase' => 'Locale already exists',
+        ),
+        1 => 
+        array (
+          'code' => 201,
+          'phrase' => 'Locale created',
+        ),
+        2 => 
+        array (
           'code' => 401,
           'phrase' => 'Invalid API key',
         ),
-        1 => 
+        3 => 
         array (
           'code' => 403,
           'phrase' => 'Insufficient privileges',
@@ -710,7 +730,7 @@ return array (
     array (
       'httpMethod' => 'GET',
       'uri' => '/api/locales/{locale}.json',
-      'class' => '\\Loco\\Http\\Command\\StrictCommand',
+      'class' => 'Guzzle\\Service\\Command\\OperationCommand',
       'responseClass' => 'Locale',
       'responseType' => 'model',
       'responseNotes' => 'Gets a single locale in currently authenticated project',
@@ -750,7 +770,7 @@ return array (
     array (
       'httpMethod' => 'PATCH',
       'uri' => '/api/locales/{locale}.json',
-      'class' => '\\Loco\\Http\\Command\\StrictCommand',
+      'class' => 'Guzzle\\Service\\Command\\OperationCommand',
       'responseClass' => 'Locale',
       'responseType' => 'model',
       'responseNotes' => '<p>Modifies the properties of a locale in the currently authenticated project.</p>
@@ -764,16 +784,16 @@ return array (
           'type' => 'string',
           'location' => 'json',
         ),
-        'native' => 
-        array (
-          'description' => 'Whether the source locale of project (read-only)',
-          'type' => 'boolean',
-          'location' => 'json',
-        ),
         'name' => 
         array (
           'description' => 'Friendly display name',
           'type' => 'string',
+          'location' => 'json',
+        ),
+        'native' => 
+        array (
+          'description' => 'Whether the source locale of project (read-only)',
+          'type' => 'boolean',
           'location' => 'json',
         ),
         'plurals' => 
@@ -783,9 +803,26 @@ return array (
           'additionalProperties' => false,
           'properties' => 
           array (
+            'length' => 
+            array (
+              'required' => true,
+              'description' => 'Number of plural forms for current language',
+              'type' => 'integer',
+              'location' => 'json',
+              'minimum' => 1,
+              'maximum' => 6,
+            ),
+            'equation' => 
+            array (
+              'required' => true,
+              'description' => 'Equation taking multiplier <code>(n)</code> to yield a plural form offset. <code>( 0 <= offset < length )</code>.',
+              'type' => 'string',
+              'location' => 'json',
+            ),
             'forms' => 
             array (
-              'description' => 'Read only plural form names, see <a href="http://unicode.org/reports/tr35/tr35-numbers.html#Language_Plural_Rules">Unicode tr35</a>.',
+              'required' => true,
+              'description' => 'Plural form names according to <a href="http://unicode.org/reports/tr35/tr35-numbers.html#Language_Plural_Rules">Unicode tr35</a>.',
               'type' => 'array',
               'location' => 'json',
               'enum' => 
@@ -801,20 +838,6 @@ return array (
               array (
                 'type' => 'string',
               ),
-            ),
-            'length' => 
-            array (
-              'description' => 'Number of plural forms',
-              'type' => 'integer',
-              'location' => 'json',
-              'minimum' => 1,
-              'maximum' => 6,
-            ),
-            'equation' => 
-            array (
-              'description' => 'Gettext-style plural form equation taking multiplier <code>n</code> to yield plural form offset <code>0 - length-1</code>.',
-              'type' => 'string',
-              'location' => 'json',
             ),
           ),
         ),
@@ -856,7 +879,7 @@ return array (
     array (
       'httpMethod' => 'DELETE',
       'uri' => '/api/locales/{locale}.json',
-      'class' => '\\Loco\\Http\\Command\\StrictCommand',
+      'class' => 'Guzzle\\Service\\Command\\OperationCommand',
       'responseClass' => 'Success',
       'responseType' => 'model',
       'responseNotes' => '<p>Delete a locale from currently authenticated project.</p>
@@ -899,14 +922,57 @@ return array (
         ),
       ),
     ),
+    'getTranslations' => 
+    array (
+      'httpMethod' => 'GET',
+      'uri' => '/api/translations/{id}.json',
+      'class' => 'Guzzle\\Service\\Command\\OperationCommand',
+      'responseClass' => 'array',
+      'responseType' => 'primitive',
+      'responseNotes' => '<p>Gets all translations of an asset in the currently authenticated project\'s locales.</p>
+           <p>Locales not yet translated are included, but their <code>translated</code> field will be set to <code>false</code>.</p>',
+      'summary' => 'Get translations of an asset',
+      'parameters' => 
+      array (
+        'key' => 
+        array (
+          'required' => true,
+          'description' => 'Project API key',
+          'type' => 'string',
+          'location' => 'query',
+        ),
+        'id' => 
+        array (
+          'required' => true,
+          'description' => 'Asset ID',
+          'type' => 'string',
+          'location' => 'uri',
+        ),
+      ),
+      'errorResponses' => 
+      array (
+        0 => 
+        array (
+          'code' => 401,
+          'phrase' => 'Invalid API key',
+        ),
+        1 => 
+        array (
+          'code' => 404,
+          'phrase' => 'Asset not in project',
+        ),
+      ),
+    ),
     'getTranslation' => 
     array (
       'httpMethod' => 'GET',
       'uri' => '/api/translations/{id}/{locale}.json',
-      'class' => '\\Loco\\Http\\Command\\StrictCommand',
+      'class' => 'Guzzle\\Service\\Command\\OperationCommand',
       'responseClass' => 'Translation',
       'responseType' => 'model',
-      'responseNotes' => 'Gets a single translation in currently authenticated project',
+      'responseNotes' => '<p>Gets a single translation in currently authenticated project.</p>
+           <p>Translations implicitly exist as long as the asset and locale are in your project.</p>
+           <p>Translations marked as complete have the <code>translated</code> field set to <code>true</code>.</p>',
       'summary' => 'Get a single translation',
       'parameters' => 
       array (
@@ -949,10 +1015,115 @@ return array (
           'code' => 404,
           'phrase' => 'Locale not in project',
         ),
-        3 => 
+      ),
+    ),
+    'translate' => 
+    array (
+      'httpMethod' => 'POST',
+      'uri' => '/api/translations/{id}/{locale}.json',
+      'class' => 'Guzzle\\Service\\Command\\OperationCommand',
+      'responseClass' => 'Translation',
+      'responseType' => 'model',
+      'responseNotes' => '<p>Translates a single asset in a single locale in the currently authenticated project.</p>
+           <p>If the asset is already translated, a new revision will be added and the <code>revision</code> field incremented.</p>
+           <p>If the asset is untranslated the locale must have already been added to the project.</p>
+           <p>Binary file uploads are not yet supported, but will be soon.</p>',
+      'summary' => 'Add a new translation in a given locale',
+      'parameters' => 
+      array (
+        'translation' => 
+        array (
+          'description' => 'Raw value of new translation. Leaving empty puts a blank translation.',
+          'type' => 'string',
+          'location' => 'body',
+        ),
+        'key' => 
+        array (
+          'required' => true,
+          'description' => 'Project API key',
+          'type' => 'string',
+          'location' => 'query',
+        ),
+        'id' => 
+        array (
+          'required' => true,
+          'description' => 'Asset ID',
+          'type' => 'string',
+          'location' => 'uri',
+        ),
+        'locale' => 
+        array (
+          'required' => true,
+          'description' => 'Short code of project locale, e.g. \'fr\' or \'fr_CH\'',
+          'type' => 'string',
+          'location' => 'uri',
+        ),
+      ),
+      'errorResponses' => 
+      array (
+        0 => 
+        array (
+          'code' => 401,
+          'phrase' => 'Invalid API key',
+        ),
+        1 => 
         array (
           'code' => 404,
-          'phrase' => 'Asset not translated in locale',
+          'phrase' => 'Asset not in project',
+        ),
+      ),
+    ),
+    'untranslate' => 
+    array (
+      'httpMethod' => 'DELETE',
+      'uri' => '/api/translations/{id}/{locale}.json',
+      'class' => 'Guzzle\\Service\\Command\\OperationCommand',
+      'responseClass' => 'Success',
+      'responseType' => 'model',
+      'responseNotes' => '<p>Deletes a single translation of an asset in currently authenticated project.</p>
+           <p><strong>Warning</strong>: Untranslating is not the same as setting an empty translation. 
+              This operation clears the asset\'s translation history and user comments for the given locale.</p>',
+      'summary' => 'Untranslate an asset in a single locale',
+      'parameters' => 
+      array (
+        'key' => 
+        array (
+          'required' => true,
+          'description' => 'Project API key',
+          'type' => 'string',
+          'location' => 'query',
+        ),
+        'id' => 
+        array (
+          'required' => true,
+          'description' => 'Asset ID',
+          'type' => 'string',
+          'location' => 'uri',
+        ),
+        'locale' => 
+        array (
+          'required' => true,
+          'description' => 'Short code of project locale, e.g. \'fr\' or \'fr_CH\'',
+          'type' => 'string',
+          'location' => 'uri',
+        ),
+      ),
+      'errorResponses' => 
+      array (
+        0 => 
+        array (
+          'code' => 401,
+          'phrase' => 'Invalid API key',
+        ),
+        1 => 
+        array (
+          'code' => 404,
+          'phrase' => 'Asset not in project',
+        ),
+        2 => 
+        array (
+          'code' => 404,
+          'phrase' => 'Asset not translated in this locale',
         ),
       ),
     ),
@@ -960,7 +1131,7 @@ return array (
     array (
       'httpMethod' => 'GET',
       'uri' => '/api/ping.json',
-      'class' => '\\Loco\\Http\\Command\\StrictCommand',
+      'class' => 'Guzzle\\Service\\Command\\OperationCommand',
       'responseClass' => 'Echo',
       'responseType' => 'model',
       'responseNotes' => 'Checks the API is up and returns the API version number',
@@ -973,7 +1144,7 @@ return array (
     array (
       'httpMethod' => 'GET',
       'uri' => '/api/ping/not-found.json',
-      'class' => '\\Loco\\Http\\Command\\StrictCommand',
+      'class' => 'Guzzle\\Service\\Command\\OperationCommand',
       'responseClass' => 'Error',
       'responseType' => 'model',
       'summary' => 'Get a test 404 response',
@@ -985,7 +1156,7 @@ return array (
     array (
       'httpMethod' => 'POST',
       'uri' => '/api/convert/{from}/{name}.{ext}',
-      'class' => '\\Loco\\Http\\Command\\StrictCommand',
+      'class' => 'Guzzle\\Service\\Command\\OperationCommand',
       'responseClass' => '\\Loco\\Http\\Response\\RawResponse',
       'responseType' => 'class',
       'responseNotes' => 'Use this API to convert between language pack file formats without a Loco account.<br /> 
@@ -1370,9 +1541,26 @@ return array (
       'additionalProperties' => false,
       'properties' => 
       array (
+        'length' => 
+        array (
+          'required' => true,
+          'description' => 'Number of plural forms for current language',
+          'type' => 'integer',
+          'location' => 'json',
+          'minimum' => 1,
+          'maximum' => 6,
+        ),
+        'equation' => 
+        array (
+          'required' => true,
+          'description' => 'Equation taking multiplier <code>(n)</code> to yield a plural form offset. <code>( 0 <= offset < length )</code>.',
+          'type' => 'string',
+          'location' => 'json',
+        ),
         'forms' => 
         array (
-          'description' => 'Read only plural form names, see <a href="http://unicode.org/reports/tr35/tr35-numbers.html#Language_Plural_Rules">Unicode tr35</a>.',
+          'required' => true,
+          'description' => 'Plural form names according to <a href="http://unicode.org/reports/tr35/tr35-numbers.html#Language_Plural_Rules">Unicode tr35</a>.',
           'type' => 'array',
           'location' => 'json',
           'enum' => 
@@ -1389,20 +1577,6 @@ return array (
             'type' => 'string',
           ),
         ),
-        'length' => 
-        array (
-          'description' => 'Number of plural forms',
-          'type' => 'integer',
-          'location' => 'json',
-          'minimum' => 1,
-          'maximum' => 6,
-        ),
-        'equation' => 
-        array (
-          'description' => 'Gettext-style plural form equation taking multiplier <code>n</code> to yield plural form offset <code>0 - length-1</code>.',
-          'type' => 'string',
-          'location' => 'json',
-        ),
       ),
     ),
     'Locale' => 
@@ -1417,16 +1591,16 @@ return array (
           'type' => 'string',
           'location' => 'json',
         ),
-        'native' => 
-        array (
-          'description' => 'Whether the source locale of project (read-only)',
-          'type' => 'boolean',
-          'location' => 'json',
-        ),
         'name' => 
         array (
           'description' => 'Friendly display name',
           'type' => 'string',
+          'location' => 'json',
+        ),
+        'native' => 
+        array (
+          'description' => 'Whether the source locale of project (read-only)',
+          'type' => 'boolean',
           'location' => 'json',
         ),
         'plurals' => 
@@ -1436,9 +1610,26 @@ return array (
           'additionalProperties' => false,
           'properties' => 
           array (
+            'length' => 
+            array (
+              'required' => true,
+              'description' => 'Number of plural forms for current language',
+              'type' => 'integer',
+              'location' => 'json',
+              'minimum' => 1,
+              'maximum' => 6,
+            ),
+            'equation' => 
+            array (
+              'required' => true,
+              'description' => 'Equation taking multiplier <code>(n)</code> to yield a plural form offset. <code>( 0 <= offset < length )</code>.',
+              'type' => 'string',
+              'location' => 'json',
+            ),
             'forms' => 
             array (
-              'description' => 'Read only plural form names, see <a href="http://unicode.org/reports/tr35/tr35-numbers.html#Language_Plural_Rules">Unicode tr35</a>.',
+              'required' => true,
+              'description' => 'Plural form names according to <a href="http://unicode.org/reports/tr35/tr35-numbers.html#Language_Plural_Rules">Unicode tr35</a>.',
               'type' => 'array',
               'location' => 'json',
               'enum' => 
@@ -1455,20 +1646,6 @@ return array (
                 'type' => 'string',
               ),
             ),
-            'length' => 
-            array (
-              'description' => 'Number of plural forms',
-              'type' => 'integer',
-              'location' => 'json',
-              'minimum' => 1,
-              'maximum' => 6,
-            ),
-            'equation' => 
-            array (
-              'description' => 'Gettext-style plural form equation taking multiplier <code>n</code> to yield plural form offset <code>0 - length-1</code>.',
-              'type' => 'string',
-              'location' => 'json',
-            ),
           ),
         ),
       ),
@@ -1479,39 +1656,16 @@ return array (
       'additionalProperties' => false,
       'properties' => 
       array (
-        'type' => 
+        'id' => 
         array (
-          'description' => 'More specific asset type, e.g. text/plain, image/jpeg',
+          'required' => true,
+          'description' => 'Asset ID',
           'type' => 'string',
-          'location' => 'json',
-        ),
-        'translation' => 
-        array (
-          'description' => 'Translated text in specified locale',
-          'type' => 'string',
-          'location' => 'json',
-        ),
-        'revision' => 
-        array (
-          'description' => 'Revision number, the number of edits made',
-          'type' => 'integer',
-          'location' => 'json',
-        ),
-        'comments' => 
-        array (
-          'description' => 'Number of comments available',
-          'type' => 'integer',
-          'location' => 'json',
-        ),
-        'modified' => 
-        array (
-          'description' => 'Time last modified in UTC',
-          'type' => 'string',
-          'format' => 'date-time',
           'location' => 'json',
         ),
         'locale' => 
         array (
+          'required' => true,
           'type' => 'object',
           'location' => 'json',
           'additionalProperties' => false,
@@ -1523,16 +1677,16 @@ return array (
               'type' => 'string',
               'location' => 'json',
             ),
-            'native' => 
-            array (
-              'description' => 'Whether the source locale of project (read-only)',
-              'type' => 'boolean',
-              'location' => 'json',
-            ),
             'name' => 
             array (
               'description' => 'Friendly display name',
               'type' => 'string',
+              'location' => 'json',
+            ),
+            'native' => 
+            array (
+              'description' => 'Whether the source locale of project (read-only)',
+              'type' => 'boolean',
               'location' => 'json',
             ),
             'plurals' => 
@@ -1542,9 +1696,26 @@ return array (
               'additionalProperties' => false,
               'properties' => 
               array (
+                'length' => 
+                array (
+                  'required' => true,
+                  'description' => 'Number of plural forms for current language',
+                  'type' => 'integer',
+                  'location' => 'json',
+                  'minimum' => 1,
+                  'maximum' => 6,
+                ),
+                'equation' => 
+                array (
+                  'required' => true,
+                  'description' => 'Equation taking multiplier <code>(n)</code> to yield a plural form offset. <code>( 0 <= offset < length )</code>.',
+                  'type' => 'string',
+                  'location' => 'json',
+                ),
                 'forms' => 
                 array (
-                  'description' => 'Read only plural form names, see <a href="http://unicode.org/reports/tr35/tr35-numbers.html#Language_Plural_Rules">Unicode tr35</a>.',
+                  'required' => true,
+                  'description' => 'Plural form names according to <a href="http://unicode.org/reports/tr35/tr35-numbers.html#Language_Plural_Rules">Unicode tr35</a>.',
                   'type' => 'array',
                   'location' => 'json',
                   'enum' => 
@@ -1561,23 +1732,60 @@ return array (
                     'type' => 'string',
                   ),
                 ),
-                'length' => 
-                array (
-                  'description' => 'Number of plural forms',
-                  'type' => 'integer',
-                  'location' => 'json',
-                  'minimum' => 1,
-                  'maximum' => 6,
-                ),
-                'equation' => 
-                array (
-                  'description' => 'Gettext-style plural form equation taking multiplier <code>n</code> to yield plural form offset <code>0 - length-1</code>.',
-                  'type' => 'string',
-                  'location' => 'json',
-                ),
               ),
             ),
           ),
+        ),
+        'type' => 
+        array (
+          'required' => true,
+          'description' => 'Specific media type, e.g. text/plain, image/jpeg',
+          'type' => 'string',
+          'location' => 'json',
+        ),
+        'translated' => 
+        array (
+          'required' => true,
+          'description' => 'Whether translation in this locale is considered complete',
+          'type' => 'boolean',
+          'location' => 'json',
+          'default' => false,
+        ),
+        'flagged' => 
+        array (
+          'required' => true,
+          'description' => 'Whether translation is incomplete due to an issue requiring attention',
+          'type' => 'boolean',
+          'location' => 'json',
+          'default' => false,
+        ),
+        'translation' => 
+        array (
+          'required' => true,
+          'description' => 'Translated text in specified locale',
+          'type' => 'string',
+          'location' => 'json',
+        ),
+        'revision' => 
+        array (
+          'required' => true,
+          'description' => 'Number of edits made, zero if not translated',
+          'type' => 'integer',
+          'location' => 'json',
+        ),
+        'comments' => 
+        array (
+          'required' => true,
+          'description' => 'Number of comments available',
+          'type' => 'integer',
+          'location' => 'json',
+        ),
+        'modified' => 
+        array (
+          'description' => 'Time last modified in UTC, null if not translated',
+          'type' => 'string',
+          'format' => 'date-time',
+          'location' => 'json',
         ),
       ),
     ),

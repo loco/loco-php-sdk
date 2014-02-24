@@ -88,7 +88,7 @@ class ApiClientLocalesTest  extends ApiClientTest {
         $client = $this->getClient();
         $update = array (
             'locale' => $code,
-            'plurals' => array( 'length' => 1 ),
+            'native' => true,
         );
         $client->patchLocale( $update );
     }
