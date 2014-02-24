@@ -71,7 +71,7 @@ class ApiClientAssetsTest  extends ApiClientTest {
         $model = $client->tagAsset( array( 'id' => $slug, 'name' => $name ) );
         $this->assertInstanceOf( '\Guzzle\Service\Resource\Model', $model );
         $this->assertInternalType( 'array', $model['tags'] );
-        $this->assertContains( 'test-tag', $model['tags'] );
+        $this->assertContains( $name, $model['tags'] );
     }
 
     
