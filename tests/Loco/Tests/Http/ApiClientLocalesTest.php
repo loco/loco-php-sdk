@@ -81,10 +81,12 @@ class ApiClientLocalesTest  extends ApiClientTest {
     
     /**
      * patchLocale with failure trying to change a read only property
-     * @depends testLocaleCreate
-     * @expectedException \Guzzle\Http\Exception\ClientErrorResponseException
+     * #depends testLocaleCreate
+     * #expectedException \Guzzle\Http\Exception\ClientErrorResponseException
+     * @ignore
+     * This test is redundant now that models is restricted to LocalePatch subset 
      */
-    public function testLocalePatchRejectsReadonly( $code ){
+    public function _testLocalePatchRejectsReadonly( $code ){
         $client = $this->getClient();
         $update = array (
             'locale' => $code,
@@ -113,9 +115,11 @@ class ApiClientLocalesTest  extends ApiClientTest {
     
     /**
      * patchLocale with harmless attempt to set read-only property as same value
-     * @depends testLocaleCreate
+     * #depends testLocaleCreate
+     * @ignore
+     * This test is redundant now that models is restricted to LocalePatch subset 
      */
-    public function testLocalePatchPassesThroughReadonly( $code ){
+    public function _testLocalePatchPassesThroughReadonly( $code ){
         $client = $this->getClient();
         $update = array (
             'locale' => $code,
