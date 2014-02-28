@@ -48,6 +48,7 @@ class ApiClientTranslationsTest  extends ApiClientTest {
     public function testAssetInTranslationList( $id ){
         $client = $this->getClient();
         $listing = $client->getTranslations( compact('id') );
+        $this->assertInternalType( 'array', $listing );
         $native = $listing[0];
         $this->assertInternalType( 'array', $native, 'Native translation of test asset not found in list' );
         $this->assertTrue( $native['translated'], 'Native locales expected to be translated' );
