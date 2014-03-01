@@ -148,12 +148,28 @@ class ApiClientAssetsTest  extends ApiClientTest {
         return $pid;
     }    
     
+    
+    
+    /**
+     * createPlural with existing asset
+     * @depends testAssetPatch
+     * @depends testUnlinkPlural
+     */
+    public function testPluralCreateFromExisting( $id, $pid ){
+        $name = 'Plural Asset renamed';
+        $model = $this->client->createPlural( compact('id','name','pid') );
+        $this->assertInstanceOf( '\Guzzle\Service\Resource\Model', $model );
+        $this->assertEquals( $pid, $model['id'] );
+        $this->assertEquals( $name, $model['name'] );
+        return $pid;
+    }
+    
          
     
     /**
      * deleteAsset
      * @depends testAssetPatch
-     * @depends testUnlinkPlural
+     * @depends testPluralCreateFromExisting
      */
     public function testAssetDelete( $id1, $id2 ){
         foreach( func_get_args() as $slug ){
