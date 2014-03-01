@@ -133,6 +133,17 @@ class ApiClientAssetsTest  extends ApiClientTest {
         $this->assertEquals( $name, $model['name'] );
         return $model['id'];
     }
+    
+    
+    
+    /**
+     * createPlural with deliberate failure creating plural of a plural
+     * @depends testCreateNewPlural
+     * @expectedException \Guzzle\Http\Exception\ClientErrorResponseException
+     */
+    public function testCreatePluralOfPluralFails( $slug ){
+        $model = $this->client->createPlural( array( 'id' => $slug, 'name' => '_' ) );
+    }
 
     
     
