@@ -12,14 +12,26 @@ use Guzzle\Service\Resource\Model;
  */
 class ApiClientAssetsTest  extends ApiClientTest {
     
+    /**
+     * @var ApiClient
+     */
+    private $client;
+    
+    
+    /**
+     * Instantiate client for each test.
+     */
+    public function setUp(){
+        $this->client = $this->getClient();
+    }
+        
     
     /**
      * getAssets
      */
     public function testAssetsList(){
-        $client = $this->getClient();
         // top level is array
-        $assets = $client->getAssets();
+        $assets = $this->client->getAssets();
         $this->assertInternalType('array', $assets );
         // items are instances of Asset model, but Guzzle won't validate due to primitive being top level.
         $asset = $assets[0]; 
@@ -35,8 +47,7 @@ class ApiClientAssetsTest  extends ApiClientTest {
      * @depends testAssetsList
      */
     public function testAssetGet( array $asset ){
-        $client = $this->getClient();
-        $model = $client->getAsset( array( 'id' => $asset['id'] ) );
+        $model = $this->client->getAsset( array( 'id' => $asset['id'] ) );
         $this->assertInstanceOf( '\Guzzle\Service\Resource\Model', $model );
         $id = $model['id'];
         $this->assertEquals( $asset['id'], $id );
@@ -48,10 +59,9 @@ class ApiClientAssetsTest  extends ApiClientTest {
      * createAsset
      */
     public function testAssetCreate(){
-        $slug = 'test-'.md5( microtime() );
+        $slug = 'test-'.substr( md5( microtime() ), 0, 5 );
         $name = 'Test asset';
-        $client = $this->getClient();
-        $model = $client->createAsset( array( 'id' => $slug, 'name' => $name ) );
+        $model = $this->client->createAsset( array( 'id' => $slug, 'name' => $name ) );
         $this->assertInstanceOf( '\Guzzle\Service\Resource\Model', $model );
         $this->assertEquals( $slug, $model['id'] );
         $this->assertEquals( $name, $model['name'] );
@@ -67,8 +77,7 @@ class ApiClientAssetsTest  extends ApiClientTest {
      */
     public function testAssetTag( $slug ){
         $name = 'Test tag';
-        $client = $this->getClient();
-        $model = $client->tagAsset( array( 'id' => $slug, 'name' => $name ) );
+        $model = $this->client->tagAsset( array( 'id' => $slug, 'name' => $name ) );
         $this->assertInstanceOf( '\Guzzle\Service\Resource\Model', $model );
         $this->assertInternalType( 'array', $model['tags'] );
         $this->assertContains( $name, $model['tags'] );
@@ -82,8 +91,7 @@ class ApiClientAssetsTest  extends ApiClientTest {
      */
     public function testAssetPatch( $slug ){
         $name = 'Renamed OK';
-        $client = $this->getClient();
-        $model = $client->patchAsset( array( 'id' => $slug, 'name' => $name ) );
+        $model = $this->client->patchAsset( array( 'id' => $slug, 'name' => $name ) );
         $this->assertInstanceOf( '\Guzzle\Service\Resource\Model', $model );
         $this->assertEquals( $name, $model['name'] );
         return $slug;
@@ -97,8 +105,7 @@ class ApiClientAssetsTest  extends ApiClientTest {
      * @expectedException \Guzzle\Http\Exception\ClientErrorResponseException
      */
     public function testAssetPatchRejectsReadonly( $slug ){
-        $client = $this->getClient();
-        $client->patchAsset( array( 'id' => $slug, 'translated' => 0 ) );
+        $this->client->patchAsset( array( 'id' => $slug, 'translated' => 0 ) );
     }
     
     
@@ -110,21 +117,50 @@ class ApiClientAssetsTest  extends ApiClientTest {
      * This test is redundant now that models is restricted to AssetPatch subset 
      */
     public function _testAssetPatchPassesThroughReadonly( $slug ){
-        $client = $this->getClient();
-        $client->patchAsset( array( 'id' => $slug, 'translated' => 1 ) );
+        $this->client->patchAsset( array( 'id' => $slug, 'translated' => 1 ) );
     }
-         
     
+    
+    
+    /**
+     * createPlural
+     * @depends testAssetPatch
+     */
+    public function testCreateNewPlural( $slug ){
+        $name = 'Plural of Test Asset';
+        $model = $this->client->createPlural( array( 'id' => $slug, 'name' => $name ) );
+        $this->assertInstanceOf( '\Guzzle\Service\Resource\Model', $model );
+        $this->assertEquals( $name, $model['name'] );
+        return $model['id'];
+    }
+
+    
+    
+    /**
+     * unlinkPlural
+     * @depends testAssetPatch
+     * @depends testCreateNewPlural
+     */    
+    public function testUnlinkPlural( $id, $pid ){
+        $model = $this->client->unlinkPlural( compact('id','pid') );
+        $this->assertInstanceOf( '\Guzzle\Service\Resource\Model', $model );
+        $this->assertEquals( 'Plural form unlinked', $model['message'] );
+        return $pid;
+    }    
+    
+         
     
     /**
      * deleteAsset
      * @depends testAssetPatch
+     * @depends testUnlinkPlural
      */
-    public function testAssetDelete( $slug ){
-        $client = $this->getClient();
-        $model = $client->deleteAsset( array( 'id' => $slug ) );
-        $this->assertInstanceOf( '\Guzzle\Service\Resource\Model', $model );
-        $this->assertEquals( 200, $model['status'] );
+    public function testAssetDelete( $id1, $id2 ){
+        foreach( func_get_args() as $slug ){
+            $model = $this->client->deleteAsset( array( 'id' => $slug ) );
+            $this->assertInstanceOf( '\Guzzle\Service\Resource\Model', $model );
+            $this->assertEquals( 200, $model['status'] );
+        }
     }   
 
 
