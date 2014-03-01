@@ -1,10 +1,10 @@
 <?php
 /**
- * Auto-generated with Swizzle at 2014-02-24 15:17:26 +0000
+ * Auto-generated with Swizzle at 2014-03-01 13:08:23 +0000
  */
 return array (
   'name' => 'Loco',
-  'apiVersion' => '1.0.4',
+  'apiVersion' => '1.0.5',
   'baseUrl' => 'https://localise.biz/',
   'description' => 'Loco REST API',
   'operations' => 
@@ -12,7 +12,7 @@ return array (
     'authVerify' => 
     array (
       'httpMethod' => 'GET',
-      'uri' => '/api/auth/verify.json',
+      'uri' => '/api/auth/verify',
       'class' => 'Guzzle\\Service\\Command\\OperationCommand',
       'responseClass' => 'Creds',
       'responseType' => 'model',
@@ -297,7 +297,7 @@ return array (
     'getAssets' => 
     array (
       'httpMethod' => 'GET',
-      'uri' => '/api/assets.json',
+      'uri' => '/api/assets',
       'class' => 'Guzzle\\Service\\Command\\OperationCommand',
       'responseClass' => 'array',
       'responseType' => 'primitive',
@@ -330,7 +330,7 @@ return array (
     'createAsset' => 
     array (
       'httpMethod' => 'POST',
-      'uri' => '/api/assets.json',
+      'uri' => '/api/assets',
       'class' => 'Guzzle\\Service\\Command\\OperationCommand',
       'responseClass' => 'Asset',
       'responseType' => 'model',
@@ -402,7 +402,7 @@ return array (
     'getAsset' => 
     array (
       'httpMethod' => 'GET',
-      'uri' => '/api/assets/{id}.json',
+      'uri' => '/api/assets/{id}',
       'class' => 'Guzzle\\Service\\Command\\OperationCommand',
       'responseClass' => 'Asset',
       'responseType' => 'model',
@@ -442,7 +442,7 @@ return array (
     'patchAsset' => 
     array (
       'httpMethod' => 'PATCH',
-      'uri' => '/api/assets/{id}.json',
+      'uri' => '/api/assets/{id}',
       'class' => 'Guzzle\\Service\\Command\\OperationCommand',
       'responseClass' => 'Asset',
       'responseType' => 'model',
@@ -522,7 +522,7 @@ return array (
     'deleteAsset' => 
     array (
       'httpMethod' => 'DELETE',
-      'uri' => '/api/assets/{id}.json',
+      'uri' => '/api/assets/{id}',
       'class' => 'Guzzle\\Service\\Command\\OperationCommand',
       'responseClass' => 'Success',
       'responseType' => 'model',
@@ -565,10 +565,165 @@ return array (
         ),
       ),
     ),
+    'getAssetPlurals' => 
+    array (
+      'httpMethod' => 'GET',
+      'uri' => '/api/assets/{id}/plurals',
+      'class' => 'Guzzle\\Service\\Command\\OperationCommand',
+      'responseClass' => 'array',
+      'responseType' => 'primitive',
+      'responseNotes' => '<p>Lists all assets that are a plural form of the current asset.</p>
+           <p>This list does <strong>not</strong> include the singular form itself.</p>',
+      'summary' => 'Get plural forms of an asset',
+      'parameters' => 
+      array (
+        'key' => 
+        array (
+          'required' => true,
+          'description' => 'Project API key',
+          'type' => 'string',
+          'location' => 'query',
+        ),
+        'id' => 
+        array (
+          'required' => true,
+          'description' => 'Asset ID',
+          'type' => 'string',
+          'location' => 'uri',
+        ),
+      ),
+      'errorResponses' => 
+      array (
+        0 => 
+        array (
+          'code' => 401,
+          'phrase' => 'Invalid API key',
+        ),
+        1 => 
+        array (
+          'code' => 404,
+          'phrase' => 'Asset not in project',
+        ),
+      ),
+    ),
+    'createPlural' => 
+    array (
+      'httpMethod' => 'POST',
+      'uri' => '/api/assets/{id}/plurals',
+      'class' => 'Guzzle\\Service\\Command\\OperationCommand',
+      'responseClass' => 'Asset',
+      'responseType' => 'model',
+      'responseNotes' => '<p>Creates a translatable asset that\'s a plural form of an existing asset.</p>
+           <p>The singular form asset specified as <code>{id}</code> must already exist, but the plural form will created as a new asset.</p>
+           <p>You can bind an existing asset as the new plural by specifying <code>{pid}</code>. In this case if <code>{name}</code> differs the asset will be renamed.</p>',
+      'summary' => 'Add a new plural form of an existing asset',
+      'parameters' => 
+      array (
+        'name' => 
+        array (
+          'required' => true,
+          'description' => 'Source text for the plural form or just a name describing it',
+          'type' => 'string',
+          'location' => 'postField',
+        ),
+        'pid' => 
+        array (
+          'description' => 'Optional machine friendly ID if you want something specific, or converting an existing asset to a plural',
+          'type' => 'string',
+          'location' => 'postField',
+          'default' => '',
+        ),
+        'key' => 
+        array (
+          'required' => true,
+          'description' => 'Project API key',
+          'type' => 'string',
+          'location' => 'query',
+        ),
+        'id' => 
+        array (
+          'required' => true,
+          'description' => 'Asset ID',
+          'type' => 'string',
+          'location' => 'uri',
+        ),
+      ),
+      'errorResponses' => 
+      array (
+        0 => 
+        array (
+          'code' => 401,
+          'phrase' => 'Invalid API key',
+        ),
+        1 => 
+        array (
+          'code' => 403,
+          'phrase' => 'Insufficient privileges',
+        ),
+        2 => 
+        array (
+          'code' => 404,
+          'phrase' => 'Asset not in project',
+        ),
+      ),
+    ),
+    'unlinkPlural' => 
+    array (
+      'httpMethod' => 'DELETE',
+      'uri' => '/api/assets/{id}/plurals/{pid}',
+      'class' => 'Guzzle\\Service\\Command\\OperationCommand',
+      'responseClass' => 'Success',
+      'responseType' => 'model',
+      'responseNotes' => '<p>Reverts an asset from being a plural form to being a singular asset on its own.</p>
+           <p>This action does <strong>not</strong> delete any assets.</p>',
+      'summary' => 'Unlinks a plural form of an existing asset',
+      'parameters' => 
+      array (
+        'pid' => 
+        array (
+          'required' => true,
+          'description' => 'ID of asset to unlink',
+          'type' => 'string',
+          'location' => 'uri',
+        ),
+        'id' => 
+        array (
+          'required' => true,
+          'description' => 'Asset ID',
+          'type' => 'string',
+          'location' => 'uri',
+        ),
+        'key' => 
+        array (
+          'required' => true,
+          'description' => 'Project API key',
+          'type' => 'string',
+          'location' => 'query',
+        ),
+      ),
+      'errorResponses' => 
+      array (
+        0 => 
+        array (
+          'code' => 401,
+          'phrase' => 'Invalid API key',
+        ),
+        1 => 
+        array (
+          'code' => 403,
+          'phrase' => 'Insufficient privileges',
+        ),
+        2 => 
+        array (
+          'code' => 404,
+          'phrase' => 'Asset not in project',
+        ),
+      ),
+    ),
     'tagAsset' => 
     array (
       'httpMethod' => 'POST',
-      'uri' => '/api/assets/{id}/tags.json',
+      'uri' => '/api/assets/{id}/tags',
       'class' => 'Guzzle\\Service\\Command\\OperationCommand',
       'responseClass' => 'Asset',
       'responseType' => 'model',
@@ -617,10 +772,62 @@ return array (
         ),
       ),
     ),
+    'untagAsset' => 
+    array (
+      'httpMethod' => 'DELETE',
+      'uri' => '/api/assets/{id}/tags/{tag}',
+      'class' => 'Guzzle\\Service\\Command\\OperationCommand',
+      'responseClass' => 'Success',
+      'responseType' => 'model',
+      'responseNotes' => '<p>Removes a single tag from the given asset.</p>',
+      'summary' => 'Untag an asset',
+      'parameters' => 
+      array (
+        'tag' => 
+        array (
+          'required' => true,
+          'description' => 'Term to remove from asset\'s tags',
+          'type' => 'string',
+          'location' => 'uri',
+        ),
+        'id' => 
+        array (
+          'required' => true,
+          'description' => 'Asset ID',
+          'type' => 'string',
+          'location' => 'uri',
+        ),
+        'key' => 
+        array (
+          'required' => true,
+          'description' => 'Project API key',
+          'type' => 'string',
+          'location' => 'query',
+        ),
+      ),
+      'errorResponses' => 
+      array (
+        0 => 
+        array (
+          'code' => 401,
+          'phrase' => 'Invalid API key',
+        ),
+        1 => 
+        array (
+          'code' => 404,
+          'phrase' => 'Asset not in project',
+        ),
+        2 => 
+        array (
+          'code' => 403,
+          'phrase' => 'Insufficient privileges',
+        ),
+      ),
+    ),
     'getLocales' => 
     array (
       'httpMethod' => 'GET',
-      'uri' => '/api/locales.json',
+      'uri' => '/api/locales',
       'class' => 'Guzzle\\Service\\Command\\OperationCommand',
       'responseClass' => 'array',
       'responseType' => 'primitive',
@@ -648,7 +855,7 @@ return array (
     'createLocale' => 
     array (
       'httpMethod' => 'POST',
-      'uri' => '/api/locales.json',
+      'uri' => '/api/locales',
       'class' => 'Guzzle\\Service\\Command\\OperationCommand',
       'responseClass' => 'Locale',
       'responseType' => 'model',
@@ -700,7 +907,7 @@ return array (
     'getLocale' => 
     array (
       'httpMethod' => 'GET',
-      'uri' => '/api/locales/{locale}.json',
+      'uri' => '/api/locales/{locale}',
       'class' => 'Guzzle\\Service\\Command\\OperationCommand',
       'responseClass' => 'Locale',
       'responseType' => 'model',
@@ -740,7 +947,7 @@ return array (
     'patchLocale' => 
     array (
       'httpMethod' => 'PATCH',
-      'uri' => '/api/locales/{locale}.json',
+      'uri' => '/api/locales/{locale}',
       'class' => 'Guzzle\\Service\\Command\\OperationCommand',
       'responseClass' => 'Locale',
       'responseType' => 'model',
@@ -798,7 +1005,7 @@ return array (
     'deleteLocale' => 
     array (
       'httpMethod' => 'DELETE',
-      'uri' => '/api/locales/{locale}.json',
+      'uri' => '/api/locales/{locale}',
       'class' => 'Guzzle\\Service\\Command\\OperationCommand',
       'responseClass' => 'Success',
       'responseType' => 'model',
@@ -845,7 +1052,7 @@ return array (
     'getTranslations' => 
     array (
       'httpMethod' => 'GET',
-      'uri' => '/api/translations/{id}.json',
+      'uri' => '/api/translations/{id}',
       'class' => 'Guzzle\\Service\\Command\\OperationCommand',
       'responseClass' => 'array',
       'responseType' => 'primitive',
@@ -886,7 +1093,7 @@ return array (
     'getTranslation' => 
     array (
       'httpMethod' => 'GET',
-      'uri' => '/api/translations/{id}/{locale}.json',
+      'uri' => '/api/translations/{id}/{locale}',
       'class' => 'Guzzle\\Service\\Command\\OperationCommand',
       'responseClass' => 'Translation',
       'responseType' => 'model',
@@ -940,7 +1147,7 @@ return array (
     'translate' => 
     array (
       'httpMethod' => 'POST',
-      'uri' => '/api/translations/{id}/{locale}.json',
+      'uri' => '/api/translations/{id}/{locale}',
       'class' => 'Guzzle\\Service\\Command\\OperationCommand',
       'responseClass' => 'Translation',
       'responseType' => 'model',
@@ -996,7 +1203,7 @@ return array (
     'untranslate' => 
     array (
       'httpMethod' => 'DELETE',
-      'uri' => '/api/translations/{id}/{locale}.json',
+      'uri' => '/api/translations/{id}/{locale}',
       'class' => 'Guzzle\\Service\\Command\\OperationCommand',
       'responseClass' => 'Success',
       'responseType' => 'model',
@@ -1050,7 +1257,7 @@ return array (
     'ping' => 
     array (
       'httpMethod' => 'GET',
-      'uri' => '/api/ping.json',
+      'uri' => '/api/ping',
       'class' => 'Guzzle\\Service\\Command\\OperationCommand',
       'responseClass' => 'Echo',
       'responseType' => 'model',
@@ -1063,7 +1270,7 @@ return array (
     'ping404' => 
     array (
       'httpMethod' => 'GET',
-      'uri' => '/api/ping/not-found.json',
+      'uri' => '/api/ping/not-found',
       'class' => 'Guzzle\\Service\\Command\\OperationCommand',
       'responseClass' => 'Error',
       'responseType' => 'model',
@@ -1428,6 +1635,13 @@ return array (
           'type' => 'integer',
           'location' => 'json',
         ),
+        'plurals' => 
+        array (
+          'required' => true,
+          'description' => 'Number of associated plural forms',
+          'type' => 'integer',
+          'location' => 'json',
+        ),
         'tags' => 
         array (
           'required' => true,
@@ -1526,7 +1740,7 @@ return array (
         ),
       ),
     ),
-    'Plurals' => 
+    'PluralRules' => 
     array (
       'type' => 'object',
       'additionalProperties' => false,
@@ -1645,6 +1859,72 @@ return array (
         ),
       ),
     ),
+    'PluralTranslation' => 
+    array (
+      'type' => 'object',
+      'additionalProperties' => false,
+      'properties' => 
+      array (
+        'id' => 
+        array (
+          'required' => true,
+          'description' => 'Asset ID',
+          'type' => 'string',
+          'location' => 'json',
+        ),
+        'type' => 
+        array (
+          'required' => true,
+          'description' => 'Specific media type, e.g. text/plain, image/jpeg',
+          'type' => 'string',
+          'location' => 'json',
+        ),
+        'translated' => 
+        array (
+          'required' => true,
+          'description' => 'Whether translation in this locale is considered complete',
+          'type' => 'boolean',
+          'location' => 'json',
+          'default' => false,
+        ),
+        'flagged' => 
+        array (
+          'required' => true,
+          'description' => 'Whether translation is incomplete due to an issue requiring attention',
+          'type' => 'boolean',
+          'location' => 'json',
+          'default' => false,
+        ),
+        'translation' => 
+        array (
+          'required' => true,
+          'description' => 'Translated text in specified locale',
+          'type' => 'string',
+          'location' => 'json',
+        ),
+        'revision' => 
+        array (
+          'required' => true,
+          'description' => 'Number of edits made, zero if not translated',
+          'type' => 'integer',
+          'location' => 'json',
+        ),
+        'comments' => 
+        array (
+          'required' => true,
+          'description' => 'Number of comments available',
+          'type' => 'integer',
+          'location' => 'json',
+        ),
+        'modified' => 
+        array (
+          'description' => 'Time last modified in UTC, null if not translated',
+          'type' => 'string',
+          'format' => 'date-time',
+          'location' => 'json',
+        ),
+      ),
+    ),
     'Translation' => 
     array (
       'type' => 'object',
@@ -1656,6 +1936,57 @@ return array (
           'required' => true,
           'description' => 'Asset ID',
           'type' => 'string',
+          'location' => 'json',
+        ),
+        'type' => 
+        array (
+          'required' => true,
+          'description' => 'Specific media type, e.g. text/plain, image/jpeg',
+          'type' => 'string',
+          'location' => 'json',
+        ),
+        'translated' => 
+        array (
+          'required' => true,
+          'description' => 'Whether translation in this locale is considered complete',
+          'type' => 'boolean',
+          'location' => 'json',
+          'default' => false,
+        ),
+        'flagged' => 
+        array (
+          'required' => true,
+          'description' => 'Whether translation is incomplete due to an issue requiring attention',
+          'type' => 'boolean',
+          'location' => 'json',
+          'default' => false,
+        ),
+        'translation' => 
+        array (
+          'required' => true,
+          'description' => 'Translated text in specified locale',
+          'type' => 'string',
+          'location' => 'json',
+        ),
+        'revision' => 
+        array (
+          'required' => true,
+          'description' => 'Number of edits made, zero if not translated',
+          'type' => 'integer',
+          'location' => 'json',
+        ),
+        'comments' => 
+        array (
+          'required' => true,
+          'description' => 'Number of comments available',
+          'type' => 'integer',
+          'location' => 'json',
+        ),
+        'modified' => 
+        array (
+          'description' => 'Time last modified in UTC, null if not translated',
+          'type' => 'string',
+          'format' => 'date-time',
           'location' => 'json',
         ),
         'locale' => 
@@ -1735,56 +2066,78 @@ return array (
             ),
           ),
         ),
-        'type' => 
+        'plurals' => 
         array (
           'required' => true,
-          'description' => 'Specific media type, e.g. text/plain, image/jpeg',
-          'type' => 'string',
+          'description' => 'Plural forms of this translation',
+          'type' => 'array',
           'location' => 'json',
-        ),
-        'translated' => 
-        array (
-          'required' => true,
-          'description' => 'Whether translation in this locale is considered complete',
-          'type' => 'boolean',
-          'location' => 'json',
-          'default' => false,
-        ),
-        'flagged' => 
-        array (
-          'required' => true,
-          'description' => 'Whether translation is incomplete due to an issue requiring attention',
-          'type' => 'boolean',
-          'location' => 'json',
-          'default' => false,
-        ),
-        'translation' => 
-        array (
-          'required' => true,
-          'description' => 'Translated text in specified locale',
-          'type' => 'string',
-          'location' => 'json',
-        ),
-        'revision' => 
-        array (
-          'required' => true,
-          'description' => 'Number of edits made, zero if not translated',
-          'type' => 'integer',
-          'location' => 'json',
-        ),
-        'comments' => 
-        array (
-          'required' => true,
-          'description' => 'Number of comments available',
-          'type' => 'integer',
-          'location' => 'json',
-        ),
-        'modified' => 
-        array (
-          'description' => 'Time last modified in UTC, null if not translated',
-          'type' => 'string',
-          'format' => 'date-time',
-          'location' => 'json',
+          'items' => 
+          array (
+            'type' => 'object',
+            'additionalProperties' => false,
+            'properties' => 
+            array (
+              'id' => 
+              array (
+                'required' => true,
+                'description' => 'Asset ID',
+                'type' => 'string',
+                'location' => 'json',
+              ),
+              'type' => 
+              array (
+                'required' => true,
+                'description' => 'Specific media type, e.g. text/plain, image/jpeg',
+                'type' => 'string',
+                'location' => 'json',
+              ),
+              'translated' => 
+              array (
+                'required' => true,
+                'description' => 'Whether translation in this locale is considered complete',
+                'type' => 'boolean',
+                'location' => 'json',
+                'default' => false,
+              ),
+              'flagged' => 
+              array (
+                'required' => true,
+                'description' => 'Whether translation is incomplete due to an issue requiring attention',
+                'type' => 'boolean',
+                'location' => 'json',
+                'default' => false,
+              ),
+              'translation' => 
+              array (
+                'required' => true,
+                'description' => 'Translated text in specified locale',
+                'type' => 'string',
+                'location' => 'json',
+              ),
+              'revision' => 
+              array (
+                'required' => true,
+                'description' => 'Number of edits made, zero if not translated',
+                'type' => 'integer',
+                'location' => 'json',
+              ),
+              'comments' => 
+              array (
+                'required' => true,
+                'description' => 'Number of comments available',
+                'type' => 'integer',
+                'location' => 'json',
+              ),
+              'modified' => 
+              array (
+                'description' => 'Time last modified in UTC, null if not translated',
+                'type' => 'string',
+                'format' => 'date-time',
+                'location' => 'json',
+              ),
+            ),
+          ),
         ),
       ),
     ),

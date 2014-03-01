@@ -1,12 +1,12 @@
 {
     "name": "Loco",
-    "apiVersion": "1.0.4",
+    "apiVersion": "1.0.5",
     "baseUrl": "https:\/\/localise.biz\/",
     "description": "Loco REST API",
     "operations": {
         "authVerify": {
             "httpMethod": "GET",
-            "uri": "\/api\/auth\/verify.json",
+            "uri": "\/api\/auth\/verify",
             "class": "Guzzle\\Service\\Command\\OperationCommand",
             "responseClass": "Creds",
             "responseType": "model",
@@ -244,7 +244,7 @@
         },
         "getAssets": {
             "httpMethod": "GET",
-            "uri": "\/api\/assets.json",
+            "uri": "\/api\/assets",
             "class": "Guzzle\\Service\\Command\\OperationCommand",
             "responseClass": "array",
             "responseType": "primitive",
@@ -271,7 +271,7 @@
         },
         "createAsset": {
             "httpMethod": "POST",
-            "uri": "\/api\/assets.json",
+            "uri": "\/api\/assets",
             "class": "Guzzle\\Service\\Command\\OperationCommand",
             "responseClass": "Asset",
             "responseType": "model",
@@ -329,7 +329,7 @@
         },
         "getAsset": {
             "httpMethod": "GET",
-            "uri": "\/api\/assets\/{id}.json",
+            "uri": "\/api\/assets\/{id}",
             "class": "Guzzle\\Service\\Command\\OperationCommand",
             "responseClass": "Asset",
             "responseType": "model",
@@ -362,7 +362,7 @@
         },
         "patchAsset": {
             "httpMethod": "PATCH",
-            "uri": "\/api\/assets\/{id}.json",
+            "uri": "\/api\/assets\/{id}",
             "class": "Guzzle\\Service\\Command\\OperationCommand",
             "responseClass": "Asset",
             "responseType": "model",
@@ -428,7 +428,7 @@
         },
         "deleteAsset": {
             "httpMethod": "DELETE",
-            "uri": "\/api\/assets\/{id}.json",
+            "uri": "\/api\/assets\/{id}",
             "class": "Guzzle\\Service\\Command\\OperationCommand",
             "responseClass": "Success",
             "responseType": "model",
@@ -463,9 +463,134 @@
                 }
             ]
         },
+        "getAssetPlurals": {
+            "httpMethod": "GET",
+            "uri": "\/api\/assets\/{id}\/plurals",
+            "class": "Guzzle\\Service\\Command\\OperationCommand",
+            "responseClass": "array",
+            "responseType": "primitive",
+            "responseNotes": "<p>Lists all assets that are a plural form of the current asset.<\/p>\n           <p>This list does <strong>not<\/strong> include the singular form itself.<\/p>",
+            "summary": "Get plural forms of an asset",
+            "parameters": {
+                "key": {
+                    "required": true,
+                    "description": "Project API key",
+                    "type": "string",
+                    "location": "query"
+                },
+                "id": {
+                    "required": true,
+                    "description": "Asset ID",
+                    "type": "string",
+                    "location": "uri"
+                }
+            },
+            "errorResponses": [
+                {
+                    "code": 401,
+                    "phrase": "Invalid API key"
+                },
+                {
+                    "code": 404,
+                    "phrase": "Asset not in project"
+                }
+            ]
+        },
+        "createPlural": {
+            "httpMethod": "POST",
+            "uri": "\/api\/assets\/{id}\/plurals",
+            "class": "Guzzle\\Service\\Command\\OperationCommand",
+            "responseClass": "Asset",
+            "responseType": "model",
+            "responseNotes": "<p>Creates a translatable asset that's a plural form of an existing asset.<\/p>\n           <p>The singular form asset specified as <code>{id}<\/code> must already exist, but the plural form will created as a new asset.<\/p>\n           <p>You can bind an existing asset as the new plural by specifying <code>{pid}<\/code>. In this case if <code>{name}<\/code> differs the asset will be renamed.<\/p>",
+            "summary": "Add a new plural form of an existing asset",
+            "parameters": {
+                "name": {
+                    "required": true,
+                    "description": "Source text for the plural form or just a name describing it",
+                    "type": "string",
+                    "location": "postField"
+                },
+                "pid": {
+                    "description": "Optional machine friendly ID if you want something specific, or converting an existing asset to a plural",
+                    "type": "string",
+                    "location": "postField",
+                    "default": ""
+                },
+                "key": {
+                    "required": true,
+                    "description": "Project API key",
+                    "type": "string",
+                    "location": "query"
+                },
+                "id": {
+                    "required": true,
+                    "description": "Asset ID",
+                    "type": "string",
+                    "location": "uri"
+                }
+            },
+            "errorResponses": [
+                {
+                    "code": 401,
+                    "phrase": "Invalid API key"
+                },
+                {
+                    "code": 403,
+                    "phrase": "Insufficient privileges"
+                },
+                {
+                    "code": 404,
+                    "phrase": "Asset not in project"
+                }
+            ]
+        },
+        "unlinkPlural": {
+            "httpMethod": "DELETE",
+            "uri": "\/api\/assets\/{id}\/plurals\/{pid}",
+            "class": "Guzzle\\Service\\Command\\OperationCommand",
+            "responseClass": "Success",
+            "responseType": "model",
+            "responseNotes": "<p>Reverts an asset from being a plural form to being a singular asset on its own.<\/p>\n           <p>This action does <strong>not<\/strong> delete any assets.<\/p>",
+            "summary": "Unlinks a plural form of an existing asset",
+            "parameters": {
+                "pid": {
+                    "required": true,
+                    "description": "ID of asset to unlink",
+                    "type": "string",
+                    "location": "uri"
+                },
+                "id": {
+                    "required": true,
+                    "description": "Asset ID",
+                    "type": "string",
+                    "location": "uri"
+                },
+                "key": {
+                    "required": true,
+                    "description": "Project API key",
+                    "type": "string",
+                    "location": "query"
+                }
+            },
+            "errorResponses": [
+                {
+                    "code": 401,
+                    "phrase": "Invalid API key"
+                },
+                {
+                    "code": 403,
+                    "phrase": "Insufficient privileges"
+                },
+                {
+                    "code": 404,
+                    "phrase": "Asset not in project"
+                }
+            ]
+        },
         "tagAsset": {
             "httpMethod": "POST",
-            "uri": "\/api\/assets\/{id}\/tags.json",
+            "uri": "\/api\/assets\/{id}\/tags",
             "class": "Guzzle\\Service\\Command\\OperationCommand",
             "responseClass": "Asset",
             "responseType": "model",
@@ -506,9 +631,52 @@
                 }
             ]
         },
+        "untagAsset": {
+            "httpMethod": "DELETE",
+            "uri": "\/api\/assets\/{id}\/tags\/{tag}",
+            "class": "Guzzle\\Service\\Command\\OperationCommand",
+            "responseClass": "Success",
+            "responseType": "model",
+            "responseNotes": "<p>Removes a single tag from the given asset.<\/p>",
+            "summary": "Untag an asset",
+            "parameters": {
+                "tag": {
+                    "required": true,
+                    "description": "Term to remove from asset's tags",
+                    "type": "string",
+                    "location": "uri"
+                },
+                "id": {
+                    "required": true,
+                    "description": "Asset ID",
+                    "type": "string",
+                    "location": "uri"
+                },
+                "key": {
+                    "required": true,
+                    "description": "Project API key",
+                    "type": "string",
+                    "location": "query"
+                }
+            },
+            "errorResponses": [
+                {
+                    "code": 401,
+                    "phrase": "Invalid API key"
+                },
+                {
+                    "code": 404,
+                    "phrase": "Asset not in project"
+                },
+                {
+                    "code": 403,
+                    "phrase": "Insufficient privileges"
+                }
+            ]
+        },
         "getLocales": {
             "httpMethod": "GET",
-            "uri": "\/api\/locales.json",
+            "uri": "\/api\/locales",
             "class": "Guzzle\\Service\\Command\\OperationCommand",
             "responseClass": "array",
             "responseType": "primitive",
@@ -531,7 +699,7 @@
         },
         "createLocale": {
             "httpMethod": "POST",
-            "uri": "\/api\/locales.json",
+            "uri": "\/api\/locales",
             "class": "Guzzle\\Service\\Command\\OperationCommand",
             "responseClass": "Locale",
             "responseType": "model",
@@ -572,7 +740,7 @@
         },
         "getLocale": {
             "httpMethod": "GET",
-            "uri": "\/api\/locales\/{locale}.json",
+            "uri": "\/api\/locales\/{locale}",
             "class": "Guzzle\\Service\\Command\\OperationCommand",
             "responseClass": "Locale",
             "responseType": "model",
@@ -605,7 +773,7 @@
         },
         "patchLocale": {
             "httpMethod": "PATCH",
-            "uri": "\/api\/locales\/{locale}.json",
+            "uri": "\/api\/locales\/{locale}",
             "class": "Guzzle\\Service\\Command\\OperationCommand",
             "responseClass": "Locale",
             "responseType": "model",
@@ -652,7 +820,7 @@
         },
         "deleteLocale": {
             "httpMethod": "DELETE",
-            "uri": "\/api\/locales\/{locale}.json",
+            "uri": "\/api\/locales\/{locale}",
             "class": "Guzzle\\Service\\Command\\OperationCommand",
             "responseClass": "Success",
             "responseType": "model",
@@ -689,7 +857,7 @@
         },
         "getTranslations": {
             "httpMethod": "GET",
-            "uri": "\/api\/translations\/{id}.json",
+            "uri": "\/api\/translations\/{id}",
             "class": "Guzzle\\Service\\Command\\OperationCommand",
             "responseClass": "array",
             "responseType": "primitive",
@@ -722,7 +890,7 @@
         },
         "getTranslation": {
             "httpMethod": "GET",
-            "uri": "\/api\/translations\/{id}\/{locale}.json",
+            "uri": "\/api\/translations\/{id}\/{locale}",
             "class": "Guzzle\\Service\\Command\\OperationCommand",
             "responseClass": "Translation",
             "responseType": "model",
@@ -765,7 +933,7 @@
         },
         "translate": {
             "httpMethod": "POST",
-            "uri": "\/api\/translations\/{id}\/{locale}.json",
+            "uri": "\/api\/translations\/{id}\/{locale}",
             "class": "Guzzle\\Service\\Command\\OperationCommand",
             "responseClass": "Translation",
             "responseType": "model",
@@ -809,7 +977,7 @@
         },
         "untranslate": {
             "httpMethod": "DELETE",
-            "uri": "\/api\/translations\/{id}\/{locale}.json",
+            "uri": "\/api\/translations\/{id}\/{locale}",
             "class": "Guzzle\\Service\\Command\\OperationCommand",
             "responseClass": "Success",
             "responseType": "model",
@@ -852,7 +1020,7 @@
         },
         "ping": {
             "httpMethod": "GET",
-            "uri": "\/api\/ping.json",
+            "uri": "\/api\/ping",
             "class": "Guzzle\\Service\\Command\\OperationCommand",
             "responseClass": "Echo",
             "responseType": "model",
@@ -864,7 +1032,7 @@
         },
         "ping404": {
             "httpMethod": "GET",
-            "uri": "\/api\/ping\/not-found.json",
+            "uri": "\/api\/ping\/not-found",
             "class": "Guzzle\\Service\\Command\\OperationCommand",
             "responseClass": "Error",
             "responseType": "model",
@@ -1170,6 +1338,12 @@
                     "type": "integer",
                     "location": "json"
                 },
+                "plurals": {
+                    "required": true,
+                    "description": "Number of associated plural forms",
+                    "type": "integer",
+                    "location": "json"
+                },
                 "tags": {
                     "required": true,
                     "description": "List of terms asset is tagged with",
@@ -1251,7 +1425,7 @@
                 }
             }
         },
-        "Plurals": {
+        "PluralRules": {
             "type": "object",
             "additionalProperties": false,
             "properties": {
@@ -1351,6 +1525,62 @@
                 }
             }
         },
+        "PluralTranslation": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "id": {
+                    "required": true,
+                    "description": "Asset ID",
+                    "type": "string",
+                    "location": "json"
+                },
+                "type": {
+                    "required": true,
+                    "description": "Specific media type, e.g. text\/plain, image\/jpeg",
+                    "type": "string",
+                    "location": "json"
+                },
+                "translated": {
+                    "required": true,
+                    "description": "Whether translation in this locale is considered complete",
+                    "type": "boolean",
+                    "location": "json",
+                    "default": false
+                },
+                "flagged": {
+                    "required": true,
+                    "description": "Whether translation is incomplete due to an issue requiring attention",
+                    "type": "boolean",
+                    "location": "json",
+                    "default": false
+                },
+                "translation": {
+                    "required": true,
+                    "description": "Translated text in specified locale",
+                    "type": "string",
+                    "location": "json"
+                },
+                "revision": {
+                    "required": true,
+                    "description": "Number of edits made, zero if not translated",
+                    "type": "integer",
+                    "location": "json"
+                },
+                "comments": {
+                    "required": true,
+                    "description": "Number of comments available",
+                    "type": "integer",
+                    "location": "json"
+                },
+                "modified": {
+                    "description": "Time last modified in UTC, null if not translated",
+                    "type": "string",
+                    "format": "date-time",
+                    "location": "json"
+                }
+            }
+        },
         "Translation": {
             "type": "object",
             "additionalProperties": false,
@@ -1359,6 +1589,50 @@
                     "required": true,
                     "description": "Asset ID",
                     "type": "string",
+                    "location": "json"
+                },
+                "type": {
+                    "required": true,
+                    "description": "Specific media type, e.g. text\/plain, image\/jpeg",
+                    "type": "string",
+                    "location": "json"
+                },
+                "translated": {
+                    "required": true,
+                    "description": "Whether translation in this locale is considered complete",
+                    "type": "boolean",
+                    "location": "json",
+                    "default": false
+                },
+                "flagged": {
+                    "required": true,
+                    "description": "Whether translation is incomplete due to an issue requiring attention",
+                    "type": "boolean",
+                    "location": "json",
+                    "default": false
+                },
+                "translation": {
+                    "required": true,
+                    "description": "Translated text in specified locale",
+                    "type": "string",
+                    "location": "json"
+                },
+                "revision": {
+                    "required": true,
+                    "description": "Number of edits made, zero if not translated",
+                    "type": "integer",
+                    "location": "json"
+                },
+                "comments": {
+                    "required": true,
+                    "description": "Number of comments available",
+                    "type": "integer",
+                    "location": "json"
+                },
+                "modified": {
+                    "description": "Time last modified in UTC, null if not translated",
+                    "type": "string",
+                    "format": "date-time",
                     "location": "json"
                 },
                 "locale": {
@@ -1426,49 +1700,67 @@
                         }
                     }
                 },
-                "type": {
+                "plurals": {
                     "required": true,
-                    "description": "Specific media type, e.g. text\/plain, image\/jpeg",
-                    "type": "string",
-                    "location": "json"
-                },
-                "translated": {
-                    "required": true,
-                    "description": "Whether translation in this locale is considered complete",
-                    "type": "boolean",
+                    "description": "Plural forms of this translation",
+                    "type": "array",
                     "location": "json",
-                    "default": false
-                },
-                "flagged": {
-                    "required": true,
-                    "description": "Whether translation is incomplete due to an issue requiring attention",
-                    "type": "boolean",
-                    "location": "json",
-                    "default": false
-                },
-                "translation": {
-                    "required": true,
-                    "description": "Translated text in specified locale",
-                    "type": "string",
-                    "location": "json"
-                },
-                "revision": {
-                    "required": true,
-                    "description": "Number of edits made, zero if not translated",
-                    "type": "integer",
-                    "location": "json"
-                },
-                "comments": {
-                    "required": true,
-                    "description": "Number of comments available",
-                    "type": "integer",
-                    "location": "json"
-                },
-                "modified": {
-                    "description": "Time last modified in UTC, null if not translated",
-                    "type": "string",
-                    "format": "date-time",
-                    "location": "json"
+                    "items": {
+                        "type": "object",
+                        "additionalProperties": false,
+                        "properties": {
+                            "id": {
+                                "required": true,
+                                "description": "Asset ID",
+                                "type": "string",
+                                "location": "json"
+                            },
+                            "type": {
+                                "required": true,
+                                "description": "Specific media type, e.g. text\/plain, image\/jpeg",
+                                "type": "string",
+                                "location": "json"
+                            },
+                            "translated": {
+                                "required": true,
+                                "description": "Whether translation in this locale is considered complete",
+                                "type": "boolean",
+                                "location": "json",
+                                "default": false
+                            },
+                            "flagged": {
+                                "required": true,
+                                "description": "Whether translation is incomplete due to an issue requiring attention",
+                                "type": "boolean",
+                                "location": "json",
+                                "default": false
+                            },
+                            "translation": {
+                                "required": true,
+                                "description": "Translated text in specified locale",
+                                "type": "string",
+                                "location": "json"
+                            },
+                            "revision": {
+                                "required": true,
+                                "description": "Number of edits made, zero if not translated",
+                                "type": "integer",
+                                "location": "json"
+                            },
+                            "comments": {
+                                "required": true,
+                                "description": "Number of comments available",
+                                "type": "integer",
+                                "location": "json"
+                            },
+                            "modified": {
+                                "description": "Time last modified in UTC, null if not translated",
+                                "type": "string",
+                                "format": "date-time",
+                                "location": "json"
+                            }
+                        }
+                    }
                 }
             }
         },
