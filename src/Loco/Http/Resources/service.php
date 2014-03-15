@@ -1,6 +1,6 @@
 <?php
 /**
- * Auto-generated with Swizzle at 2014-03-01 13:08:23 +0000
+ * Auto-generated with Swizzle at 2014-03-15 15:02:01 +0000
  */
 return array (
   'name' => 'Loco',
@@ -45,10 +45,9 @@ return array (
       'class' => 'Guzzle\\Service\\Command\\OperationCommand',
       'responseClass' => '\\Loco\\Http\\Response\\RawResponse',
       'responseType' => 'class',
-      'responseNotes' => 'Export all translations from your project to a multi-locale language pack.<br />
-           <br />
-           Note that not all formats support multiple locales in the same file. See <code>/export/archive</code> for exporting separate files,
-           and <code>/export/locale</code> for exporting one language at a time.',
+      'responseNotes' => '<p>Export all translations from your project to a multi-locale language pack.</p>
+           <p>Note that not all formats support multiple locales in the same file. See <code>/export/archive</code> for exporting separate files,
+           and <code>/export/locale</code> for exporting one language at a time.</p>',
       'summary' => 'Export your whole project to a multi-locale language pack',
       'parameters' => 
       array (
@@ -137,8 +136,9 @@ return array (
             3 => 'constants',
             4 => 'chrome',
             5 => 'nested',
-            6 => 'java',
-            7 => 'tizen',
+            6 => 'rails',
+            7 => 'java',
+            8 => 'tizen',
           ),
         ),
         'filter' => 
@@ -203,8 +203,9 @@ return array (
       'class' => 'Guzzle\\Service\\Command\\OperationCommand',
       'responseClass' => '\\Loco\\Http\\Response\\RawResponse',
       'responseType' => 'class',
-      'responseNotes' => 'Export translations from your project to a locale-specific language pack.
-           Various export file types are supported with format variations for some types.',
+      'responseNotes' => '<p>Export translations from your project to a locale-specific language pack.</p>
+           <p>Various export file types are supported with format variations for some types.
+              <a href="http://localise.biz/api#formats">See the full list of supported export formats</a>.</p>',
       'summary' => 'Export a single locale to a language pack.',
       'parameters' => 
       array (
@@ -228,8 +229,9 @@ return array (
             3 => 'constants',
             4 => 'chrome',
             5 => 'nested',
-            6 => 'java',
-            7 => 'tizen',
+            6 => 'rails',
+            7 => 'java',
+            8 => 'tizen',
           ),
         ),
         'filter' => 
@@ -1373,9 +1375,10 @@ return array (
             4 => 'constants',
             5 => 'chrome',
             6 => 'nested',
-            7 => 'java',
-            8 => 'tizen',
-            9 => 'gettext',
+            7 => 'rails',
+            8 => 'java',
+            9 => 'tizen',
+            10 => 'gettext',
           ),
         ),
         'locale' => 

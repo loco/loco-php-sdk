@@ -33,7 +33,7 @@
             "class": "Guzzle\\Service\\Command\\OperationCommand",
             "responseClass": "\\Loco\\Http\\Response\\RawResponse",
             "responseType": "class",
-            "responseNotes": "Export all translations from your project to a multi-locale language pack.<br \/>\n           <br \/>\n           Note that not all formats support multiple locales in the same file. See <code>\/export\/archive<\/code> for exporting separate files,\n           and <code>\/export\/locale<\/code> for exporting one language at a time.",
+            "responseNotes": "<p>Export all translations from your project to a multi-locale language pack.<\/p>\n           <p>Note that not all formats support multiple locales in the same file. See <code>\/export\/archive<\/code> for exporting separate files,\n           and <code>\/export\/locale<\/code> for exporting one language at a time.<\/p>",
             "summary": "Export your whole project to a multi-locale language pack",
             "parameters": {
                 "ext": {
@@ -106,6 +106,7 @@
                         "constants",
                         "chrome",
                         "nested",
+                        "rails",
                         "java",
                         "tizen"
                     ]
@@ -164,7 +165,7 @@
             "class": "Guzzle\\Service\\Command\\OperationCommand",
             "responseClass": "\\Loco\\Http\\Response\\RawResponse",
             "responseType": "class",
-            "responseNotes": "Export translations from your project to a locale-specific language pack.\n           Various export file types are supported with format variations for some types.",
+            "responseNotes": "<p>Export translations from your project to a locale-specific language pack.<\/p>\n           <p>Various export file types are supported with format variations for some types.\n              <a href=\"http:\/\/localise.biz\/api#formats\">See the full list of supported export formats<\/a>.<\/p>",
             "summary": "Export a single locale to a language pack.",
             "parameters": {
                 "key": {
@@ -184,6 +185,7 @@
                         "constants",
                         "chrome",
                         "nested",
+                        "rails",
                         "java",
                         "tizen"
                     ]
@@ -1123,6 +1125,7 @@
                         "constants",
                         "chrome",
                         "nested",
+                        "rails",
                         "java",
                         "tizen",
                         "gettext"
