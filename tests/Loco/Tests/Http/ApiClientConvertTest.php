@@ -471,7 +471,7 @@ class ApiClientConvertTest extends ApiClientTest {
      */
     public function testImportNestedYaml( $sourcefile ){
         // @todo handle nested yaml namespacing
-        $this->checkValidJson( $this->convert( $sourcefile, 'yml', 'json', '', false ), true, '', 'test-' );
+        $this->checkValidJson( $this->convert( $sourcefile, 'yml', 'json', '', false ), true, 'test' );
     }
     //*/
     
