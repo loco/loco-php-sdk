@@ -1,26 +1,76 @@
 <?php
 /**
- * Auto-generated with Swizzle at 2014-03-15 15:02:01 +0000
+ * Auto-generated with Swizzle at 2014-05-07 14:52:36 +0100
  */
 return array (
   'name' => 'Loco',
-  'apiVersion' => '1.0.5',
+  'apiVersion' => '1.0.6',
   'baseUrl' => 'https://localise.biz/',
   'description' => 'Loco REST API',
   'operations' => 
   array (
-    'authVerify' => 
+    'import' => 
     array (
-      'httpMethod' => 'GET',
-      'uri' => '/api/auth/verify',
+      'httpMethod' => 'POST',
+      'uri' => '/api/import/{ext}',
       'class' => 'Guzzle\\Service\\Command\\OperationCommand',
-      'responseClass' => 'Creds',
+      'responseClass' => 'Imported',
       'responseType' => 'model',
-      'responseNotes' => 'Loco API keys authenticate your user account for accessing a specific project.<br />
-             This endpoint verifies an API key and returns the authenticated user, account and project.',
-      'summary' => 'Verify an API project key',
+      'responseNotes' => '<p>The import API loads translations from various language pack formats into the currently authenticated project.</p>
+           <p>Take note of how the <code>index</code> and <code>locale</code> parameters are used to describe how your file will be imported. 
+              By leaving these fields empty Loco will try to guess your intentions, but it\'s advisable to specify all parameters if in any doubt.
+              <a href="http://localise.biz/api#imports">See examples</a>.</p>',
+      'summary' => 'Import from language pack files',
       'parameters' => 
       array (
+        'ext' => 
+        array (
+          'required' => true,
+          'description' => 'Import file type specified as a file extension',
+          'type' => 'string',
+          'location' => 'uri',
+          'enum' => 
+          array (
+            0 => 'json',
+            1 => 'mo',
+            2 => 'php',
+            3 => 'po',
+            4 => 'pot',
+            5 => 'resx',
+            6 => 'strings',
+            7 => 'tmx',
+            8 => 'ts',
+            9 => 'xlf',
+            10 => 'xml',
+            11 => 'yml',
+          ),
+          'default' => 'json',
+        ),
+        'src' => 
+        array (
+          'required' => true,
+          'description' => 'Raw source of file being imported',
+          'type' => 'string',
+          'location' => 'body',
+          'default' => '{}',
+        ),
+        'index' => 
+        array (
+          'description' => 'Specify whether file indexes translations by asset ID or source texts',
+          'type' => 'string',
+          'location' => 'query',
+          'enum' => 
+          array (
+            0 => 'id',
+            1 => 'text',
+          ),
+        ),
+        'locale' => 
+        array (
+          'description' => 'Specify target locale if importing translations',
+          'type' => 'string',
+          'location' => 'query',
+        ),
         'key' => 
         array (
           'required' => true,
@@ -33,8 +83,18 @@ return array (
       array (
         0 => 
         array (
+          'code' => 422,
+          'phrase' => 'Empty or invalid source data',
+        ),
+        1 => 
+        array (
           'code' => 401,
           'phrase' => 'Invalid API key',
+        ),
+        2 => 
+        array (
+          'code' => 403,
+          'phrase' => 'Insufficient privileges',
         ),
       ),
     ),
@@ -172,7 +232,7 @@ return array (
             2 => 'js',
             3 => 'json',
             4 => 'mo',
-            5 => 'phps',
+            5 => 'php',
             6 => 'po',
             7 => 'pot',
             8 => 'resx',
@@ -272,7 +332,7 @@ return array (
             2 => 'js',
             3 => 'json',
             4 => 'mo',
-            5 => 'phps',
+            5 => 'php',
             6 => 'po',
             7 => 'pot',
             8 => 'resx',
@@ -285,6 +345,35 @@ return array (
             15 => 'yml',
           ),
           'default' => 'json',
+        ),
+      ),
+      'errorResponses' => 
+      array (
+        0 => 
+        array (
+          'code' => 401,
+          'phrase' => 'Invalid API key',
+        ),
+      ),
+    ),
+    'authVerify' => 
+    array (
+      'httpMethod' => 'GET',
+      'uri' => '/api/auth/verify',
+      'class' => 'Guzzle\\Service\\Command\\OperationCommand',
+      'responseClass' => 'Creds',
+      'responseType' => 'model',
+      'responseNotes' => 'Loco API keys authenticate your user account for accessing a specific project.<br />
+             This endpoint verifies an API key and returns the authenticated user, account and project.',
+      'summary' => 'Verify an API project key',
+      'parameters' => 
+      array (
+        'key' => 
+        array (
+          'required' => true,
+          'description' => 'Project API key',
+          'type' => 'string',
+          'location' => 'query',
         ),
       ),
       'errorResponses' => 
@@ -404,7 +493,7 @@ return array (
     'getAsset' => 
     array (
       'httpMethod' => 'GET',
-      'uri' => '/api/assets/{id}',
+      'uri' => '/api/assets/{id}.json',
       'class' => 'Guzzle\\Service\\Command\\OperationCommand',
       'responseClass' => 'Asset',
       'responseType' => 'model',
@@ -444,7 +533,7 @@ return array (
     'patchAsset' => 
     array (
       'httpMethod' => 'PATCH',
-      'uri' => '/api/assets/{id}',
+      'uri' => '/api/assets/{id}.json',
       'class' => 'Guzzle\\Service\\Command\\OperationCommand',
       'responseClass' => 'Asset',
       'responseType' => 'model',
@@ -524,7 +613,7 @@ return array (
     'deleteAsset' => 
     array (
       'httpMethod' => 'DELETE',
-      'uri' => '/api/assets/{id}',
+      'uri' => '/api/assets/{id}.json',
       'class' => 'Guzzle\\Service\\Command\\OperationCommand',
       'responseClass' => 'Success',
       'responseType' => 'model',
@@ -672,7 +761,7 @@ return array (
     'unlinkPlural' => 
     array (
       'httpMethod' => 'DELETE',
-      'uri' => '/api/assets/{id}/plurals/{pid}',
+      'uri' => '/api/assets/{id}/plurals/{pid}.json',
       'class' => 'Guzzle\\Service\\Command\\OperationCommand',
       'responseClass' => 'Success',
       'responseType' => 'model',
@@ -777,7 +866,7 @@ return array (
     'untagAsset' => 
     array (
       'httpMethod' => 'DELETE',
-      'uri' => '/api/assets/{id}/tags/{tag}',
+      'uri' => '/api/assets/{id}/tags/{tag}.json',
       'class' => 'Guzzle\\Service\\Command\\OperationCommand',
       'responseClass' => 'Success',
       'responseType' => 'model',
@@ -1054,7 +1143,7 @@ return array (
     'getTranslations' => 
     array (
       'httpMethod' => 'GET',
-      'uri' => '/api/translations/{id}',
+      'uri' => '/api/translations/{id}.json',
       'class' => 'Guzzle\\Service\\Command\\OperationCommand',
       'responseClass' => 'array',
       'responseType' => 'primitive',
@@ -1411,6 +1500,394 @@ return array (
   ),
   'models' => 
   array (
+    'anon_type_string' => 
+    array (
+      'type' => 'string',
+    ),
+    'Asset' => 
+    array (
+      'type' => 'object',
+      'additionalProperties' => false,
+      'properties' => 
+      array (
+        'id' => 
+        array (
+          'required' => true,
+          'description' => 'Machine friendly name',
+          'type' => 'string',
+          'location' => 'json',
+        ),
+        'type' => 
+        array (
+          'required' => true,
+          'description' => 'Broad content type, defaults to plain text',
+          'type' => 'string',
+          'location' => 'json',
+          'enum' => 
+          array (
+            0 => 'text',
+            1 => 'html',
+            2 => 'image',
+            3 => 'audio',
+            4 => 'video',
+            5 => 'bin',
+          ),
+        ),
+        'name' => 
+        array (
+          'required' => true,
+          'description' => 'Human friendly name',
+          'type' => 'string',
+          'location' => 'json',
+        ),
+        'context' => 
+        array (
+          'required' => true,
+          'description' => 'Optional context descriptor',
+          'type' => 'string',
+          'location' => 'json',
+        ),
+        'modified' => 
+        array (
+          'required' => true,
+          'description' => 'Time last modified in UTC',
+          'type' => 'string',
+          'format' => 'date-time',
+          'location' => 'json',
+        ),
+        'translated' => 
+        array (
+          'required' => true,
+          'description' => 'Number of completed translations',
+          'type' => 'integer',
+          'location' => 'json',
+        ),
+        'untranslated' => 
+        array (
+          'required' => true,
+          'description' => 'Number of incomplete translations',
+          'type' => 'integer',
+          'location' => 'json',
+        ),
+        'plurals' => 
+        array (
+          'required' => true,
+          'description' => 'Number of associated plural forms',
+          'type' => 'integer',
+          'location' => 'json',
+        ),
+        'tags' => 
+        array (
+          'required' => true,
+          'description' => 'List of terms asset is tagged with',
+          'type' => 'array',
+          'location' => 'json',
+          'items' => 
+          array (
+            'type' => 'string',
+          ),
+        ),
+      ),
+    ),
+    'PluralRules' => 
+    array (
+      'type' => 'object',
+      'additionalProperties' => false,
+      'properties' => 
+      array (
+        'length' => 
+        array (
+          'required' => true,
+          'description' => 'Number of plural forms for current language',
+          'type' => 'integer',
+          'location' => 'json',
+          'minimum' => 1,
+          'maximum' => 6,
+        ),
+        'equation' => 
+        array (
+          'required' => true,
+          'description' => 'Equation taking multiplier <code>(n)</code> to yield a plural form offset. <code>( 0 <= offset < length )</code>.',
+          'type' => 'string',
+          'location' => 'json',
+        ),
+        'forms' => 
+        array (
+          'required' => true,
+          'description' => 'Plural form names according to <a href="http://unicode.org/reports/tr35/tr35-numbers.html#Language_Plural_Rules">Unicode tr35</a>.',
+          'type' => 'array',
+          'location' => 'json',
+          'enum' => 
+          array (
+            0 => 'zero',
+            1 => 'one',
+            2 => 'two',
+            3 => 'few',
+            4 => 'many',
+            5 => 'other',
+          ),
+          'items' => 
+          array (
+            'type' => 'string',
+          ),
+        ),
+      ),
+    ),
+    'Locale' => 
+    array (
+      'type' => 'object',
+      'additionalProperties' => false,
+      'properties' => 
+      array (
+        'code' => 
+        array (
+          'required' => true,
+          'description' => 'Locale short code',
+          'type' => 'string',
+          'location' => 'json',
+        ),
+        'name' => 
+        array (
+          'required' => true,
+          'description' => 'Friendly display name',
+          'type' => 'string',
+          'location' => 'json',
+        ),
+        'native' => 
+        array (
+          'required' => true,
+          'description' => 'Whether the source locale of project (read-only)',
+          'type' => 'boolean',
+          'location' => 'json',
+        ),
+        'plurals' => 
+        array (
+          'required' => true,
+          'type' => 'object',
+          'location' => 'json',
+          'additionalProperties' => false,
+          'properties' => 
+          array (
+            'length' => 
+            array (
+              'required' => true,
+              'description' => 'Number of plural forms for current language',
+              'type' => 'integer',
+              'location' => 'json',
+              'minimum' => 1,
+              'maximum' => 6,
+            ),
+            'equation' => 
+            array (
+              'required' => true,
+              'description' => 'Equation taking multiplier <code>(n)</code> to yield a plural form offset. <code>( 0 <= offset < length )</code>.',
+              'type' => 'string',
+              'location' => 'json',
+            ),
+            'forms' => 
+            array (
+              'required' => true,
+              'description' => 'Plural form names according to <a href="http://unicode.org/reports/tr35/tr35-numbers.html#Language_Plural_Rules">Unicode tr35</a>.',
+              'type' => 'array',
+              'location' => 'json',
+              'enum' => 
+              array (
+                0 => 'zero',
+                1 => 'one',
+                2 => 'two',
+                3 => 'few',
+                4 => 'many',
+                5 => 'other',
+              ),
+              'items' => 
+              array (
+                'type' => 'string',
+              ),
+            ),
+          ),
+        ),
+      ),
+    ),
+    'Imported' => 
+    array (
+      'type' => 'object',
+      'additionalProperties' => false,
+      'properties' => 
+      array (
+        'assets' => 
+        array (
+          'description' => 'Assets present in imported data',
+          'type' => 'array',
+          'location' => 'json',
+          'items' => 
+          array (
+            'type' => 'object',
+            'additionalProperties' => false,
+            'properties' => 
+            array (
+              'id' => 
+              array (
+                'required' => true,
+                'description' => 'Machine friendly name',
+                'type' => 'string',
+                'location' => 'json',
+              ),
+              'type' => 
+              array (
+                'required' => true,
+                'description' => 'Broad content type, defaults to plain text',
+                'type' => 'string',
+                'location' => 'json',
+                'enum' => 
+                array (
+                  0 => 'text',
+                  1 => 'html',
+                  2 => 'image',
+                  3 => 'audio',
+                  4 => 'video',
+                  5 => 'bin',
+                ),
+              ),
+              'name' => 
+              array (
+                'required' => true,
+                'description' => 'Human friendly name',
+                'type' => 'string',
+                'location' => 'json',
+              ),
+              'context' => 
+              array (
+                'required' => true,
+                'description' => 'Optional context descriptor',
+                'type' => 'string',
+                'location' => 'json',
+              ),
+              'modified' => 
+              array (
+                'required' => true,
+                'description' => 'Time last modified in UTC',
+                'type' => 'string',
+                'format' => 'date-time',
+                'location' => 'json',
+              ),
+              'translated' => 
+              array (
+                'required' => true,
+                'description' => 'Number of completed translations',
+                'type' => 'integer',
+                'location' => 'json',
+              ),
+              'untranslated' => 
+              array (
+                'required' => true,
+                'description' => 'Number of incomplete translations',
+                'type' => 'integer',
+                'location' => 'json',
+              ),
+              'plurals' => 
+              array (
+                'required' => true,
+                'description' => 'Number of associated plural forms',
+                'type' => 'integer',
+                'location' => 'json',
+              ),
+              'tags' => 
+              array (
+                'required' => true,
+                'description' => 'List of terms asset is tagged with',
+                'type' => 'array',
+                'location' => 'json',
+                'items' => 
+                array (
+                  'type' => 'string',
+                ),
+              ),
+            ),
+          ),
+        ),
+        'locales' => 
+        array (
+          'description' => 'Locales present in imported data',
+          'type' => 'array',
+          'location' => 'json',
+          'items' => 
+          array (
+            'type' => 'object',
+            'additionalProperties' => false,
+            'properties' => 
+            array (
+              'code' => 
+              array (
+                'required' => true,
+                'description' => 'Locale short code',
+                'type' => 'string',
+                'location' => 'json',
+              ),
+              'name' => 
+              array (
+                'required' => true,
+                'description' => 'Friendly display name',
+                'type' => 'string',
+                'location' => 'json',
+              ),
+              'native' => 
+              array (
+                'required' => true,
+                'description' => 'Whether the source locale of project (read-only)',
+                'type' => 'boolean',
+                'location' => 'json',
+              ),
+              'plurals' => 
+              array (
+                'required' => true,
+                'type' => 'object',
+                'location' => 'json',
+                'additionalProperties' => false,
+                'properties' => 
+                array (
+                  'length' => 
+                  array (
+                    'required' => true,
+                    'description' => 'Number of plural forms for current language',
+                    'type' => 'integer',
+                    'location' => 'json',
+                    'minimum' => 1,
+                    'maximum' => 6,
+                  ),
+                  'equation' => 
+                  array (
+                    'required' => true,
+                    'description' => 'Equation taking multiplier <code>(n)</code> to yield a plural form offset. <code>( 0 <= offset < length )</code>.',
+                    'type' => 'string',
+                    'location' => 'json',
+                  ),
+                  'forms' => 
+                  array (
+                    'required' => true,
+                    'description' => 'Plural form names according to <a href="http://unicode.org/reports/tr35/tr35-numbers.html#Language_Plural_Rules">Unicode tr35</a>.',
+                    'type' => 'array',
+                    'location' => 'json',
+                    'enum' => 
+                    array (
+                      0 => 'zero',
+                      1 => 'one',
+                      2 => 'two',
+                      3 => 'few',
+                      4 => 'many',
+                      5 => 'other',
+                    ),
+                    'items' => 
+                    array (
+                      'type' => 'string',
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ),
+      ),
+    ),
     'User' => 
     array (
       'type' => 'object',
@@ -1569,95 +2046,6 @@ return array (
         ),
       ),
     ),
-    'anon_type_string' => 
-    array (
-      'type' => 'string',
-    ),
-    'Asset' => 
-    array (
-      'type' => 'object',
-      'additionalProperties' => false,
-      'properties' => 
-      array (
-        'id' => 
-        array (
-          'required' => true,
-          'description' => 'Machine friendly name',
-          'type' => 'string',
-          'location' => 'json',
-        ),
-        'type' => 
-        array (
-          'required' => true,
-          'description' => 'Broad content type, defaults to plain text',
-          'type' => 'string',
-          'location' => 'json',
-          'enum' => 
-          array (
-            0 => 'text',
-            1 => 'html',
-            2 => 'image',
-            3 => 'audio',
-            4 => 'video',
-            5 => 'bin',
-          ),
-        ),
-        'name' => 
-        array (
-          'required' => true,
-          'description' => 'Human friendly name',
-          'type' => 'string',
-          'location' => 'json',
-        ),
-        'context' => 
-        array (
-          'required' => true,
-          'description' => 'Optional context descriptor',
-          'type' => 'string',
-          'location' => 'json',
-        ),
-        'modified' => 
-        array (
-          'required' => true,
-          'description' => 'Time last modified in UTC',
-          'type' => 'string',
-          'format' => 'date-time',
-          'location' => 'json',
-        ),
-        'translated' => 
-        array (
-          'required' => true,
-          'description' => 'Number of completed translations',
-          'type' => 'integer',
-          'location' => 'json',
-        ),
-        'untranslated' => 
-        array (
-          'required' => true,
-          'description' => 'Number of incomplete translations',
-          'type' => 'integer',
-          'location' => 'json',
-        ),
-        'plurals' => 
-        array (
-          'required' => true,
-          'description' => 'Number of associated plural forms',
-          'type' => 'integer',
-          'location' => 'json',
-        ),
-        'tags' => 
-        array (
-          'required' => true,
-          'description' => 'List of terms asset is tagged with',
-          'type' => 'array',
-          'location' => 'json',
-          'items' => 
-          array (
-            'type' => 'string',
-          ),
-        ),
-      ),
-    ),
     'AssetPatch' => 
     array (
       'description' => 'Patch class for documentation only.',
@@ -1740,125 +2128,6 @@ return array (
           'description' => 'Friendly display name',
           'type' => 'string',
           'location' => 'json',
-        ),
-      ),
-    ),
-    'PluralRules' => 
-    array (
-      'type' => 'object',
-      'additionalProperties' => false,
-      'properties' => 
-      array (
-        'length' => 
-        array (
-          'required' => true,
-          'description' => 'Number of plural forms for current language',
-          'type' => 'integer',
-          'location' => 'json',
-          'minimum' => 1,
-          'maximum' => 6,
-        ),
-        'equation' => 
-        array (
-          'required' => true,
-          'description' => 'Equation taking multiplier <code>(n)</code> to yield a plural form offset. <code>( 0 <= offset < length )</code>.',
-          'type' => 'string',
-          'location' => 'json',
-        ),
-        'forms' => 
-        array (
-          'required' => true,
-          'description' => 'Plural form names according to <a href="http://unicode.org/reports/tr35/tr35-numbers.html#Language_Plural_Rules">Unicode tr35</a>.',
-          'type' => 'array',
-          'location' => 'json',
-          'enum' => 
-          array (
-            0 => 'zero',
-            1 => 'one',
-            2 => 'two',
-            3 => 'few',
-            4 => 'many',
-            5 => 'other',
-          ),
-          'items' => 
-          array (
-            'type' => 'string',
-          ),
-        ),
-      ),
-    ),
-    'Locale' => 
-    array (
-      'type' => 'object',
-      'additionalProperties' => false,
-      'properties' => 
-      array (
-        'code' => 
-        array (
-          'required' => true,
-          'description' => 'Locale short code',
-          'type' => 'string',
-          'location' => 'json',
-        ),
-        'name' => 
-        array (
-          'required' => true,
-          'description' => 'Friendly display name',
-          'type' => 'string',
-          'location' => 'json',
-        ),
-        'native' => 
-        array (
-          'required' => true,
-          'description' => 'Whether the source locale of project (read-only)',
-          'type' => 'boolean',
-          'location' => 'json',
-        ),
-        'plurals' => 
-        array (
-          'required' => true,
-          'type' => 'object',
-          'location' => 'json',
-          'additionalProperties' => false,
-          'properties' => 
-          array (
-            'length' => 
-            array (
-              'required' => true,
-              'description' => 'Number of plural forms for current language',
-              'type' => 'integer',
-              'location' => 'json',
-              'minimum' => 1,
-              'maximum' => 6,
-            ),
-            'equation' => 
-            array (
-              'required' => true,
-              'description' => 'Equation taking multiplier <code>(n)</code> to yield a plural form offset. <code>( 0 <= offset < length )</code>.',
-              'type' => 'string',
-              'location' => 'json',
-            ),
-            'forms' => 
-            array (
-              'required' => true,
-              'description' => 'Plural form names according to <a href="http://unicode.org/reports/tr35/tr35-numbers.html#Language_Plural_Rules">Unicode tr35</a>.',
-              'type' => 'array',
-              'location' => 'json',
-              'enum' => 
-              array (
-                0 => 'zero',
-                1 => 'one',
-                2 => 'two',
-                3 => 'few',
-                4 => 'many',
-                5 => 'other',
-              ),
-              'items' => 
-              array (
-                'type' => 'string',
-              ),
-            ),
-          ),
         ),
       ),
     ),

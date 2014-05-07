@@ -221,13 +221,25 @@ class ApiClientConvertTest extends ApiClientTest {
 
 
     /**
-     * Export nested (ruby style) Yaml from seed file
+     * Export nested Yaml from seed file
      */
     public function testExportNestedYaml(){
         $yml = $this->convert( 'test-fr_FR.po', 'po', 'yml', 'nested' );
         $arr = $this->checkValidYaml( $yml );
         $this->assertContains("fr_FR:\n  test:\n    sample: échantillon", $yml );
         return 'export/test-fr_FR.nested.yml';
+    }
+
+
+    /**
+     * Export RoR style Yaml from seed file
+     */
+    public function testExportRailsYaml(){
+        $yml = $this->convert( 'test-fr_FR.po', 'po', 'yml', 'rails' );
+        $arr = $this->checkValidYaml( $yml );
+        // Rails has short locale and no interim namespace
+        $this->assertContains("fr:\n  sample: échantillon", $yml );
+        return 'export/test-fr_FR.rails.yml';
     }
     
     
@@ -471,7 +483,7 @@ class ApiClientConvertTest extends ApiClientTest {
      */
     public function testImportNestedYaml( $sourcefile ){
         // @todo handle nested yaml namespacing
-        $this->checkValidJson( $this->convert( $sourcefile, 'yml', 'json', '', false ), true, '', 'test-' );
+        $this->checkValidJson( $this->convert( $sourcefile, 'yml', 'json', '', false ), true, 'test' );
     }
     //*/
     

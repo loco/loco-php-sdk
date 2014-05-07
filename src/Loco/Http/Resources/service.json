@@ -1,18 +1,60 @@
 {
     "name": "Loco",
-    "apiVersion": "1.0.5",
+    "apiVersion": "1.0.6",
     "baseUrl": "https:\/\/localise.biz\/",
     "description": "Loco REST API",
     "operations": {
-        "authVerify": {
-            "httpMethod": "GET",
-            "uri": "\/api\/auth\/verify",
+        "import": {
+            "httpMethod": "POST",
+            "uri": "\/api\/import\/{ext}",
             "class": "Guzzle\\Service\\Command\\OperationCommand",
-            "responseClass": "Creds",
+            "responseClass": "Imported",
             "responseType": "model",
-            "responseNotes": "Loco API keys authenticate your user account for accessing a specific project.<br \/>\n             This endpoint verifies an API key and returns the authenticated user, account and project.",
-            "summary": "Verify an API project key",
+            "responseNotes": "<p>The import API loads translations from various language pack formats into the currently authenticated project.<\/p>\n           <p>Take note of how the <code>index<\/code> and <code>locale<\/code> parameters are used to describe how your file will be imported. \n              By leaving these fields empty Loco will try to guess your intentions, but it's advisable to specify all parameters if in any doubt.\n              <a href=\"http:\/\/localise.biz\/api#imports\">See examples<\/a>.<\/p>",
+            "summary": "Import from language pack files",
             "parameters": {
+                "ext": {
+                    "required": true,
+                    "description": "Import file type specified as a file extension",
+                    "type": "string",
+                    "location": "uri",
+                    "enum": [
+                        "json",
+                        "mo",
+                        "php",
+                        "po",
+                        "pot",
+                        "resx",
+                        "strings",
+                        "tmx",
+                        "ts",
+                        "xlf",
+                        "xml",
+                        "yml"
+                    ],
+                    "default": "json"
+                },
+                "src": {
+                    "required": true,
+                    "description": "Raw source of file being imported",
+                    "type": "string",
+                    "location": "body",
+                    "default": "{}"
+                },
+                "index": {
+                    "description": "Specify whether file indexes translations by asset ID or source texts",
+                    "type": "string",
+                    "location": "query",
+                    "enum": [
+                        "id",
+                        "text"
+                    ]
+                },
+                "locale": {
+                    "description": "Specify target locale if importing translations",
+                    "type": "string",
+                    "location": "query"
+                },
                 "key": {
                     "required": true,
                     "description": "Project API key",
@@ -22,8 +64,16 @@
             },
             "errorResponses": [
                 {
+                    "code": 422,
+                    "phrase": "Empty or invalid source data"
+                },
+                {
                     "code": 401,
                     "phrase": "Invalid API key"
+                },
+                {
+                    "code": 403,
+                    "phrase": "Insufficient privileges"
                 }
             ]
         },
@@ -137,7 +187,7 @@
                         "js",
                         "json",
                         "mo",
-                        "phps",
+                        "php",
                         "po",
                         "pot",
                         "resx",
@@ -222,7 +272,7 @@
                         "js",
                         "json",
                         "mo",
-                        "phps",
+                        "php",
                         "po",
                         "pot",
                         "resx",
@@ -235,6 +285,29 @@
                         "yml"
                     ],
                     "default": "json"
+                }
+            },
+            "errorResponses": [
+                {
+                    "code": 401,
+                    "phrase": "Invalid API key"
+                }
+            ]
+        },
+        "authVerify": {
+            "httpMethod": "GET",
+            "uri": "\/api\/auth\/verify",
+            "class": "Guzzle\\Service\\Command\\OperationCommand",
+            "responseClass": "Creds",
+            "responseType": "model",
+            "responseNotes": "Loco API keys authenticate your user account for accessing a specific project.<br \/>\n             This endpoint verifies an API key and returns the authenticated user, account and project.",
+            "summary": "Verify an API project key",
+            "parameters": {
+                "key": {
+                    "required": true,
+                    "description": "Project API key",
+                    "type": "string",
+                    "location": "query"
                 }
             },
             "errorResponses": [
@@ -331,7 +404,7 @@
         },
         "getAsset": {
             "httpMethod": "GET",
-            "uri": "\/api\/assets\/{id}",
+            "uri": "\/api\/assets\/{id}.json",
             "class": "Guzzle\\Service\\Command\\OperationCommand",
             "responseClass": "Asset",
             "responseType": "model",
@@ -364,7 +437,7 @@
         },
         "patchAsset": {
             "httpMethod": "PATCH",
-            "uri": "\/api\/assets\/{id}",
+            "uri": "\/api\/assets\/{id}.json",
             "class": "Guzzle\\Service\\Command\\OperationCommand",
             "responseClass": "Asset",
             "responseType": "model",
@@ -430,7 +503,7 @@
         },
         "deleteAsset": {
             "httpMethod": "DELETE",
-            "uri": "\/api\/assets\/{id}",
+            "uri": "\/api\/assets\/{id}.json",
             "class": "Guzzle\\Service\\Command\\OperationCommand",
             "responseClass": "Success",
             "responseType": "model",
@@ -549,7 +622,7 @@
         },
         "unlinkPlural": {
             "httpMethod": "DELETE",
-            "uri": "\/api\/assets\/{id}\/plurals\/{pid}",
+            "uri": "\/api\/assets\/{id}\/plurals\/{pid}.json",
             "class": "Guzzle\\Service\\Command\\OperationCommand",
             "responseClass": "Success",
             "responseType": "model",
@@ -635,7 +708,7 @@
         },
         "untagAsset": {
             "httpMethod": "DELETE",
-            "uri": "\/api\/assets\/{id}\/tags\/{tag}",
+            "uri": "\/api\/assets\/{id}\/tags\/{tag}.json",
             "class": "Guzzle\\Service\\Command\\OperationCommand",
             "responseClass": "Success",
             "responseType": "model",
@@ -859,7 +932,7 @@
         },
         "getTranslations": {
             "httpMethod": "GET",
-            "uri": "\/api\/translations\/{id}",
+            "uri": "\/api\/translations\/{id}.json",
             "class": "Guzzle\\Service\\Command\\OperationCommand",
             "responseClass": "array",
             "responseType": "primitive",
@@ -1155,6 +1228,332 @@
         }
     },
     "models": {
+        "anon_type_string": {
+            "type": "string"
+        },
+        "Asset": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "id": {
+                    "required": true,
+                    "description": "Machine friendly name",
+                    "type": "string",
+                    "location": "json"
+                },
+                "type": {
+                    "required": true,
+                    "description": "Broad content type, defaults to plain text",
+                    "type": "string",
+                    "location": "json",
+                    "enum": [
+                        "text",
+                        "html",
+                        "image",
+                        "audio",
+                        "video",
+                        "bin"
+                    ]
+                },
+                "name": {
+                    "required": true,
+                    "description": "Human friendly name",
+                    "type": "string",
+                    "location": "json"
+                },
+                "context": {
+                    "required": true,
+                    "description": "Optional context descriptor",
+                    "type": "string",
+                    "location": "json"
+                },
+                "modified": {
+                    "required": true,
+                    "description": "Time last modified in UTC",
+                    "type": "string",
+                    "format": "date-time",
+                    "location": "json"
+                },
+                "translated": {
+                    "required": true,
+                    "description": "Number of completed translations",
+                    "type": "integer",
+                    "location": "json"
+                },
+                "untranslated": {
+                    "required": true,
+                    "description": "Number of incomplete translations",
+                    "type": "integer",
+                    "location": "json"
+                },
+                "plurals": {
+                    "required": true,
+                    "description": "Number of associated plural forms",
+                    "type": "integer",
+                    "location": "json"
+                },
+                "tags": {
+                    "required": true,
+                    "description": "List of terms asset is tagged with",
+                    "type": "array",
+                    "location": "json",
+                    "items": {
+                        "type": "string"
+                    }
+                }
+            }
+        },
+        "PluralRules": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "length": {
+                    "required": true,
+                    "description": "Number of plural forms for current language",
+                    "type": "integer",
+                    "location": "json",
+                    "minimum": 1,
+                    "maximum": 6
+                },
+                "equation": {
+                    "required": true,
+                    "description": "Equation taking multiplier <code>(n)<\/code> to yield a plural form offset. <code>( 0 <= offset < length )<\/code>.",
+                    "type": "string",
+                    "location": "json"
+                },
+                "forms": {
+                    "required": true,
+                    "description": "Plural form names according to <a href=\"http:\/\/unicode.org\/reports\/tr35\/tr35-numbers.html#Language_Plural_Rules\">Unicode tr35<\/a>.",
+                    "type": "array",
+                    "location": "json",
+                    "enum": [
+                        "zero",
+                        "one",
+                        "two",
+                        "few",
+                        "many",
+                        "other"
+                    ],
+                    "items": {
+                        "type": "string"
+                    }
+                }
+            }
+        },
+        "Locale": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "code": {
+                    "required": true,
+                    "description": "Locale short code",
+                    "type": "string",
+                    "location": "json"
+                },
+                "name": {
+                    "required": true,
+                    "description": "Friendly display name",
+                    "type": "string",
+                    "location": "json"
+                },
+                "native": {
+                    "required": true,
+                    "description": "Whether the source locale of project (read-only)",
+                    "type": "boolean",
+                    "location": "json"
+                },
+                "plurals": {
+                    "required": true,
+                    "type": "object",
+                    "location": "json",
+                    "additionalProperties": false,
+                    "properties": {
+                        "length": {
+                            "required": true,
+                            "description": "Number of plural forms for current language",
+                            "type": "integer",
+                            "location": "json",
+                            "minimum": 1,
+                            "maximum": 6
+                        },
+                        "equation": {
+                            "required": true,
+                            "description": "Equation taking multiplier <code>(n)<\/code> to yield a plural form offset. <code>( 0 <= offset < length )<\/code>.",
+                            "type": "string",
+                            "location": "json"
+                        },
+                        "forms": {
+                            "required": true,
+                            "description": "Plural form names according to <a href=\"http:\/\/unicode.org\/reports\/tr35\/tr35-numbers.html#Language_Plural_Rules\">Unicode tr35<\/a>.",
+                            "type": "array",
+                            "location": "json",
+                            "enum": [
+                                "zero",
+                                "one",
+                                "two",
+                                "few",
+                                "many",
+                                "other"
+                            ],
+                            "items": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "Imported": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "assets": {
+                    "description": "Assets present in imported data",
+                    "type": "array",
+                    "location": "json",
+                    "items": {
+                        "type": "object",
+                        "additionalProperties": false,
+                        "properties": {
+                            "id": {
+                                "required": true,
+                                "description": "Machine friendly name",
+                                "type": "string",
+                                "location": "json"
+                            },
+                            "type": {
+                                "required": true,
+                                "description": "Broad content type, defaults to plain text",
+                                "type": "string",
+                                "location": "json",
+                                "enum": [
+                                    "text",
+                                    "html",
+                                    "image",
+                                    "audio",
+                                    "video",
+                                    "bin"
+                                ]
+                            },
+                            "name": {
+                                "required": true,
+                                "description": "Human friendly name",
+                                "type": "string",
+                                "location": "json"
+                            },
+                            "context": {
+                                "required": true,
+                                "description": "Optional context descriptor",
+                                "type": "string",
+                                "location": "json"
+                            },
+                            "modified": {
+                                "required": true,
+                                "description": "Time last modified in UTC",
+                                "type": "string",
+                                "format": "date-time",
+                                "location": "json"
+                            },
+                            "translated": {
+                                "required": true,
+                                "description": "Number of completed translations",
+                                "type": "integer",
+                                "location": "json"
+                            },
+                            "untranslated": {
+                                "required": true,
+                                "description": "Number of incomplete translations",
+                                "type": "integer",
+                                "location": "json"
+                            },
+                            "plurals": {
+                                "required": true,
+                                "description": "Number of associated plural forms",
+                                "type": "integer",
+                                "location": "json"
+                            },
+                            "tags": {
+                                "required": true,
+                                "description": "List of terms asset is tagged with",
+                                "type": "array",
+                                "location": "json",
+                                "items": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                },
+                "locales": {
+                    "description": "Locales present in imported data",
+                    "type": "array",
+                    "location": "json",
+                    "items": {
+                        "type": "object",
+                        "additionalProperties": false,
+                        "properties": {
+                            "code": {
+                                "required": true,
+                                "description": "Locale short code",
+                                "type": "string",
+                                "location": "json"
+                            },
+                            "name": {
+                                "required": true,
+                                "description": "Friendly display name",
+                                "type": "string",
+                                "location": "json"
+                            },
+                            "native": {
+                                "required": true,
+                                "description": "Whether the source locale of project (read-only)",
+                                "type": "boolean",
+                                "location": "json"
+                            },
+                            "plurals": {
+                                "required": true,
+                                "type": "object",
+                                "location": "json",
+                                "additionalProperties": false,
+                                "properties": {
+                                    "length": {
+                                        "required": true,
+                                        "description": "Number of plural forms for current language",
+                                        "type": "integer",
+                                        "location": "json",
+                                        "minimum": 1,
+                                        "maximum": 6
+                                    },
+                                    "equation": {
+                                        "required": true,
+                                        "description": "Equation taking multiplier <code>(n)<\/code> to yield a plural form offset. <code>( 0 <= offset < length )<\/code>.",
+                                        "type": "string",
+                                        "location": "json"
+                                    },
+                                    "forms": {
+                                        "required": true,
+                                        "description": "Plural form names according to <a href=\"http:\/\/unicode.org\/reports\/tr35\/tr35-numbers.html#Language_Plural_Rules\">Unicode tr35<\/a>.",
+                                        "type": "array",
+                                        "location": "json",
+                                        "enum": [
+                                            "zero",
+                                            "one",
+                                            "two",
+                                            "few",
+                                            "many",
+                                            "other"
+                                        ],
+                                        "items": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "User": {
             "type": "object",
             "additionalProperties": false,
@@ -1283,81 +1682,6 @@
                 }
             }
         },
-        "anon_type_string": {
-            "type": "string"
-        },
-        "Asset": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "id": {
-                    "required": true,
-                    "description": "Machine friendly name",
-                    "type": "string",
-                    "location": "json"
-                },
-                "type": {
-                    "required": true,
-                    "description": "Broad content type, defaults to plain text",
-                    "type": "string",
-                    "location": "json",
-                    "enum": [
-                        "text",
-                        "html",
-                        "image",
-                        "audio",
-                        "video",
-                        "bin"
-                    ]
-                },
-                "name": {
-                    "required": true,
-                    "description": "Human friendly name",
-                    "type": "string",
-                    "location": "json"
-                },
-                "context": {
-                    "required": true,
-                    "description": "Optional context descriptor",
-                    "type": "string",
-                    "location": "json"
-                },
-                "modified": {
-                    "required": true,
-                    "description": "Time last modified in UTC",
-                    "type": "string",
-                    "format": "date-time",
-                    "location": "json"
-                },
-                "translated": {
-                    "required": true,
-                    "description": "Number of completed translations",
-                    "type": "integer",
-                    "location": "json"
-                },
-                "untranslated": {
-                    "required": true,
-                    "description": "Number of incomplete translations",
-                    "type": "integer",
-                    "location": "json"
-                },
-                "plurals": {
-                    "required": true,
-                    "description": "Number of associated plural forms",
-                    "type": "integer",
-                    "location": "json"
-                },
-                "tags": {
-                    "required": true,
-                    "description": "List of terms asset is tagged with",
-                    "type": "array",
-                    "location": "json",
-                    "items": {
-                        "type": "string"
-                    }
-                }
-            }
-        },
         "AssetPatch": {
             "description": "Patch class for documentation only.",
             "type": "object",
@@ -1425,106 +1749,6 @@
                     "description": "Friendly display name",
                     "type": "string",
                     "location": "json"
-                }
-            }
-        },
-        "PluralRules": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "length": {
-                    "required": true,
-                    "description": "Number of plural forms for current language",
-                    "type": "integer",
-                    "location": "json",
-                    "minimum": 1,
-                    "maximum": 6
-                },
-                "equation": {
-                    "required": true,
-                    "description": "Equation taking multiplier <code>(n)<\/code> to yield a plural form offset. <code>( 0 <= offset < length )<\/code>.",
-                    "type": "string",
-                    "location": "json"
-                },
-                "forms": {
-                    "required": true,
-                    "description": "Plural form names according to <a href=\"http:\/\/unicode.org\/reports\/tr35\/tr35-numbers.html#Language_Plural_Rules\">Unicode tr35<\/a>.",
-                    "type": "array",
-                    "location": "json",
-                    "enum": [
-                        "zero",
-                        "one",
-                        "two",
-                        "few",
-                        "many",
-                        "other"
-                    ],
-                    "items": {
-                        "type": "string"
-                    }
-                }
-            }
-        },
-        "Locale": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "code": {
-                    "required": true,
-                    "description": "Locale short code",
-                    "type": "string",
-                    "location": "json"
-                },
-                "name": {
-                    "required": true,
-                    "description": "Friendly display name",
-                    "type": "string",
-                    "location": "json"
-                },
-                "native": {
-                    "required": true,
-                    "description": "Whether the source locale of project (read-only)",
-                    "type": "boolean",
-                    "location": "json"
-                },
-                "plurals": {
-                    "required": true,
-                    "type": "object",
-                    "location": "json",
-                    "additionalProperties": false,
-                    "properties": {
-                        "length": {
-                            "required": true,
-                            "description": "Number of plural forms for current language",
-                            "type": "integer",
-                            "location": "json",
-                            "minimum": 1,
-                            "maximum": 6
-                        },
-                        "equation": {
-                            "required": true,
-                            "description": "Equation taking multiplier <code>(n)<\/code> to yield a plural form offset. <code>( 0 <= offset < length )<\/code>.",
-                            "type": "string",
-                            "location": "json"
-                        },
-                        "forms": {
-                            "required": true,
-                            "description": "Plural form names according to <a href=\"http:\/\/unicode.org\/reports\/tr35\/tr35-numbers.html#Language_Plural_Rules\">Unicode tr35<\/a>.",
-                            "type": "array",
-                            "location": "json",
-                            "enum": [
-                                "zero",
-                                "one",
-                                "two",
-                                "few",
-                                "many",
-                                "other"
-                            ],
-                            "items": {
-                                "type": "string"
-                            }
-                        }
-                    }
                 }
             }
         },
