@@ -1,13 +1,13 @@
 {
     "name": "Loco",
     "apiVersion": "1.0.6",
-    "baseUrl": "https:\/\/ssl.loco.192.168.0.7.xip.io\/",
+    "baseUrl": "https:\/\/localise.biz\/",
     "description": "Loco REST API",
     "operations": {
         "import": {
             "httpMethod": "POST",
             "uri": "\/api\/import\/{ext}",
-            "class": "\\Loco\\Http\\Command\\StrictCommand",
+            "class": "Guzzle\\Service\\Command\\OperationCommand",
             "responseClass": "Imported",
             "responseType": "model",
             "responseNotes": "<p>The import API loads translations from various language pack formats into the currently authenticated project.<\/p>\n           <p>Take note of how the <code>index<\/code> and <code>locale<\/code> parameters are used to describe how your file will be imported. \n              By leaving these fields empty Loco will try to guess your intentions, but it's advisable to specify all parameters if in any doubt.\n              <a href=\"http:\/\/localise.biz\/api#imports\">See examples<\/a>.<\/p>",
@@ -80,7 +80,7 @@
         "exportAll": {
             "httpMethod": "GET",
             "uri": "\/api\/export\/all.{ext}",
-            "class": "\\Loco\\Http\\Command\\StrictCommand",
+            "class": "Guzzle\\Service\\Command\\OperationCommand",
             "responseClass": "\\Loco\\Http\\Response\\RawResponse",
             "responseType": "class",
             "responseNotes": "<p>Export all translations from your project to a multi-locale language pack.<\/p>\n           <p>Note that not all formats support multiple locales in the same file. See <code>\/export\/archive<\/code> for exporting separate files,\n           and <code>\/export\/locale<\/code> for exporting one language at a time.<\/p>",
@@ -133,7 +133,7 @@
         "exportArchive": {
             "httpMethod": "GET",
             "uri": "\/api\/export\/archive\/{ext}.zip",
-            "class": "\\Loco\\Http\\Command\\StrictCommand",
+            "class": "Guzzle\\Service\\Command\\OperationCommand",
             "responseClass": "\\Loco\\Http\\Response\\ZipResponse",
             "responseType": "class",
             "responseNotes": "Export all translations from your project to a zip archive of language packs.<br \/>\n           <br \/>\n           If you're exporting to a file format that supports multiple locales within the same file, you can use the <code>\/export\/all<\/code> method ",
@@ -212,7 +212,7 @@
         "exportLocale": {
             "httpMethod": "GET",
             "uri": "\/api\/export\/locale\/{locale}.{ext}",
-            "class": "\\Loco\\Http\\Command\\StrictCommand",
+            "class": "Guzzle\\Service\\Command\\OperationCommand",
             "responseClass": "\\Loco\\Http\\Response\\RawResponse",
             "responseType": "class",
             "responseNotes": "<p>Export translations from your project to a locale-specific language pack.<\/p>\n           <p>Various export file types are supported with format variations for some types.\n              <a href=\"http:\/\/localise.biz\/api#formats\">See the full list of supported export formats<\/a>.<\/p>",
@@ -297,7 +297,7 @@
         "authVerify": {
             "httpMethod": "GET",
             "uri": "\/api\/auth\/verify",
-            "class": "\\Loco\\Http\\Command\\StrictCommand",
+            "class": "Guzzle\\Service\\Command\\OperationCommand",
             "responseClass": "Creds",
             "responseType": "model",
             "responseNotes": "Loco API keys authenticate your user account for accessing a specific project.<br \/>\n             This endpoint verifies an API key and returns the authenticated user, account and project.",
@@ -320,7 +320,7 @@
         "getAssets": {
             "httpMethod": "GET",
             "uri": "\/api\/assets",
-            "class": "\\Loco\\Http\\Command\\StrictCommand",
+            "class": "Guzzle\\Service\\Command\\OperationCommand",
             "responseClass": "array",
             "responseType": "primitive",
             "summary": "List all translatable assets in your project",
@@ -347,7 +347,7 @@
         "createAsset": {
             "httpMethod": "POST",
             "uri": "\/api\/assets",
-            "class": "\\Loco\\Http\\Command\\StrictCommand",
+            "class": "Guzzle\\Service\\Command\\OperationCommand",
             "responseClass": "Asset",
             "responseType": "model",
             "responseNotes": "<p>Adds a new asset to the currently authenticated project.<\/p>\n           <p>If the asset is created successfully the response will be 201 (created).<\/p>\n           <p>If you specify the asset ID and it clashes with an existing asset the response will be 409 (conflict).<\/p>\n           <p>If another asset exists with the same name and you <strong>haven't specified the ID<\/strong>, a new asset will be created with a unique id.<\/p>",
@@ -405,7 +405,7 @@
         "getAsset": {
             "httpMethod": "GET",
             "uri": "\/api\/assets\/{id}.json",
-            "class": "\\Loco\\Http\\Command\\StrictCommand",
+            "class": "Guzzle\\Service\\Command\\OperationCommand",
             "responseClass": "Asset",
             "responseType": "model",
             "responseNotes": "Gets a single asset in currently authenticated project",
@@ -438,7 +438,7 @@
         "patchAsset": {
             "httpMethod": "PATCH",
             "uri": "\/api\/assets\/{id}.json",
-            "class": "\\Loco\\Http\\Command\\StrictCommand",
+            "class": "Guzzle\\Service\\Command\\OperationCommand",
             "responseClass": "Asset",
             "responseType": "model",
             "responseNotes": "<p>Modifies the properties of an asset in the currently authenticated project.<\/p>\n           <p>The full, modified asset object is returned.<\/p>",
@@ -504,7 +504,7 @@
         "deleteAsset": {
             "httpMethod": "DELETE",
             "uri": "\/api\/assets\/{id}.json",
-            "class": "\\Loco\\Http\\Command\\StrictCommand",
+            "class": "Guzzle\\Service\\Command\\OperationCommand",
             "responseClass": "Success",
             "responseType": "model",
             "responseNotes": "<p>Deletes an asset from the currently authenticated project.<\/p>\n           <p><strong>Warning<\/strong>: This will permanently delete all translations made of this asset across all locales<\/p>",
@@ -541,7 +541,7 @@
         "getAssetPlurals": {
             "httpMethod": "GET",
             "uri": "\/api\/assets\/{id}\/plurals",
-            "class": "\\Loco\\Http\\Command\\StrictCommand",
+            "class": "Guzzle\\Service\\Command\\OperationCommand",
             "responseClass": "array",
             "responseType": "primitive",
             "responseNotes": "<p>Lists all assets that are a plural form of the current asset.<\/p>\n           <p>This list does <strong>not<\/strong> include the singular form itself.<\/p>",
@@ -574,7 +574,7 @@
         "createPlural": {
             "httpMethod": "POST",
             "uri": "\/api\/assets\/{id}\/plurals",
-            "class": "\\Loco\\Http\\Command\\StrictCommand",
+            "class": "Guzzle\\Service\\Command\\OperationCommand",
             "responseClass": "Asset",
             "responseType": "model",
             "responseNotes": "<p>Creates a translatable asset that's a plural form of an existing asset.<\/p>\n           <p>The singular form asset specified as <code>{id}<\/code> must already exist, but the plural form will created as a new asset.<\/p>\n           <p>You can bind an existing asset as the new plural by specifying <code>{pid}<\/code>. In this case if <code>{name}<\/code> differs the asset will be renamed.<\/p>",
@@ -623,7 +623,7 @@
         "unlinkPlural": {
             "httpMethod": "DELETE",
             "uri": "\/api\/assets\/{id}\/plurals\/{pid}.json",
-            "class": "\\Loco\\Http\\Command\\StrictCommand",
+            "class": "Guzzle\\Service\\Command\\OperationCommand",
             "responseClass": "Success",
             "responseType": "model",
             "responseNotes": "<p>Reverts an asset from being a plural form to being a singular asset on its own.<\/p>\n           <p>This action does <strong>not<\/strong> delete any assets.<\/p>",
@@ -666,7 +666,7 @@
         "tagAsset": {
             "httpMethod": "POST",
             "uri": "\/api\/assets\/{id}\/tags",
-            "class": "\\Loco\\Http\\Command\\StrictCommand",
+            "class": "Guzzle\\Service\\Command\\OperationCommand",
             "responseClass": "Asset",
             "responseType": "model",
             "responseNotes": "<p>Tags an asset with a new or existing term. If the tag doesn't exist it will be created.<\/p>",
@@ -709,7 +709,7 @@
         "untagAsset": {
             "httpMethod": "DELETE",
             "uri": "\/api\/assets\/{id}\/tags\/{tag}.json",
-            "class": "\\Loco\\Http\\Command\\StrictCommand",
+            "class": "Guzzle\\Service\\Command\\OperationCommand",
             "responseClass": "Success",
             "responseType": "model",
             "responseNotes": "<p>Removes a single tag from the given asset.<\/p>",
@@ -752,7 +752,7 @@
         "getLocales": {
             "httpMethod": "GET",
             "uri": "\/api\/locales",
-            "class": "\\Loco\\Http\\Command\\StrictCommand",
+            "class": "Guzzle\\Service\\Command\\OperationCommand",
             "responseClass": "array",
             "responseType": "primitive",
             "responseNotes": "Lists all locales in currently authenticated project. Your native\/source language will always be the first in the list",
@@ -775,7 +775,7 @@
         "createLocale": {
             "httpMethod": "POST",
             "uri": "\/api\/locales",
-            "class": "\\Loco\\Http\\Command\\StrictCommand",
+            "class": "Guzzle\\Service\\Command\\OperationCommand",
             "responseClass": "Locale",
             "responseType": "model",
             "responseNotes": "<p>Adds a new locale to the currently authenticated project.<\/p>\n           <p>If the locale is created successfully the response will be 201 (created).<\/p>\n           <p>If the locale already exists the response will be 409 (conflict).<\/p>",
@@ -816,7 +816,7 @@
         "getLocale": {
             "httpMethod": "GET",
             "uri": "\/api\/locales\/{locale}",
-            "class": "\\Loco\\Http\\Command\\StrictCommand",
+            "class": "Guzzle\\Service\\Command\\OperationCommand",
             "responseClass": "Locale",
             "responseType": "model",
             "responseNotes": "Gets a single locale in currently authenticated project",
@@ -849,7 +849,7 @@
         "patchLocale": {
             "httpMethod": "PATCH",
             "uri": "\/api\/locales\/{locale}",
-            "class": "\\Loco\\Http\\Command\\StrictCommand",
+            "class": "Guzzle\\Service\\Command\\OperationCommand",
             "responseClass": "Locale",
             "responseType": "model",
             "responseNotes": "<p>Modifies the properties of a locale in the currently authenticated project.<\/p>\n           <p>The full, modified locale object is returned.<\/p>",
@@ -896,7 +896,7 @@
         "deleteLocale": {
             "httpMethod": "DELETE",
             "uri": "\/api\/locales\/{locale}",
-            "class": "\\Loco\\Http\\Command\\StrictCommand",
+            "class": "Guzzle\\Service\\Command\\OperationCommand",
             "responseClass": "Success",
             "responseType": "model",
             "responseNotes": "<p>Delete a locale from currently authenticated project.<\/p>\n           <p><strong>Warning<\/strong>: This will permanently delete any translations made in the specified locale across your project<\/p>\n           <p>Note that you cannot delete your native\/source locale.<\/p>",
@@ -933,7 +933,7 @@
         "getTranslations": {
             "httpMethod": "GET",
             "uri": "\/api\/translations\/{id}.json",
-            "class": "\\Loco\\Http\\Command\\StrictCommand",
+            "class": "Guzzle\\Service\\Command\\OperationCommand",
             "responseClass": "array",
             "responseType": "primitive",
             "responseNotes": "<p>Gets all translations of an asset in the currently authenticated project's locales.<\/p>\n           <p>Locales not yet translated are included, but their <code>translated<\/code> field will be set to <code>false<\/code>.<\/p>",
@@ -966,7 +966,7 @@
         "getTranslation": {
             "httpMethod": "GET",
             "uri": "\/api\/translations\/{id}\/{locale}",
-            "class": "\\Loco\\Http\\Command\\StrictCommand",
+            "class": "Guzzle\\Service\\Command\\OperationCommand",
             "responseClass": "Translation",
             "responseType": "model",
             "responseNotes": "<p>Gets a single translation in currently authenticated project.<\/p>\n           <p>Translations implicitly exist as long as the asset and locale are in your project.<\/p>\n           <p>Translations marked as complete have the <code>translated<\/code> field set to <code>true<\/code>.<\/p>",
@@ -1009,7 +1009,7 @@
         "translate": {
             "httpMethod": "POST",
             "uri": "\/api\/translations\/{id}\/{locale}",
-            "class": "\\Loco\\Http\\Command\\StrictCommand",
+            "class": "Guzzle\\Service\\Command\\OperationCommand",
             "responseClass": "Translation",
             "responseType": "model",
             "responseNotes": "<p>Translates a single asset in a single locale in the currently authenticated project.<\/p>\n           <p>If the asset is already translated, a new revision will be added and the <code>revision<\/code> field incremented.<\/p>\n           <p>If the asset is untranslated the locale must have already been added to the project.<\/p>\n           <p>Binary file uploads are not yet supported, but will be soon.<\/p>",
@@ -1053,7 +1053,7 @@
         "untranslate": {
             "httpMethod": "DELETE",
             "uri": "\/api\/translations\/{id}\/{locale}",
-            "class": "\\Loco\\Http\\Command\\StrictCommand",
+            "class": "Guzzle\\Service\\Command\\OperationCommand",
             "responseClass": "Success",
             "responseType": "model",
             "responseNotes": "<p>Deletes a single translation of an asset in currently authenticated project.<\/p>\n           <p><strong>Warning<\/strong>: Untranslating is not the same as setting an empty translation. \n              This operation clears the asset's translation history and user comments for the given locale.<\/p>",
@@ -1096,7 +1096,7 @@
         "ping": {
             "httpMethod": "GET",
             "uri": "\/api\/ping",
-            "class": "\\Loco\\Http\\Command\\StrictCommand",
+            "class": "Guzzle\\Service\\Command\\OperationCommand",
             "responseClass": "Echo",
             "responseType": "model",
             "responseNotes": "Checks the API is up and returns the API version number",
@@ -1108,7 +1108,7 @@
         "ping404": {
             "httpMethod": "GET",
             "uri": "\/api\/ping\/not-found",
-            "class": "\\Loco\\Http\\Command\\StrictCommand",
+            "class": "Guzzle\\Service\\Command\\OperationCommand",
             "responseClass": "Error",
             "responseType": "model",
             "summary": "Get a test 404 response",
@@ -1119,7 +1119,7 @@
         "convert": {
             "httpMethod": "POST",
             "uri": "\/api\/convert\/{from}\/{name}.{ext}",
-            "class": "\\Loco\\Http\\Command\\StrictCommand",
+            "class": "Guzzle\\Service\\Command\\OperationCommand",
             "responseClass": "\\Loco\\Http\\Response\\RawResponse",
             "responseType": "class",
             "responseNotes": "Use this API to convert between language pack file formats without a Loco account.<br \/> \n             Precise options depend on the file formats you're converting between.\n             <a href='https:\/\/localise.biz\/free\/converter\/api'>See some examples<\/a>.",
