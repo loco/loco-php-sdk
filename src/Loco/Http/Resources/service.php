@@ -1,6 +1,6 @@
 <?php
 /**
- * Auto-generated with Swizzle at 2014-05-07 10:02:28 +0100
+ * Auto-generated with Swizzle at 2014-05-07 14:33:28 +0100
  */
 return array (
   'name' => 'Loco',
@@ -493,7 +493,7 @@ return array (
     'getAsset' => 
     array (
       'httpMethod' => 'GET',
-      'uri' => '/api/assets/{id}',
+      'uri' => '/api/assets/{id}.json',
       'class' => '\\Loco\\Http\\Command\\StrictCommand',
       'responseClass' => 'Asset',
       'responseType' => 'model',
@@ -533,7 +533,7 @@ return array (
     'patchAsset' => 
     array (
       'httpMethod' => 'PATCH',
-      'uri' => '/api/assets/{id}',
+      'uri' => '/api/assets/{id}.json',
       'class' => '\\Loco\\Http\\Command\\StrictCommand',
       'responseClass' => 'Asset',
       'responseType' => 'model',
@@ -613,7 +613,7 @@ return array (
     'deleteAsset' => 
     array (
       'httpMethod' => 'DELETE',
-      'uri' => '/api/assets/{id}',
+      'uri' => '/api/assets/{id}.json',
       'class' => '\\Loco\\Http\\Command\\StrictCommand',
       'responseClass' => 'Success',
       'responseType' => 'model',
@@ -761,7 +761,7 @@ return array (
     'unlinkPlural' => 
     array (
       'httpMethod' => 'DELETE',
-      'uri' => '/api/assets/{id}/plurals/{pid}',
+      'uri' => '/api/assets/{id}/plurals/{pid}.json',
       'class' => '\\Loco\\Http\\Command\\StrictCommand',
       'responseClass' => 'Success',
       'responseType' => 'model',
@@ -866,7 +866,7 @@ return array (
     'untagAsset' => 
     array (
       'httpMethod' => 'DELETE',
-      'uri' => '/api/assets/{id}/tags/{tag}',
+      'uri' => '/api/assets/{id}/tags/{tag}.json',
       'class' => '\\Loco\\Http\\Command\\StrictCommand',
       'responseClass' => 'Success',
       'responseType' => 'model',
@@ -1143,7 +1143,7 @@ return array (
     'getTranslations' => 
     array (
       'httpMethod' => 'GET',
-      'uri' => '/api/translations/{id}',
+      'uri' => '/api/translations/{id}.json',
       'class' => '\\Loco\\Http\\Command\\StrictCommand',
       'responseClass' => 'array',
       'responseType' => 'primitive',

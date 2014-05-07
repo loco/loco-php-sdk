@@ -404,7 +404,7 @@
         },
         "getAsset": {
             "httpMethod": "GET",
-            "uri": "\/api\/assets\/{id}",
+            "uri": "\/api\/assets\/{id}.json",
             "class": "\\Loco\\Http\\Command\\StrictCommand",
             "responseClass": "Asset",
             "responseType": "model",
@@ -437,7 +437,7 @@
         },
         "patchAsset": {
             "httpMethod": "PATCH",
-            "uri": "\/api\/assets\/{id}",
+            "uri": "\/api\/assets\/{id}.json",
             "class": "\\Loco\\Http\\Command\\StrictCommand",
             "responseClass": "Asset",
             "responseType": "model",
@@ -503,7 +503,7 @@
         },
         "deleteAsset": {
             "httpMethod": "DELETE",
-            "uri": "\/api\/assets\/{id}",
+            "uri": "\/api\/assets\/{id}.json",
             "class": "\\Loco\\Http\\Command\\StrictCommand",
             "responseClass": "Success",
             "responseType": "model",
@@ -622,7 +622,7 @@
         },
         "unlinkPlural": {
             "httpMethod": "DELETE",
-            "uri": "\/api\/assets\/{id}\/plurals\/{pid}",
+            "uri": "\/api\/assets\/{id}\/plurals\/{pid}.json",
             "class": "\\Loco\\Http\\Command\\StrictCommand",
             "responseClass": "Success",
             "responseType": "model",
@@ -708,7 +708,7 @@
         },
         "untagAsset": {
             "httpMethod": "DELETE",
-            "uri": "\/api\/assets\/{id}\/tags\/{tag}",
+            "uri": "\/api\/assets\/{id}\/tags\/{tag}.json",
             "class": "\\Loco\\Http\\Command\\StrictCommand",
             "responseClass": "Success",
             "responseType": "model",
@@ -932,7 +932,7 @@
         },
         "getTranslations": {
             "httpMethod": "GET",
-            "uri": "\/api\/translations\/{id}",
+            "uri": "\/api\/translations\/{id}.json",
             "class": "\\Loco\\Http\\Command\\StrictCommand",
             "responseClass": "array",
             "responseType": "primitive",

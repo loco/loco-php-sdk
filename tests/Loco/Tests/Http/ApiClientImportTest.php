@@ -46,7 +46,7 @@ class ApiClientImportTest extends ApiClientTest {
      * Trash imported assets between each test
      */    
     public function tearDown(){
-        foreach( $this->assets as $id ){
+        while( $id = array_pop( $this->assets ) ){
             $param = compact('id');
             $this->client->deleteAsset( $param );
         }
