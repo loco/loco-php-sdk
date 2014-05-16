@@ -214,8 +214,8 @@ class ApiClientConvertTest extends ApiClientTest {
         $arr = $this->checkValidYaml( $yml );
         $this->assertContains('sample: échantillon', $yml );
         $this->assertContains('examples: exemples', $yml );
-        // @todo check whether simple yaml is allowed nested context
-        // $this->assertContains('specific-something: quelque chose de spécifique', $yml );
+        // simple yaml shouldn't expand nested key
+        $this->assertContains('specific.something: quelque chose de spécifique', $yml );
         return 'export/test-fr_FR.yml';
     }
 

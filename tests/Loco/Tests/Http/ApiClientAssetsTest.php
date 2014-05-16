@@ -131,7 +131,8 @@ class ApiClientAssetsTest  extends ApiClientTest {
         $model = $this->client->createPlural( array( 'id' => $slug, 'name' => $name ) );
         $this->assertInstanceOf( '\Guzzle\Service\Resource\Model', $model );
         $this->assertEquals( $name, $model['name'] );
-        $this->assertEquals( 1, $model['translated'] );
+        // number translated will depend on whether locales exist that must have this blank (e.g. zero plural langs)
+        $this->assertGreaterThan( 0, $model['translated'] );
         return $model['id'];
     }
     
