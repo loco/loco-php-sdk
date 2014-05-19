@@ -1,11 +1,11 @@
 <?php
 /**
- * Auto-generated with Swizzle at 2014-05-16 20:26:44 +0100
+ * Auto-generated with Swizzle at 2014-05-19 15:26:34 +0100
  */
 return array (
   'name' => 'Loco',
-  'apiVersion' => '1.0.6',
-  'baseUrl' => 'https://ssl.loco.192.168.0.7.xip.io/',
+  'apiVersion' => '1.0.7',
+  'baseUrl' => 'https://localise.biz/',
   'description' => 'Loco REST API',
   'operations' => 
   array (
@@ -13,7 +13,7 @@ return array (
     array (
       'httpMethod' => 'POST',
       'uri' => '/api/import/{ext}',
-      'class' => '\\Loco\\Http\\Command\\StrictCommand',
+      'class' => 'Guzzle\\Service\\Command\\OperationCommand',
       'responseClass' => 'Imported',
       'responseType' => 'model',
       'responseNotes' => '<p>The import API loads translations from various language pack formats into the currently authenticated project.</p>
@@ -102,7 +102,7 @@ return array (
     array (
       'httpMethod' => 'GET',
       'uri' => '/api/export/all.{ext}',
-      'class' => '\\Loco\\Http\\Command\\StrictCommand',
+      'class' => 'Guzzle\\Service\\Command\\OperationCommand',
       'responseClass' => '\\Loco\\Http\\Response\\RawResponse',
       'responseType' => 'class',
       'responseNotes' => '<p>Export all translations from your project to a multi-locale language pack.</p>
@@ -167,7 +167,7 @@ return array (
     array (
       'httpMethod' => 'GET',
       'uri' => '/api/export/archive/{ext}.zip',
-      'class' => '\\Loco\\Http\\Command\\StrictCommand',
+      'class' => 'Guzzle\\Service\\Command\\OperationCommand',
       'responseClass' => '\\Loco\\Http\\Response\\ZipResponse',
       'responseType' => 'class',
       'responseNotes' => 'Export all translations from your project to a zip archive of language packs.<br />
@@ -235,14 +235,15 @@ return array (
             5 => 'php',
             6 => 'po',
             7 => 'pot',
-            8 => 'resx',
-            9 => 'sql',
-            10 => 'strings',
-            11 => 'tmx',
-            12 => 'ts',
-            13 => 'xlf',
-            14 => 'xml',
-            15 => 'yml',
+            8 => 'plist',
+            9 => 'resx',
+            10 => 'sql',
+            11 => 'strings',
+            12 => 'tmx',
+            13 => 'ts',
+            14 => 'xlf',
+            15 => 'xml',
+            16 => 'yml',
           ),
           'default' => 'json',
         ),
@@ -260,7 +261,7 @@ return array (
     array (
       'httpMethod' => 'GET',
       'uri' => '/api/export/locale/{locale}.{ext}',
-      'class' => '\\Loco\\Http\\Command\\StrictCommand',
+      'class' => 'Guzzle\\Service\\Command\\OperationCommand',
       'responseClass' => '\\Loco\\Http\\Response\\RawResponse',
       'responseType' => 'class',
       'responseNotes' => '<p>Export translations from your project to a locale-specific language pack.</p>
@@ -335,14 +336,109 @@ return array (
             5 => 'php',
             6 => 'po',
             7 => 'pot',
-            8 => 'resx',
-            9 => 'sql',
-            10 => 'strings',
-            11 => 'tmx',
-            12 => 'ts',
-            13 => 'xlf',
-            14 => 'xml',
-            15 => 'yml',
+            8 => 'plist',
+            9 => 'resx',
+            10 => 'sql',
+            11 => 'strings',
+            12 => 'tmx',
+            13 => 'ts',
+            14 => 'xlf',
+            15 => 'xml',
+            16 => 'yml',
+          ),
+          'default' => 'json',
+        ),
+      ),
+      'errorResponses' => 
+      array (
+        0 => 
+        array (
+          'code' => 401,
+          'phrase' => 'Invalid API key',
+        ),
+      ),
+    ),
+    'exportTemplate' => 
+    array (
+      'httpMethod' => 'GET',
+      'uri' => '/api/export/template.{ext}',
+      'class' => 'Guzzle\\Service\\Command\\OperationCommand',
+      'responseClass' => '\\Loco\\Http\\Response\\RawResponse',
+      'responseType' => 'class',
+      'responseNotes' => '<p>Export only the source keys from your project to a language pack.</p>
+           <p>This is different to exporting just your source language translations, because it only exports the left hand side of each mapping.</p>
+           <p><a href="http://localise.biz/api#formats">See the full list of supported export formats</a>.</p>',
+      'summary' => 'Export a template containing only source keys',
+      'parameters' => 
+      array (
+        'key' => 
+        array (
+          'required' => true,
+          'description' => 'Project API key',
+          'type' => 'string',
+          'location' => 'query',
+        ),
+        'format' => 
+        array (
+          'description' => 'Specific format, applicable to some file types only',
+          'type' => 'string',
+          'location' => 'query',
+          'enum' => 
+          array (
+            0 => 'symfony',
+            1 => 'zend',
+            2 => 'codeigniter',
+            3 => 'constants',
+            4 => 'chrome',
+            5 => 'nested',
+            6 => 'rails',
+            7 => 'java',
+            8 => 'tizen',
+          ),
+        ),
+        'filter' => 
+        array (
+          'description' => 'Comma-separated list of tags to filter subset of assets.',
+          'type' => 'string',
+          'location' => 'query',
+        ),
+        'index' => 
+        array (
+          'description' => 'Override default lookup key in language pack. Leave blank for auto.',
+          'type' => 'string',
+          'location' => 'query',
+          'enum' => 
+          array (
+            0 => 'id',
+            1 => 'name',
+            2 => 'text',
+          ),
+        ),
+        'ext' => 
+        array (
+          'required' => true,
+          'description' => 'Target file type specified as a file extension',
+          'type' => 'string',
+          'location' => 'uri',
+          'enum' => 
+          array (
+            0 => 'csv',
+            1 => 'html',
+            2 => 'js',
+            3 => 'json',
+            4 => 'mo',
+            5 => 'php',
+            6 => 'po',
+            7 => 'pot',
+            8 => 'plist',
+            9 => 'resx',
+            10 => 'sql',
+            11 => 'strings',
+            12 => 'tmx',
+            13 => 'ts',
+            14 => 'xlf',
+            15 => 'xml',
+            16 => 'yml',
           ),
           'default' => 'json',
         ),
@@ -360,7 +456,7 @@ return array (
     array (
       'httpMethod' => 'GET',
       'uri' => '/api/auth/verify',
-      'class' => '\\Loco\\Http\\Command\\StrictCommand',
+      'class' => 'Guzzle\\Service\\Command\\OperationCommand',
       'responseClass' => 'Creds',
       'responseType' => 'model',
       'responseNotes' => 'Loco API keys authenticate your user account for accessing a specific project.<br />
@@ -389,7 +485,7 @@ return array (
     array (
       'httpMethod' => 'GET',
       'uri' => '/api/assets',
-      'class' => '\\Loco\\Http\\Command\\StrictCommand',
+      'class' => 'Guzzle\\Service\\Command\\OperationCommand',
       'responseClass' => 'array',
       'responseType' => 'primitive',
       'summary' => 'List all translatable assets in your project',
@@ -422,7 +518,7 @@ return array (
     array (
       'httpMethod' => 'POST',
       'uri' => '/api/assets',
-      'class' => '\\Loco\\Http\\Command\\StrictCommand',
+      'class' => 'Guzzle\\Service\\Command\\OperationCommand',
       'responseClass' => 'Asset',
       'responseType' => 'model',
       'responseNotes' => '<p>Adds a new asset to the currently authenticated project.</p>
@@ -494,7 +590,7 @@ return array (
     array (
       'httpMethod' => 'GET',
       'uri' => '/api/assets/{id}.json',
-      'class' => '\\Loco\\Http\\Command\\StrictCommand',
+      'class' => 'Guzzle\\Service\\Command\\OperationCommand',
       'responseClass' => 'Asset',
       'responseType' => 'model',
       'responseNotes' => 'Gets a single asset in currently authenticated project',
@@ -534,7 +630,7 @@ return array (
     array (
       'httpMethod' => 'PATCH',
       'uri' => '/api/assets/{id}.json',
-      'class' => '\\Loco\\Http\\Command\\StrictCommand',
+      'class' => 'Guzzle\\Service\\Command\\OperationCommand',
       'responseClass' => 'Asset',
       'responseType' => 'model',
       'responseNotes' => '<p>Modifies the properties of an asset in the currently authenticated project.</p>
@@ -614,7 +710,7 @@ return array (
     array (
       'httpMethod' => 'DELETE',
       'uri' => '/api/assets/{id}.json',
-      'class' => '\\Loco\\Http\\Command\\StrictCommand',
+      'class' => 'Guzzle\\Service\\Command\\OperationCommand',
       'responseClass' => 'Success',
       'responseType' => 'model',
       'responseNotes' => '<p>Deletes an asset from the currently authenticated project.</p>
@@ -660,7 +756,7 @@ return array (
     array (
       'httpMethod' => 'GET',
       'uri' => '/api/assets/{id}/plurals',
-      'class' => '\\Loco\\Http\\Command\\StrictCommand',
+      'class' => 'Guzzle\\Service\\Command\\OperationCommand',
       'responseClass' => 'array',
       'responseType' => 'primitive',
       'responseNotes' => '<p>Lists all assets that are a plural form of the current asset.</p>
@@ -701,7 +797,7 @@ return array (
     array (
       'httpMethod' => 'POST',
       'uri' => '/api/assets/{id}/plurals',
-      'class' => '\\Loco\\Http\\Command\\StrictCommand',
+      'class' => 'Guzzle\\Service\\Command\\OperationCommand',
       'responseClass' => 'Asset',
       'responseType' => 'model',
       'responseNotes' => '<p>Creates a translatable asset that\'s a plural form of an existing asset.</p>
@@ -762,7 +858,7 @@ return array (
     array (
       'httpMethod' => 'DELETE',
       'uri' => '/api/assets/{id}/plurals/{pid}.json',
-      'class' => '\\Loco\\Http\\Command\\StrictCommand',
+      'class' => 'Guzzle\\Service\\Command\\OperationCommand',
       'responseClass' => 'Success',
       'responseType' => 'model',
       'responseNotes' => '<p>Reverts an asset from being a plural form to being a singular asset on its own.</p>
@@ -815,7 +911,7 @@ return array (
     array (
       'httpMethod' => 'POST',
       'uri' => '/api/assets/{id}/tags',
-      'class' => '\\Loco\\Http\\Command\\StrictCommand',
+      'class' => 'Guzzle\\Service\\Command\\OperationCommand',
       'responseClass' => 'Asset',
       'responseType' => 'model',
       'responseNotes' => '<p>Tags an asset with a new or existing term. If the tag doesn\'t exist it will be created.</p>',
@@ -867,7 +963,7 @@ return array (
     array (
       'httpMethod' => 'DELETE',
       'uri' => '/api/assets/{id}/tags/{tag}.json',
-      'class' => '\\Loco\\Http\\Command\\StrictCommand',
+      'class' => 'Guzzle\\Service\\Command\\OperationCommand',
       'responseClass' => 'Success',
       'responseType' => 'model',
       'responseNotes' => '<p>Removes a single tag from the given asset.</p>',
@@ -919,7 +1015,7 @@ return array (
     array (
       'httpMethod' => 'GET',
       'uri' => '/api/locales',
-      'class' => '\\Loco\\Http\\Command\\StrictCommand',
+      'class' => 'Guzzle\\Service\\Command\\OperationCommand',
       'responseClass' => 'array',
       'responseType' => 'primitive',
       'responseNotes' => 'Lists all locales in currently authenticated project. Your native/source language will always be the first in the list',
@@ -947,7 +1043,7 @@ return array (
     array (
       'httpMethod' => 'POST',
       'uri' => '/api/locales',
-      'class' => '\\Loco\\Http\\Command\\StrictCommand',
+      'class' => 'Guzzle\\Service\\Command\\OperationCommand',
       'responseClass' => 'Locale',
       'responseType' => 'model',
       'responseNotes' => '<p>Adds a new locale to the currently authenticated project.</p>
@@ -999,7 +1095,7 @@ return array (
     array (
       'httpMethod' => 'GET',
       'uri' => '/api/locales/{locale}',
-      'class' => '\\Loco\\Http\\Command\\StrictCommand',
+      'class' => 'Guzzle\\Service\\Command\\OperationCommand',
       'responseClass' => 'Locale',
       'responseType' => 'model',
       'responseNotes' => 'Gets a single locale in currently authenticated project',
@@ -1039,7 +1135,7 @@ return array (
     array (
       'httpMethod' => 'PATCH',
       'uri' => '/api/locales/{locale}',
-      'class' => '\\Loco\\Http\\Command\\StrictCommand',
+      'class' => 'Guzzle\\Service\\Command\\OperationCommand',
       'responseClass' => 'Locale',
       'responseType' => 'model',
       'responseNotes' => '<p>Modifies the properties of a locale in the currently authenticated project.</p>
@@ -1097,7 +1193,7 @@ return array (
     array (
       'httpMethod' => 'DELETE',
       'uri' => '/api/locales/{locale}',
-      'class' => '\\Loco\\Http\\Command\\StrictCommand',
+      'class' => 'Guzzle\\Service\\Command\\OperationCommand',
       'responseClass' => 'Success',
       'responseType' => 'model',
       'responseNotes' => '<p>Delete a locale from currently authenticated project.</p>
@@ -1144,7 +1240,7 @@ return array (
     array (
       'httpMethod' => 'GET',
       'uri' => '/api/translations/{id}.json',
-      'class' => '\\Loco\\Http\\Command\\StrictCommand',
+      'class' => 'Guzzle\\Service\\Command\\OperationCommand',
       'responseClass' => 'array',
       'responseType' => 'primitive',
       'responseNotes' => '<p>Gets all translations of an asset in the currently authenticated project\'s locales.</p>
@@ -1185,7 +1281,7 @@ return array (
     array (
       'httpMethod' => 'GET',
       'uri' => '/api/translations/{id}/{locale}',
-      'class' => '\\Loco\\Http\\Command\\StrictCommand',
+      'class' => 'Guzzle\\Service\\Command\\OperationCommand',
       'responseClass' => 'Translation',
       'responseType' => 'model',
       'responseNotes' => '<p>Gets a single translation in currently authenticated project.</p>
@@ -1239,7 +1335,7 @@ return array (
     array (
       'httpMethod' => 'POST',
       'uri' => '/api/translations/{id}/{locale}',
-      'class' => '\\Loco\\Http\\Command\\StrictCommand',
+      'class' => 'Guzzle\\Service\\Command\\OperationCommand',
       'responseClass' => 'Translation',
       'responseType' => 'model',
       'responseNotes' => '<p>Translates a single asset in a single locale in the currently authenticated project.</p>
@@ -1295,7 +1391,7 @@ return array (
     array (
       'httpMethod' => 'DELETE',
       'uri' => '/api/translations/{id}/{locale}',
-      'class' => '\\Loco\\Http\\Command\\StrictCommand',
+      'class' => 'Guzzle\\Service\\Command\\OperationCommand',
       'responseClass' => 'Success',
       'responseType' => 'model',
       'responseNotes' => '<p>Deletes a single translation of an asset in currently authenticated project.</p>
@@ -1349,7 +1445,7 @@ return array (
     array (
       'httpMethod' => 'GET',
       'uri' => '/api/ping',
-      'class' => '\\Loco\\Http\\Command\\StrictCommand',
+      'class' => 'Guzzle\\Service\\Command\\OperationCommand',
       'responseClass' => 'Echo',
       'responseType' => 'model',
       'responseNotes' => 'Checks the API is up and returns the API version number',
@@ -1362,7 +1458,7 @@ return array (
     array (
       'httpMethod' => 'GET',
       'uri' => '/api/ping/not-found',
-      'class' => '\\Loco\\Http\\Command\\StrictCommand',
+      'class' => 'Guzzle\\Service\\Command\\OperationCommand',
       'responseClass' => 'Error',
       'responseType' => 'model',
       'summary' => 'Get a test 404 response',
@@ -1374,7 +1470,7 @@ return array (
     array (
       'httpMethod' => 'POST',
       'uri' => '/api/convert/{from}/{name}.{ext}',
-      'class' => '\\Loco\\Http\\Command\\StrictCommand',
+      'class' => 'Guzzle\\Service\\Command\\OperationCommand',
       'responseClass' => '\\Loco\\Http\\Response\\RawResponse',
       'responseType' => 'class',
       'responseNotes' => 'Use this API to convert between language pack file formats without a Loco account.<br /> 
