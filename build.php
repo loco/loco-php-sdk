@@ -20,6 +20,7 @@ $builder->setDelay( 0 );
 $raw = '\Loco\Http\Response\RawResponse';
 $zip = '\Loco\Http\Response\ZipResponse';
 $builder->registerResponseClass('exportArchive', $zip )
+        ->registerResponseClass('exportTemplate', $raw )
         ->registerResponseClass('exportLocale', $raw )
         ->registerResponseClass('exportAll', $raw )
         ->registerResponseClass('convert', $raw );

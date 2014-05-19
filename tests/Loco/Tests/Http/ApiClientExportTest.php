@@ -7,7 +7,7 @@ use Loco\Http\ApiClient;
 /**
  * Test the live /export API.
  * @group live
- * @group exporter
+ * @group export
  */
 class ApiClientExportTest extends ApiClientTest {
     
@@ -27,7 +27,7 @@ class ApiClientExportTest extends ApiClientTest {
 
 
     /**
-     * Live test of a muilt-locale export in a single file
+     * Live test of a multi-locale export in a single file
      */
     public function testLiveExportAll(){
         $client = $this->getClient();
@@ -53,6 +53,19 @@ class ApiClientExportTest extends ApiClientTest {
         $this->assertContains( 'Exported', $zip->getArchiveComment() );
         $zip->close();
     }
+
+
+    /**
+     * Live test of template export
+     */
+    public function testLiveExportTemplate(){
+        $client = $this->getClient();
+        $result = $client->exportTemplate( array(
+            'ext' => 'pot',
+        ) );
+        $this->assertInstanceOf('\Loco\Http\Response\RawResponse', $result );
+        $this->assertContains( '"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"', (string) $result );
+    }      
 
 }
 
