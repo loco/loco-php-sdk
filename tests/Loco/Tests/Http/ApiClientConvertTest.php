@@ -371,8 +371,8 @@ class ApiClientConvertTest extends ApiClientTest {
      */
     public function testExportJavaProprties(){
         $src = $this->convert( 'test-fr_FR.po', 'po', 'properties' );
-        $this->assertStringStartsWith('#Loco', $src );
-        $this->assertContains('sample=\u00E9chantillon', $src );
+        $this->assertStringStartsWith('# Loco', $src );
+        $this->assertContains('sample = \u00E9chantillon', $src );
         return 'export/test-fr_FR.properties';    
     }    
     
