@@ -1,6 +1,6 @@
 <?php
 /**
- * Auto-generated with Swizzle at 2014-05-19 15:26:34 +0100
+ * Auto-generated with Swizzle at 2014-06-09 16:39:32 +0100
  */
 return array (
   'name' => 'Loco',
@@ -669,6 +669,12 @@ return array (
         'context' => 
         array (
           'description' => 'Optional context descriptor',
+          'type' => 'string',
+          'location' => 'json',
+        ),
+        'notes' => 
+        array (
+          'description' => 'Optional notes for translators',
           'type' => 'string',
           'location' => 'json',
         ),
@@ -1643,6 +1649,13 @@ return array (
           'type' => 'string',
           'location' => 'json',
         ),
+        'notes' => 
+        array (
+          'required' => true,
+          'description' => 'Optional notes for translators',
+          'type' => 'string',
+          'location' => 'json',
+        ),
         'modified' => 
         array (
           'required' => true,
@@ -1855,6 +1868,13 @@ return array (
               array (
                 'required' => true,
                 'description' => 'Optional context descriptor',
+                'type' => 'string',
+                'location' => 'json',
+              ),
+              'notes' => 
+              array (
+                'required' => true,
+                'description' => 'Optional notes for translators',
                 'type' => 'string',
                 'location' => 'json',
               ),
@@ -2179,6 +2199,12 @@ return array (
         'context' => 
         array (
           'description' => 'Optional context descriptor',
+          'type' => 'string',
+          'location' => 'json',
+        ),
+        'notes' => 
+        array (
+          'description' => 'Optional notes for translators',
           'type' => 'string',
           'location' => 'json',
         ),

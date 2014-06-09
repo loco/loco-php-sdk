@@ -75,9 +75,9 @@ class ApiClientAssetsTest  extends ApiClientTest {
      * tagAsset
      * @depends testAssetCreate
      */
-    public function testAssetTag( $slug ){
+    public function testAssetTag( $id ){
         $name = 'Test tag';
-        $model = $this->client->tagAsset( array( 'id' => $slug, 'name' => $name ) );
+        $model = $this->client->tagAsset( compact('id','name') );
         $this->assertInstanceOf( '\Guzzle\Service\Resource\Model', $model );
         $this->assertInternalType( 'array', $model['tags'] );
         $this->assertContains( $name, $model['tags'] );
@@ -89,12 +89,17 @@ class ApiClientAssetsTest  extends ApiClientTest {
      * patchAsset
      * @depends testAssetCreate
      */
-    public function testAssetPatch( $slug ){
+    public function testAssetPatch( $id ){
         $name = 'Renamed OK';
-        $model = $this->client->patchAsset( array( 'id' => $slug, 'name' => $name ) );
+        $notes = 'Notes field OK';
+        $context = 'Context field OK';
+        $model = $this->client->patchAsset( compact('id','name','notes','context') );
         $this->assertInstanceOf( '\Guzzle\Service\Resource\Model', $model );
+        $this->assertEquals( $id, $model['id'] );
         $this->assertEquals( $name, $model['name'] );
-        return $slug;
+        $this->assertEquals( $notes, $model['notes'] );
+        $this->assertEquals( $context, $model['context'] );
+        return $id;
     }
     
     

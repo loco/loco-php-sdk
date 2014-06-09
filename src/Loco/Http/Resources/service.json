@@ -555,6 +555,11 @@
                     "type": "string",
                     "location": "json"
                 },
+                "notes": {
+                    "description": "Optional notes for translators",
+                    "type": "string",
+                    "location": "json"
+                },
                 "key": {
                     "required": true,
                     "description": "Project API key",
@@ -1349,6 +1354,12 @@
                     "type": "string",
                     "location": "json"
                 },
+                "notes": {
+                    "required": true,
+                    "description": "Optional notes for translators",
+                    "type": "string",
+                    "location": "json"
+                },
                 "modified": {
                     "required": true,
                     "description": "Time last modified in UTC",
@@ -1526,6 +1537,12 @@
                             "context": {
                                 "required": true,
                                 "description": "Optional context descriptor",
+                                "type": "string",
+                                "location": "json"
+                            },
+                            "notes": {
+                                "required": true,
+                                "description": "Optional notes for translators",
                                 "type": "string",
                                 "location": "json"
                             },
@@ -1794,6 +1811,11 @@
                 },
                 "context": {
                     "description": "Optional context descriptor",
+                    "type": "string",
+                    "location": "json"
+                },
+                "notes": {
+                    "description": "Optional notes for translators",
                     "type": "string",
                     "location": "json"
                 }
