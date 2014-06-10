@@ -356,6 +356,7 @@ class ApiClientConvertTest extends ApiClientTest {
     
     /**
      * Export iOS strings from seed
+     * @group ios
      */
     public function testExportLocalizableStrings(){
         $src = $this->convert('test-fr_FR.po', 'po', 'strings' );
@@ -368,6 +369,7 @@ class ApiClientConvertTest extends ApiClientTest {
     
     /**
      * Export Java .properties from seed    
+     * @group java
      */
     public function testExportJavaProprties(){
         $src = $this->convert( 'test-fr_FR.po', 'po', 'properties' );
@@ -443,6 +445,8 @@ class ApiClientConvertTest extends ApiClientTest {
 
     /**
      * Test Java XML Parser
+     * @group xml
+     * @group java
      * @depends testExportJavaXML
      */
     public function testImportJavaXML( $sourcefile ){
@@ -470,6 +474,7 @@ class ApiClientConvertTest extends ApiClientTest {
 
     /**
      * Test simple yaml Parser
+     * @group yaml
      * @depends testExportSimpleYaml
      */
     public function testImportSimpleYaml( $sourcefile ){
@@ -479,6 +484,7 @@ class ApiClientConvertTest extends ApiClientTest {
 
     /**
      * Test nested yaml Parser
+     * @group yaml
      * @depends testExportNestedYaml
      */
     public function testImportNestedYaml( $sourcefile ){
@@ -510,6 +516,7 @@ class ApiClientConvertTest extends ApiClientTest {
     /**
      * Test php parse from symfony format
      * @todo implement symfony import parser that handles plural formats
+     * @group php
      * @depends testExportSymfony
      */
     public function testImportSymfony( $sourcefile ){
@@ -519,11 +526,34 @@ class ApiClientConvertTest extends ApiClientTest {
     
     /**
      * Test php parse from CodeIgniter format
+     * @group php
      * @depends testExportCodeIgniter
      */
     public function testImportCodeIgniter( $sourcefile ){
         $this->checkValidJson( $this->convert( $sourcefile, 'php', 'json', '', false ), false, '', 'test_' );
     }
+            
+    
+    /**
+     * Test .properties parser
+     * @group java
+     * @depends testExportJavaProprties
+     */            
+    public function testImportJavaProperties( $sourcefile ){
+        $this->checkValidJson( $this->convert( $sourcefile, 'properties', 'json', '', false ), false );
+    }
+    
+    
+    /**
+     * Test .strings parser
+     * @group ios
+     * @depends testExportLocalizableStrings
+     */    
+    public function testImportLocalizableStrings( $sourcefile ){
+        $this->checkValidJson( $this->convert( $sourcefile, 'strings', 'json', '', false ), false );
+    }
+    
+            
             
     
 }
