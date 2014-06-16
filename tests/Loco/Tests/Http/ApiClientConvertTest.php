@@ -280,7 +280,11 @@ class ApiClientConvertTest extends ApiClientTest {
      */
     public function testExportJsonChrome(){
         $json = $this->convert('test-fr_FR.po', 'po', 'json', 'chrome' );
-        $this->assertContains( '{"message":"\u00e9chantillon","description":"sample"}', $json );
+        $data = json_decode( $json, true );
+        $this->assertEquals( array(
+            'message' => 'échantillon',
+            'description' => 'sample',
+        ), $data['sample'] );
         return 'export/test-fr_FR.chrome.json';
     }
 
