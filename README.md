@@ -49,4 +49,5 @@ Check the [Loco API documentation](https://localise.biz/api) to see what model i
 
 See the [example](https://github.com/loco/loco-php-sdk/tree/master/example) directory for more working code examples.
 
+Build the PHP API documentation with [apigen](http://apigen.org/) using `apigen -c apigen.yml`
 
