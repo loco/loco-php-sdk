@@ -3,7 +3,8 @@
         "loco": {
             "class": "Loco\\Http\\ApiClient",
             "params": {
-                "key": ""
+                "key": "",
+                "base_url": "https://localise.biz/api"
             }
         }
     }

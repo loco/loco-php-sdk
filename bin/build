@@ -1,0 +1,20 @@
+#!/usr/bin/env php
+<?php
+/**
+ * Build Loco SDK
+ */
+
+set_time_limit(0);
+
+$loader = require_once __DIR__.'/../vendor/autoload.php';
+$loader->setPsr4('Loco\\Dev\\', __DIR__.'/../dev' );
+
+$application = new Symfony\Component\Console\Application;
+
+$application->add( new Loco\Dev\BuildCommand );
+
+$application->setDefaultCommand('loco:build');
+
+$input = new Symfony\Component\Console\Input\ArgvInput;
+
+$application->run( $input );

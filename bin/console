@@ -1,0 +1,20 @@
+#!/usr/bin/env php
+<?php
+/**
+ * Loco SDK console
+ */
+
+set_time_limit(0);
+
+require_once __DIR__.'/../vendor/autoload.php';
+
+use Loco\Console\Application;
+use Symfony\Component\Console\Input\ArgvInput;
+
+$application = new Application;
+
+$application->initRestService( __DIR__.'/../config.json' );
+
+$application->add( new Loco\Console\Command\AuthVerifyCommand );
+
+$application->run( new ArgvInput() );
