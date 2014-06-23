@@ -3,6 +3,10 @@
 namespace Loco\Console;
 
 use Symfony\Component\Console\Application as BaseApplication;
+use Symfony\Component\Console\Command\Command;
+use Symfony\Component\Console\Input\InputOption;
+use Symfony\Component\Console\Input\InputArgument;
+use Symfony\Component\Console\Input\InputDefinition;
 use Loco\Http\ApiClient;
 
 
@@ -11,16 +15,24 @@ use Loco\Http\ApiClient;
  */
 final class Application extends BaseApplication {
     
-    
+    /**
+     * @var ApiClient
+     */    
     private $restClient;
     
     
+    /**
+     * @override
+     */    
     public function __construct(){
         parent::__construct('Loco','1.0.7');
     }    
-    
-    
-    
+
+
+
+    /**
+     * @override
+     */    
     public function getHelp(){
         return '
      __         ______     ______     ______    
@@ -35,15 +47,41 @@ final class Application extends BaseApplication {
     
 
     /**
-     * Initialize REST client using Guzzle service builder
+     * Initialize REST client using Guzzle service builder.
+     * @return ApiClient
      */    
     public function initRestService( $config ){
         $builder = \Guzzle\Service\Builder\ServiceBuilder::factory($config);
-        $this->restClient = $builder->get('loco');
+        return $this->restClient = $builder->get('loco');
     }    
-    
-    
 
+
+
+    /**
+     * Auto-register all CLI commands analogous to API endpoints.
+     * @return Application
+     */    
+    public function initApiCommands(){     
+        $service = $this->getRestClient()->getDescription()->toArray();
+        foreach( array_keys($service['operations']) as $funcname ){
+            $classname = strtoupper($funcname{0}).substr($funcname,1).'Command';
+            // attempt to load overriden base class first
+            if( class_exists('\\Loco\\Console\\Command\\'.$classname) ){
+                $classname = '\\Loco\\Console\\Command\\'.$classname;
+            }
+            else if( class_exists('\\Loco\\Console\\Command\\Generated\\'.$classname) ){
+                $classname = '\\Loco\\Console\\Command\\Generated\\'.$classname;
+            }
+            else {
+                continue;
+            }
+            $this->add( new $classname );
+        }
+        return $this;
+    }
+         
+    
+    
     /**
      * Get instance of the Loco API client
      * @param string api key to override any current configuration
@@ -57,8 +95,8 @@ final class Application extends BaseApplication {
             ) );
         }
         return $this->restClient;
-    }    
-    
-    
+    }
+
+
     
 }
