@@ -21,8 +21,8 @@
         "loco/swizzle": "dev-master"
     },
     "autoload": {
-        "psr-0": {
-            "Loco": "src/"
+        "psr-4": {
+            "Loco\\": "src/"
         }
     },
     "extra": {

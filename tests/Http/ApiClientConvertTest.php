@@ -17,7 +17,7 @@ class ApiClientConvertTest extends ApiClientTest {
      * Make API /convert call
      */
     private function convert( $sourcefile, $from, $ext = 'json', $format = '', $savefile = true ){
-        $sourcefile = __DIR__.'/Resources/'.$sourcefile;    
+        $sourcefile = __DIR__.'/Fixtures/'.$sourcefile;    
         //$this->assertFileExists( $sourcefile );
         $src = file_get_contents( $sourcefile );
         $params = compact('from','ext','format','src');
@@ -29,7 +29,7 @@ class ApiClientConvertTest extends ApiClientTest {
             $response = (string) $response;
             $name = $params['name'];
             $format and $name .= '.'.$format;
-            $exportfile = __DIR__.'/Resources/export/'.$name.'.'.$ext;
+            $exportfile = __DIR__.'/Fixtures/export/'.$name.'.'.$ext;
             file_put_contents( $exportfile, $response );
         }
         return $response;

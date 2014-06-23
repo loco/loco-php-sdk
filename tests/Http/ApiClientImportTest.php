@@ -58,7 +58,7 @@ class ApiClientImportTest extends ApiClientTest {
      * Do import from file exported by converter tests.
      */
     private function _import( $sourcefile, $index = '', $locale = '' ){
-        $sourcefile = __DIR__.'/Resources/export/'.$sourcefile;
+        $sourcefile = __DIR__.'/Fixtures/export/'.$sourcefile;
         $src = file_get_contents( $sourcefile );
         $ext = pathinfo( $sourcefile, PATHINFO_EXTENSION );
         $params = compact('index','locale','src','ext');

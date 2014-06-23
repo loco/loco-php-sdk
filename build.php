@@ -40,12 +40,12 @@ else {
 $builder->build( $base_url );
 
 $phps = $builder->export();
-$file = __DIR__.'/src/Loco/Http/Resources/service.php';
+$file = __DIR__.'/src/Http/Resources/service.php';
 $blen = file_put_contents( $file, $phps );
 printf("Wrote PHP service description to %s (%s bytes)\n", $file, $blen );
 
 $json = $builder->toJson();
-$file = __DIR__.'/src/Loco/Http/Resources/service.json';
+$file = __DIR__.'/src/Http/Resources/service.json';
 $blen = file_put_contents( $file, $json );
 printf("Wrote JSON service description to %s (%s bytes)\n", $file, $blen );
 
