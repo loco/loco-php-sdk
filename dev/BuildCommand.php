@@ -31,14 +31,15 @@ final class BuildCommand extends Command {
     
     
     protected function execute( InputInterface $input, OutputInterface $output ){
-        
+
+        $cwd = realpath( __DIR__.'/..' );
         $verbose = $output->getVerbosity();
         
         if( ! class_exists('\Loco\Utils\Swizzle\Swizzle') ){
             throw new \RuntimeException("Swizzle not found.\nRun composer install --dev\n");
         }
         
-        if( ! file_exists( $confpath = __DIR__.'/../config.json' ) ){
+        if( ! file_exists( $confpath = $cwd.'/config.json' ) ){
             throw new \RuntimeException('config.json not found, do ~$ cp config.json.dist config.json');
         }
         
@@ -73,11 +74,11 @@ final class BuildCommand extends Command {
         $output->writeln('<comment>Pulling docs from '.$base_url.'</comment>');
         $builder->build( $base_url );
         
-        $file = __DIR__.'/../src/Http/Resources/service.php';
+        $file = $cwd.'/src/Http/Resources/service.php';
         $blen = file_put_contents( $file, $builder->export() );
         $output->writeln( printf("Wrote PHP service description to %s (%s bytes)", $file, $blen ) );
         
-        $file = __DIR__.'/../src/Http/Resources/service.json';
+        $file = $cwd.'/src/Http/Resources/service.json';
         $blen = file_put_contents( $file, $builder->toJson() );
         $output->writeln( printf("Wrote JSON service description to %s (%s bytes)", $file, $blen ) );
 
@@ -92,7 +93,7 @@ final class BuildCommand extends Command {
                 $required = ! empty($param['required']);
             }
             
-            $source = file_get_contents(__DIR__.'/src/Console/Command/Base/TemplateCommand.php');
+            $source = file_get_contents($cwd.'/src/Console/Command/Base/TemplateCommand.php');
             
             $source = str_replace('%%');
             
