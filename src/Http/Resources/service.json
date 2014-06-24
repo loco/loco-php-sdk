@@ -1305,6 +1305,16 @@
                     "description": "Optional source locale, not required in many cases",
                     "type": "string",
                     "location": "query"
+                },
+                "index": {
+                    "description": "Override default lookup key in exported file. Leave blank for auto.",
+                    "type": "string",
+                    "location": "query",
+                    "enum": [
+                        "id",
+                        "name",
+                        "text"
+                    ]
                 }
             },
             "errorResponses": [

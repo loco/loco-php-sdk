@@ -1,6 +1,6 @@
 <?php
 /**
- * Auto-generated with Swizzle at 2014-06-24 15:03:08 +0100
+ * Auto-generated with Swizzle at 2014-06-24 16:17:01 +0100
  */
 return array (
   'name' => 'Loco',
@@ -1588,6 +1588,18 @@ return array (
           'description' => 'Optional source locale, not required in many cases',
           'type' => 'string',
           'location' => 'query',
+        ),
+        'index' => 
+        array (
+          'description' => 'Override default lookup key in exported file. Leave blank for auto.',
+          'type' => 'string',
+          'location' => 'query',
+          'enum' => 
+          array (
+            0 => 'id',
+            1 => 'name',
+            2 => 'text',
+          ),
         ),
       ),
       'errorResponses' => 

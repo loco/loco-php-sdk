@@ -27,6 +27,7 @@ class ConvertCommand extends Command {
             ->addOption('format','',InputOption::VALUE_OPTIONAL,'Specific target format, required for some file types',null)
             ->addOption('locale','',InputOption::VALUE_OPTIONAL,'Locale of target language pack, required in most cases',null)
             ->addOption('native','',InputOption::VALUE_OPTIONAL,'Optional source locale, not required in many cases',null)
+            ->addOption('index','',InputOption::VALUE_OPTIONAL,'Override default lookup key in exported file. Leave blank for auto.',null)
         ;
     }
     
