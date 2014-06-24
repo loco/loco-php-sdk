@@ -19,6 +19,7 @@
                     "type": "string",
                     "location": "uri",
                     "enum": [
+                        "ini",
                         "json",
                         "mo",
                         "php",
@@ -186,6 +187,7 @@
                     "enum": [
                         "csv",
                         "html",
+                        "ini",
                         "js",
                         "json",
                         "mo",
@@ -273,6 +275,7 @@
                     "enum": [
                         "csv",
                         "html",
+                        "ini",
                         "js",
                         "json",
                         "mo",
@@ -354,6 +357,7 @@
                     "enum": [
                         "csv",
                         "html",
+                        "ini",
                         "js",
                         "json",
                         "mo",
@@ -1254,6 +1258,7 @@
                     "enum": [
                         "csv",
                         "html",
+                        "ini",
                         "js",
                         "json",
                         "mo",
