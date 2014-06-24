@@ -1234,6 +1234,7 @@
                     "type": "string",
                     "location": "uri",
                     "enum": [
+                        "ini",
                         "json",
                         "mo",
                         "php",

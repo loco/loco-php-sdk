@@ -393,6 +393,19 @@ class ApiClientConvertTest extends ApiClientTest {
         $this->assertContains('<td>and &quot;quotes&quot; too</td>', $src );
         return 'export/test-fr_FR.html';    
     }    
+    
+    
+    /**
+     * Export symfony-style INI file from seed    
+     * @group ini
+     */
+    public function testExportINI(){
+        $src = $this->convert( 'test-fr_FR.po', 'po', 'ini' );
+        $this->assertStringStartsWith(';; ', $src );
+        $this->assertContains('sample = "échantillon"', $src );
+        $this->assertContains("= \"c'est \nmulti\"", $src );
+        return 'export/test-fr_FR.ini';    
+    }    
 
     
         
@@ -557,7 +570,15 @@ class ApiClientConvertTest extends ApiClientTest {
         $this->checkValidJson( $this->convert( $sourcefile, 'strings', 'json', '', false ), false );
     }
     
-            
+    
+    /**
+     * Test .ini parser
+     * @group ini
+     * @depends testExportINI
+     */
+    public function testImportINI( $sourcefile ){
+        $this->checkValidJson( $this->convert( $sourcefile, 'ini', 'json', '', false ), false );
+    }            
             
     
 }

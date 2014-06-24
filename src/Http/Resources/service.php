@@ -1,6 +1,6 @@
 <?php
 /**
- * Auto-generated with Swizzle at 2014-06-24 19:07:52 +0100
+ * Auto-generated with Swizzle at 2014-06-24 19:26:41 +0100
  */
 return array (
   'name' => 'Loco',
@@ -1510,19 +1510,20 @@ return array (
           'location' => 'uri',
           'enum' => 
           array (
-            0 => 'json',
-            1 => 'mo',
-            2 => 'php',
-            3 => 'po',
-            4 => 'properties',
-            5 => 'resx',
-            6 => 'strings',
-            7 => 'symfony',
-            8 => 'tmx',
-            9 => 'ts',
-            10 => 'xlf',
-            11 => 'xml',
-            12 => 'yml',
+            0 => 'ini',
+            1 => 'json',
+            2 => 'mo',
+            3 => 'php',
+            4 => 'po',
+            5 => 'properties',
+            6 => 'resx',
+            7 => 'strings',
+            8 => 'symfony',
+            9 => 'tmx',
+            10 => 'ts',
+            11 => 'xlf',
+            12 => 'xml',
+            13 => 'yml',
           ),
           'default' => 'json',
         ),
