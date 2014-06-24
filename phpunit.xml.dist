@@ -11,8 +11,14 @@
 
     <testsuites>
         <testsuite>
-            <directory>./tests/Http</directory>
+            <directory>./tests</directory>
         </testsuite>
     </testsuites>
+
+    <groups>
+        <exclude>
+            <group>strict</group>
+        </exclude>
+    </groups>
 
 </phpunit>

@@ -148,9 +148,9 @@ class ApiClientConvertTest extends ApiClientTest {
     public function testExportXLF(){
         $xml = $this->convert( 'test-fr_FR.po', 'po', 'xlf' );                
         $this->checkValidXml( $xml );
-        $this->assertContains('<source xml:lang="en_GB">sample</source>', $xml );
-        $this->assertContains('<source xml:lang="en_GB">examples</source>', $xml );
-        $this->assertContains('<target xml:lang="fr_FR">échantillon</target>', $xml );
+        $this->assertContains('<source>sample</source>', $xml );
+        $this->assertContains('<source>examples</source>', $xml );
+        $this->assertContains('<target>échantillon</target>', $xml );
         return 'export/test-fr_FR.xlf';
     }
 
