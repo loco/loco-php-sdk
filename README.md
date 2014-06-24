@@ -42,10 +42,10 @@ $client = Guzzle\Service\Builder\ServiceBuilder::factory('/path/to/config.json' 
 
 Most responses are Guzzle models, which behave much like arrays. The above example fetches `$result['user']` although `$result` is actually an instance of [Guzzle\Service\Resource\Model](http://api.guzzlephp.org/class-Guzzle.Service.Resource.Model.html).
 
+
+## Docs
+
 Check the [Loco API documentation](https://localise.biz/api) to see what model is returned from each end point.
-
-
-
 
 See the [example](https://github.com/loco/loco-php-sdk/tree/master/example) directory for more working code examples.
 

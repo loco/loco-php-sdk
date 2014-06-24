@@ -24,7 +24,7 @@ class ApiClientConvertTest extends ApiClientTest {
         $params['name'] = pathinfo( $sourcefile, PATHINFO_FILENAME );
         $response = $this->getClient()->convert( $params );
         $this->assertInstanceOf( '\Loco\Http\Response\RawResponse', $response );
-        // write to target file, e.g. export-symfony.phps
+        // write to target file, e.g. export-symfony.php
         if( $savefile ){
             $response = (string) $response;
             $name = $params['name'];
@@ -314,11 +314,11 @@ class ApiClientConvertTest extends ApiClientTest {
      * Export PHP default (Zend) from seed
      */    
     public function testExportZend(){
-        $php = $this->convert('test-fr_FR.po', 'po', 'phps' );
+        $php = $this->convert('test-fr_FR.po', 'po', 'php' );
         $this->assertStringStartsWith('<?php', $php );
         $this->assertContains("'sample' => 'échantillon'", $php );
         $this->assertContains("1 => 'exemples'", $php );
-        return 'export/test-fr_FR.phps';
+        return 'export/test-fr_FR.php';
     }    
     
     
@@ -326,11 +326,11 @@ class ApiClientConvertTest extends ApiClientTest {
      * Export PHP Symfony format from seed
      */    
     public function testExportSymfony(){
-        $php = $this->convert('test-fr_FR.po', 'po', 'phps', 'symfony' );
+        $php = $this->convert('test-fr_FR.po', 'po', 'php', 'symfony' );
         $this->assertStringStartsWith('<?php', $php );
         $this->assertContains("'sample' => 'échantillon'", $php );
         $this->assertContains("'example' => 'one: exemple|other: exemples'", $php );
-        return 'export/test-fr_FR.symfony.phps';
+        return 'export/test-fr_FR.symfony.php';
     }    
     
     
@@ -338,11 +338,11 @@ class ApiClientConvertTest extends ApiClientTest {
      * Export PHP Code Igniter format from seed
      */    
     public function testExportCodeIgniter(){
-        $php = $this->convert('test-fr_FR.po', 'po', 'phps', 'codeigniter' );
+        $php = $this->convert('test-fr_FR.po', 'po', 'php', 'codeigniter' );
         $this->assertStringStartsWith('<?php', $php );
         $this->assertContains("\$lang['test_sample'] = 'échantillon';", $php );
         $this->assertContains("\$lang['test_specific_something'] = 'quelque chose de spécifique';", $php );
-        return 'export/test-fr_FR.codeigniter.phps';
+        return 'export/test-fr_FR.codeigniter.php';
     }    
 
     
@@ -350,10 +350,10 @@ class ApiClientConvertTest extends ApiClientTest {
      * Export PHP Constants from seed
      */    
     public function testExportPHPConstants(){
-        $php = $this->convert('test-fr_FR.po', 'po', 'phps', 'constants' );
+        $php = $this->convert('test-fr_FR.po', 'po', 'php', 'constants' );
         $this->assertStringStartsWith('<?php', $php );
         $this->assertContains("define('TEST_EXAMPLES', 'exemples');", $php );
-        return 'export/test-fr_FR.constants.phps';
+        return 'export/test-fr_FR.constants.php';
     }    
     
     

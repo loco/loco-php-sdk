@@ -1,6 +1,6 @@
 <?php
 /**
- * Auto-generated with Swizzle at 2014-06-23 21:14:28 +0100
+ * Auto-generated with Swizzle at 2014-06-24 15:03:08 +0100
  */
 return array (
   'name' => 'Loco',
@@ -1535,7 +1535,7 @@ return array (
             2 => 'js',
             3 => 'json',
             4 => 'mo',
-            5 => 'phps',
+            5 => 'php',
             6 => 'po',
             7 => 'pot',
             8 => 'properties',
