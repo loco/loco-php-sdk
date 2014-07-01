@@ -21,7 +21,7 @@ class GetAssetsCommand extends Command {
             ->setMethod( 'getAssets' )
             ->setDescription( 'List all translatable assets in your project' )
             ->addOption('key','k',InputOption::VALUE_OPTIONAL,'Override configured API key for this request','')
-            ->addOption('filter','',InputOption::VALUE_OPTIONAL,'Comma-separated list of tags to filter subset of assets.',null)
+            ->addOption('filter','',InputOption::VALUE_REQUIRED,'Comma-separated list of tags to filter subset of assets.',null)
         ;
     }
     

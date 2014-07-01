@@ -103,8 +103,8 @@ final class BuildCommand extends Command {
                     $options[] = '->addArgument('.var_export($name,1).",InputArgument::".$required.','.$descr.','.$default.')';
                 }
                 else {
-                    $required = ! empty($param['required']);
-                    $options[] = '->addOption('.var_export($name,1).",'',InputOption::VALUE_".($required?'REQUIRED':'OPTIONAL').','.$descr.','.$default.')';
+                    //$required = ! empty($param['required']); // option values are always required. this does not mean mandatory
+                    $options[] = '->addOption('.var_export($name,1).",'',InputOption::VALUE_REQUIRED,".$descr.','.$default.')';
                 }
             }
             

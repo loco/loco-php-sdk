@@ -24,10 +24,10 @@ class ConvertCommand extends Command {
             ->addArgument('from',InputArgument::OPTIONAL,'Source file format being imported','json')
             ->addArgument('ext',InputArgument::OPTIONAL,'Target file format being exported, specified as a file extension','json')
             ->addArgument('name',InputArgument::OPTIONAL,'Domain/namespace, applicable to some file formats','messages')
-            ->addOption('format','',InputOption::VALUE_OPTIONAL,'Specific target format, required for some file types',null)
-            ->addOption('locale','',InputOption::VALUE_OPTIONAL,'Locale of target language pack, required in most cases',null)
-            ->addOption('native','',InputOption::VALUE_OPTIONAL,'Optional source locale, not required in many cases',null)
-            ->addOption('index','',InputOption::VALUE_OPTIONAL,'Override default lookup key in exported file. Leave blank for auto.',null)
+            ->addOption('format','',InputOption::VALUE_REQUIRED,'Specific target format, required for some file types',null)
+            ->addOption('locale','',InputOption::VALUE_REQUIRED,'Locale of target language pack, required in most cases',null)
+            ->addOption('native','',InputOption::VALUE_REQUIRED,'Optional source locale, not required in many cases',null)
+            ->addOption('index','',InputOption::VALUE_REQUIRED,'Override default lookup key in exported file. Leave blank for auto.',null)
         ;
     }
     

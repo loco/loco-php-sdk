@@ -20,7 +20,7 @@ class TranslateCommand extends Command {
             ->setName( 'loco:translate' )
             ->setMethod( 'translate' )
             ->setDescription( 'Add a new translation in a given locale' )
-            ->addOption('translation','',InputOption::VALUE_OPTIONAL,'Raw value of new translation. Leaving empty puts a blank translation.',null)
+            ->addOption('translation','',InputOption::VALUE_REQUIRED,'Raw value of new translation. Leaving empty puts a blank translation.',null)
             ->addOption('key','k',InputOption::VALUE_OPTIONAL,'Override configured API key for this request','')
             ->addArgument('id',InputArgument::REQUIRED,'Asset ID',null)
             ->addArgument('locale',InputArgument::REQUIRED,'Short code of project locale, e.g. \'fr\' or \'fr_CH\'',null)

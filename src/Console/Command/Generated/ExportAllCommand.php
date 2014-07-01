@@ -22,8 +22,8 @@ class ExportAllCommand extends Command {
             ->setDescription( 'Export your whole project to a multi-locale language pack' )
             ->addArgument('ext',InputArgument::OPTIONAL,'Target file type specified as a file extension','yml')
             ->addOption('key','k',InputOption::VALUE_OPTIONAL,'Override configured API key for this request','')
-            ->addOption('filter','',InputOption::VALUE_OPTIONAL,'Comma-separated list of tags to filter subset of assets.',null)
-            ->addOption('index','',InputOption::VALUE_OPTIONAL,'Override default lookup key in language pack. Leave blank for auto.',null)
+            ->addOption('filter','',InputOption::VALUE_REQUIRED,'Comma-separated list of tags to filter subset of assets.',null)
+            ->addOption('index','',InputOption::VALUE_REQUIRED,'Override default lookup key in language pack. Leave blank for auto.',null)
         ;
     }
     

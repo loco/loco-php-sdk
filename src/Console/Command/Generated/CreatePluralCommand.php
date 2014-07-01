@@ -21,7 +21,7 @@ class CreatePluralCommand extends Command {
             ->setMethod( 'createPlural' )
             ->setDescription( 'Add a new plural form of an existing asset' )
             ->addOption('name','',InputOption::VALUE_REQUIRED,'Source text for the plural form or just a name describing it',null)
-            ->addOption('pid','',InputOption::VALUE_OPTIONAL,'Optional machine friendly ID if you want something specific, or converting an existing asset to a plural','')
+            ->addOption('pid','',InputOption::VALUE_REQUIRED,'Optional machine friendly ID if you want something specific, or converting an existing asset to a plural','')
             ->addOption('key','k',InputOption::VALUE_OPTIONAL,'Override configured API key for this request','')
             ->addArgument('id',InputArgument::REQUIRED,'Asset ID',null)
         ;
