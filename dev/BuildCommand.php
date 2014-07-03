@@ -68,7 +68,7 @@ final class BuildCommand extends Command {
             $builder->registerCommandClass( '', '\Loco\Http\Command\StrictCommand');
         }
 
-        $base_url .= '/docs';
+        $base_url .= '/swagger';
         $output->writeln('<comment>Pulling docs from '.$base_url.'</comment>');
         $builder->build( $base_url );
         
