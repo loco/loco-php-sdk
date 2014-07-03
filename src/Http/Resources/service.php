@@ -1,6 +1,6 @@
 <?php
 /**
- * Auto-generated with Swizzle at 2014-07-01 23:01:15 +0100
+ * Auto-generated with Swizzle at 2014-07-03 22:29:31 +0100
  */
 return array (
   'name' => 'Loco',
@@ -1733,7 +1733,7 @@ return array (
         'length' => 
         array (
           'required' => true,
-          'description' => 'Number of plural forms for current language',
+          'description' => 'Number of forms including singular',
           'type' => 'integer',
           'location' => 'json',
           'minimum' => 1,
@@ -1742,14 +1742,14 @@ return array (
         'equation' => 
         array (
           'required' => true,
-          'description' => 'Equation taking multiplier <code>(n)</code> to yield a plural form offset. <code>( 0 <= offset < length )</code>.',
+          'description' => 'Equation for calculating offset in forms. The formula takes a multiplier <code>(n)</code> to yield a plural form offset. <code>( 0 <= offset < length )</code>.',
           'type' => 'string',
           'location' => 'json',
         ),
         'forms' => 
         array (
           'required' => true,
-          'description' => 'Plural form names according to <a href="http://unicode.org/reports/tr35/tr35-numbers.html#Language_Plural_Rules">Unicode tr35</a>.',
+          'description' => 'Plural form names. See <a href="http://unicode.org/reports/tr35/tr35-numbers.html#Language_Plural_Rules">Unicode tr35</a>.',
           'type' => 'array',
           'location' => 'json',
           'enum' => 
@@ -1791,7 +1791,7 @@ return array (
         'native' => 
         array (
           'required' => true,
-          'description' => 'Whether the source locale of project (read-only)',
+          'description' => 'Whether the source locale of project',
           'type' => 'boolean',
           'location' => 'json',
         ),
@@ -1806,7 +1806,7 @@ return array (
             'length' => 
             array (
               'required' => true,
-              'description' => 'Number of plural forms for current language',
+              'description' => 'Number of forms including singular',
               'type' => 'integer',
               'location' => 'json',
               'minimum' => 1,
@@ -1815,14 +1815,14 @@ return array (
             'equation' => 
             array (
               'required' => true,
-              'description' => 'Equation taking multiplier <code>(n)</code> to yield a plural form offset. <code>( 0 <= offset < length )</code>.',
+              'description' => 'Equation for calculating offset in forms. The formula takes a multiplier <code>(n)</code> to yield a plural form offset. <code>( 0 <= offset < length )</code>.',
               'type' => 'string',
               'location' => 'json',
             ),
             'forms' => 
             array (
               'required' => true,
-              'description' => 'Plural form names according to <a href="http://unicode.org/reports/tr35/tr35-numbers.html#Language_Plural_Rules">Unicode tr35</a>.',
+              'description' => 'Plural form names. See <a href="http://unicode.org/reports/tr35/tr35-numbers.html#Language_Plural_Rules">Unicode tr35</a>.',
               'type' => 'array',
               'location' => 'json',
               'enum' => 
@@ -1975,7 +1975,7 @@ return array (
               'native' => 
               array (
                 'required' => true,
-                'description' => 'Whether the source locale of project (read-only)',
+                'description' => 'Whether the source locale of project',
                 'type' => 'boolean',
                 'location' => 'json',
               ),
@@ -1990,7 +1990,7 @@ return array (
                   'length' => 
                   array (
                     'required' => true,
-                    'description' => 'Number of plural forms for current language',
+                    'description' => 'Number of forms including singular',
                     'type' => 'integer',
                     'location' => 'json',
                     'minimum' => 1,
@@ -1999,14 +1999,14 @@ return array (
                   'equation' => 
                   array (
                     'required' => true,
-                    'description' => 'Equation taking multiplier <code>(n)</code> to yield a plural form offset. <code>( 0 <= offset < length )</code>.',
+                    'description' => 'Equation for calculating offset in forms. The formula takes a multiplier <code>(n)</code> to yield a plural form offset. <code>( 0 <= offset < length )</code>.',
                     'type' => 'string',
                     'location' => 'json',
                   ),
                   'forms' => 
                   array (
                     'required' => true,
-                    'description' => 'Plural form names according to <a href="http://unicode.org/reports/tr35/tr35-numbers.html#Language_Plural_Rules">Unicode tr35</a>.',
+                    'description' => 'Plural form names. See <a href="http://unicode.org/reports/tr35/tr35-numbers.html#Language_Plural_Rules">Unicode tr35</a>.',
                     'type' => 'array',
                     'location' => 'json',
                     'enum' => 
@@ -2190,7 +2190,7 @@ return array (
     ),
     'AssetPatch' => 
     array (
-      'description' => 'Patch class for documentation only.',
+      'description' => 'Patch structure for modifying assets',
       'type' => 'object',
       'additionalProperties' => false,
       'properties' => 
@@ -2260,7 +2260,7 @@ return array (
     ),
     'LocalePatch' => 
     array (
-      'description' => 'Patch class for documentation only.',
+      'description' => 'Patch structure for modifying locales',
       'type' => 'object',
       'additionalProperties' => false,
       'properties' => 
@@ -2434,7 +2434,7 @@ return array (
             'native' => 
             array (
               'required' => true,
-              'description' => 'Whether the source locale of project (read-only)',
+              'description' => 'Whether the source locale of project',
               'type' => 'boolean',
               'location' => 'json',
             ),
@@ -2449,7 +2449,7 @@ return array (
                 'length' => 
                 array (
                   'required' => true,
-                  'description' => 'Number of plural forms for current language',
+                  'description' => 'Number of forms including singular',
                   'type' => 'integer',
                   'location' => 'json',
                   'minimum' => 1,
@@ -2458,14 +2458,14 @@ return array (
                 'equation' => 
                 array (
                   'required' => true,
-                  'description' => 'Equation taking multiplier <code>(n)</code> to yield a plural form offset. <code>( 0 <= offset < length )</code>.',
+                  'description' => 'Equation for calculating offset in forms. The formula takes a multiplier <code>(n)</code> to yield a plural form offset. <code>( 0 <= offset < length )</code>.',
                   'type' => 'string',
                   'location' => 'json',
                 ),
                 'forms' => 
                 array (
                   'required' => true,
-                  'description' => 'Plural form names according to <a href="http://unicode.org/reports/tr35/tr35-numbers.html#Language_Plural_Rules">Unicode tr35</a>.',
+                  'description' => 'Plural form names. See <a href="http://unicode.org/reports/tr35/tr35-numbers.html#Language_Plural_Rules">Unicode tr35</a>.',
                   'type' => 'array',
                   'location' => 'json',
                   'enum' => 

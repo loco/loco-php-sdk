@@ -1426,7 +1426,7 @@
             "properties": {
                 "length": {
                     "required": true,
-                    "description": "Number of plural forms for current language",
+                    "description": "Number of forms including singular",
                     "type": "integer",
                     "location": "json",
                     "minimum": 1,
@@ -1434,13 +1434,13 @@
                 },
                 "equation": {
                     "required": true,
-                    "description": "Equation taking multiplier <code>(n)<\/code> to yield a plural form offset. <code>( 0 <= offset < length )<\/code>.",
+                    "description": "Equation for calculating offset in forms. The formula takes a multiplier <code>(n)<\/code> to yield a plural form offset. <code>( 0 <= offset < length )<\/code>.",
                     "type": "string",
                     "location": "json"
                 },
                 "forms": {
                     "required": true,
-                    "description": "Plural form names according to <a href=\"http:\/\/unicode.org\/reports\/tr35\/tr35-numbers.html#Language_Plural_Rules\">Unicode tr35<\/a>.",
+                    "description": "Plural form names. See <a href=\"http:\/\/unicode.org\/reports\/tr35\/tr35-numbers.html#Language_Plural_Rules\">Unicode tr35<\/a>.",
                     "type": "array",
                     "location": "json",
                     "enum": [
@@ -1475,7 +1475,7 @@
                 },
                 "native": {
                     "required": true,
-                    "description": "Whether the source locale of project (read-only)",
+                    "description": "Whether the source locale of project",
                     "type": "boolean",
                     "location": "json"
                 },
@@ -1487,7 +1487,7 @@
                     "properties": {
                         "length": {
                             "required": true,
-                            "description": "Number of plural forms for current language",
+                            "description": "Number of forms including singular",
                             "type": "integer",
                             "location": "json",
                             "minimum": 1,
@@ -1495,13 +1495,13 @@
                         },
                         "equation": {
                             "required": true,
-                            "description": "Equation taking multiplier <code>(n)<\/code> to yield a plural form offset. <code>( 0 <= offset < length )<\/code>.",
+                            "description": "Equation for calculating offset in forms. The formula takes a multiplier <code>(n)<\/code> to yield a plural form offset. <code>( 0 <= offset < length )<\/code>.",
                             "type": "string",
                             "location": "json"
                         },
                         "forms": {
                             "required": true,
-                            "description": "Plural form names according to <a href=\"http:\/\/unicode.org\/reports\/tr35\/tr35-numbers.html#Language_Plural_Rules\">Unicode tr35<\/a>.",
+                            "description": "Plural form names. See <a href=\"http:\/\/unicode.org\/reports\/tr35\/tr35-numbers.html#Language_Plural_Rules\">Unicode tr35<\/a>.",
                             "type": "array",
                             "location": "json",
                             "enum": [
@@ -1629,7 +1629,7 @@
                             },
                             "native": {
                                 "required": true,
-                                "description": "Whether the source locale of project (read-only)",
+                                "description": "Whether the source locale of project",
                                 "type": "boolean",
                                 "location": "json"
                             },
@@ -1641,7 +1641,7 @@
                                 "properties": {
                                     "length": {
                                         "required": true,
-                                        "description": "Number of plural forms for current language",
+                                        "description": "Number of forms including singular",
                                         "type": "integer",
                                         "location": "json",
                                         "minimum": 1,
@@ -1649,13 +1649,13 @@
                                     },
                                     "equation": {
                                         "required": true,
-                                        "description": "Equation taking multiplier <code>(n)<\/code> to yield a plural form offset. <code>( 0 <= offset < length )<\/code>.",
+                                        "description": "Equation for calculating offset in forms. The formula takes a multiplier <code>(n)<\/code> to yield a plural form offset. <code>( 0 <= offset < length )<\/code>.",
                                         "type": "string",
                                         "location": "json"
                                     },
                                     "forms": {
                                         "required": true,
-                                        "description": "Plural form names according to <a href=\"http:\/\/unicode.org\/reports\/tr35\/tr35-numbers.html#Language_Plural_Rules\">Unicode tr35<\/a>.",
+                                        "description": "Plural form names. See <a href=\"http:\/\/unicode.org\/reports\/tr35\/tr35-numbers.html#Language_Plural_Rules\">Unicode tr35<\/a>.",
                                         "type": "array",
                                         "location": "json",
                                         "enum": [
@@ -1806,7 +1806,7 @@
             }
         },
         "AssetPatch": {
-            "description": "Patch class for documentation only.",
+            "description": "Patch structure for modifying assets",
             "type": "object",
             "additionalProperties": false,
             "properties": {
@@ -1864,7 +1864,7 @@
             }
         },
         "LocalePatch": {
-            "description": "Patch class for documentation only.",
+            "description": "Patch structure for modifying locales",
             "type": "object",
             "additionalProperties": false,
             "properties": {
@@ -2010,7 +2010,7 @@
                         },
                         "native": {
                             "required": true,
-                            "description": "Whether the source locale of project (read-only)",
+                            "description": "Whether the source locale of project",
                             "type": "boolean",
                             "location": "json"
                         },
@@ -2022,7 +2022,7 @@
                             "properties": {
                                 "length": {
                                     "required": true,
-                                    "description": "Number of plural forms for current language",
+                                    "description": "Number of forms including singular",
                                     "type": "integer",
                                     "location": "json",
                                     "minimum": 1,
@@ -2030,13 +2030,13 @@
                                 },
                                 "equation": {
                                     "required": true,
-                                    "description": "Equation taking multiplier <code>(n)<\/code> to yield a plural form offset. <code>( 0 <= offset < length )<\/code>.",
+                                    "description": "Equation for calculating offset in forms. The formula takes a multiplier <code>(n)<\/code> to yield a plural form offset. <code>( 0 <= offset < length )<\/code>.",
                                     "type": "string",
                                     "location": "json"
                                 },
                                 "forms": {
                                     "required": true,
-                                    "description": "Plural form names according to <a href=\"http:\/\/unicode.org\/reports\/tr35\/tr35-numbers.html#Language_Plural_Rules\">Unicode tr35<\/a>.",
+                                    "description": "Plural form names. See <a href=\"http:\/\/unicode.org\/reports\/tr35\/tr35-numbers.html#Language_Plural_Rules\">Unicode tr35<\/a>.",
                                     "type": "array",
                                     "location": "json",
                                     "enum": [
