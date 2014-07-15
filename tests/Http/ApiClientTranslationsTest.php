@@ -177,7 +177,7 @@ class ApiClientTranslationsTest  extends ApiClientTest {
             'locale' => $translation['locale']['code'],
         ) );
         $this->assertTrue( $model['flagged'], 'Asset should be flagged after flagging' );
-        $this->assertFalse( $model['translated'], 'Asset should not be considered translated when flagged' );
+        $this->assertTrue( $model['translated'], 'Asset should still be "translated" when flagged' );
         return $translation;
     }
 
@@ -210,7 +210,6 @@ class ApiClientTranslationsTest  extends ApiClientTest {
             'locale' => $translation['locale']['code'],
         ) );
         $this->assertFalse( $model['flagged'], 'Asset should be unflagged after unflagging' );
-        $this->assertTrue( $model['translated'], 'Asset should be considered translated when unflagged' );
         return $translation;
     }    
 
