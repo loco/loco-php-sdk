@@ -9,20 +9,20 @@ use Symfony\Component\Console\Input\InputArgument;
 /**
  * Auto-generated Loco API console command.
  */
-class PatchLocaleCommand extends Command {
+class FlagTranslationCommand extends Command {
     
     /**
-     * Configure loco:patch:locale command
+     * Configure loco:flag:translation command
      * @internal
      */
     protected function configure(){
         $this
-            ->setName( 'loco:patch:locale' )
-            ->setMethod( 'patchLocale' )
-            ->setDescription( 'Modify a project locale' )
-            ->addOption('code','',InputOption::VALUE_REQUIRED,'Locale short code',null)
-            ->addOption('name','',InputOption::VALUE_REQUIRED,'Friendly display name',null)
+            ->setName( 'loco:flag:translation' )
+            ->setMethod( 'flagTranslation' )
+            ->setDescription( 'Flag a translation as incomplete' )
+            ->addOption('flag','',InputOption::VALUE_REQUIRED,'Flag to set','fuzzy')
             ->addOption('key','k',InputOption::VALUE_OPTIONAL,'Override configured API key for this request','')
+            ->addArgument('id',InputArgument::REQUIRED,'Asset ID',null)
             ->addArgument('locale',InputArgument::REQUIRED,'Short code of project locale, e.g. `fr` or `fr_CH`',null)
         ;
     }

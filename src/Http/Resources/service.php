@@ -1,10 +1,10 @@
 <?php
 /**
- * Auto-generated with Swizzle at 2014-07-03 22:29:31 +0100
+ * Auto-generated with Swizzle at 2014-07-15 21:00:21 +0100
  */
 return array (
   'name' => 'Loco',
-  'apiVersion' => '1.0.7',
+  'apiVersion' => '1.0.8',
   'baseUrl' => 'https://localise.biz/',
   'description' => 'Loco REST API',
   'operations' => 
@@ -19,7 +19,7 @@ return array (
       'responseNotes' => '<p>The import API loads translations from various language pack formats into the currently authenticated project.</p>
            <p>Take note of how the <code>index</code> and <code>locale</code> parameters are used to describe how your file will be imported. 
               By leaving these fields empty Loco will try to guess your intentions, but it\'s advisable to specify all parameters if in any doubt.
-              <a href="http://localise.biz/api#imports">See examples</a>.</p>',
+              <a href="https://localise.biz/api#imports">See examples</a>.</p>',
       'summary' => 'Import from language pack files',
       'parameters' => 
       array (
@@ -272,7 +272,7 @@ return array (
       'responseType' => 'class',
       'responseNotes' => '<p>Export translations from your project to a locale-specific language pack.</p>
            <p>Various export file types are supported with format variations for some types.
-              <a href="http://localise.biz/api#formats">See the full list of supported export formats</a>.</p>',
+              <a href="https://localise.biz/api#formats">See the full list of supported export formats</a>.</p>',
       'summary' => 'Export a single locale to a language pack.',
       'parameters' => 
       array (
@@ -322,7 +322,7 @@ return array (
         'locale' => 
         array (
           'required' => true,
-          'description' => 'Locale to export, specified as short code. e.g. \'en\' or \'en_GB\'',
+          'description' => 'Locale to export, specified as short code. e.g. `en` or `en_GB`',
           'type' => 'string',
           'location' => 'uri',
         ),
@@ -375,7 +375,7 @@ return array (
       'responseType' => 'class',
       'responseNotes' => '<p>Export only the source keys from your project to a language pack.</p>
            <p>This is different to exporting just your source language translations, because it only exports the left hand side of each mapping.</p>
-           <p><a href="http://localise.biz/api#formats">See the full list of supported export formats</a>.</p>',
+           <p><a href="https://localise.biz/api#formats">See the full list of supported export formats</a>.</p>',
       'summary' => 'Export a template containing only source keys',
       'parameters' => 
       array (
@@ -1128,7 +1128,7 @@ return array (
         'locale' => 
         array (
           'required' => true,
-          'description' => 'Short code of project locale, e.g. \'fr\' or \'fr_CH\'',
+          'description' => 'Short code of project locale, e.g. `fr` or `fr_CH`',
           'type' => 'string',
           'location' => 'uri',
         ),
@@ -1181,7 +1181,7 @@ return array (
         'locale' => 
         array (
           'required' => true,
-          'description' => 'Short code of project locale, e.g. \'fr\' or \'fr_CH\'',
+          'description' => 'Short code of project locale, e.g. `fr` or `fr_CH`',
           'type' => 'string',
           'location' => 'uri',
         ),
@@ -1228,7 +1228,7 @@ return array (
         'locale' => 
         array (
           'required' => true,
-          'description' => 'Short code of project locale, e.g. \'fr\' or \'fr_CH\'',
+          'description' => 'Short code of project locale, e.g. `fr` or `fr_CH`',
           'type' => 'string',
           'location' => 'uri',
         ),
@@ -1259,9 +1259,9 @@ return array (
       'class' => 'Guzzle\\Service\\Command\\OperationCommand',
       'responseClass' => 'array',
       'responseType' => 'primitive',
-      'responseNotes' => '<p>Gets all translations of an asset in the currently authenticated project\'s locales.</p>
+      'responseNotes' => '<p>Gets all translations of an asset across the currently authenticated project\'s locales.</p>
            <p>Locales not yet translated are included, but their <code>translated</code> field will be set to <code>false</code>.</p>',
-      'summary' => 'Get translations of an asset',
+      'summary' => 'Get all translations of an asset',
       'parameters' => 
       array (
         'key' => 
@@ -1323,7 +1323,7 @@ return array (
         'locale' => 
         array (
           'required' => true,
-          'description' => 'Short code of project locale, e.g. \'fr\' or \'fr_CH\'',
+          'description' => 'Short code of project locale, e.g. `fr` or `fr_CH`',
           'type' => 'string',
           'location' => 'uri',
         ),
@@ -1384,7 +1384,7 @@ return array (
         'locale' => 
         array (
           'required' => true,
-          'description' => 'Short code of project locale, e.g. \'fr\' or \'fr_CH\'',
+          'description' => 'Short code of project locale, e.g. `fr` or `fr_CH`',
           'type' => 'string',
           'location' => 'uri',
         ),
@@ -1433,7 +1433,7 @@ return array (
         'locale' => 
         array (
           'required' => true,
-          'description' => 'Short code of project locale, e.g. \'fr\' or \'fr_CH\'',
+          'description' => 'Short code of project locale, e.g. `fr` or `fr_CH`',
           'type' => 'string',
           'location' => 'uri',
         ),
@@ -1454,6 +1454,117 @@ return array (
         array (
           'code' => 404,
           'phrase' => 'Asset not translated in this locale',
+        ),
+      ),
+    ),
+    'flagTranslation' => 
+    array (
+      'httpMethod' => 'POST',
+      'uri' => '/api/translations/{id}/{locale}/flag',
+      'class' => 'Guzzle\\Service\\Command\\OperationCommand',
+      'responseClass' => 'Success',
+      'responseType' => 'model',
+      'responseNotes' => '<p>Flag a single translation as being incomplete or in error for the given locale.</p>
+           <p>Flagged translations reduce your project completeness.</p>',
+      'summary' => 'Flag a translation as incomplete',
+      'parameters' => 
+      array (
+        'flag' => 
+        array (
+          'required' => true,
+          'description' => 'Flag to set',
+          'type' => 'string',
+          'location' => 'postField',
+          'enum' => 
+          array (
+            0 => 'fuzzy',
+            1 => 'error',
+            2 => 'review',
+            3 => 'pending',
+          ),
+          'default' => 'fuzzy',
+        ),
+        'key' => 
+        array (
+          'required' => true,
+          'description' => 'Project API key',
+          'type' => 'string',
+          'location' => 'query',
+        ),
+        'id' => 
+        array (
+          'required' => true,
+          'description' => 'Asset ID',
+          'type' => 'string',
+          'location' => 'uri',
+        ),
+        'locale' => 
+        array (
+          'required' => true,
+          'description' => 'Short code of project locale, e.g. `fr` or `fr_CH`',
+          'type' => 'string',
+          'location' => 'uri',
+        ),
+      ),
+      'errorResponses' => 
+      array (
+        0 => 
+        array (
+          'code' => 401,
+          'phrase' => 'Invalid API key',
+        ),
+        1 => 
+        array (
+          'code' => 404,
+          'phrase' => 'Asset not in project',
+        ),
+      ),
+    ),
+    'unflagTranslation' => 
+    array (
+      'httpMethod' => 'DELETE',
+      'uri' => '/api/translations/{id}/{locale}/flag',
+      'class' => 'Guzzle\\Service\\Command\\OperationCommand',
+      'responseClass' => 'Success',
+      'responseType' => 'model',
+      'responseNotes' => '<p>Removes current flag from a translation marked as incomplete or in error.</p>
+           <p>It\'s not necessary to specify which flag to remove, because there can be only one.</p>',
+      'summary' => 'Clear flag from a translation',
+      'parameters' => 
+      array (
+        'key' => 
+        array (
+          'required' => true,
+          'description' => 'Project API key',
+          'type' => 'string',
+          'location' => 'query',
+        ),
+        'id' => 
+        array (
+          'required' => true,
+          'description' => 'Asset ID',
+          'type' => 'string',
+          'location' => 'uri',
+        ),
+        'locale' => 
+        array (
+          'required' => true,
+          'description' => 'Short code of project locale, e.g. `fr` or `fr_CH`',
+          'type' => 'string',
+          'location' => 'uri',
+        ),
+      ),
+      'errorResponses' => 
+      array (
+        0 => 
+        array (
+          'code' => 401,
+          'phrase' => 'Invalid API key',
+        ),
+        1 => 
+        array (
+          'code' => 404,
+          'phrase' => 'Asset not in project',
         ),
       ),
     ),
@@ -1693,14 +1804,20 @@ return array (
         'translated' => 
         array (
           'required' => true,
-          'description' => 'Number of completed translations',
+          'description' => 'Number of locales asset is translated into',
           'type' => 'integer',
           'location' => 'json',
         ),
         'untranslated' => 
         array (
           'required' => true,
-          'description' => 'Number of incomplete translations',
+          'description' => 'Number of locales left to translate',
+          'type' => 'integer',
+          'location' => 'json',
+        ),
+        'incomplete' => 
+        array (
+          'description' => 'Number of translations that are flagged as incomplete',
           'type' => 'integer',
           'location' => 'json',
         ),
@@ -1915,14 +2032,20 @@ return array (
               'translated' => 
               array (
                 'required' => true,
-                'description' => 'Number of completed translations',
+                'description' => 'Number of locales asset is translated into',
                 'type' => 'integer',
                 'location' => 'json',
               ),
               'untranslated' => 
               array (
                 'required' => true,
-                'description' => 'Number of incomplete translations',
+                'description' => 'Number of locales left to translate',
+                'type' => 'integer',
+                'location' => 'json',
+              ),
+              'incomplete' => 
+              array (
+                'description' => 'Number of translations that are flagged as incomplete',
                 'type' => 'integer',
                 'location' => 'json',
               ),
@@ -2302,7 +2425,7 @@ return array (
         'translated' => 
         array (
           'required' => true,
-          'description' => 'Whether translation in this locale is considered complete',
+          'description' => 'Whether plural translation exists, even if marked intentionally blank',
           'type' => 'boolean',
           'location' => 'json',
           'default' => false,
@@ -2368,7 +2491,7 @@ return array (
         'translated' => 
         array (
           'required' => true,
-          'description' => 'Whether translation in this locale is considered complete',
+          'description' => 'Whether this translation exists, even if marked intentionally blank',
           'type' => 'boolean',
           'location' => 'json',
           'default' => false,
@@ -2404,7 +2527,7 @@ return array (
         ),
         'modified' => 
         array (
-          'description' => 'Time last modified in UTC, null if not translated',
+          'description' => 'Time last modified in UTC, null if translation doesn\'t exist',
           'type' => 'string',
           'format' => 'date-time',
           'location' => 'json',
@@ -2515,7 +2638,7 @@ return array (
               'translated' => 
               array (
                 'required' => true,
-                'description' => 'Whether translation in this locale is considered complete',
+                'description' => 'Whether plural translation exists, even if marked intentionally blank',
                 'type' => 'boolean',
                 'location' => 'json',
                 'default' => false,

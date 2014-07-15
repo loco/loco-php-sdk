@@ -19,7 +19,7 @@ class GetTranslationsCommand extends Command {
         $this
             ->setName( 'loco:get:translations' )
             ->setMethod( 'getTranslations' )
-            ->setDescription( 'Get translations of an asset' )
+            ->setDescription( 'Get all translations of an asset' )
             ->addOption('key','k',InputOption::VALUE_OPTIONAL,'Override configured API key for this request','')
             ->addArgument('id',InputArgument::REQUIRED,'Asset ID',null)
         ;

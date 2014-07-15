@@ -22,7 +22,7 @@ class UntranslateCommand extends Command {
             ->setDescription( 'Untranslate an asset in a single locale' )
             ->addOption('key','k',InputOption::VALUE_OPTIONAL,'Override configured API key for this request','')
             ->addArgument('id',InputArgument::REQUIRED,'Asset ID',null)
-            ->addArgument('locale',InputArgument::REQUIRED,'Short code of project locale, e.g. \'fr\' or \'fr_CH\'',null)
+            ->addArgument('locale',InputArgument::REQUIRED,'Short code of project locale, e.g. `fr` or `fr_CH`',null)
         ;
     }
     
