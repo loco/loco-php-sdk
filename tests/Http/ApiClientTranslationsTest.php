@@ -69,6 +69,7 @@ class ApiClientTranslationsTest  extends ApiClientTest {
         $this->assertEquals( $id, $model['id'] );
         $this->assertEquals( $locale, $model['locale']['code'] );
         $this->assertFalse( $model['translated'] );
+        $this->assertFalse( $model['flagged'] );
         $this->assertEquals( 0, $model['revision'] );
         return $model;
     }    
@@ -88,6 +89,7 @@ class ApiClientTranslationsTest  extends ApiClientTest {
         ) );
         $this->assertInstanceOf( '\Guzzle\Service\Resource\Model', $model );
         $this->assertTrue( $model['translated'] );
+        $this->assertFalse( $model['flagged'] );
         $this->assertEquals( 1, $model['revision'] );
         //sleep(1);
         return $model;
@@ -146,10 +148,76 @@ class ApiClientTranslationsTest  extends ApiClientTest {
     }
     
     
+
+    /**
+     * @depends testTranslationChange
+     */
+    public function testTranslationFlagging( Model $translation ){
+        $client = $this->getClient();
+        $model = $client->flagTranslation( array(
+            'id' => $translation['id'],
+            'locale' => $translation['locale']['code'],
+            'flag' => 'fuzzy',
+        ) );
+        $this->assertInstanceOf('\Guzzle\Service\Resource\Model', $model );
+        $this->assertEquals( 200, $model['status'] );
+        $this->assertEquals( 'Flagged as "Fuzzy"', $model['message'] );
+        return $translation;
+    }    
+    
+    
     
     /**
-     * untranslate
-     * @depends testTranslationChange
+     * @depends testTranslationFlagging
+     */
+    public function testTranslationIncompleteAfterFlagging( Model $translation ){
+        $client = $this->getClient();
+        $model = $client->getTranslation( array(
+            'id' => $translation['id'],
+            'locale' => $translation['locale']['code'],
+        ) );
+        $this->assertTrue( $model['flagged'], 'Asset should be flagged after flagging' );
+        $this->assertFalse( $model['translated'], 'Asset should not be considered translated when flagged' );
+        return $translation;
+    }
+
+
+
+    /**
+     * @depends testTranslationIncompleteAfterFlagging
+     */    
+    public function testUnflagTranslation( Model $translation ){
+        $client = $this->getClient();
+        $model = $client->unflagTranslation( array(
+            'id' => $translation['id'],
+            'locale' => $translation['locale']['code'],
+        ) );
+        $this->assertInstanceOf('\Guzzle\Service\Resource\Model', $model );
+        $this->assertEquals( 200, $model['status'] );
+        $this->assertEquals( 'Unflagged', $model['message'] );
+        return $translation;
+    }    
+    
+    
+
+    /**
+     * @depends testTranslationFlagging
+     */
+    public function testTranslationCompleteAfterUnflagging( Model $translation ){
+        $client = $this->getClient();
+        $model = $client->getTranslation( array(
+            'id' => $translation['id'],
+            'locale' => $translation['locale']['code'],
+        ) );
+        $this->assertFalse( $model['flagged'], 'Asset should be unflagged after unflagging' );
+        $this->assertTrue( $model['translated'], 'Asset should be considered translated when unflagged' );
+        return $translation;
+    }    
+
+
+
+    /**
+     * @depends testTranslationCompleteAfterUnflagging
      */   
     public function testUntranslate( Model $translation ){
         $client = $this->getClient();
@@ -176,6 +244,7 @@ class ApiClientTranslationsTest  extends ApiClientTest {
             'locale' => $translation['locale']['code'],
         ) );
         $this->assertFalse( $model['translated'], 'Asset not untranslated after delete operation' );
+        $this->assertFalse( $model['flagged'], 'Asset should not be flagged when no translation exists' );
         $this->assertEquals( 0, $model['revision'], 'Asset revision not zeroed after delete operation' );
         return $model;
     }    
