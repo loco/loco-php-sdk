@@ -532,14 +532,14 @@ class ApiClientConvertTest extends ApiClientTest {
     
     /**
      * Test php parse from symfony format
-     * @todo implement symfony import parser that handles plural formats
      * @group php
      * @depends testExportSymfony
      */
     public function testImportSymfony( $sourcefile ){
-        $this->markTestSkipped();
-        // @todo work out how to better handle symfony hinting for plural conversion
-        $this->checkValidJson( $this->convert( $sourcefile, 'php', 'json', '', false ), true );
+        $json = $this->convert( $sourcefile, 'php', 'json', '', false );
+        // re-importing symfony plurals won't work due to the way symfony handles string formatted plurals
+        $data = json_decode( $json, true );
+        $this->assertEquals('one: exemple|other: exemples', $data['example'] );
     }
     
     
