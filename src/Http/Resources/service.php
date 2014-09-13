@@ -1,6 +1,6 @@
 <?php
 /**
- * Auto-generated with Swizzle at 2014-07-15 21:00:21 +0100
+ * Auto-generated with Swizzle at 2014-09-13 16:25:18 +0100
  */
 return array (
   'name' => 'Loco',
@@ -203,6 +203,8 @@ return array (
             6 => 'rails',
             7 => 'java',
             8 => 'tizen',
+            9 => 'gettext',
+            10 => 'ng-gettext',
           ),
         ),
         'filter' => 
@@ -299,6 +301,8 @@ return array (
             6 => 'rails',
             7 => 'java',
             8 => 'tizen',
+            9 => 'gettext',
+            10 => 'ng-gettext',
           ),
         ),
         'filter' => 
@@ -402,6 +406,8 @@ return array (
             6 => 'rails',
             7 => 'java',
             8 => 'tizen',
+            9 => 'gettext',
+            10 => 'ng-gettext',
           ),
         ),
         'filter' => 

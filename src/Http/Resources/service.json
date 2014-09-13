@@ -162,7 +162,9 @@
                         "nested",
                         "rails",
                         "java",
-                        "tizen"
+                        "tizen",
+                        "gettext",
+                        "ng-gettext"
                     ]
                 },
                 "filter": {
@@ -244,7 +246,9 @@
                         "nested",
                         "rails",
                         "java",
-                        "tizen"
+                        "tizen",
+                        "gettext",
+                        "ng-gettext"
                     ]
                 },
                 "filter": {
@@ -332,7 +336,9 @@
                         "nested",
                         "rails",
                         "java",
-                        "tizen"
+                        "tizen",
+                        "gettext",
+                        "ng-gettext"
                     ]
                 },
                 "filter": {
@@ -1289,9 +1295,7 @@
             "responseType": "model",
             "responseNotes": "Checks the API is up and returns the API version number",
             "summary": "Check the API is up",
-            "parameters": [
-
-            ]
+            "parameters": []
         },
         "ping404": {
             "httpMethod": "GET",
@@ -1300,9 +1304,7 @@
             "responseClass": "Error",
             "responseType": "model",
             "summary": "Get a test 404 response",
-            "parameters": [
-
-            ]
+            "parameters": []
         },
         "convert": {
             "httpMethod": "POST",
