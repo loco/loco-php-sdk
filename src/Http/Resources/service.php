@@ -1,6 +1,6 @@
 <?php
 /**
- * Auto-generated with Swizzle at 2014-09-13 16:25:18 +0100
+ * Auto-generated with Swizzle at 2014-11-06 18:16:18 +0000
  */
 return array (
   'name' => 'Loco',
@@ -157,6 +157,12 @@ return array (
             2 => 'text',
           ),
         ),
+        'fallback' => 
+        array (
+          'description' => 'Fallback locale for untranslated assets, specified as short code. e.g. `en` or `en_GB`',
+          'type' => 'string',
+          'location' => 'query',
+        ),
       ),
       'errorResponses' => 
       array (
@@ -224,6 +230,12 @@ return array (
             1 => 'name',
             2 => 'text',
           ),
+        ),
+        'fallback' => 
+        array (
+          'description' => 'Fallback locale for untranslated assets, specified as short code. e.g. `en` or `en_GB`',
+          'type' => 'string',
+          'location' => 'query',
         ),
         'ext' => 
         array (
@@ -322,6 +334,12 @@ return array (
             1 => 'name',
             2 => 'text',
           ),
+        ),
+        'fallback' => 
+        array (
+          'description' => 'Fallback locale for untranslated assets, specified as short code. e.g. `en` or `en_GB`',
+          'type' => 'string',
+          'location' => 'query',
         ),
         'locale' => 
         array (
@@ -427,6 +445,12 @@ return array (
             1 => 'name',
             2 => 'text',
           ),
+        ),
+        'fallback' => 
+        array (
+          'description' => 'Fallback locale for untranslated assets, specified as short code. e.g. `en` or `en_GB`',
+          'type' => 'string',
+          'location' => 'query',
         ),
         'ext' => 
         array (

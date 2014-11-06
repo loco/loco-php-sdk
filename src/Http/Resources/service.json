@@ -125,6 +125,11 @@
                         "name",
                         "text"
                     ]
+                },
+                "fallback": {
+                    "description": "Fallback locale for untranslated assets, specified as short code. e.g. `en` or `en_GB`",
+                    "type": "string",
+                    "location": "query"
                 }
             },
             "errorResponses": [
@@ -181,6 +186,11 @@
                         "name",
                         "text"
                     ]
+                },
+                "fallback": {
+                    "description": "Fallback locale for untranslated assets, specified as short code. e.g. `en` or `en_GB`",
+                    "type": "string",
+                    "location": "query"
                 },
                 "ext": {
                     "required": true,
@@ -265,6 +275,11 @@
                         "name",
                         "text"
                     ]
+                },
+                "fallback": {
+                    "description": "Fallback locale for untranslated assets, specified as short code. e.g. `en` or `en_GB`",
+                    "type": "string",
+                    "location": "query"
                 },
                 "locale": {
                     "required": true,
@@ -355,6 +370,11 @@
                         "name",
                         "text"
                     ]
+                },
+                "fallback": {
+                    "description": "Fallback locale for untranslated assets, specified as short code. e.g. `en` or `en_GB`",
+                    "type": "string",
+                    "location": "query"
                 },
                 "ext": {
                     "required": true,
