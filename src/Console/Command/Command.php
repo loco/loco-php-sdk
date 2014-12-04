@@ -63,11 +63,14 @@ abstract class Command extends BaseCommand {
     protected function showResult( $result, OutputInterface $output ){
         $output->writeln('<info>'.$this->getName().' OK</info>');
         if( $result instanceof Model ){
+            $result = $result->toArray();
+        }
+        if( is_array($result) ){
             if( defined('JSON_PRETTY_PRINT') ){
-                echo json_encode( $result->toArray(), JSON_PRETTY_PRINT ),"\n";
+                echo json_encode( $result, JSON_PRETTY_PRINT ),"\n";
             }
             else {
-                print_r( $result->toArray() );
+                print_r( $result );
             }
         }
         else {
