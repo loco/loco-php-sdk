@@ -76,7 +76,7 @@ class ApiClientImportTest extends ApiClientTest {
         $expect = array_keys( $this->expect );
         $this->assets = array_intersect( $found, $expect );
         sort( $this->assets );
-        $this->assertEquals( $expect, $this->assets, 'Expected assets not in response, got '.json_encode($found) );
+        $this->assertEquals( $expect, $this->assets, 'Expected assets were not in response, got '.json_encode($found) );
         // assets all imported, check them on the server too
         // will throw with 404 if asset does not exist
         foreach( $this->assets as $id ){

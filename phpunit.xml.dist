@@ -17,6 +17,7 @@
 
     <groups>
         <exclude>
+            <group>tags</group>
             <group>strict</group>
         </exclude>
     </groups>
