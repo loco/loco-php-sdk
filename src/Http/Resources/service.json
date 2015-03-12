@@ -1,9 +1,130 @@
 {
     "name": "Loco",
-    "apiVersion": "1.0.8",
+    "apiVersion": "1.0.9",
     "baseUrl": "https:\/\/localise.biz\/",
     "description": "Loco REST API",
     "operations": {
+        "getTags": {
+            "httpMethod": "GET",
+            "uri": "\/api\/tags.json",
+            "class": "Guzzle\\Service\\Command\\OperationCommand",
+            "responseClass": "array",
+            "responseType": "primitive",
+            "responseNotes": "Lists all tags in currently authenticated project",
+            "summary": "Get project tags",
+            "parameters": {
+                "key": {
+                    "required": true,
+                    "description": "Project API key",
+                    "type": "string",
+                    "location": "query"
+                }
+            },
+            "errorResponses": [
+                {
+                    "code": 401,
+                    "phrase": "Invalid API key"
+                }
+            ]
+        },
+        "createTag": {
+            "httpMethod": "POST",
+            "uri": "\/api\/tags.json",
+            "class": "Guzzle\\Service\\Command\\OperationCommand",
+            "responseClass": "Success",
+            "responseType": "model",
+            "responseNotes": "Adds a new tag to the currently authenticated project",
+            "summary": "Create a new tag",
+            "parameters": {
+                "name": {
+                    "required": true,
+                    "description": "Name of new tag",
+                    "type": "string",
+                    "location": "postField"
+                },
+                "key": {
+                    "required": true,
+                    "description": "Project API key",
+                    "type": "string",
+                    "location": "query"
+                }
+            },
+            "errorResponses": [
+                {
+                    "code": 401,
+                    "phrase": "Invalid API key"
+                }
+            ]
+        },
+        "patchTag": {
+            "httpMethod": "PATCH",
+            "uri": "\/api\/tags\/{tag}.json",
+            "class": "Guzzle\\Service\\Command\\OperationCommand",
+            "responseClass": "Success",
+            "responseType": "model",
+            "responseNotes": "Renames an existing tag in the currently authenticated project",
+            "summary": "Modify a single tag",
+            "parameters": {
+                "name": {
+                    "description": "Display name of tag",
+                    "type": "string",
+                    "location": "json"
+                },
+                "key": {
+                    "required": true,
+                    "description": "Project API key",
+                    "type": "string",
+                    "location": "query"
+                },
+                "tag": {
+                    "description": "Name of a single asset tag.",
+                    "type": "string",
+                    "location": "uri"
+                }
+            },
+            "errorResponses": [
+                {
+                    "code": 401,
+                    "phrase": "Invalid API key"
+                },
+                {
+                    "code": 404,
+                    "phrase": "Tag not in project"
+                }
+            ]
+        },
+        "deleteTag": {
+            "httpMethod": "DELETE",
+            "uri": "\/api\/tags\/{tag}.json",
+            "class": "Guzzle\\Service\\Command\\OperationCommand",
+            "responseClass": "Success",
+            "responseType": "model",
+            "responseNotes": "Deletes an existing tag in the currently authenticated project",
+            "summary": "Delete a single tag",
+            "parameters": {
+                "key": {
+                    "required": true,
+                    "description": "Project API key",
+                    "type": "string",
+                    "location": "query"
+                },
+                "tag": {
+                    "description": "Name of a single asset tag.",
+                    "type": "string",
+                    "location": "uri"
+                }
+            },
+            "errorResponses": [
+                {
+                    "code": 401,
+                    "phrase": "Invalid API key"
+                },
+                {
+                    "code": 404,
+                    "phrase": "Tag not in project"
+                }
+            ]
+        },
         "exportAll": {
             "httpMethod": "GET",
             "uri": "\/api\/export\/all.{ext}",
@@ -1461,6 +1582,36 @@
         }
     },
     "models": {
+        "Success": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "status": {
+                    "required": true,
+                    "description": "HTTP status 2xx code",
+                    "type": "integer",
+                    "location": "json"
+                },
+                "message": {
+                    "required": true,
+                    "description": "Descriptive success message",
+                    "type": "string",
+                    "location": "json"
+                }
+            }
+        },
+        "TagPatch": {
+            "description": "Patch structure for modifying tags",
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "name": {
+                    "description": "Display name of tag",
+                    "type": "string",
+                    "location": "json"
+                }
+            }
+        },
         "anon_type_string": {
             "type": "string"
         },
@@ -1814,6 +1965,7 @@
             "additionalProperties": false,
             "properties": {
                 "id": {
+                    "required": true,
                     "description": "User id",
                     "type": "integer",
                     "location": "json"
@@ -1824,7 +1976,7 @@
                     "location": "json"
                 },
                 "email": {
-                    "description": "User's email address",
+                    "description": "Contact email address if you have permission to see it",
                     "type": "string",
                     "location": "json"
                 }
@@ -1878,6 +2030,7 @@
                     "additionalProperties": false,
                     "properties": {
                         "id": {
+                            "required": true,
                             "description": "User id",
                             "type": "integer",
                             "location": "json"
@@ -1888,7 +2041,7 @@
                             "location": "json"
                         },
                         "email": {
-                            "description": "User's email address",
+                            "description": "Contact email address if you have permission to see it",
                             "type": "string",
                             "location": "json"
                         }
@@ -1972,24 +2125,6 @@
                 },
                 "notes": {
                     "description": "Optional notes for translators",
-                    "type": "string",
-                    "location": "json"
-                }
-            }
-        },
-        "Success": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "status": {
-                    "required": true,
-                    "description": "HTTP status 2xx code",
-                    "type": "integer",
-                    "location": "json"
-                },
-                "message": {
-                    "required": true,
-                    "description": "Descriptive success message",
                     "type": "string",
                     "location": "json"
                 }
@@ -2121,6 +2256,29 @@
                     "type": "string",
                     "format": "date-time",
                     "location": "json"
+                },
+                "author": {
+                    "type": "object",
+                    "location": "json",
+                    "additionalProperties": false,
+                    "properties": {
+                        "id": {
+                            "required": true,
+                            "description": "User id",
+                            "type": "integer",
+                            "location": "json"
+                        },
+                        "name": {
+                            "description": "Full user name",
+                            "type": "string",
+                            "location": "json"
+                        },
+                        "email": {
+                            "description": "Contact email address if you have permission to see it",
+                            "type": "string",
+                            "location": "json"
+                        }
+                    }
                 },
                 "locale": {
                     "required": true,

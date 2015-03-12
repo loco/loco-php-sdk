@@ -27,27 +27,54 @@ class ApiClientTagsTest  extends ApiClientTest {
         
     
     /**
-     * getTags
+     * List all tags in project
      */
-    public function testTagsList(){
+    public function testGetTags(){
         $tags = $this->client->getTags();
         $this->assertInternalType('array', $tags );
         $tag = current( $tags );
         $this->assertInternalType('string', $tag );
         return $tag;
     }
+    
+    
+    /**
+     * createTag
+     */
+    public function testCreateTag(){
+        $name = md5( __CLASS__.__FUNCTION__.microtime() );
+        $model = $this->client->createTag( compact('name') );
+        $this->assertInstanceOf( '\Guzzle\Service\Resource\Model', $model );
+        $this->assertSame( 201, $model['status'] );
+        $this->assertEquals( 'Tag created', $model['message'] );
+        return $name;
+    }
+    
 
 
     /**
-     * patchTag
-     * @depends testTagsList
+     * @depends testCreateTag
      */
     public function testPatchTag( $tag ){
         $name = $tag.' renamed';
         $model = $this->client->patchTag( compact('tag','name') );
         $this->assertInstanceOf( '\Guzzle\Service\Resource\Model', $model );
+        $this->assertSame( 200, $model['status'] );
         $this->assertEquals( 'Tag renamed', $model['message'] );
+        return $name;
     }    
+    
+    
+    /**
+     * @depends testPatchTag
+     */    
+    public function testDeleteTag( $tag ){
+        $model = $this->client->deleteTag( compact('tag') );
+        $this->assertInstanceOf( '\Guzzle\Service\Resource\Model', $model );
+        $this->assertSame( 200, $model['status'] );
+        $this->assertEquals( 'Tag deleted', $model['message'] );
+    }    
+    
      
     
 }

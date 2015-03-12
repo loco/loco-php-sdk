@@ -277,6 +277,7 @@ class ApiClientConvertTest extends ApiClientTest {
     
     /**
      * Export Chrome formatted JSON from seed file
+     * @group chrome
      */
     public function testExportJsonChrome(){
         $json = $this->convert('test-fr_FR.po', 'po', 'json', 'chrome' );

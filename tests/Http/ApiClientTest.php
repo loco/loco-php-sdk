@@ -41,9 +41,9 @@ class ApiClientTest extends GuzzleTestCase {
     /**
      * Fake ping over Guzzle Node test server
      * @group node
-     * @depends testFactoryInitializesClient
      */
-    public function testNodePing( ApiClient $client ){
+    public function testNodePing(){
+        $client = ApiClient::factory( array( 'base_url' => 'https://localise.biz/api' ) );
         $this->enqueueJson( $client, array( 'version' => '1.1' ) );
         $version = $client->ping()->get('version');
         $this->assertEquals( '1.1', $version );
@@ -55,10 +55,10 @@ class ApiClientTest extends GuzzleTestCase {
      * Fake an invalid ping
      * @group node
      * @group strict
-     * @depends testFactoryInitializesClient
      * @expectedException \Guzzle\Service\Exception\ValidationException
      */
-    public function testMockInvalidPing( ApiClient $client ){
+    public function testMockInvalidPing(){
+        $client = ApiClient::factory( array( 'base_url' => 'https://localise.biz/api' ) );
         $this->enqueueJson( $client, array( 'fail' => 'woops' ) );
         $client->ping();
     }

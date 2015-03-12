@@ -1,14 +1,161 @@
 <?php
 /**
- * Auto-generated with Swizzle at 2015-01-14 19:16:22 +0000
+ * Auto-generated with Swizzle at 2015-03-12 16:44:53 +0000
  */
 return array (
   'name' => 'Loco',
-  'apiVersion' => '1.0.8',
+  'apiVersion' => '1.0.9',
   'baseUrl' => 'https://localise.biz/',
   'description' => 'Loco REST API',
   'operations' => 
   array (
+    'getTags' => 
+    array (
+      'httpMethod' => 'GET',
+      'uri' => '/api/tags.json',
+      'class' => 'Guzzle\\Service\\Command\\OperationCommand',
+      'responseClass' => 'array',
+      'responseType' => 'primitive',
+      'responseNotes' => 'Lists all tags in currently authenticated project',
+      'summary' => 'Get project tags',
+      'parameters' => 
+      array (
+        'key' => 
+        array (
+          'required' => true,
+          'description' => 'Project API key',
+          'type' => 'string',
+          'location' => 'query',
+        ),
+      ),
+      'errorResponses' => 
+      array (
+        0 => 
+        array (
+          'code' => 401,
+          'phrase' => 'Invalid API key',
+        ),
+      ),
+    ),
+    'createTag' => 
+    array (
+      'httpMethod' => 'POST',
+      'uri' => '/api/tags.json',
+      'class' => 'Guzzle\\Service\\Command\\OperationCommand',
+      'responseClass' => 'Success',
+      'responseType' => 'model',
+      'responseNotes' => 'Adds a new tag to the currently authenticated project',
+      'summary' => 'Create a new tag',
+      'parameters' => 
+      array (
+        'name' => 
+        array (
+          'required' => true,
+          'description' => 'Name of new tag',
+          'type' => 'string',
+          'location' => 'postField',
+        ),
+        'key' => 
+        array (
+          'required' => true,
+          'description' => 'Project API key',
+          'type' => 'string',
+          'location' => 'query',
+        ),
+      ),
+      'errorResponses' => 
+      array (
+        0 => 
+        array (
+          'code' => 401,
+          'phrase' => 'Invalid API key',
+        ),
+      ),
+    ),
+    'patchTag' => 
+    array (
+      'httpMethod' => 'PATCH',
+      'uri' => '/api/tags/{tag}.json',
+      'class' => 'Guzzle\\Service\\Command\\OperationCommand',
+      'responseClass' => 'Success',
+      'responseType' => 'model',
+      'responseNotes' => 'Renames an existing tag in the currently authenticated project',
+      'summary' => 'Modify a single tag',
+      'parameters' => 
+      array (
+        'name' => 
+        array (
+          'description' => 'Display name of tag',
+          'type' => 'string',
+          'location' => 'json',
+        ),
+        'key' => 
+        array (
+          'required' => true,
+          'description' => 'Project API key',
+          'type' => 'string',
+          'location' => 'query',
+        ),
+        'tag' => 
+        array (
+          'description' => 'Name of a single asset tag.',
+          'type' => 'string',
+          'location' => 'uri',
+        ),
+      ),
+      'errorResponses' => 
+      array (
+        0 => 
+        array (
+          'code' => 401,
+          'phrase' => 'Invalid API key',
+        ),
+        1 => 
+        array (
+          'code' => 404,
+          'phrase' => 'Tag not in project',
+        ),
+      ),
+    ),
+    'deleteTag' => 
+    array (
+      'httpMethod' => 'DELETE',
+      'uri' => '/api/tags/{tag}.json',
+      'class' => 'Guzzle\\Service\\Command\\OperationCommand',
+      'responseClass' => 'Success',
+      'responseType' => 'model',
+      'responseNotes' => 'Deletes an existing tag in the currently authenticated project',
+      'summary' => 'Delete a single tag',
+      'parameters' => 
+      array (
+        'key' => 
+        array (
+          'required' => true,
+          'description' => 'Project API key',
+          'type' => 'string',
+          'location' => 'query',
+        ),
+        'tag' => 
+        array (
+          'description' => 'Name of a single asset tag.',
+          'type' => 'string',
+          'location' => 'uri',
+        ),
+      ),
+      'errorResponses' => 
+      array (
+        0 => 
+        array (
+          'code' => 401,
+          'phrase' => 'Invalid API key',
+        ),
+        1 => 
+        array (
+          'code' => 404,
+          'phrase' => 'Tag not in project',
+        ),
+      ),
+    ),
     'exportAll' => 
     array (
       'httpMethod' => 'GET',
@@ -1778,6 +1925,43 @@ return array (
   ),
   'models' => 
   array (
+    'Success' => 
+    array (
+      'type' => 'object',
+      'additionalProperties' => false,
+      'properties' => 
+      array (
+        'status' => 
+        array (
+          'required' => true,
+          'description' => 'HTTP status 2xx code',
+          'type' => 'integer',
+          'location' => 'json',
+        ),
+        'message' => 
+        array (
+          'required' => true,
+          'description' => 'Descriptive success message',
+          'type' => 'string',
+          'location' => 'json',
+        ),
+      ),
+    ),
+    'TagPatch' => 
+    array (
+      'description' => 'Patch structure for modifying tags',
+      'type' => 'object',
+      'additionalProperties' => false,
+      'properties' => 
+      array (
+        'name' => 
+        array (
+          'description' => 'Display name of tag',
+          'type' => 'string',
+          'location' => 'json',
+        ),
+      ),
+    ),
     'anon_type_string' => 
     array (
       'type' => 'string',
@@ -2200,6 +2384,7 @@ return array (
       array (
         'id' => 
         array (
+          'required' => true,
           'description' => 'User id',
           'type' => 'integer',
           'location' => 'json',
@@ -2212,7 +2397,7 @@ return array (
         ),
         'email' => 
         array (
-          'description' => 'User\'s email address',
+          'description' => 'Contact email address if you have permission to see it',
           'type' => 'string',
           'location' => 'json',
         ),
@@ -2280,6 +2465,7 @@ return array (
           array (
             'id' => 
             array (
+              'required' => true,
               'description' => 'User id',
               'type' => 'integer',
               'location' => 'json',
@@ -2292,7 +2478,7 @@ return array (
             ),
             'email' => 
             array (
-              'description' => 'User\'s email address',
+              'description' => 'Contact email address if you have permission to see it',
               'type' => 'string',
               'location' => 'json',
             ),
@@ -2393,28 +2579,6 @@ return array (
         'notes' => 
         array (
           'description' => 'Optional notes for translators',
-          'type' => 'string',
-          'location' => 'json',
-        ),
-      ),
-    ),
-    'Success' => 
-    array (
-      'type' => 'object',
-      'additionalProperties' => false,
-      'properties' => 
-      array (
-        'status' => 
-        array (
-          'required' => true,
-          'description' => 'HTTP status 2xx code',
-          'type' => 'integer',
-          'location' => 'json',
-        ),
-        'message' => 
-        array (
-          'required' => true,
-          'description' => 'Descriptive success message',
           'type' => 'string',
           'location' => 'json',
         ),
@@ -2570,6 +2734,34 @@ return array (
           'type' => 'string',
           'format' => 'date-time',
           'location' => 'json',
+        ),
+        'author' => 
+        array (
+          'type' => 'object',
+          'location' => 'json',
+          'additionalProperties' => false,
+          'properties' => 
+          array (
+            'id' => 
+            array (
+              'required' => true,
+              'description' => 'User id',
+              'type' => 'integer',
+              'location' => 'json',
+            ),
+            'name' => 
+            array (
+              'description' => 'Full user name',
+              'type' => 'string',
+              'location' => 'json',
+            ),
+            'email' => 
+            array (
+              'description' => 'Contact email address if you have permission to see it',
+              'type' => 'string',
+              'location' => 'json',
+            ),
+          ),
         ),
         'locale' => 
         array (
