@@ -10,11 +10,11 @@ $client = Loco\Http\ApiClient::factory();
 $result = $client->ping();
 
 if( $version = $result->get('version') ){
-    if( $client->getVersion() === $version ){
+    if( $client->getApiVersion() === $version ){
         printf("Ping OK, API version is %s\n", $version );
     }
     else {
-        printf("Ping OK, but API version is %s and SDK is version %s\n", $version, $client->getVersion() );
+        printf("Ping OK, but API version is %s and SDK is built against %s\n", $version, $client->getApiVersion() );
     }
 }
 else {

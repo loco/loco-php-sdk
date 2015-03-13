@@ -79,7 +79,7 @@ class ApiClient extends Client {
      * Get canonical API version that library is expecting to find on the server
      * @return string
      */
-    public function getSdkVersion(){
+    public function getVersion(){
         return self::VERSION;
     }
 

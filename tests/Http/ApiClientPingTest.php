@@ -17,7 +17,7 @@ class ApiClientPingTest  extends ApiClientTest {
      */
     public function testLivePing(){
         $client = $this->getClient();
-        $sdk_version = $client->getSdkVersion();
+        $sdk_version = $client->getVersion();
         $api_version = $client->getApiVersion();
         $this->assertEquals( $sdk_version, $api_version, 'API version does not match SDK version' );
         $api_version = $client->ping()->get('version');
