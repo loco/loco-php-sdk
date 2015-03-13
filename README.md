@@ -17,31 +17,35 @@ If you want to install straight from Github you'll have to write your own [autol
 
 ## REST API Client
 
-This SDK includes a REST client for the [Loco API](https://localise.biz/api). Other utilities will be added in future.
-
-The converter API for language pack file formats can be used without a Loco account. Other endpoints are for working with Loco projects and require an API key.
-
-See [localise.biz/api](https://localise.biz/api) for full API documention.
+The SDK includes a REST client for the [Loco API](https://localise.biz/api).
 
 
 ### Client Usage
 
-Basic usage of the client is to construct with your API key and call API methods directly on it. The following example simply verifies your credentials:
+Basic usage of the client is to construct with your API key and call the endpoint methods directly. The following example simply verifies your credentials:
 
 ```php
-$client = Loco\Http\ApiClient::factory( array( 'key' => 'yourkeyhere' ) );
+$client = Loco\Http\ApiClient::factory( array( 'key' => 'your_api_key' ) );
 $result = $client->authVerify();
 printf("Authenticated as '%s'\n", $result['user']['name'] );
 ```
 
-The Loco API client is built on [Guzzle](http://docs.guzzlephp.org/), so you can use its factory methods to pass in your API key from your site configuration. You could create your client from a JSON config [like our example](https://github.com/loco/loco-php-sdk/blob/master/config.json.dist) as follows:
+The Loco API client is built on [Guzzle 3](http://guzzle3.readthedocs.org). You can use its factory methods to configure your API Key as above, or you can use a JSON config [like our example](https://github.com/loco/loco-php-sdk/blob/master/config.json.dist). Constructing from the config file can be done as follows:
 
 ```php
-$client = Guzzle\Service\Builder\ServiceBuilder::factory('/path/to/config.json' )->get('loco');
+$client = Guzzle\Service\Builder\ServiceBuilder::factory('config.json' )->get('loco');
 ```
 
-Most responses are Guzzle models, which behave much like arrays. The above example fetches `$result['user']` although `$result` is actually an instance of [Guzzle\Service\Resource\Model](http://api.guzzlephp.org/class-Guzzle.Service.Resource.Model.html).
 
+## Command Line Client
+
+A [Console](http://symfony.com/doc/current/components/console/introduction.html) interface supporting all methods of the Loco API is at `bin/console`. Just run it to see all the available options.
+
+The console reads from [config.json](https://github.com/loco/loco-php-sdk/blob/master/config.json.dist), but you can override your API key from the command line. Run the following to verify your credentials:
+
+```
+bin/console loco:auth:verify -v -k <your_api_key> 
+```
 
 ## Docs
 
@@ -50,4 +54,3 @@ Check the [Loco API documentation](https://localise.biz/api) to see what model i
 See the [example](https://github.com/loco/loco-php-sdk/tree/master/example) directory for more working code examples.
 
 Build the PHP API documentation with [apigen](http://apigen.org/) using `apigen -c apigen.yml`
-
