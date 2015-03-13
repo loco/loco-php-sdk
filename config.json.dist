@@ -4,6 +4,7 @@
             "class": "Loco\\Http\\ApiClient",
             "params": {
                 "key": "",
+                "auth": "loco",
                 "base_url": "https://localise.biz/api"
             }
         }

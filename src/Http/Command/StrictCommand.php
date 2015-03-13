@@ -12,7 +12,7 @@ use Guzzle\Service\Command\OperationResponseParser;
 /**
  * Operation command that validates response models.
  */
-class StrictCommand extends OperationCommand {
+class StrictCommand extends LocoCommand {
     
     
     /**

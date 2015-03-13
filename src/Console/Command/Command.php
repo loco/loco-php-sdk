@@ -8,7 +8,15 @@ use Symfony\Component\Console\Input\InputDefinition;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+
+use Guzzle\Common\Event;
+use Guzzle\Http\Message\Response;
+use Guzzle\Http\Message\EntityEnclosingRequest;
 use Guzzle\Service\Resource\Model;
+use Guzzle\Service\Description\Parameter;
+use Guzzle\Http\Exception\BadResponseException;
+use Guzzle\Service\Command\ResponseClassInterface;
+
 use Loco\Http\ApiClient;
 
 
@@ -36,11 +44,11 @@ abstract class Command extends BaseCommand {
 
     /**
      * Execute call to endpoint
-     * @return Model
      */
     protected function execute( InputInterface $input, OutputInterface $output ){
         $args = $input->getArguments() + $input->getOptions();
-        // override key
+
+        // override API key
         if( isset($args['key']) && ( $apiKey = trim($args['key']) ) ){
             $client = $this->getApplication()->getRestClient( $apiKey );
         }
@@ -49,10 +57,41 @@ abstract class Command extends BaseCommand {
             $client = $this->getApplication()->getRestClient();
             unset( $args['key'] );
         }
-        // call overloaded function dymnamically
-        $result = $client->__call( $this->method, array( $args ) );
-        $this->showResult( $result, $output );
-        return $result;
+        
+        if( 1 < $output->getVerbosity() ){
+            $output->writeln( sprintf('Calling <comment>%s</comment>', $this->method) );
+            // inspect request before sending
+            $dispatcher = $client->getEventDispatcher();
+            $dispatcher->addListener('request.before_send', function( Event $e )use( $output ){
+                $request = $e['request'];
+                /* @var $request EntityEnclosingRequest */
+                $output->writeln( sprintf('Requesting <comment>%s</comment>', $request->getPath() ) );
+                $lines = explode( "\n", trim( $request->__toString() ) );
+                echo ' > ',implode("\n > ", $lines ),"\n";
+            } );
+            // inspect response after receiving
+            $dispatcher->addListener('request.sent', function( Event $e )use( $output ){
+                $response = $e['response'];
+                /* @var $response Response */
+                $output->writeln( sprintf('Responded <comment>%u</comment>', $response->getStatusCode() ) );
+                $lines = explode( "\n", trim( $response->__toString() ) );
+                echo ' < ',implode("\n < ", $lines ),"\n";
+            } );
+        }        
+        
+        // call overloaded function  and show body on error
+        try {
+            $result = $client->__call( $this->method, array( $args ) );
+            if( 0 !== $output->getVerbosity() ){
+                $this->showResult( $result, $output );
+            }
+        }
+        catch( BadResponseException $e ){
+            $output->writeln('<comment>Bad response:</comment>');
+            $output->writeln( (string) $e->getResponse()->getBody() );
+            throw $e;
+        }
+
     }
 
 

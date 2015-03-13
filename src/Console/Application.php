@@ -25,7 +25,7 @@ final class Application extends BaseApplication {
      * @override
      */    
     public function __construct(){
-        parent::__construct('Loco','1.0.7');
+        parent::__construct( 'Loco', ApiClient::VERSION );
     }    
 
 

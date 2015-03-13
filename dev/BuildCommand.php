@@ -64,7 +64,10 @@ final class BuildCommand extends Command {
         // Enable response validation and locale URL if building for local test
         $base_url = $conf['services']['loco']['params']['base_url'];
         $domain = parse_url($base_url,PHP_URL_HOST);
-        if( ! empty($conf['services']['loco']['strict']) ){ 
+        if( empty($conf['services']['loco']['strict']) ){
+            $builder->registerCommandClass( '', '\Loco\Http\Command\LocoCommand');
+        }
+        else {
             $builder->registerCommandClass( '', '\Loco\Http\Command\StrictCommand');
         }
 

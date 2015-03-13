@@ -9,6 +9,7 @@ use Guzzle\Http\Message\Response;
 
 /**
  * Mock ApiClient tests.
+ * @group client
  */
 class ApiClientTest extends GuzzleTestCase {
     
@@ -30,12 +31,21 @@ class ApiClientTest extends GuzzleTestCase {
     public function testFactoryInitializesClient(){
         $client = ApiClient::factory( array(
             'key' => 'dummy',
-            'base_url' => 'https://localise.biz/api',
+            'base_url' => 'https://example.com/api',
         ) );
-        $this->assertEquals( 'https://localise.biz/api', $client->getBaseUrl() );
+        $this->assertEquals( 'https://example.com/api', $client->getBaseUrl() );
         $this->assertEquals('dummy', $client->getConfig('key') );
         return $client;
     }
+    
+    
+    /**
+     * @expectedException Guzzle\Common\Exception\InvalidArgumentException
+     */ 
+    public function testClientRejectsInvalidAuthType(){
+        $client = ApiClient::factory( array( 'auth' => 'Foo' ) );
+    }
+    
 
 
     /**
@@ -43,7 +53,7 @@ class ApiClientTest extends GuzzleTestCase {
      * @group node
      */
     public function testNodePing(){
-        $client = ApiClient::factory( array( 'base_url' => 'https://localise.biz/api' ) );
+        $client = ApiClient::factory( array( 'base_url' => 'https://example.com/api' ) );
         $this->enqueueJson( $client, array( 'version' => '1.1' ) );
         $version = $client->ping()->get('version');
         $this->assertEquals( '1.1', $version );
@@ -58,7 +68,7 @@ class ApiClientTest extends GuzzleTestCase {
      * @expectedException \Guzzle\Service\Exception\ValidationException
      */
     public function testMockInvalidPing(){
-        $client = ApiClient::factory( array( 'base_url' => 'https://localise.biz/api' ) );
+        $client = ApiClient::factory( array( 'base_url' => 'https://example.com/api' ) );
         $this->enqueueJson( $client, array( 'fail' => 'woops' ) );
         $client->ping();
     }
@@ -66,7 +76,7 @@ class ApiClientTest extends GuzzleTestCase {
 
 
     /**
-     * Queue upo a fake JSON response via node test server
+     * Queue up o a fake JSON response via node test server
      */    
     private function enqueueJson( ApiClient $client, array $data ){
         $json = json_encode( $data );

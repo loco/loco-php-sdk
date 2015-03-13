@@ -5,6 +5,7 @@ namespace Loco\Http;
 use Guzzle\Common\Collection;
 use Guzzle\Service\Client;
 use Guzzle\Service\Description\ServiceDescription;
+use Guzzle\Common\Exception\InvalidArgumentException;
 
 /**
  * Loco REST API Client.
@@ -12,7 +13,8 @@ use Guzzle\Service\Description\ServiceDescription;
  * @usage $client = ApiClient::factory( array( 'key' => 'my-api-key' ) );
  */
 class ApiClient extends Client {
-
+    
+    const VERSION = '1.0.9';
     
     /**
      * Factory method to create a new Loco API client.
@@ -31,11 +33,18 @@ class ApiClient extends Client {
 
         // Merge in default settings and validate the config
         $config = Collection::fromConfig( $config, $default, $required );
-        
-        // add common command parameters. They should only be appended when required
+
+        // Add configured API key as default command parameter although individual command execution may override
         $config->add( Client::COMMAND_PARAMS, array ( 
             'key' => $config->get('key'),
         ) );
+        
+        // Sanitize authentication type now to pre-empty errors
+        if( $mode = $config->get('auth') ){
+            if( ! in_array( $mode, array('loco','basic','query'), true ) ){
+                throw new InvalidArgumentException('No such authentication mode, '.json_encode($mode) ); 
+            }
+        }
 
         // Create a new instance of self
         $client = new self( '', $config );
@@ -56,12 +65,22 @@ class ApiClient extends Client {
     }   
 
 
+
     /**
      * Get API version that service was built against.
      * @return string
      */
-    public function getVersion(){
+    public function getApiVersion(){
         return $this->getDescription()->getApiVersion();
+    }
+
+
+    /**
+     * Get canonical API version that library is expecting to find on the server
+     * @return string
+     */
+    public function getSdkVersion(){
+        return self::VERSION;
     }
 
 }
