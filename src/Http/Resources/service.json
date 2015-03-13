@@ -15,7 +15,7 @@
             "parameters": {
                 "key": {
                     "required": true,
-                    "description": "Project API key",
+                    "description": "Project API key - preferably sent in request header as `Authorization: Loco <key>`",
                     "type": "string",
                     "location": "query"
                 }
@@ -44,7 +44,7 @@
                 },
                 "key": {
                     "required": true,
-                    "description": "Project API key",
+                    "description": "Project API key - preferably sent in request header as `Authorization: Loco <key>`",
                     "type": "string",
                     "location": "query"
                 }
@@ -72,7 +72,7 @@
                 },
                 "key": {
                     "required": true,
-                    "description": "Project API key",
+                    "description": "Project API key - preferably sent in request header as `Authorization: Loco <key>`",
                     "type": "string",
                     "location": "query"
                 },
@@ -104,7 +104,7 @@
             "parameters": {
                 "key": {
                     "required": true,
-                    "description": "Project API key",
+                    "description": "Project API key - preferably sent in request header as `Authorization: Loco <key>`",
                     "type": "string",
                     "location": "query"
                 },
@@ -151,7 +151,7 @@
                 },
                 "key": {
                     "required": true,
-                    "description": "Project API key",
+                    "description": "Project API key - preferably sent in request header as `Authorization: Loco <key>`",
                     "type": "string",
                     "location": "query"
                 },
@@ -194,7 +194,7 @@
             "parameters": {
                 "key": {
                     "required": true,
-                    "description": "Project API key",
+                    "description": "Project API key - preferably sent in request header as `Authorization: Loco <key>`",
                     "type": "string",
                     "location": "query"
                 },
@@ -286,7 +286,7 @@
             "parameters": {
                 "key": {
                     "required": true,
-                    "description": "Project API key",
+                    "description": "Project API key - preferably sent in request header as `Authorization: Loco <key>`",
                     "type": "string",
                     "location": "query"
                 },
@@ -384,7 +384,7 @@
             "parameters": {
                 "key": {
                     "required": true,
-                    "description": "Project API key",
+                    "description": "Project API key - preferably sent in request header as `Authorization: Loco <key>`",
                     "type": "string",
                     "location": "query"
                 },
@@ -522,7 +522,7 @@
                 },
                 "key": {
                     "required": true,
-                    "description": "Project API key",
+                    "description": "Project API key - preferably sent in request header as `Authorization: Loco <key>`",
                     "type": "string",
                     "location": "query"
                 }
@@ -553,7 +553,7 @@
             "parameters": {
                 "key": {
                     "required": true,
-                    "description": "Project API key",
+                    "description": "Project API key - preferably sent in request header as `Authorization: Loco <key>`",
                     "type": "string",
                     "location": "query"
                 }
@@ -575,7 +575,7 @@
             "parameters": {
                 "key": {
                     "required": true,
-                    "description": "Project API key",
+                    "description": "Project API key - preferably sent in request header as `Authorization: Loco <key>`",
                     "type": "string",
                     "location": "query"
                 },
@@ -630,7 +630,7 @@
                 },
                 "key": {
                     "required": true,
-                    "description": "Project API key",
+                    "description": "Project API key - preferably sent in request header as `Authorization: Loco <key>`",
                     "type": "string",
                     "location": "query"
                 }
@@ -661,7 +661,7 @@
             "parameters": {
                 "key": {
                     "required": true,
-                    "description": "Project API key",
+                    "description": "Project API key - preferably sent in request header as `Authorization: Loco <key>`",
                     "type": "string",
                     "location": "query"
                 },
@@ -728,7 +728,7 @@
                 },
                 "key": {
                     "required": true,
-                    "description": "Project API key",
+                    "description": "Project API key - preferably sent in request header as `Authorization: Loco <key>`",
                     "type": "string",
                     "location": "query"
                 },
@@ -765,7 +765,7 @@
             "parameters": {
                 "key": {
                     "required": true,
-                    "description": "Project API key",
+                    "description": "Project API key - preferably sent in request header as `Authorization: Loco <key>`",
                     "type": "string",
                     "location": "query"
                 },
@@ -802,7 +802,7 @@
             "parameters": {
                 "key": {
                     "required": true,
-                    "description": "Project API key",
+                    "description": "Project API key - preferably sent in request header as `Authorization: Loco <key>`",
                     "type": "string",
                     "location": "query"
                 },
@@ -847,7 +847,7 @@
                 },
                 "key": {
                     "required": true,
-                    "description": "Project API key",
+                    "description": "Project API key - preferably sent in request header as `Authorization: Loco <key>`",
                     "type": "string",
                     "location": "query"
                 },
@@ -896,7 +896,7 @@
                 },
                 "key": {
                     "required": true,
-                    "description": "Project API key",
+                    "description": "Project API key - preferably sent in request header as `Authorization: Loco <key>`",
                     "type": "string",
                     "location": "query"
                 }
@@ -933,7 +933,7 @@
                 },
                 "key": {
                     "required": true,
-                    "description": "Project API key",
+                    "description": "Project API key - preferably sent in request header as `Authorization: Loco <key>`",
                     "type": "string",
                     "location": "query"
                 },
@@ -982,7 +982,7 @@
                 },
                 "key": {
                     "required": true,
-                    "description": "Project API key",
+                    "description": "Project API key - preferably sent in request header as `Authorization: Loco <key>`",
                     "type": "string",
                     "location": "query"
                 }
@@ -1013,7 +1013,7 @@
             "parameters": {
                 "key": {
                     "required": true,
-                    "description": "Project API key",
+                    "description": "Project API key - preferably sent in request header as `Authorization: Loco <key>`",
                     "type": "string",
                     "location": "query"
                 }
@@ -1042,7 +1042,7 @@
                 },
                 "key": {
                     "required": true,
-                    "description": "Project API key",
+                    "description": "Project API key - preferably sent in request header as `Authorization: Loco <key>`",
                     "type": "string",
                     "location": "query"
                 }
@@ -1077,7 +1077,7 @@
             "parameters": {
                 "key": {
                     "required": true,
-                    "description": "Project API key",
+                    "description": "Project API key - preferably sent in request header as `Authorization: Loco <key>`",
                     "type": "string",
                     "location": "query"
                 },
@@ -1120,7 +1120,7 @@
                 },
                 "key": {
                     "required": true,
-                    "description": "Project API key",
+                    "description": "Project API key - preferably sent in request header as `Authorization: Loco <key>`",
                     "type": "string",
                     "location": "query"
                 },
@@ -1157,7 +1157,7 @@
             "parameters": {
                 "key": {
                     "required": true,
-                    "description": "Project API key",
+                    "description": "Project API key - preferably sent in request header as `Authorization: Loco <key>`",
                     "type": "string",
                     "location": "query"
                 },
@@ -1194,7 +1194,7 @@
             "parameters": {
                 "key": {
                     "required": true,
-                    "description": "Project API key",
+                    "description": "Project API key - preferably sent in request header as `Authorization: Loco <key>`",
                     "type": "string",
                     "location": "query"
                 },
@@ -1227,7 +1227,7 @@
             "parameters": {
                 "key": {
                     "required": true,
-                    "description": "Project API key",
+                    "description": "Project API key - preferably sent in request header as `Authorization: Loco <key>`",
                     "type": "string",
                     "location": "query"
                 },
@@ -1275,7 +1275,7 @@
                 },
                 "key": {
                     "required": true,
-                    "description": "Project API key",
+                    "description": "Project API key - preferably sent in request header as `Authorization: Loco <key>`",
                     "type": "string",
                     "location": "query"
                 },
@@ -1314,7 +1314,7 @@
             "parameters": {
                 "key": {
                     "required": true,
-                    "description": "Project API key",
+                    "description": "Project API key - preferably sent in request header as `Authorization: Loco <key>`",
                     "type": "string",
                     "location": "query"
                 },
@@ -1370,7 +1370,7 @@
                 },
                 "key": {
                     "required": true,
-                    "description": "Project API key",
+                    "description": "Project API key - preferably sent in request header as `Authorization: Loco <key>`",
                     "type": "string",
                     "location": "query"
                 },
@@ -1409,7 +1409,7 @@
             "parameters": {
                 "key": {
                     "required": true,
-                    "description": "Project API key",
+                    "description": "Project API key - preferably sent in request header as `Authorization: Loco <key>`",
                     "type": "string",
                     "location": "query"
                 },

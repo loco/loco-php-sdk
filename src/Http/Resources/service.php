@@ -1,6 +1,6 @@
 <?php
 /**
- * Auto-generated with Swizzle at 2015-03-13 19:28:30 +0000
+ * Auto-generated with Swizzle at 2015-03-13 20:22:25 +0000
  */
 return array (
   'name' => 'Loco',
@@ -23,7 +23,7 @@ return array (
         'key' => 
         array (
           'required' => true,
-          'description' => 'Project API key',
+          'description' => 'Project API key - preferably sent in request header as `Authorization: Loco <key>`',
           'type' => 'string',
           'location' => 'query',
         ),
@@ -58,7 +58,7 @@ return array (
         'key' => 
         array (
           'required' => true,
-          'description' => 'Project API key',
+          'description' => 'Project API key - preferably sent in request header as `Authorization: Loco <key>`',
           'type' => 'string',
           'location' => 'query',
         ),
@@ -92,7 +92,7 @@ return array (
         'key' => 
         array (
           'required' => true,
-          'description' => 'Project API key',
+          'description' => 'Project API key - preferably sent in request header as `Authorization: Loco <key>`',
           'type' => 'string',
           'location' => 'query',
         ),
@@ -131,7 +131,7 @@ return array (
         'key' => 
         array (
           'required' => true,
-          'description' => 'Project API key',
+          'description' => 'Project API key - preferably sent in request header as `Authorization: Loco <key>`',
           'type' => 'string',
           'location' => 'query',
         ),
@@ -189,7 +189,7 @@ return array (
         'key' => 
         array (
           'required' => true,
-          'description' => 'Project API key',
+          'description' => 'Project API key - preferably sent in request header as `Authorization: Loco <key>`',
           'type' => 'string',
           'location' => 'query',
         ),
@@ -243,7 +243,7 @@ return array (
         'key' => 
         array (
           'required' => true,
-          'description' => 'Project API key',
+          'description' => 'Project API key - preferably sent in request header as `Authorization: Loco <key>`',
           'type' => 'string',
           'location' => 'query',
         ),
@@ -350,7 +350,7 @@ return array (
         'key' => 
         array (
           'required' => true,
-          'description' => 'Project API key',
+          'description' => 'Project API key - preferably sent in request header as `Authorization: Loco <key>`',
           'type' => 'string',
           'location' => 'query',
         ),
@@ -464,7 +464,7 @@ return array (
         'key' => 
         array (
           'required' => true,
-          'description' => 'Project API key',
+          'description' => 'Project API key - preferably sent in request header as `Authorization: Loco <key>`',
           'type' => 'string',
           'location' => 'query',
         ),
@@ -624,7 +624,7 @@ return array (
         'key' => 
         array (
           'required' => true,
-          'description' => 'Project API key',
+          'description' => 'Project API key - preferably sent in request header as `Authorization: Loco <key>`',
           'type' => 'string',
           'location' => 'query',
         ),
@@ -663,7 +663,7 @@ return array (
         'key' => 
         array (
           'required' => true,
-          'description' => 'Project API key',
+          'description' => 'Project API key - preferably sent in request header as `Authorization: Loco <key>`',
           'type' => 'string',
           'location' => 'query',
         ),
@@ -690,7 +690,7 @@ return array (
         'key' => 
         array (
           'required' => true,
-          'description' => 'Project API key',
+          'description' => 'Project API key - preferably sent in request header as `Authorization: Loco <key>`',
           'type' => 'string',
           'location' => 'query',
         ),
@@ -758,7 +758,7 @@ return array (
         'key' => 
         array (
           'required' => true,
-          'description' => 'Project API key',
+          'description' => 'Project API key - preferably sent in request header as `Authorization: Loco <key>`',
           'type' => 'string',
           'location' => 'query',
         ),
@@ -796,7 +796,7 @@ return array (
         'key' => 
         array (
           'required' => true,
-          'description' => 'Project API key',
+          'description' => 'Project API key - preferably sent in request header as `Authorization: Loco <key>`',
           'type' => 'string',
           'location' => 'query',
         ),
@@ -877,7 +877,7 @@ return array (
         'key' => 
         array (
           'required' => true,
-          'description' => 'Project API key',
+          'description' => 'Project API key - preferably sent in request header as `Authorization: Loco <key>`',
           'type' => 'string',
           'location' => 'query',
         ),
@@ -923,7 +923,7 @@ return array (
         'key' => 
         array (
           'required' => true,
-          'description' => 'Project API key',
+          'description' => 'Project API key - preferably sent in request header as `Authorization: Loco <key>`',
           'type' => 'string',
           'location' => 'query',
         ),
@@ -969,7 +969,7 @@ return array (
         'key' => 
         array (
           'required' => true,
-          'description' => 'Project API key',
+          'description' => 'Project API key - preferably sent in request header as `Authorization: Loco <key>`',
           'type' => 'string',
           'location' => 'query',
         ),
@@ -1025,7 +1025,7 @@ return array (
         'key' => 
         array (
           'required' => true,
-          'description' => 'Project API key',
+          'description' => 'Project API key - preferably sent in request header as `Authorization: Loco <key>`',
           'type' => 'string',
           'location' => 'query',
         ),
@@ -1085,7 +1085,7 @@ return array (
         'key' => 
         array (
           'required' => true,
-          'description' => 'Project API key',
+          'description' => 'Project API key - preferably sent in request header as `Authorization: Loco <key>`',
           'type' => 'string',
           'location' => 'query',
         ),
@@ -1130,7 +1130,7 @@ return array (
         'key' => 
         array (
           'required' => true,
-          'description' => 'Project API key',
+          'description' => 'Project API key - preferably sent in request header as `Authorization: Loco <key>`',
           'type' => 'string',
           'location' => 'query',
         ),
@@ -1189,7 +1189,7 @@ return array (
         'key' => 
         array (
           'required' => true,
-          'description' => 'Project API key',
+          'description' => 'Project API key - preferably sent in request header as `Authorization: Loco <key>`',
           'type' => 'string',
           'location' => 'query',
         ),
@@ -1227,7 +1227,7 @@ return array (
         'key' => 
         array (
           'required' => true,
-          'description' => 'Project API key',
+          'description' => 'Project API key - preferably sent in request header as `Authorization: Loco <key>`',
           'type' => 'string',
           'location' => 'query',
         ),
@@ -1264,7 +1264,7 @@ return array (
         'key' => 
         array (
           'required' => true,
-          'description' => 'Project API key',
+          'description' => 'Project API key - preferably sent in request header as `Authorization: Loco <key>`',
           'type' => 'string',
           'location' => 'query',
         ),
@@ -1307,7 +1307,7 @@ return array (
         'key' => 
         array (
           'required' => true,
-          'description' => 'Project API key',
+          'description' => 'Project API key - preferably sent in request header as `Authorization: Loco <key>`',
           'type' => 'string',
           'location' => 'query',
         ),
@@ -1360,7 +1360,7 @@ return array (
         'key' => 
         array (
           'required' => true,
-          'description' => 'Project API key',
+          'description' => 'Project API key - preferably sent in request header as `Authorization: Loco <key>`',
           'type' => 'string',
           'location' => 'query',
         ),
@@ -1407,7 +1407,7 @@ return array (
         'key' => 
         array (
           'required' => true,
-          'description' => 'Project API key',
+          'description' => 'Project API key - preferably sent in request header as `Authorization: Loco <key>`',
           'type' => 'string',
           'location' => 'query',
         ),
@@ -1453,7 +1453,7 @@ return array (
         'key' => 
         array (
           'required' => true,
-          'description' => 'Project API key',
+          'description' => 'Project API key - preferably sent in request header as `Authorization: Loco <key>`',
           'type' => 'string',
           'location' => 'query',
         ),
@@ -1495,7 +1495,7 @@ return array (
         'key' => 
         array (
           'required' => true,
-          'description' => 'Project API key',
+          'description' => 'Project API key - preferably sent in request header as `Authorization: Loco <key>`',
           'type' => 'string',
           'location' => 'query',
         ),
@@ -1556,7 +1556,7 @@ return array (
         'key' => 
         array (
           'required' => true,
-          'description' => 'Project API key',
+          'description' => 'Project API key - preferably sent in request header as `Authorization: Loco <key>`',
           'type' => 'string',
           'location' => 'query',
         ),
@@ -1605,7 +1605,7 @@ return array (
         'key' => 
         array (
           'required' => true,
-          'description' => 'Project API key',
+          'description' => 'Project API key - preferably sent in request header as `Authorization: Loco <key>`',
           'type' => 'string',
           'location' => 'query',
         ),
@@ -1673,7 +1673,7 @@ return array (
         'key' => 
         array (
           'required' => true,
-          'description' => 'Project API key',
+          'description' => 'Project API key - preferably sent in request header as `Authorization: Loco <key>`',
           'type' => 'string',
           'location' => 'query',
         ),
@@ -1721,7 +1721,7 @@ return array (
         'key' => 
         array (
           'required' => true,
-          'description' => 'Project API key',
+          'description' => 'Project API key - preferably sent in request header as `Authorization: Loco <key>`',
           'type' => 'string',
           'location' => 'query',
         ),
