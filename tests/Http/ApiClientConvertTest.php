@@ -137,7 +137,7 @@ class ApiClientConvertTest extends ApiClientTest {
         $this->checkValidXml( $xml );
         $this->assertContains('<tu tuid="sample">', $xml );
         $this->assertContains('<tu tuid="examples">', $xml );
-        $this->assertContains('<![CDATA[échantillon]]>', $xml );
+        $this->assertContains('échantillon', $xml );
         return 'export/test-fr_FR.tmx';
     }
 
@@ -391,7 +391,7 @@ class ApiClientConvertTest extends ApiClientTest {
         $src = $this->convert( 'test-fr_FR.po', 'po', 'html' );
         $this->assertStringStartsWith('<!DOCTYPE html>', $src );
         $this->assertContains('<td><code>specific.something</code></td>', $src );
-        $this->assertContains('<td>and &quot;quotes&quot; too</td>', $src );
+        $this->assertContains('<td class="fr">and &quot;quotes&quot; too</td>', $src );
         return 'export/test-fr_FR.html';    
     }    
     
