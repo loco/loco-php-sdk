@@ -214,7 +214,7 @@ class ApiClientConvertTest extends ApiClientTest {
         $arr = $this->checkValidYaml( $yml );
         $this->assertContains('sample: échantillon', $yml );
         $this->assertContains('examples: exemples', $yml );
-        // simple yaml shouldn't expand nested key
+        // simple yaml shouldn't expand nested key, but message context should be added
         $this->assertContains('specific.something: quelque chose de spécifique', $yml );
         return 'export/test-fr_FR.yml';
     }
@@ -248,8 +248,9 @@ class ApiClientConvertTest extends ApiClientTest {
      */
     public function testExportCSV(){
         $csv = $this->convert('test-fr_FR.po', 'po', 'csv' );
-        $this->assertContains( '"sample","échantillon"', $csv );
-        $this->assertContains( '"something-with-commas","and ""quotes"" too"', $csv );
+        // converter renders source language to all multiple locale templates
+        $this->assertContains( '"sample","sample","échantillon"', $csv );
+        $this->assertContains( '"something-with-commas","something, with, commas","and ""quotes"" too"', $csv );
         return 'export/test-fr_FR.csv';
     }
     
@@ -259,8 +260,9 @@ class ApiClientConvertTest extends ApiClientTest {
      */
     public function testExportSQL(){
         $sql = $this->convert('test-fr_FR.po', 'po', 'sql' );
-        $this->assertContains( "('sample','échantillon')", $sql );
-        $this->assertContains( "('something-with-commas','and \\\"quotes\\\" too')", $sql );
+        // converter renders source language to all multiple locale templates
+        $this->assertContains( "('sample','sample','échantillon')", $sql );
+        $this->assertContains( "('something-with-commas','something, with, commas','and \\\"quotes\\\" too')", $sql );
         return 'export/test-fr_FR.sql';
     }
     
@@ -284,7 +286,7 @@ class ApiClientConvertTest extends ApiClientTest {
         $data = json_decode( $json, true );
         $this->assertEquals( array(
             'message' => 'échantillon',
-            'description' => 'sample',
+            'description' => 'Sample notes',
         ), $data['sample'] );
         return 'export/test-fr_FR.chrome.json';
     }
@@ -506,10 +508,8 @@ class ApiClientConvertTest extends ApiClientTest {
      * @depends testExportNestedYaml
      */
     public function testImportNestedYaml( $sourcefile ){
-        // @todo handle nested yaml namespacing
-        $this->checkValidJson( $this->convert( $sourcefile, 'yml', 'json', '', false ), true, 'test' );
+        $this->checkValidJson( $this->convert( $sourcefile, 'yml', 'json', '', false ), true, 'fr_FR.test' );
     }
-    //*/
     
     
     /**
