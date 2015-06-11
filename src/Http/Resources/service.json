@@ -1,6 +1,6 @@
 {
     "name": "Loco",
-    "apiVersion": "1.0.9",
+    "apiVersion": "1.0.10",
     "baseUrl": "https:\/\/localise.biz\/",
     "description": "Loco REST API",
     "operations": {
@@ -465,14 +465,51 @@
                 }
             ]
         },
+        "importProgress": {
+            "httpMethod": "GET",
+            "uri": "\/api\/import\/progress\/{id}",
+            "class": "\\Loco\\Http\\Command\\LocoCommand",
+            "responseClass": "Progress",
+            "responseType": "model",
+            "responseNotes": "<p>\n             If you specified <code>async=1<\/code> in your original import API request, you can check on its progress with this endpoint.\n           <\/p>\n           <p>\n             The full URL including job identifier will have been provided in the Location header of your original import response\n           <\/p>",
+            "summary": "Check the progress of an asynchronous import",
+            "parameters": {
+                "id": {
+                    "required": true,
+                    "description": "Job identifier from original import action",
+                    "type": "string",
+                    "location": "uri"
+                },
+                "key": {
+                    "required": true,
+                    "description": "Project API key - preferably sent in request header as `Authorization: Loco <key>`",
+                    "type": "string",
+                    "location": "query"
+                }
+            },
+            "errorResponses": [
+                {
+                    "code": 422,
+                    "phrase": "Empty job id"
+                },
+                {
+                    "code": 401,
+                    "phrase": "Invalid API key"
+                },
+                {
+                    "code": 403,
+                    "phrase": "Insufficient privileges"
+                }
+            ]
+        },
         "import": {
             "httpMethod": "POST",
             "uri": "\/api\/import\/{ext}",
             "class": "\\Loco\\Http\\Command\\LocoCommand",
             "responseClass": "Imported",
             "responseType": "model",
-            "responseNotes": "<p>The import API loads translations from various language pack formats into the currently authenticated project.<\/p>\n           <p>Take note of how the <code>index<\/code> and <code>locale<\/code> parameters are used to describe how your file will be imported. \n              By leaving these fields empty Loco will try to guess your intentions, but it's advisable to specify all parameters if in any doubt.\n              <a href=\"https:\/\/localise.biz\/api#imports\">See examples<\/a>.<\/p>",
-            "summary": "Import from language pack files",
+            "responseNotes": "<p>The import API loads translations from various language pack formats into the currently authenticated project.<\/p>\n           <p>Take note of how the <code>index<\/code> and <code>locale<\/code> parameters are used to describe how your file will be imported. \n              By leaving these fields empty Loco will try to guess your intentions, but it's advisable to specify all parameters if in any doubt.\n              <a href=\"https:\/\/localise.biz\/api#imports\">See examples<\/a>.<\/p>\n           <p>It's recommended that you set <code>async=1<\/code> for large files. This will cause the import to run in the background.\n              Note that the response will differ from that given below. Instead you will receive a 201 message with a Location header \n              pointing to a progress checking endpoint.\n           <\/p>",
+            "summary": "Import assets and translations from a language pack file",
             "parameters": {
                 "ext": {
                     "required": true,
@@ -520,6 +557,11 @@
                     "type": "string",
                     "location": "query"
                 },
+                "async": {
+                    "description": "Specify that import should be done asynchronously",
+                    "type": "boolean",
+                    "location": "query"
+                },
                 "key": {
                     "required": true,
                     "description": "Project API key - preferably sent in request header as `Authorization: Loco <key>`",
@@ -531,6 +573,10 @@
                 {
                     "code": 422,
                     "phrase": "Empty or invalid source data"
+                },
+                {
+                    "code": 201,
+                    "phrase": "Asynchronous import job created"
                 },
                 {
                     "code": 401,
@@ -624,7 +670,8 @@
                         "image",
                         "audio",
                         "video",
-                        "bin"
+                        "bin",
+                        "xml"
                     ],
                     "default": "text"
                 },
@@ -1732,6 +1779,24 @@
                     "items": {
                         "type": "string"
                     }
+                }
+            }
+        },
+        "Progress": {
+            "description": "Job progress for checking asynchronous operations",
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "progress": {
+                    "required": true,
+                    "description": "Percentage progress through job",
+                    "type": "integer",
+                    "location": "json"
+                },
+                "error": {
+                    "description": "Description of any error that prevented job from finishing",
+                    "type": "string",
+                    "location": "json"
                 }
             }
         },

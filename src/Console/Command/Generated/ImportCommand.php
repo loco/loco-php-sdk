@@ -24,7 +24,7 @@ class ImportCommand extends Command {
             ->addOption('src','',InputOption::VALUE_REQUIRED,'Raw source of file being imported','{}')
             ->addOption('index','',InputOption::VALUE_REQUIRED,'Specify whether file indexes translations by asset ID or source texts',null)
             ->addOption('locale','',InputOption::VALUE_REQUIRED,'Specify target locale if importing translations',null)
-            ->addOption('async','',InputOption::VALUE_REQUIRED,'Specify that import should be done asyncronously',null)
+            ->addOption('async','',InputOption::VALUE_REQUIRED,'Specify that import should be done asynchronously',null)
             ->addOption('key','k',InputOption::VALUE_OPTIONAL,'Override configured API key for this request','')
         ;
     }

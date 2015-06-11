@@ -1,10 +1,10 @@
 <?php
 /**
- * Auto-generated with Swizzle at 2015-04-09 14:03:51 +0100
+ * Auto-generated with Swizzle at 2015-06-11 23:57:42 +0100
  */
 return array (
   'name' => 'Loco',
-  'apiVersion' => '1.0.9',
+  'apiVersion' => '1.0.10',
   'baseUrl' => 'https://localise.biz/',
   'description' => 'Loco REST API',
   'operations' => 
@@ -555,6 +555,56 @@ return array (
         ),
       ),
     ),
+    'importProgress' => 
+    array (
+      'httpMethod' => 'GET',
+      'uri' => '/api/import/progress/{id}',
+      'class' => '\\Loco\\Http\\Command\\LocoCommand',
+      'responseClass' => 'Progress',
+      'responseType' => 'model',
+      'responseNotes' => '<p>
+             If you specified <code>async=1</code> in your original import API request, you can check on its progress with this endpoint.
+           </p>
+           <p>
+             The full URL including job identifier will have been provided in the Location header of your original import response
+           </p>',
+      'summary' => 'Check the progress of an asynchronous import',
+      'parameters' => 
+      array (
+        'id' => 
+        array (
+          'required' => true,
+          'description' => 'Job identifier from original import action',
+          'type' => 'string',
+          'location' => 'uri',
+        ),
+        'key' => 
+        array (
+          'required' => true,
+          'description' => 'Project API key - preferably sent in request header as `Authorization: Loco <key>`',
+          'type' => 'string',
+          'location' => 'query',
+        ),
+      ),
+      'errorResponses' => 
+      array (
+        0 => 
+        array (
+          'code' => 422,
+          'phrase' => 'Empty job id',
+        ),
+        1 => 
+        array (
+          'code' => 401,
+          'phrase' => 'Invalid API key',
+        ),
+        2 => 
+        array (
+          'code' => 403,
+          'phrase' => 'Insufficient privileges',
+        ),
+      ),
+    ),
     'import' => 
     array (
       'httpMethod' => 'POST',
@@ -565,8 +615,12 @@ return array (
       'responseNotes' => '<p>The import API loads translations from various language pack formats into the currently authenticated project.</p>
            <p>Take note of how the <code>index</code> and <code>locale</code> parameters are used to describe how your file will be imported. 
               By leaving these fields empty Loco will try to guess your intentions, but it\'s advisable to specify all parameters if in any doubt.
-              <a href="https://localise.biz/api#imports">See examples</a>.</p>',
-      'summary' => 'Import from language pack files',
+              <a href="https://localise.biz/api#imports">See examples</a>.</p>
+           <p>It\'s recommended that you set <code>async=1</code> for large files. This will cause the import to run in the background.
+              Note that the response will differ from that given below. Instead you will receive a 201 message with a Location header 
+              pointing to a progress checking endpoint.
+           </p>',
+      'summary' => 'Import assets and translations from a language pack file',
       'parameters' => 
       array (
         'ext' => 
@@ -621,6 +675,12 @@ return array (
           'type' => 'string',
           'location' => 'query',
         ),
+        'async' => 
+        array (
+          'description' => 'Specify that import should be done asynchronously',
+          'type' => 'boolean',
+          'location' => 'query',
+        ),
         'key' => 
         array (
           'required' => true,
@@ -638,10 +698,15 @@ return array (
         ),
         1 => 
         array (
+          'code' => 201,
+          'phrase' => 'Asynchronous import job created',
+        ),
+        2 => 
+        array (
           'code' => 401,
           'phrase' => 'Invalid API key',
         ),
-        2 => 
+        3 => 
         array (
           'code' => 403,
           'phrase' => 'Insufficient privileges',
@@ -752,6 +817,7 @@ return array (
             3 => 'audio',
             4 => 'video',
             5 => 'bin',
+            6 => 'xml',
           ),
           'default' => 'text',
         ),
@@ -2105,6 +2171,28 @@ return array (
           array (
             'type' => 'string',
           ),
+        ),
+      ),
+    ),
+    'Progress' => 
+    array (
+      'description' => 'Job progress for checking asynchronous operations',
+      'type' => 'object',
+      'additionalProperties' => false,
+      'properties' => 
+      array (
+        'progress' => 
+        array (
+          'required' => true,
+          'description' => 'Percentage progress through job',
+          'type' => 'integer',
+          'location' => 'json',
+        ),
+        'error' => 
+        array (
+          'description' => 'Description of any error that prevented job from finishing',
+          'type' => 'string',
+          'location' => 'json',
         ),
       ),
     ),
