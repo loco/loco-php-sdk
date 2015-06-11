@@ -1,6 +1,6 @@
 <?php
 /**
- * Auto-generated with Swizzle at 2015-06-11 23:57:42 +0100
+ * Auto-generated with Swizzle at 2015-06-12 00:06:40 +0100
  */
 return array (
   'name' => 'Loco',
@@ -817,7 +817,6 @@ return array (
             3 => 'audio',
             4 => 'video',
             5 => 'bin',
-            6 => 'xml',
           ),
           'default' => 'text',
         ),

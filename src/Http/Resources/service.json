@@ -670,8 +670,7 @@
                         "image",
                         "audio",
                         "video",
-                        "bin",
-                        "xml"
+                        "bin"
                     ],
                     "default": "text"
                 },
