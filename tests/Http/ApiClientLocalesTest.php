@@ -15,6 +15,7 @@ class ApiClientLocalesTest  extends ApiClientTest {
     
     /**
      * getLocales
+     * @group readonly
      */
     public function testLocalesList(){
         $client = $this->getClient();
@@ -34,6 +35,7 @@ class ApiClientLocalesTest  extends ApiClientTest {
     /**
      * getLocale
      * @depends testLocalesList
+     * @group readonly
      */
     public function testLocaleGet( array $locale ){
         $client = $this->getClient();
@@ -80,29 +82,11 @@ class ApiClientLocalesTest  extends ApiClientTest {
     
     
     /**
-     * patchLocale with failure trying to change a read only property
-     * #depends testLocaleCreate
-     * #expectedException \Guzzle\Http\Exception\ClientErrorResponseException
-     * @ignore
-     * This test is redundant now that models is restricted to LocalePatch subset 
-     */
-    public function _testLocalePatchRejectsReadonly( $code ){
-        $client = $this->getClient();
-        $update = array (
-            'locale' => $code,
-            'native' => true,
-        );
-        $client->patchLocale( $update );
-    }
-    
-    
-    
-    /**
      * patchLocale with failure trying to set a non-existant property
      * @depends testLocaleCreate
      * @expectedException \Guzzle\Http\Exception\ClientErrorResponseException
      */
-    public function testLocalePatchRejectsUnknown( $code ){
+    public function testLocalePatchRejectsUnpatchable( $code ){
         $client = $this->getClient();
         $update = array (
             'locale' => $code,
@@ -112,24 +96,7 @@ class ApiClientLocalesTest  extends ApiClientTest {
     }
     
     
-    
-    /**
-     * patchLocale with harmless attempt to set read-only property as same value
-     * #depends testLocaleCreate
-     * @ignore
-     * This test is redundant now that models is restricted to LocalePatch subset 
-     */
-    public function _testLocalePatchPassesThroughReadonly( $code ){
-        $client = $this->getClient();
-        $update = array (
-            'locale' => $code,
-            'native' => false, // <- would fail if set to true
-        );
-        $client->patchLocale( $update );
-    }
-         
-    
-    
+     
     /**
      * deleteLocale
      * @depends testLocalePatch

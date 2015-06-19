@@ -27,7 +27,8 @@ class ApiClientTagsTest  extends ApiClientTest {
         
     
     /**
-     * List all tags in project
+     * getTags
+     * @group readonly
      */
     public function testGetTags(){
         $tags = $this->client->getTags();

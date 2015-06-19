@@ -10,6 +10,7 @@ use Guzzle\Service\Resource\Model;
  * Test the live /auth API.
  * @group live
  * @group auth
+ * @group readonly
  */
 class ApiClientAuthTest  extends ApiClientTest {
     

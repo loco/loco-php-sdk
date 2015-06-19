@@ -44,6 +44,7 @@ class ApiClientTranslationsTest  extends ApiClientTest {
     /**
      * getTranslations
      * @depends testAssetCreatedForTranslating
+     * @group readonly
      */
     public function testAssetInTranslationList( $id ){
         $client = $this->getClient();
@@ -61,6 +62,7 @@ class ApiClientTranslationsTest  extends ApiClientTest {
      * getTranslation
      * @depends testAssetInTranslationList
      * @depends testLocaleCreatedForTranslating
+     * @group readonly
      */
     public function testAssetUntranslatedInitially( $id, $locale ){
         $client = $this->getClient();

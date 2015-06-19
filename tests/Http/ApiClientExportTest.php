@@ -8,6 +8,7 @@ use Loco\Http\ApiClient;
  * Test the live /export API.
  * @group live
  * @group export
+ * @group readonly
  */
 class ApiClientExportTest extends ApiClientTest {
     

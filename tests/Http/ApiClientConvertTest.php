@@ -315,6 +315,7 @@ class ApiClientConvertTest extends ApiClientTest {
     
     /**
      * Export PHP default (Zend) from seed
+     * @group php
      */    
     public function testExportZend(){
         $php = $this->convert('test-fr_FR.po', 'po', 'php' );
@@ -327,6 +328,7 @@ class ApiClientConvertTest extends ApiClientTest {
     
     /**
      * Export PHP Symfony format from seed
+     * @group php
      */    
     public function testExportSymfony(){
         $php = $this->convert('test-fr_FR.po', 'po', 'php', 'symfony' );
@@ -339,12 +341,13 @@ class ApiClientConvertTest extends ApiClientTest {
     
     /**
      * Export PHP Code Igniter format from seed
+     * @group php
      */    
     public function testExportCodeIgniter(){
         $php = $this->convert('test-fr_FR.po', 'po', 'php', 'codeigniter' );
         $this->assertStringStartsWith('<?php', $php );
         $this->assertContains("\$lang['test_sample'] = 'échantillon';", $php );
-        $this->assertContains("\$lang['test_specific_something'] = 'quelque chose de spécifique';", $php );
+        $this->assertContains("\$lang['test_specific']['something'] = 'quelque chose de spécifique';", $php, 'Code igniter should fold on dot syntax' );
         return 'export/test-fr_FR.codeigniter.php';
     }    
 
@@ -550,6 +553,7 @@ class ApiClientConvertTest extends ApiClientTest {
      * @depends testExportCodeIgniter
      */
     public function testImportCodeIgniter( $sourcefile ){
+        //$this->markTestSkipped(); // until CI import matches export (dot syntax)
         $this->checkValidJson( $this->convert( $sourcefile, 'php', 'json', '', false ), false, '', 'test_' );
     }
             

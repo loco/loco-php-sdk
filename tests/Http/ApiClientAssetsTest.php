@@ -28,6 +28,7 @@ class ApiClientAssetsTest  extends ApiClientTest {
     
     /**
      * getAssets
+     * @group readonly
      */
     public function testAssetsList(){
         // top level is array
@@ -45,6 +46,7 @@ class ApiClientAssetsTest  extends ApiClientTest {
     /**
      * getAsset
      * @depends testAssetsList
+     * @group readonly
      */
     public function testAssetGet( array $asset ){
         $model = $this->client->getAsset( array( 'id' => $asset['id'] ) );
@@ -109,20 +111,8 @@ class ApiClientAssetsTest  extends ApiClientTest {
      * @depends testAssetCreate
      * @expectedException \Guzzle\Http\Exception\ClientErrorResponseException
      */
-    public function testAssetPatchRejectsReadonly( $slug ){
+    public function testAssetPatchRejectsUnpatchable( $slug ){
         $this->client->patchAsset( array( 'id' => $slug, 'translated' => 0 ) );
-    }
-    
-    
-    
-    /**
-     * patchAsset with harmless attempt to set read-only property as same value
-     * #depends testAssetCreate
-     * @ignore
-     * This test is redundant now that models is restricted to AssetPatch subset 
-     */
-    public function _testAssetPatchPassesThroughReadonly( $slug ){
-        $this->client->patchAsset( array( 'id' => $slug, 'translated' => 1 ) );
     }
     
     
