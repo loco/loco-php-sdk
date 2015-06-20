@@ -1,6 +1,6 @@
 <?php
 /**
- * Auto-generated with Swizzle at 2015-06-12 00:06:40 +0100
+ * Auto-generated with Swizzle at 2015-06-20 15:18:55 +0100
  */
 return array (
   'name' => 'Loco',
@@ -286,6 +286,12 @@ return array (
             2 => 'text',
           ),
         ),
+        'namespace' => 
+        array (
+          'description' => 'Override the project name for some language packs that use it as a key prefix',
+          'type' => 'string',
+          'location' => 'query',
+        ),
         'fallback' => 
         array (
           'description' => 'Fallback locale for untranslated assets, specified as short code. e.g. `en` or `en_GB`',
@@ -392,6 +398,12 @@ return array (
             1 => 'name',
             2 => 'text',
           ),
+        ),
+        'namespace' => 
+        array (
+          'description' => 'Override the project name for some language packs that use it as a key prefix',
+          'type' => 'string',
+          'location' => 'query',
         ),
         'fallback' => 
         array (
@@ -506,6 +518,12 @@ return array (
             1 => 'name',
             2 => 'text',
           ),
+        ),
+        'namespace' => 
+        array (
+          'description' => 'Override the project name for some language packs that use it as a key prefix',
+          'type' => 'string',
+          'location' => 'query',
         ),
         'fallback' => 
         array (
@@ -720,8 +738,9 @@ return array (
       'class' => '\\Loco\\Http\\Command\\LocoCommand',
       'responseClass' => 'Creds',
       'responseType' => 'model',
-      'responseNotes' => 'Loco API keys authenticate your user account for accessing a specific project.<br />
-             This endpoint verifies an API key and returns the authenticated user, account and project.',
+      'responseNotes' => '<p>Loco API keys authenticate your user account for accessing a specific project.<br />
+                This endpoint verifies an API key and returns the authenticated user, account and project.</p>
+             <p>If you want to verify whether the key has read or write access, just send this endpoint a POST request instead. Read only keys will respond 403 to any non-GET request.</p>',
       'summary' => 'Verify an API project key',
       'parameters' => 
       array (
@@ -739,6 +758,11 @@ return array (
         array (
           'code' => 401,
           'phrase' => 'Invalid API key',
+        ),
+        1 => 
+        array (
+          'code' => 403,
+          'phrase' => 'Insufficient privileges',
         ),
       ),
     ),

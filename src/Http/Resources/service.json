@@ -232,6 +232,11 @@
                         "text"
                     ]
                 },
+                "namespace": {
+                    "description": "Override the project name for some language packs that use it as a key prefix",
+                    "type": "string",
+                    "location": "query"
+                },
                 "fallback": {
                     "description": "Fallback locale for untranslated assets, specified as short code. e.g. `en` or `en_GB`",
                     "type": "string",
@@ -323,6 +328,11 @@
                         "name",
                         "text"
                     ]
+                },
+                "namespace": {
+                    "description": "Override the project name for some language packs that use it as a key prefix",
+                    "type": "string",
+                    "location": "query"
                 },
                 "fallback": {
                     "description": "Fallback locale for untranslated assets, specified as short code. e.g. `en` or `en_GB`",
@@ -421,6 +431,11 @@
                         "name",
                         "text"
                     ]
+                },
+                "namespace": {
+                    "description": "Override the project name for some language packs that use it as a key prefix",
+                    "type": "string",
+                    "location": "query"
                 },
                 "fallback": {
                     "description": "Fallback locale for untranslated assets, specified as short code. e.g. `en` or `en_GB`",
@@ -594,7 +609,7 @@
             "class": "\\Loco\\Http\\Command\\LocoCommand",
             "responseClass": "Creds",
             "responseType": "model",
-            "responseNotes": "Loco API keys authenticate your user account for accessing a specific project.<br \/>\n             This endpoint verifies an API key and returns the authenticated user, account and project.",
+            "responseNotes": "<p>Loco API keys authenticate your user account for accessing a specific project.<br \/>\n                This endpoint verifies an API key and returns the authenticated user, account and project.<\/p>\n             <p>If you want to verify whether the key has read or write access, just send this endpoint a POST request instead. Read only keys will respond 403 to any non-GET request.<\/p>",
             "summary": "Verify an API project key",
             "parameters": {
                 "key": {
@@ -608,6 +623,10 @@
                 {
                     "code": 401,
                     "phrase": "Invalid API key"
+                },
+                {
+                    "code": 403,
+                    "phrase": "Insufficient privileges"
                 }
             ]
         },
