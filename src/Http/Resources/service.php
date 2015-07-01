@@ -1,10 +1,10 @@
 <?php
 /**
- * Auto-generated with Swizzle at 2015-06-20 15:18:55 +0100
+ * Auto-generated with Swizzle at 2015-07-01 11:17:38 +0100
  */
 return array (
   'name' => 'Loco',
-  'apiVersion' => '1.0.10',
+  'apiVersion' => '1.0.11',
   'baseUrl' => 'https://localise.biz/',
   'description' => 'Loco REST API',
   'operations' => 
@@ -217,6 +217,29 @@ return array (
           'type' => 'string',
           'location' => 'query',
         ),
+        'order' => 
+        array (
+          'description' => 'Export translations according to asset order',
+          'type' => 'string',
+          'location' => 'query',
+          'enum' => 
+          array (
+            0 => 'created',
+            1 => 'id',
+          ),
+        ),
+        'status' => 
+        array (
+          'description' => 'Export only translations with a specific status or flag',
+          'type' => 'string',
+          'location' => 'query',
+          'enum' => 
+          array (
+            0 => 'translated',
+            1 => 'untranslated',
+            2 => '&lt;flag&gt;',
+          ),
+        ),
       ),
       'errorResponses' => 
       array (
@@ -297,6 +320,29 @@ return array (
           'description' => 'Fallback locale for untranslated assets, specified as short code. e.g. `en` or `en_GB`',
           'type' => 'string',
           'location' => 'query',
+        ),
+        'order' => 
+        array (
+          'description' => 'Export translations according to asset order',
+          'type' => 'string',
+          'location' => 'query',
+          'enum' => 
+          array (
+            0 => 'created',
+            1 => 'id',
+          ),
+        ),
+        'status' => 
+        array (
+          'description' => 'Export only translations with a specific status or flag',
+          'type' => 'string',
+          'location' => 'query',
+          'enum' => 
+          array (
+            0 => 'translated',
+            1 => 'untranslated',
+            2 => '&lt;flag&gt;',
+          ),
         ),
         'ext' => 
         array (
@@ -410,6 +456,29 @@ return array (
           'description' => 'Fallback locale for untranslated assets, specified as short code. e.g. `en` or `en_GB`',
           'type' => 'string',
           'location' => 'query',
+        ),
+        'order' => 
+        array (
+          'description' => 'Export translations according to asset order',
+          'type' => 'string',
+          'location' => 'query',
+          'enum' => 
+          array (
+            0 => 'created',
+            1 => 'id',
+          ),
+        ),
+        'status' => 
+        array (
+          'description' => 'Export only translations with a specific status or flag',
+          'type' => 'string',
+          'location' => 'query',
+          'enum' => 
+          array (
+            0 => 'translated',
+            1 => 'untranslated',
+            2 => '&lt;flag&gt;',
+          ),
         ),
         'locale' => 
         array (
@@ -530,6 +599,29 @@ return array (
           'description' => 'Fallback locale for untranslated assets, specified as short code. e.g. `en` or `en_GB`',
           'type' => 'string',
           'location' => 'query',
+        ),
+        'order' => 
+        array (
+          'description' => 'Export translations according to asset order',
+          'type' => 'string',
+          'location' => 'query',
+          'enum' => 
+          array (
+            0 => 'created',
+            1 => 'id',
+          ),
+        ),
+        'status' => 
+        array (
+          'description' => 'Export only translations with a specific status or flag',
+          'type' => 'string',
+          'location' => 'query',
+          'enum' => 
+          array (
+            0 => 'translated',
+            1 => 'untranslated',
+            2 => '&lt;flag&gt;',
+          ),
         ),
         'ext' => 
         array (

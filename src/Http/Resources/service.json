@@ -1,6 +1,6 @@
 {
     "name": "Loco",
-    "apiVersion": "1.0.10",
+    "apiVersion": "1.0.11",
     "baseUrl": "https:\/\/localise.biz\/",
     "description": "Loco REST API",
     "operations": {
@@ -174,6 +174,25 @@
                     "description": "Fallback locale for untranslated assets, specified as short code. e.g. `en` or `en_GB`",
                     "type": "string",
                     "location": "query"
+                },
+                "order": {
+                    "description": "Export translations according to asset order",
+                    "type": "string",
+                    "location": "query",
+                    "enum": [
+                        "created",
+                        "id"
+                    ]
+                },
+                "status": {
+                    "description": "Export only translations with a specific status or flag",
+                    "type": "string",
+                    "location": "query",
+                    "enum": [
+                        "translated",
+                        "untranslated",
+                        "&lt;flag&gt;"
+                    ]
                 }
             },
             "errorResponses": [
@@ -241,6 +260,25 @@
                     "description": "Fallback locale for untranslated assets, specified as short code. e.g. `en` or `en_GB`",
                     "type": "string",
                     "location": "query"
+                },
+                "order": {
+                    "description": "Export translations according to asset order",
+                    "type": "string",
+                    "location": "query",
+                    "enum": [
+                        "created",
+                        "id"
+                    ]
+                },
+                "status": {
+                    "description": "Export only translations with a specific status or flag",
+                    "type": "string",
+                    "location": "query",
+                    "enum": [
+                        "translated",
+                        "untranslated",
+                        "&lt;flag&gt;"
+                    ]
                 },
                 "ext": {
                     "required": true,
@@ -338,6 +376,25 @@
                     "description": "Fallback locale for untranslated assets, specified as short code. e.g. `en` or `en_GB`",
                     "type": "string",
                     "location": "query"
+                },
+                "order": {
+                    "description": "Export translations according to asset order",
+                    "type": "string",
+                    "location": "query",
+                    "enum": [
+                        "created",
+                        "id"
+                    ]
+                },
+                "status": {
+                    "description": "Export only translations with a specific status or flag",
+                    "type": "string",
+                    "location": "query",
+                    "enum": [
+                        "translated",
+                        "untranslated",
+                        "&lt;flag&gt;"
+                    ]
                 },
                 "locale": {
                     "required": true,
@@ -441,6 +498,25 @@
                     "description": "Fallback locale for untranslated assets, specified as short code. e.g. `en` or `en_GB`",
                     "type": "string",
                     "location": "query"
+                },
+                "order": {
+                    "description": "Export translations according to asset order",
+                    "type": "string",
+                    "location": "query",
+                    "enum": [
+                        "created",
+                        "id"
+                    ]
+                },
+                "status": {
+                    "description": "Export only translations with a specific status or flag",
+                    "type": "string",
+                    "location": "query",
+                    "enum": [
+                        "translated",
+                        "untranslated",
+                        "&lt;flag&gt;"
+                    ]
                 },
                 "ext": {
                     "required": true,

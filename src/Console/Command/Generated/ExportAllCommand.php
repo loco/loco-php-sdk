@@ -25,6 +25,8 @@ class ExportAllCommand extends Command {
             ->addOption('filter','',InputOption::VALUE_REQUIRED,'Comma-separated list of tags to filter subset of assets.',null)
             ->addOption('index','',InputOption::VALUE_REQUIRED,'Override default lookup key in language pack. Leave blank for auto.',null)
             ->addOption('fallback','',InputOption::VALUE_REQUIRED,'Fallback locale for untranslated assets, specified as short code. e.g. `en` or `en_GB`',null)
+            ->addOption('order','',InputOption::VALUE_REQUIRED,'Export translations according to asset order',null)
+            ->addOption('status','',InputOption::VALUE_REQUIRED,'Export only translations with a specific status or flag',null)
         ;
     }
     
