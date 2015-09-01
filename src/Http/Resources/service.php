@@ -1,10 +1,10 @@
 <?php
 /**
- * Auto-generated with Swizzle at 2015-07-01 11:17:38 +0100
+ * Auto-generated with Swizzle at 2015-09-01 18:27:05 +0100
  */
 return array (
   'name' => 'Loco',
-  'apiVersion' => '1.0.11',
+  'apiVersion' => '1.0.12',
   'baseUrl' => 'https://localise.biz/',
   'description' => 'Loco REST API',
   'operations' => 
@@ -125,7 +125,7 @@ return array (
       'responseClass' => 'Success',
       'responseType' => 'model',
       'responseNotes' => 'Deletes an existing tag in the currently authenticated project',
-      'summary' => 'Delete a single tag',
+      'summary' => 'Delete an existing tag',
       'parameters' => 
       array (
         'key' => 
@@ -901,7 +901,8 @@ return array (
       'responseNotes' => '<p>Adds a new asset to the currently authenticated project.</p>
            <p>If the asset is created successfully the response will be 201 (created).</p>
            <p>If you specify the asset ID and it clashes with an existing asset the response will be 409 (conflict).</p>
-           <p>If another asset exists with the same name and you <strong>haven\'t specified the ID</strong>, a new asset will be created with a unique id.</p>',
+           <p>If another asset exists with the same name and you <strong>haven\'t specified the ID</strong>, a new asset will be created with a unique id.</p>
+           <p>Creating a new asset also creates a translation in your source language with the value of the \'name\' parameter. Use the \'default\' parameter to control this behaviour.</p>',
       'summary' => 'Add a new translatable asset',
       'parameters' => 
       array (
@@ -935,6 +936,23 @@ return array (
             5 => 'bin',
           ),
           'default' => 'text',
+        ),
+        'default' => 
+        array (
+          'description' => 'Status of the default source language translation. Specify \'untranslated\' to avoid creation',
+          'type' => 'string',
+          'location' => 'postField',
+          'enum' => 
+          array (
+            0 => 'translated',
+            1 => 'untranslated',
+            2 => 'incorrect',
+            3 => 'provisional',
+            4 => 'unapproved',
+            5 => 'fuzzy',
+            6 => 'incomplete',
+          ),
+          'default' => 'translated',
         ),
         'key' => 
         array (
@@ -1724,7 +1742,7 @@ return array (
       'responseNotes' => '<p>Translates a single asset in a single locale in the currently authenticated project.</p>
            <p>If the asset is already translated, a new revision will be added and the <code>revision</code> field incremented.</p>
            <p>If the asset is untranslated the locale must have already been added to the project.</p>
-           <p>Binary file uploads are not yet supported, but will be soon.</p>',
+           <p>Binary file uploads are not yet supported via this endpoint.</p>',
       'summary' => 'Add a new translation in a given locale',
       'parameters' => 
       array (
@@ -1844,10 +1862,11 @@ return array (
           'location' => 'postField',
           'enum' => 
           array (
-            0 => 'fuzzy',
-            1 => 'error',
-            2 => 'review',
-            3 => 'pending',
+            0 => 'incorrect',
+            1 => 'provisional',
+            2 => 'unapproved',
+            3 => 'fuzzy',
+            4 => 'incomplete',
           ),
           'default' => 'fuzzy',
         ),
@@ -2221,7 +2240,7 @@ return array (
         ),
         'incomplete' => 
         array (
-          'description' => 'Number of translations that are flagged as incomplete',
+          'description' => 'Number of translations that are flagged as requiring attention',
           'type' => 'integer',
           'location' => 'json',
         ),
@@ -2471,7 +2490,7 @@ return array (
               ),
               'incomplete' => 
               array (
-                'description' => 'Number of translations that are flagged as incomplete',
+                'description' => 'Number of translations that are flagged as requiring attention',
                 'type' => 'integer',
                 'location' => 'json',
               ),
@@ -2839,7 +2858,7 @@ return array (
         'flagged' => 
         array (
           'required' => true,
-          'description' => 'Whether translation is incomplete due to an issue requiring attention',
+          'description' => 'Whether translation is flagged as requiring attention',
           'type' => 'boolean',
           'location' => 'json',
           'default' => false,
@@ -2905,10 +2924,16 @@ return array (
         'flagged' => 
         array (
           'required' => true,
-          'description' => 'Whether translation is incomplete due to an issue requiring attention',
+          'description' => 'Whether translation is flagged as requiring attention',
           'type' => 'boolean',
           'location' => 'json',
           'default' => false,
+        ),
+        'status' => 
+        array (
+          'description' => 'Status of translation as string compatible with export status parameter',
+          'type' => 'string',
+          'location' => 'json',
         ),
         'translation' => 
         array (
@@ -3080,7 +3105,7 @@ return array (
               'flagged' => 
               array (
                 'required' => true,
-                'description' => 'Whether translation is incomplete due to an issue requiring attention',
+                'description' => 'Whether translation is flagged as requiring attention',
                 'type' => 'boolean',
                 'location' => 'json',
                 'default' => false,

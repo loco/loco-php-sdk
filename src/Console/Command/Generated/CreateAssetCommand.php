@@ -23,6 +23,7 @@ class CreateAssetCommand extends Command {
             ->addOption('name','',InputOption::VALUE_REQUIRED,'Source text or just a name describing what the asset is',null)
             ->addOption('id','',InputOption::VALUE_REQUIRED,'Optional machine friendly ID if you want something specific','')
             ->addOption('type','',InputOption::VALUE_REQUIRED,'Media type, defaults to plain old text','text')
+            ->addOption('default','',InputOption::VALUE_REQUIRED,'Status of the default source language translation. Specify \'untranslated\' to avoid creation','translated')
             ->addOption('key','k',InputOption::VALUE_OPTIONAL,'Override configured API key for this request','')
         ;
     }

@@ -334,7 +334,7 @@ class ApiClientConvertTest extends ApiClientTest {
         $php = $this->convert('test-fr_FR.po', 'po', 'php', 'symfony' );
         $this->assertStringStartsWith('<?php', $php );
         $this->assertContains("'sample' => 'échantillon'", $php );
-        $this->assertContains("'example' => 'one: exemple|other: exemples'", $php );
+        $this->assertContains("'example' => 'exemple|exemples'", $php );
         return 'export/test-fr_FR.symfony.php';
     }    
     
@@ -543,7 +543,7 @@ class ApiClientConvertTest extends ApiClientTest {
         $json = $this->convert( $sourcefile, 'php', 'json', '', false );
         // re-importing symfony plurals won't work due to the way symfony handles string formatted plurals
         $data = json_decode( $json, true );
-        $this->assertEquals('one: exemple|other: exemples', $data['example'] );
+        $this->assertEquals('exemple|exemples', $data['example'] );
     }
     
     

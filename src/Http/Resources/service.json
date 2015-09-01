@@ -1,6 +1,6 @@
 {
     "name": "Loco",
-    "apiVersion": "1.0.11",
+    "apiVersion": "1.0.12",
     "baseUrl": "https:\/\/localise.biz\/",
     "description": "Loco REST API",
     "operations": {
@@ -100,7 +100,7 @@
             "responseClass": "Success",
             "responseType": "model",
             "responseNotes": "Deletes an existing tag in the currently authenticated project",
-            "summary": "Delete a single tag",
+            "summary": "Delete an existing tag",
             "parameters": {
                 "key": {
                     "required": true,
@@ -739,7 +739,7 @@
             "class": "\\Loco\\Http\\Command\\LocoCommand",
             "responseClass": "Asset",
             "responseType": "model",
-            "responseNotes": "<p>Adds a new asset to the currently authenticated project.<\/p>\n           <p>If the asset is created successfully the response will be 201 (created).<\/p>\n           <p>If you specify the asset ID and it clashes with an existing asset the response will be 409 (conflict).<\/p>\n           <p>If another asset exists with the same name and you <strong>haven't specified the ID<\/strong>, a new asset will be created with a unique id.<\/p>",
+            "responseNotes": "<p>Adds a new asset to the currently authenticated project.<\/p>\n           <p>If the asset is created successfully the response will be 201 (created).<\/p>\n           <p>If you specify the asset ID and it clashes with an existing asset the response will be 409 (conflict).<\/p>\n           <p>If another asset exists with the same name and you <strong>haven't specified the ID<\/strong>, a new asset will be created with a unique id.<\/p>\n           <p>Creating a new asset also creates a translation in your source language with the value of the 'name' parameter. Use the 'default' parameter to control this behaviour.<\/p>",
             "summary": "Add a new translatable asset",
             "parameters": {
                 "name": {
@@ -768,6 +768,21 @@
                         "bin"
                     ],
                     "default": "text"
+                },
+                "default": {
+                    "description": "Status of the default source language translation. Specify 'untranslated' to avoid creation",
+                    "type": "string",
+                    "location": "postField",
+                    "enum": [
+                        "translated",
+                        "untranslated",
+                        "incorrect",
+                        "provisional",
+                        "unapproved",
+                        "fuzzy",
+                        "incomplete"
+                    ],
+                    "default": "translated"
                 },
                 "key": {
                     "required": true,
@@ -1406,7 +1421,7 @@
             "class": "\\Loco\\Http\\Command\\LocoCommand",
             "responseClass": "Translation",
             "responseType": "model",
-            "responseNotes": "<p>Translates a single asset in a single locale in the currently authenticated project.<\/p>\n           <p>If the asset is already translated, a new revision will be added and the <code>revision<\/code> field incremented.<\/p>\n           <p>If the asset is untranslated the locale must have already been added to the project.<\/p>\n           <p>Binary file uploads are not yet supported, but will be soon.<\/p>",
+            "responseNotes": "<p>Translates a single asset in a single locale in the currently authenticated project.<\/p>\n           <p>If the asset is already translated, a new revision will be added and the <code>revision<\/code> field incremented.<\/p>\n           <p>If the asset is untranslated the locale must have already been added to the project.<\/p>\n           <p>Binary file uploads are not yet supported via this endpoint.<\/p>",
             "summary": "Add a new translation in a given locale",
             "parameters": {
                 "translation": {
@@ -1502,10 +1517,11 @@
                     "type": "string",
                     "location": "postField",
                     "enum": [
+                        "incorrect",
+                        "provisional",
+                        "unapproved",
                         "fuzzy",
-                        "error",
-                        "review",
-                        "pending"
+                        "incomplete"
                     ],
                     "default": "fuzzy"
                 },
@@ -1818,7 +1834,7 @@
                     "location": "json"
                 },
                 "incomplete": {
-                    "description": "Number of translations that are flagged as incomplete",
+                    "description": "Number of translations that are flagged as requiring attention",
                     "type": "integer",
                     "location": "json"
                 },
@@ -2027,7 +2043,7 @@
                                 "location": "json"
                             },
                             "incomplete": {
-                                "description": "Number of translations that are flagged as incomplete",
+                                "description": "Number of translations that are flagged as requiring attention",
                                 "type": "integer",
                                 "location": "json"
                             },
@@ -2331,7 +2347,7 @@
                 },
                 "flagged": {
                     "required": true,
-                    "description": "Whether translation is incomplete due to an issue requiring attention",
+                    "description": "Whether translation is flagged as requiring attention",
                     "type": "boolean",
                     "location": "json",
                     "default": false
@@ -2387,10 +2403,15 @@
                 },
                 "flagged": {
                     "required": true,
-                    "description": "Whether translation is incomplete due to an issue requiring attention",
+                    "description": "Whether translation is flagged as requiring attention",
                     "type": "boolean",
                     "location": "json",
                     "default": false
+                },
+                "status": {
+                    "description": "Status of translation as string compatible with export status parameter",
+                    "type": "string",
+                    "location": "json"
                 },
                 "translation": {
                     "required": true,
@@ -2534,7 +2555,7 @@
                             },
                             "flagged": {
                                 "required": true,
-                                "description": "Whether translation is incomplete due to an issue requiring attention",
+                                "description": "Whether translation is flagged as requiring attention",
                                 "type": "boolean",
                                 "location": "json",
                                 "default": false

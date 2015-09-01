@@ -19,7 +19,7 @@ class DeleteTagCommand extends Command {
         $this
             ->setName( 'loco:delete:tag' )
             ->setMethod( 'deleteTag' )
-            ->setDescription( 'Delete a single tag' )
+            ->setDescription( 'Delete an existing tag' )
             ->addOption('key','k',InputOption::VALUE_OPTIONAL,'Override configured API key for this request','')
             ->addArgument('tag',InputArgument::REQUIRED,'Name of a single asset tag.',null)
         ;
