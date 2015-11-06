@@ -90,10 +90,10 @@ class ApiClientImportTest extends ApiClientTest {
                 $locales[ $l['code'] ] = $l;
             }
             // English should always have been used if any locale is set
-            $this->assertArrayHasKey( 'en_GB', $locales, 'english not returned in locales' );
+            $this->assertArrayHasKey( 'en-GB', $locales, 'english not returned in locales' );
             // check all english translations exist and are correct
             foreach( $this->assets as $id ){
-                $param = compact('id') + array( 'locale' => 'en' );
+                $param = compact('id') + array( 'locale' => 'en-GB' );
                 $trans = $this->client->getTranslation( $param );
                 // english translation same as slug for simpler testing
                 $this->assertEquals( $id, $trans['translation'], 'English not imported correctly' ); 
@@ -137,7 +137,7 @@ class ApiClientImportTest extends ApiClientTest {
      * import YAML with keys as native texts
      */
     public function testYamlImportEnglish(){
-        $this->_import('test-fr_FR.yml', 'text', 'en_GB' );
+        $this->_import('test-fr_FR.yml', 'text', 'en-GB' );
     }
 
 
@@ -146,7 +146,7 @@ class ApiClientImportTest extends ApiClientTest {
      * import YAML with keys as native texts plus french translations
      */
     public function testYamlImportFrench(){
-        $this->_import('test-fr_FR.yml', 'text', 'fr_FR' );
+        $this->_import('test-fr_FR.yml', 'text', 'fr-FR' );
     }
 
     

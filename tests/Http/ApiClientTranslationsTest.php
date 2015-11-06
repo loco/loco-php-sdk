@@ -32,7 +32,7 @@ class ApiClientTranslationsTest  extends ApiClientTest {
      */
     public function testLocaleCreatedForTranslating(){
         $rand = substr( md5( microtime() ), 0, 5 );
-        $code = 'en_GB+'.$rand;
+        $code = 'en-GB-x-'.$rand;
         $client = $this->getClient();
         $model = $client->createLocale( compact('code') );
         $this->assertEquals( $code, $model['code'] );

@@ -226,7 +226,7 @@ class ApiClientConvertTest extends ApiClientTest {
     public function testExportNestedYaml(){
         $yml = $this->convert( 'test-fr_FR.po', 'po', 'yml', 'nested' );
         $arr = $this->checkValidYaml( $yml );
-        $this->assertContains("fr_FR:\n  test:\n    sample: échantillon", $yml );
+        $this->assertContains("fr-FR:\n  test:\n    sample: échantillon", $yml );
         return 'export/test-fr_FR.nested.yml';
     }
 
@@ -238,7 +238,7 @@ class ApiClientConvertTest extends ApiClientTest {
         $yml = $this->convert( 'test-fr_FR.po', 'po', 'yml', 'rails' );
         $arr = $this->checkValidYaml( $yml );
         // Rails has short locale and no interim namespace
-        $this->assertContains("fr:\n  sample: échantillon", $yml );
+        $this->assertContains("fr-FR:\n  sample: échantillon", $yml );
         return 'export/test-fr_FR.rails.yml';
     }
     
@@ -307,7 +307,7 @@ class ApiClientConvertTest extends ApiClientTest {
     */
     public function testExportJSGettext(){
         $js = $this->convert('test-fr_FR.po', 'po', 'js', 'gettext' );
-        $this->assertContains('{"lang":"French","plural-forms":"nplurals=2;', $js );
+        $this->assertContains('{"lang":"French (France)","plural-forms":"nplurals=2;', $js );
         $this->assertContains('["examples","exemple","exemples"]', $js );
         return 'export/test-fr_FR.gettext.js';
     }    
@@ -511,7 +511,7 @@ class ApiClientConvertTest extends ApiClientTest {
      * @depends testExportNestedYaml
      */
     public function testImportNestedYaml( $sourcefile ){
-        $this->checkValidJson( $this->convert( $sourcefile, 'yml', 'json', '', false ), true, 'fr_FR.test' );
+        $this->checkValidJson( $this->convert( $sourcefile, 'yml', 'json', '', false ), true, 'fr-FR.test' );
     }
     
     

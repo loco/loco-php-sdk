@@ -20,7 +20,7 @@ class ApiClientExportTest extends ApiClientTest {
         $client = $this->getClient();
         $result = $client->exportLocale( array(
             'ext' => 'pot',
-            'locale' => 'en',
+            'locale' => 'en-GB',
         ) );
         $this->assertInstanceOf('\Loco\Http\Response\RawResponse', $result );
         $this->assertRegExp( '/msgid\s+""/', (string) $result );

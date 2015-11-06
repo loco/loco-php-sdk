@@ -53,12 +53,12 @@ class ApiClientLocalesTest  extends ApiClientTest {
      */
     public function testLocaleCreate(){
         $rand = substr( md5( microtime() ), 0, 5 );
-        $code = 'en_GB+'.$rand;
+        $code = 'en-GB-x-'.$rand;
         $client = $this->getClient();
         $model = $client->createLocale( array( 'code' => $code ) );
         $this->assertInstanceOf( '\Guzzle\Service\Resource\Model', $model );
         $this->assertEquals( $code, $model['code'] );
-        $this->assertEquals( 'English (UK)', $model['name'] );
+        $this->assertStringStartsWith( 'English ', $model['name'] );
         return $code;
     }
 
