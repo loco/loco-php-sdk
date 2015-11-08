@@ -1,6 +1,6 @@
 {
     "name": "Loco",
-    "apiVersion": "1.0.12",
+    "apiVersion": "1.0.13",
     "baseUrl": "https:\/\/localise.biz\/",
     "description": "Loco REST API",
     "operations": {
@@ -191,7 +191,8 @@
                     "enum": [
                         "translated",
                         "untranslated",
-                        "&lt;flag&gt;"
+                        "&lt;flag&gt;",
+                        "all"
                     ]
                 }
             },
@@ -277,8 +278,14 @@
                     "enum": [
                         "translated",
                         "untranslated",
-                        "&lt;flag&gt;"
+                        "&lt;flag&gt;",
+                        "all"
                     ]
+                },
+                "path": {
+                    "description": "Custom pattern for file paths. <a href=\"\/help\/developers\/locales\/export-paths\">See syntax<\/a>",
+                    "type": "string",
+                    "location": "query"
                 },
                 "ext": {
                     "required": true,
@@ -393,7 +400,8 @@
                     "enum": [
                         "translated",
                         "untranslated",
-                        "&lt;flag&gt;"
+                        "&lt;flag&gt;",
+                        "all"
                     ]
                 },
                 "locale": {
@@ -515,7 +523,8 @@
                     "enum": [
                         "translated",
                         "untranslated",
-                        "&lt;flag&gt;"
+                        "&lt;flag&gt;",
+                        "all"
                     ]
                 },
                 "ext": {
@@ -1916,7 +1925,7 @@
             "properties": {
                 "code": {
                     "required": true,
-                    "description": "Locale short code",
+                    "description": "Locale short code, or language tag",
                     "type": "string",
                     "location": "json"
                 },
@@ -2075,7 +2084,7 @@
                         "properties": {
                             "code": {
                                 "required": true,
-                                "description": "Locale short code",
+                                "description": "Locale short code, or language tag",
                                 "type": "string",
                                 "location": "json"
                             },
@@ -2468,7 +2477,7 @@
                     "properties": {
                         "code": {
                             "required": true,
-                            "description": "Locale short code",
+                            "description": "Locale short code, or language tag",
                             "type": "string",
                             "location": "json"
                         },
@@ -2596,6 +2605,11 @@
                 "version": {
                     "required": true,
                     "description": "Current API version",
+                    "type": "string",
+                    "location": "json"
+                },
+                "build": {
+                    "description": "Current build",
                     "type": "string",
                     "location": "json"
                 }

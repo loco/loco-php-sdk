@@ -1,10 +1,10 @@
 <?php
 /**
- * Auto-generated with Swizzle at 2015-09-01 18:27:05 +0100
+ * Auto-generated with Swizzle at 2015-11-08 17:51:59 +0000
  */
 return array (
   'name' => 'Loco',
-  'apiVersion' => '1.0.12',
+  'apiVersion' => '1.0.13',
   'baseUrl' => 'https://localise.biz/',
   'description' => 'Loco REST API',
   'operations' => 
@@ -238,6 +238,7 @@ return array (
             0 => 'translated',
             1 => 'untranslated',
             2 => '&lt;flag&gt;',
+            3 => 'all',
           ),
         ),
       ),
@@ -342,7 +343,14 @@ return array (
             0 => 'translated',
             1 => 'untranslated',
             2 => '&lt;flag&gt;',
+            3 => 'all',
           ),
+        ),
+        'path' => 
+        array (
+          'description' => 'Custom pattern for file paths. <a href="/help/developers/locales/export-paths">See syntax</a>',
+          'type' => 'string',
+          'location' => 'query',
         ),
         'ext' => 
         array (
@@ -478,6 +486,7 @@ return array (
             0 => 'translated',
             1 => 'untranslated',
             2 => '&lt;flag&gt;',
+            3 => 'all',
           ),
         ),
         'locale' => 
@@ -621,6 +630,7 @@ return array (
             0 => 'translated',
             1 => 'untranslated',
             2 => '&lt;flag&gt;',
+            3 => 'all',
           ),
         ),
         'ext' => 
@@ -2339,7 +2349,7 @@ return array (
         'code' => 
         array (
           'required' => true,
-          'description' => 'Locale short code',
+          'description' => 'Locale short code, or language tag',
           'type' => 'string',
           'location' => 'json',
         ),
@@ -2529,7 +2539,7 @@ return array (
               'code' => 
               array (
                 'required' => true,
-                'description' => 'Locale short code',
+                'description' => 'Locale short code, or language tag',
                 'type' => 'string',
                 'location' => 'json',
               ),
@@ -3002,7 +3012,7 @@ return array (
             'code' => 
             array (
               'required' => true,
-              'description' => 'Locale short code',
+              'description' => 'Locale short code, or language tag',
               'type' => 'string',
               'location' => 'json',
             ),
@@ -3153,6 +3163,12 @@ return array (
         array (
           'required' => true,
           'description' => 'Current API version',
+          'type' => 'string',
+          'location' => 'json',
+        ),
+        'build' => 
+        array (
+          'description' => 'Current build',
           'type' => 'string',
           'location' => 'json',
         ),
