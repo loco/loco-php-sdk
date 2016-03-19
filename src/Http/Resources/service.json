@@ -1,6 +1,6 @@
 {
     "name": "Loco",
-    "apiVersion": "1.0.13",
+    "apiVersion": "1.0.14",
     "baseUrl": "https:\/\/localise.biz\/",
     "description": "Loco REST API",
     "operations": {
@@ -657,6 +657,11 @@
                     "type": "string",
                     "location": "query"
                 },
+                "tag": {
+                    "description": "Override name of default tag applied to new and modified assets",
+                    "type": "string",
+                    "location": "query"
+                },
                 "async": {
                     "description": "Specify that import should be done asynchronously",
                     "type": "boolean",
@@ -694,7 +699,7 @@
             "class": "\\Loco\\Http\\Command\\LocoCommand",
             "responseClass": "Creds",
             "responseType": "model",
-            "responseNotes": "<p>Loco API keys authenticate your user account for accessing a specific project.<br \/>\n                This endpoint verifies an API key and returns the authenticated user, account and project.<\/p>\n             <p>If you want to verify whether the key has read or write access, just send this endpoint a POST request instead. Read only keys will respond 403 to any non-GET request.<\/p>",
+            "responseNotes": "<p>Loco API keys authenticate your user account for accessing a specific project.<br \/>\n                This endpoint verifies an API key and returns the authenticated user, account and project.<\/p>\n             <p>If you want to verify whether the key has write access, just send this endpoint a POST request instead. A read-only key will give 403 for any POST request.<\/p>",
             "summary": "Verify an API project key",
             "parameters": {
                 "key": {
@@ -1474,8 +1479,8 @@
             "class": "\\Loco\\Http\\Command\\LocoCommand",
             "responseClass": "Success",
             "responseType": "model",
-            "responseNotes": "<p>Deletes a single translation of an asset in currently authenticated project.<\/p>\n           <p><strong>Warning<\/strong>: Untranslating is not the same as setting an empty translation. \n              This operation clears the asset's translation history and user comments for the given locale.<\/p>",
-            "summary": "Untranslate an asset in a single locale",
+            "responseNotes": "<p>Erases translation data of a localised asset in the currently authenticated project.<\/p>\n           <p><strong>Warning<\/strong>: Erasing is not the same as setting an empty translation. \n              This operation clears the asset's translation history and user comments for the given locale.<\/p>",
+            "summary": "Erase translation data in a single locale",
             "parameters": {
                 "key": {
                     "required": true,
@@ -2332,6 +2337,7 @@
             }
         },
         "PluralTranslation": {
+            "description": "Base class containing subset of the fields of LocoApiTranslationModel Doesn't need $plurals or $locale",
             "type": "object",
             "additionalProperties": false,
             "properties": {
@@ -2349,17 +2355,22 @@
                 },
                 "translated": {
                     "required": true,
-                    "description": "Whether plural translation exists, even if marked intentionally blank",
+                    "description": "Whether asset is translated and contributing to project completion",
                     "type": "boolean",
                     "location": "json",
                     "default": false
                 },
                 "flagged": {
                     "required": true,
-                    "description": "Whether translation is flagged as requiring attention",
+                    "description": "Whether translation is flagged by user action",
                     "type": "boolean",
                     "location": "json",
                     "default": false
+                },
+                "status": {
+                    "description": "Status of translation as string compatible with export status parameter",
+                    "type": "string",
+                    "location": "json"
                 },
                 "translation": {
                     "required": true,
@@ -2369,9 +2380,10 @@
                 },
                 "revision": {
                     "required": true,
-                    "description": "Number of edits made, zero if not translated",
+                    "description": "Number of edits made, zero if never translated",
                     "type": "integer",
-                    "location": "json"
+                    "location": "json",
+                    "default": 0
                 },
                 "comments": {
                     "required": true,
@@ -2380,10 +2392,56 @@
                     "location": "json"
                 },
                 "modified": {
-                    "description": "Time last modified in UTC, null if not translated",
+                    "description": "Time last modified in UTC, null if translation doesn't exist",
                     "type": "string",
                     "format": "date-time",
                     "location": "json"
+                },
+                "author": {
+                    "type": "object",
+                    "location": "json",
+                    "additionalProperties": false,
+                    "properties": {
+                        "id": {
+                            "required": true,
+                            "description": "User id",
+                            "type": "integer",
+                            "location": "json"
+                        },
+                        "name": {
+                            "description": "Full user name",
+                            "type": "string",
+                            "location": "json"
+                        },
+                        "email": {
+                            "description": "Contact email address if you have permission to see it",
+                            "type": "string",
+                            "location": "json"
+                        }
+                    }
+                },
+                "flagger": {
+                    "type": "object",
+                    "location": "json",
+                    "additionalProperties": false,
+                    "properties": {
+                        "id": {
+                            "required": true,
+                            "description": "User id",
+                            "type": "integer",
+                            "location": "json"
+                        },
+                        "name": {
+                            "description": "Full user name",
+                            "type": "string",
+                            "location": "json"
+                        },
+                        "email": {
+                            "description": "Contact email address if you have permission to see it",
+                            "type": "string",
+                            "location": "json"
+                        }
+                    }
                 }
             }
         },
@@ -2405,14 +2463,14 @@
                 },
                 "translated": {
                     "required": true,
-                    "description": "Whether this translation exists, even if marked intentionally blank",
+                    "description": "Whether asset is translated and contributing to project completion",
                     "type": "boolean",
                     "location": "json",
                     "default": false
                 },
                 "flagged": {
                     "required": true,
-                    "description": "Whether translation is flagged as requiring attention",
+                    "description": "Whether translation is flagged by user action",
                     "type": "boolean",
                     "location": "json",
                     "default": false
@@ -2430,9 +2488,10 @@
                 },
                 "revision": {
                     "required": true,
-                    "description": "Number of edits made, zero if not translated",
+                    "description": "Number of edits made, zero if never translated",
                     "type": "integer",
-                    "location": "json"
+                    "location": "json",
+                    "default": 0
                 },
                 "comments": {
                     "required": true,
@@ -2447,6 +2506,29 @@
                     "location": "json"
                 },
                 "author": {
+                    "type": "object",
+                    "location": "json",
+                    "additionalProperties": false,
+                    "properties": {
+                        "id": {
+                            "required": true,
+                            "description": "User id",
+                            "type": "integer",
+                            "location": "json"
+                        },
+                        "name": {
+                            "description": "Full user name",
+                            "type": "string",
+                            "location": "json"
+                        },
+                        "email": {
+                            "description": "Contact email address if you have permission to see it",
+                            "type": "string",
+                            "location": "json"
+                        }
+                    }
+                },
+                "flagger": {
                     "type": "object",
                     "location": "json",
                     "additionalProperties": false,
@@ -2540,6 +2622,7 @@
                     "type": "array",
                     "location": "json",
                     "items": {
+                        "description": "Base class containing subset of the fields of LocoApiTranslationModel Doesn't need $plurals or $locale",
                         "type": "object",
                         "additionalProperties": false,
                         "properties": {
@@ -2557,17 +2640,22 @@
                             },
                             "translated": {
                                 "required": true,
-                                "description": "Whether plural translation exists, even if marked intentionally blank",
+                                "description": "Whether asset is translated and contributing to project completion",
                                 "type": "boolean",
                                 "location": "json",
                                 "default": false
                             },
                             "flagged": {
                                 "required": true,
-                                "description": "Whether translation is flagged as requiring attention",
+                                "description": "Whether translation is flagged by user action",
                                 "type": "boolean",
                                 "location": "json",
                                 "default": false
+                            },
+                            "status": {
+                                "description": "Status of translation as string compatible with export status parameter",
+                                "type": "string",
+                                "location": "json"
                             },
                             "translation": {
                                 "required": true,
@@ -2577,9 +2665,10 @@
                             },
                             "revision": {
                                 "required": true,
-                                "description": "Number of edits made, zero if not translated",
+                                "description": "Number of edits made, zero if never translated",
                                 "type": "integer",
-                                "location": "json"
+                                "location": "json",
+                                "default": 0
                             },
                             "comments": {
                                 "required": true,
@@ -2588,10 +2677,56 @@
                                 "location": "json"
                             },
                             "modified": {
-                                "description": "Time last modified in UTC, null if not translated",
+                                "description": "Time last modified in UTC, null if translation doesn't exist",
                                 "type": "string",
                                 "format": "date-time",
                                 "location": "json"
+                            },
+                            "author": {
+                                "type": "object",
+                                "location": "json",
+                                "additionalProperties": false,
+                                "properties": {
+                                    "id": {
+                                        "required": true,
+                                        "description": "User id",
+                                        "type": "integer",
+                                        "location": "json"
+                                    },
+                                    "name": {
+                                        "description": "Full user name",
+                                        "type": "string",
+                                        "location": "json"
+                                    },
+                                    "email": {
+                                        "description": "Contact email address if you have permission to see it",
+                                        "type": "string",
+                                        "location": "json"
+                                    }
+                                }
+                            },
+                            "flagger": {
+                                "type": "object",
+                                "location": "json",
+                                "additionalProperties": false,
+                                "properties": {
+                                    "id": {
+                                        "required": true,
+                                        "description": "User id",
+                                        "type": "integer",
+                                        "location": "json"
+                                    },
+                                    "name": {
+                                        "description": "Full user name",
+                                        "type": "string",
+                                        "location": "json"
+                                    },
+                                    "email": {
+                                        "description": "Contact email address if you have permission to see it",
+                                        "type": "string",
+                                        "location": "json"
+                                    }
+                                }
                             }
                         }
                     }

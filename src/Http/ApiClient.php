@@ -14,7 +14,7 @@ use Guzzle\Common\Exception\InvalidArgumentException;
  */
 class ApiClient extends Client {
     
-    const VERSION = '1.0.13';
+    const VERSION = '1.0.14';
     
     /**
      * Factory method to create a new Loco API client.

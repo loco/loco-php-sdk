@@ -1,10 +1,10 @@
 <?php
 /**
- * Auto-generated with Swizzle at 2015-11-08 17:51:59 +0000
+ * Auto-generated with Swizzle at 2016-03-19 18:33:36 +0000
  */
 return array (
   'name' => 'Loco',
-  'apiVersion' => '1.0.13',
+  'apiVersion' => '1.0.14',
   'baseUrl' => 'https://localise.biz/',
   'description' => 'Loco REST API',
   'operations' => 
@@ -795,6 +795,12 @@ return array (
           'type' => 'string',
           'location' => 'query',
         ),
+        'tag' => 
+        array (
+          'description' => 'Override name of default tag applied to new and modified assets',
+          'type' => 'string',
+          'location' => 'query',
+        ),
         'async' => 
         array (
           'description' => 'Specify that import should be done asynchronously',
@@ -842,7 +848,7 @@ return array (
       'responseType' => 'model',
       'responseNotes' => '<p>Loco API keys authenticate your user account for accessing a specific project.<br />
                 This endpoint verifies an API key and returns the authenticated user, account and project.</p>
-             <p>If you want to verify whether the key has read or write access, just send this endpoint a POST request instead. Read only keys will respond 403 to any non-GET request.</p>',
+             <p>If you want to verify whether the key has write access, just send this endpoint a POST request instead. A read-only key will give 403 for any POST request.</p>',
       'summary' => 'Verify an API project key',
       'parameters' => 
       array (
@@ -1805,10 +1811,10 @@ return array (
       'class' => '\\Loco\\Http\\Command\\LocoCommand',
       'responseClass' => 'Success',
       'responseType' => 'model',
-      'responseNotes' => '<p>Deletes a single translation of an asset in currently authenticated project.</p>
-           <p><strong>Warning</strong>: Untranslating is not the same as setting an empty translation. 
+      'responseNotes' => '<p>Erases translation data of a localised asset in the currently authenticated project.</p>
+           <p><strong>Warning</strong>: Erasing is not the same as setting an empty translation. 
               This operation clears the asset\'s translation history and user comments for the given locale.</p>',
-      'summary' => 'Untranslate an asset in a single locale',
+      'summary' => 'Erase translation data in a single locale',
       'parameters' => 
       array (
         'key' => 
@@ -2839,6 +2845,7 @@ return array (
     ),
     'PluralTranslation' => 
     array (
+      'description' => 'Base class containing subset of the fields of LocoApiTranslationModel Doesn\'t need $plurals or $locale',
       'type' => 'object',
       'additionalProperties' => false,
       'properties' => 
@@ -2860,7 +2867,7 @@ return array (
         'translated' => 
         array (
           'required' => true,
-          'description' => 'Whether plural translation exists, even if marked intentionally blank',
+          'description' => 'Whether asset is translated and contributing to project completion',
           'type' => 'boolean',
           'location' => 'json',
           'default' => false,
@@ -2868,10 +2875,16 @@ return array (
         'flagged' => 
         array (
           'required' => true,
-          'description' => 'Whether translation is flagged as requiring attention',
+          'description' => 'Whether translation is flagged by user action',
           'type' => 'boolean',
           'location' => 'json',
           'default' => false,
+        ),
+        'status' => 
+        array (
+          'description' => 'Status of translation as string compatible with export status parameter',
+          'type' => 'string',
+          'location' => 'json',
         ),
         'translation' => 
         array (
@@ -2883,9 +2896,10 @@ return array (
         'revision' => 
         array (
           'required' => true,
-          'description' => 'Number of edits made, zero if not translated',
+          'description' => 'Number of edits made, zero if never translated',
           'type' => 'integer',
           'location' => 'json',
+          'default' => 0,
         ),
         'comments' => 
         array (
@@ -2896,10 +2910,66 @@ return array (
         ),
         'modified' => 
         array (
-          'description' => 'Time last modified in UTC, null if not translated',
+          'description' => 'Time last modified in UTC, null if translation doesn\'t exist',
           'type' => 'string',
           'format' => 'date-time',
           'location' => 'json',
+        ),
+        'author' => 
+        array (
+          'type' => 'object',
+          'location' => 'json',
+          'additionalProperties' => false,
+          'properties' => 
+          array (
+            'id' => 
+            array (
+              'required' => true,
+              'description' => 'User id',
+              'type' => 'integer',
+              'location' => 'json',
+            ),
+            'name' => 
+            array (
+              'description' => 'Full user name',
+              'type' => 'string',
+              'location' => 'json',
+            ),
+            'email' => 
+            array (
+              'description' => 'Contact email address if you have permission to see it',
+              'type' => 'string',
+              'location' => 'json',
+            ),
+          ),
+        ),
+        'flagger' => 
+        array (
+          'type' => 'object',
+          'location' => 'json',
+          'additionalProperties' => false,
+          'properties' => 
+          array (
+            'id' => 
+            array (
+              'required' => true,
+              'description' => 'User id',
+              'type' => 'integer',
+              'location' => 'json',
+            ),
+            'name' => 
+            array (
+              'description' => 'Full user name',
+              'type' => 'string',
+              'location' => 'json',
+            ),
+            'email' => 
+            array (
+              'description' => 'Contact email address if you have permission to see it',
+              'type' => 'string',
+              'location' => 'json',
+            ),
+          ),
         ),
       ),
     ),
@@ -2926,7 +2996,7 @@ return array (
         'translated' => 
         array (
           'required' => true,
-          'description' => 'Whether this translation exists, even if marked intentionally blank',
+          'description' => 'Whether asset is translated and contributing to project completion',
           'type' => 'boolean',
           'location' => 'json',
           'default' => false,
@@ -2934,7 +3004,7 @@ return array (
         'flagged' => 
         array (
           'required' => true,
-          'description' => 'Whether translation is flagged as requiring attention',
+          'description' => 'Whether translation is flagged by user action',
           'type' => 'boolean',
           'location' => 'json',
           'default' => false,
@@ -2955,9 +3025,10 @@ return array (
         'revision' => 
         array (
           'required' => true,
-          'description' => 'Number of edits made, zero if not translated',
+          'description' => 'Number of edits made, zero if never translated',
           'type' => 'integer',
           'location' => 'json',
+          'default' => 0,
         ),
         'comments' => 
         array (
@@ -2974,6 +3045,34 @@ return array (
           'location' => 'json',
         ),
         'author' => 
+        array (
+          'type' => 'object',
+          'location' => 'json',
+          'additionalProperties' => false,
+          'properties' => 
+          array (
+            'id' => 
+            array (
+              'required' => true,
+              'description' => 'User id',
+              'type' => 'integer',
+              'location' => 'json',
+            ),
+            'name' => 
+            array (
+              'description' => 'Full user name',
+              'type' => 'string',
+              'location' => 'json',
+            ),
+            'email' => 
+            array (
+              'description' => 'Contact email address if you have permission to see it',
+              'type' => 'string',
+              'location' => 'json',
+            ),
+          ),
+        ),
+        'flagger' => 
         array (
           'type' => 'object',
           'location' => 'json',
@@ -3086,6 +3185,7 @@ return array (
           'location' => 'json',
           'items' => 
           array (
+            'description' => 'Base class containing subset of the fields of LocoApiTranslationModel Doesn\'t need $plurals or $locale',
             'type' => 'object',
             'additionalProperties' => false,
             'properties' => 
@@ -3107,7 +3207,7 @@ return array (
               'translated' => 
               array (
                 'required' => true,
-                'description' => 'Whether plural translation exists, even if marked intentionally blank',
+                'description' => 'Whether asset is translated and contributing to project completion',
                 'type' => 'boolean',
                 'location' => 'json',
                 'default' => false,
@@ -3115,10 +3215,16 @@ return array (
               'flagged' => 
               array (
                 'required' => true,
-                'description' => 'Whether translation is flagged as requiring attention',
+                'description' => 'Whether translation is flagged by user action',
                 'type' => 'boolean',
                 'location' => 'json',
                 'default' => false,
+              ),
+              'status' => 
+              array (
+                'description' => 'Status of translation as string compatible with export status parameter',
+                'type' => 'string',
+                'location' => 'json',
               ),
               'translation' => 
               array (
@@ -3130,9 +3236,10 @@ return array (
               'revision' => 
               array (
                 'required' => true,
-                'description' => 'Number of edits made, zero if not translated',
+                'description' => 'Number of edits made, zero if never translated',
                 'type' => 'integer',
                 'location' => 'json',
+                'default' => 0,
               ),
               'comments' => 
               array (
@@ -3143,10 +3250,66 @@ return array (
               ),
               'modified' => 
               array (
-                'description' => 'Time last modified in UTC, null if not translated',
+                'description' => 'Time last modified in UTC, null if translation doesn\'t exist',
                 'type' => 'string',
                 'format' => 'date-time',
                 'location' => 'json',
+              ),
+              'author' => 
+              array (
+                'type' => 'object',
+                'location' => 'json',
+                'additionalProperties' => false,
+                'properties' => 
+                array (
+                  'id' => 
+                  array (
+                    'required' => true,
+                    'description' => 'User id',
+                    'type' => 'integer',
+                    'location' => 'json',
+                  ),
+                  'name' => 
+                  array (
+                    'description' => 'Full user name',
+                    'type' => 'string',
+                    'location' => 'json',
+                  ),
+                  'email' => 
+                  array (
+                    'description' => 'Contact email address if you have permission to see it',
+                    'type' => 'string',
+                    'location' => 'json',
+                  ),
+                ),
+              ),
+              'flagger' => 
+              array (
+                'type' => 'object',
+                'location' => 'json',
+                'additionalProperties' => false,
+                'properties' => 
+                array (
+                  'id' => 
+                  array (
+                    'required' => true,
+                    'description' => 'User id',
+                    'type' => 'integer',
+                    'location' => 'json',
+                  ),
+                  'name' => 
+                  array (
+                    'description' => 'Full user name',
+                    'type' => 'string',
+                    'location' => 'json',
+                  ),
+                  'email' => 
+                  array (
+                    'description' => 'Contact email address if you have permission to see it',
+                    'type' => 'string',
+                    'location' => 'json',
+                  ),
+                ),
               ),
             ),
           ),
