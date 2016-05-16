@@ -482,7 +482,7 @@ class ApiClientConvertTest extends ApiClientTest {
      * @depends testExportTs
      */
     public function testImportTs( $sourcefile ){
-        $this->checkValidJson( $this->convert( $sourcefile, 'ts', 'json', '', false ), false, 'test' );
+        $this->checkValidJson( $this->convert( $sourcefile, 'ts', 'json', '', false ), true, 'test' );
     }
 
 
