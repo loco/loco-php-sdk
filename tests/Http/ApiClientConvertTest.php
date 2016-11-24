@@ -22,6 +22,7 @@ class ApiClientConvertTest extends ApiClientTest {
         $src = file_get_contents( $sourcefile );
         $params = compact('from','ext','format','src');
         $params['name'] = pathinfo( $sourcefile, PATHINFO_FILENAME );
+        $params['locale'] = 'fr-FR';
         $response = $this->getClient()->convert( $params );
         $this->assertInstanceOf( '\Loco\Http\Response\RawResponse', $response );
         // write to target file, e.g. export-symfony.php
@@ -46,7 +47,7 @@ class ApiClientConvertTest extends ApiClientTest {
         $this->assertInternalType( 'array', $arr, 'Bad parse: '.$json );
         if( $namespace ){
             foreach( explode('.',$namespace) as $key ){
-                $this->assertArrayHasKey( $key, $arr );
+                $this->assertArrayHasKey( $key, $arr, $namespace.' not in '.$json );
                 $arr = $arr[ $key ];
             }
         }
@@ -222,6 +223,7 @@ class ApiClientConvertTest extends ApiClientTest {
 
     /**
      * Export nested Yaml from seed file
+     * @group yaml
      */
     public function testExportNestedYaml(){
         $yml = $this->convert( 'test-fr_FR.po', 'po', 'yml', 'nested' );
@@ -511,7 +513,7 @@ class ApiClientConvertTest extends ApiClientTest {
      * @depends testExportNestedYaml
      */
     public function testImportNestedYaml( $sourcefile ){
-        $this->checkValidJson( $this->convert( $sourcefile, 'yml', 'json', '', false ), true, 'fr-FR.test' );
+        $this->checkValidJson( $this->convert( $sourcefile, 'yml', 'json', '', false ), true, 'test' );
     }
     
     
