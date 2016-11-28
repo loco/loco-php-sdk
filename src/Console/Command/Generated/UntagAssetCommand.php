@@ -9,21 +9,22 @@ use Symfony\Component\Console\Input\InputArgument;
 /**
  * Auto-generated Loco API console command.
  */
-class UntagAssetCommand extends Command {
-    
+class UntagAssetCommand extends Command
+{
     /**
-     * Configure loco:untag:asset command
+     * Configure loco:untag:asset command.
+     *
      * @internal
      */
-    protected function configure(){
+    protected function configure()
+    {
         $this
-            ->setName( 'loco:untag:asset' )
-            ->setMethod( 'untagAsset' )
-            ->setDescription( 'Untag an asset' )
-            ->addArgument('tag',InputArgument::REQUIRED,'Term to remove from asset\'s tags',null)
-            ->addArgument('id',InputArgument::REQUIRED,'Asset ID',null)
-            ->addOption('key','k',InputOption::VALUE_OPTIONAL,'Override configured API key for this request','')
+            ->setName('loco:untag:asset')
+            ->setMethod('untagAsset')
+            ->setDescription('Untag an asset')
+            ->addArgument('tag', InputArgument::REQUIRED, 'Term to remove from asset\'s tags', null)
+            ->addArgument('id', InputArgument::REQUIRED, 'Asset ID', null)
+            ->addOption('key', 'k', InputOption::VALUE_OPTIONAL, 'Override configured API key for this request', '')
         ;
     }
-    
 }

@@ -4,36 +4,31 @@ namespace Loco\Console;
 
 use Symfony\Component\Console\Application as BaseApplication;
 use Symfony\Component\Console\Command\Command;
-use Symfony\Component\Console\Input\InputOption;
-use Symfony\Component\Console\Input\InputArgument;
-use Symfony\Component\Console\Input\InputDefinition;
 use Loco\Http\ApiClient;
 
-
 /**
- * Loco CLI application
+ * Loco CLI application.
  */
-final class Application extends BaseApplication {
-    
+final class Application extends BaseApplication
+{
     /**
      * @var ApiClient
-     */    
+     */
     private $restClient;
-    
-    
-    /**
-     * @override
-     */    
-    public function __construct(){
-        parent::__construct( 'Loco', ApiClient::VERSION );
-    }    
-
-
 
     /**
      * @override
-     */    
-    public function getHelp(){
+     */
+    public function __construct()
+    {
+        parent::__construct('Loco', ApiClient::VERSION);
+    }
+
+    /**
+     * @override
+     */
+    public function getHelp()
+    {
         return '
      __         ______     ______     ______    
     /\ \       /\  __ \   /\  ___\   /\  __ \   
@@ -43,60 +38,59 @@ final class Application extends BaseApplication {
 
         '.parent::getHelp();
     }
-    
-    
 
     /**
      * Initialize REST client using Guzzle service builder.
+     *
      * @return ApiClient
-     */    
-    public function initRestService( $config ){
+     */
+    public function initRestService($config)
+    {
         $builder = \Guzzle\Service\Builder\ServiceBuilder::factory($config);
+
         return $this->restClient = $builder->get('loco');
-    }    
-
-
+    }
 
     /**
      * Auto-register all CLI commands analogous to API endpoints.
+     *
      * @return Application
-     */    
-    public function initApiCommands(){     
+     */
+    public function initApiCommands()
+    {
         $service = $this->getRestClient()->getDescription()->toArray();
-        foreach( array_keys($service['operations']) as $funcname ){
-            $classname = strtoupper($funcname{0}).substr($funcname,1).'Command';
+        foreach (array_keys($service['operations']) as $funcname) {
+            $classname = strtoupper($funcname{0}).substr($funcname, 1).'Command';
             // attempt to load overriden base class first
-            if( class_exists('\\Loco\\Console\\Command\\'.$classname) ){
+            if (class_exists('\\Loco\\Console\\Command\\'.$classname)) {
                 $classname = '\\Loco\\Console\\Command\\'.$classname;
-            }
-            else if( class_exists('\\Loco\\Console\\Command\\Generated\\'.$classname) ){
+            } elseif (class_exists('\\Loco\\Console\\Command\\Generated\\'.$classname)) {
                 $classname = '\\Loco\\Console\\Command\\Generated\\'.$classname;
-            }
-            else {
+            } else {
                 continue;
             }
-            $this->add( new $classname );
+            $this->add(new $classname());
         }
+
         return $this;
     }
-         
-    
-    
+
     /**
-     * Get instance of the Loco API client
+     * Get instance of the Loco API client.
+     *
      * @param string api key to override any current configuration
+     *
      * @return ApiClient
      */
-    public function getRestClient( $defaultKey = '' ){
-        if( ! $this->restClient || $defaultKey ){
-            $this->restClient = ApiClient::factory( array(
+    public function getRestClient($defaultKey = '')
+    {
+        if (!$this->restClient || $defaultKey) {
+            $this->restClient = ApiClient::factory(array(
                 'key' => $defaultKey,
                 'base_url' => 'https://localise.biz/api',
-            ) );
+            ));
         }
+
         return $this->restClient;
     }
-
-
-    
 }

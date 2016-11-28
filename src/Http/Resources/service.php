@@ -1,16 +1,14 @@
 <?php
 /**
- * Auto-generated with Swizzle at 2016-03-19 18:33:36 +0000
+ * Auto-generated with Swizzle at 2016-03-19 18:33:36 +0000.
  */
-return array (
+return array(
   'name' => 'Loco',
   'apiVersion' => '1.0.14',
   'baseUrl' => 'https://localise.biz/',
   'description' => 'Loco REST API',
-  'operations' => 
-  array (
-    'getTags' => 
-    array (
+  'operations' => array(
+    'getTags' => array(
       'httpMethod' => 'GET',
       'uri' => '/api/tags.json',
       'class' => '\\Loco\\Http\\Command\\LocoCommand',
@@ -18,27 +16,22 @@ return array (
       'responseType' => 'primitive',
       'responseNotes' => 'Lists all tags in currently authenticated project',
       'summary' => 'Get project tags',
-      'parameters' => 
-      array (
-        'key' => 
-        array (
+      'parameters' => array(
+        'key' => array(
           'required' => true,
           'description' => 'Project API key - preferably sent in request header as `Authorization: Loco <key>`',
           'type' => 'string',
           'location' => 'query',
         ),
       ),
-      'errorResponses' => 
-      array (
-        0 => 
-        array (
+      'errorResponses' => array(
+        0 => array(
           'code' => 401,
           'phrase' => 'Invalid API key',
         ),
       ),
     ),
-    'createTag' => 
-    array (
+    'createTag' => array(
       'httpMethod' => 'POST',
       'uri' => '/api/tags.json',
       'class' => '\\Loco\\Http\\Command\\LocoCommand',
@@ -46,34 +39,28 @@ return array (
       'responseType' => 'model',
       'responseNotes' => 'Adds a new tag to the currently authenticated project',
       'summary' => 'Create a new tag',
-      'parameters' => 
-      array (
-        'name' => 
-        array (
+      'parameters' => array(
+        'name' => array(
           'required' => true,
           'description' => 'Name of new tag',
           'type' => 'string',
           'location' => 'postField',
         ),
-        'key' => 
-        array (
+        'key' => array(
           'required' => true,
           'description' => 'Project API key - preferably sent in request header as `Authorization: Loco <key>`',
           'type' => 'string',
           'location' => 'query',
         ),
       ),
-      'errorResponses' => 
-      array (
-        0 => 
-        array (
+      'errorResponses' => array(
+        0 => array(
           'code' => 401,
           'phrase' => 'Invalid API key',
         ),
       ),
     ),
-    'patchTag' => 
-    array (
+    'patchTag' => array(
       'httpMethod' => 'PATCH',
       'uri' => '/api/tags/{tag}.json',
       'class' => '\\Loco\\Http\\Command\\LocoCommand',
@@ -81,44 +68,36 @@ return array (
       'responseType' => 'model',
       'responseNotes' => 'Renames an existing tag in the currently authenticated project',
       'summary' => 'Modify a single tag',
-      'parameters' => 
-      array (
-        'name' => 
-        array (
+      'parameters' => array(
+        'name' => array(
           'description' => 'Display name of tag',
           'type' => 'string',
           'location' => 'json',
         ),
-        'key' => 
-        array (
+        'key' => array(
           'required' => true,
           'description' => 'Project API key - preferably sent in request header as `Authorization: Loco <key>`',
           'type' => 'string',
           'location' => 'query',
         ),
-        'tag' => 
-        array (
+        'tag' => array(
           'description' => 'Name of a single asset tag.',
           'type' => 'string',
           'location' => 'uri',
         ),
       ),
-      'errorResponses' => 
-      array (
-        0 => 
-        array (
+      'errorResponses' => array(
+        0 => array(
           'code' => 401,
           'phrase' => 'Invalid API key',
         ),
-        1 => 
-        array (
+        1 => array(
           'code' => 404,
           'phrase' => 'Tag not in project',
         ),
       ),
     ),
-    'deleteTag' => 
-    array (
+    'deleteTag' => array(
       'httpMethod' => 'DELETE',
       'uri' => '/api/tags/{tag}.json',
       'class' => '\\Loco\\Http\\Command\\LocoCommand',
@@ -126,38 +105,31 @@ return array (
       'responseType' => 'model',
       'responseNotes' => 'Deletes an existing tag in the currently authenticated project',
       'summary' => 'Delete an existing tag',
-      'parameters' => 
-      array (
-        'key' => 
-        array (
+      'parameters' => array(
+        'key' => array(
           'required' => true,
           'description' => 'Project API key - preferably sent in request header as `Authorization: Loco <key>`',
           'type' => 'string',
           'location' => 'query',
         ),
-        'tag' => 
-        array (
+        'tag' => array(
           'description' => 'Name of a single asset tag.',
           'type' => 'string',
           'location' => 'uri',
         ),
       ),
-      'errorResponses' => 
-      array (
-        0 => 
-        array (
+      'errorResponses' => array(
+        0 => array(
           'code' => 401,
           'phrase' => 'Invalid API key',
         ),
-        1 => 
-        array (
+        1 => array(
           'code' => 404,
           'phrase' => 'Tag not in project',
         ),
       ),
     ),
-    'exportAll' => 
-    array (
+    'exportAll' => array(
       'httpMethod' => 'GET',
       'uri' => '/api/export/all.{ext}',
       'class' => '\\Loco\\Http\\Command\\LocoCommand',
@@ -167,16 +139,13 @@ return array (
            <p>Note that not all formats support multiple locales in the same file. See <code>/export/archive</code> for exporting separate files,
            and <code>/export/locale</code> for exporting one language at a time.</p>',
       'summary' => 'Export your whole project to a multi-locale language pack',
-      'parameters' => 
-      array (
-        'ext' => 
-        array (
+      'parameters' => array(
+        'ext' => array(
           'required' => true,
           'description' => 'Target file type specified as a file extension',
           'type' => 'string',
           'location' => 'uri',
-          'enum' => 
-          array (
+          'enum' => array(
             0 => 'csv',
             1 => 'html',
             2 => 'sql',
@@ -186,55 +155,46 @@ return array (
           ),
           'default' => 'yml',
         ),
-        'key' => 
-        array (
+        'key' => array(
           'required' => true,
           'description' => 'Project API key - preferably sent in request header as `Authorization: Loco <key>`',
           'type' => 'string',
           'location' => 'query',
         ),
-        'filter' => 
-        array (
+        'filter' => array(
           'description' => 'Comma-separated list of tags to filter subset of assets.',
           'type' => 'string',
           'location' => 'query',
         ),
-        'index' => 
-        array (
+        'index' => array(
           'description' => 'Override default lookup key in language pack. Leave blank for auto.',
           'type' => 'string',
           'location' => 'query',
-          'enum' => 
-          array (
+          'enum' => array(
             0 => 'id',
             1 => 'name',
             2 => 'text',
           ),
         ),
-        'fallback' => 
-        array (
+        'fallback' => array(
           'description' => 'Fallback locale for untranslated assets, specified as short code. e.g. `en` or `en_GB`',
           'type' => 'string',
           'location' => 'query',
         ),
-        'order' => 
-        array (
+        'order' => array(
           'description' => 'Export translations according to asset order',
           'type' => 'string',
           'location' => 'query',
-          'enum' => 
-          array (
+          'enum' => array(
             0 => 'created',
             1 => 'id',
           ),
         ),
-        'status' => 
-        array (
+        'status' => array(
           'description' => 'Export only translations with a specific status or flag',
           'type' => 'string',
           'location' => 'query',
-          'enum' => 
-          array (
+          'enum' => array(
             0 => 'translated',
             1 => 'untranslated',
             2 => '&lt;flag&gt;',
@@ -242,17 +202,14 @@ return array (
           ),
         ),
       ),
-      'errorResponses' => 
-      array (
-        0 => 
-        array (
+      'errorResponses' => array(
+        0 => array(
           'code' => 401,
           'phrase' => 'Invalid API key',
         ),
       ),
     ),
-    'exportArchive' => 
-    array (
+    'exportArchive' => array(
       'httpMethod' => 'GET',
       'uri' => '/api/export/archive/{ext}.zip',
       'class' => '\\Loco\\Http\\Command\\LocoCommand',
@@ -262,22 +219,18 @@ return array (
            <br />
            If you\'re exporting to a file format that supports multiple locales within the same file, you can use the <code>/export/all</code> method ',
       'summary' => 'Export all locales to a zip archive',
-      'parameters' => 
-      array (
-        'key' => 
-        array (
+      'parameters' => array(
+        'key' => array(
           'required' => true,
           'description' => 'Project API key - preferably sent in request header as `Authorization: Loco <key>`',
           'type' => 'string',
           'location' => 'query',
         ),
-        'format' => 
-        array (
+        'format' => array(
           'description' => 'Specific format, applicable to some file types only',
           'type' => 'string',
           'location' => 'query',
-          'enum' => 
-          array (
+          'enum' => array(
             0 => 'symfony',
             1 => 'zend',
             2 => 'codeigniter',
@@ -292,74 +245,62 @@ return array (
             11 => 'xcode',
           ),
         ),
-        'filter' => 
-        array (
+        'filter' => array(
           'description' => 'Comma-separated list of tags to filter subset of assets.',
           'type' => 'string',
           'location' => 'query',
         ),
-        'index' => 
-        array (
+        'index' => array(
           'description' => 'Override default lookup key in language pack. Leave blank for auto.',
           'type' => 'string',
           'location' => 'query',
-          'enum' => 
-          array (
+          'enum' => array(
             0 => 'id',
             1 => 'name',
             2 => 'text',
           ),
         ),
-        'namespace' => 
-        array (
+        'namespace' => array(
           'description' => 'Override the project name for some language packs that use it as a key prefix',
           'type' => 'string',
           'location' => 'query',
         ),
-        'fallback' => 
-        array (
+        'fallback' => array(
           'description' => 'Fallback locale for untranslated assets, specified as short code. e.g. `en` or `en_GB`',
           'type' => 'string',
           'location' => 'query',
         ),
-        'order' => 
-        array (
+        'order' => array(
           'description' => 'Export translations according to asset order',
           'type' => 'string',
           'location' => 'query',
-          'enum' => 
-          array (
+          'enum' => array(
             0 => 'created',
             1 => 'id',
           ),
         ),
-        'status' => 
-        array (
+        'status' => array(
           'description' => 'Export only translations with a specific status or flag',
           'type' => 'string',
           'location' => 'query',
-          'enum' => 
-          array (
+          'enum' => array(
             0 => 'translated',
             1 => 'untranslated',
             2 => '&lt;flag&gt;',
             3 => 'all',
           ),
         ),
-        'path' => 
-        array (
+        'path' => array(
           'description' => 'Custom pattern for file paths. <a href="/help/developers/locales/export-paths">See syntax</a>',
           'type' => 'string',
           'location' => 'query',
         ),
-        'ext' => 
-        array (
+        'ext' => array(
           'required' => true,
           'description' => 'Target file type specified as a file extension',
           'type' => 'string',
           'location' => 'uri',
-          'enum' => 
-          array (
+          'enum' => array(
             0 => 'csv',
             1 => 'html',
             2 => 'ini',
@@ -385,17 +326,14 @@ return array (
           'default' => 'json',
         ),
       ),
-      'errorResponses' => 
-      array (
-        0 => 
-        array (
+      'errorResponses' => array(
+        0 => array(
           'code' => 401,
           'phrase' => 'Invalid API key',
         ),
       ),
     ),
-    'exportLocale' => 
-    array (
+    'exportLocale' => array(
       'httpMethod' => 'GET',
       'uri' => '/api/export/locale/{locale}.{ext}',
       'class' => '\\Loco\\Http\\Command\\LocoCommand',
@@ -405,22 +343,18 @@ return array (
            <p>Various export file types are supported with format variations for some types.
               <a href="https://localise.biz/api#formats">See the full list of supported export formats</a>.</p>',
       'summary' => 'Export a single locale to a language pack.',
-      'parameters' => 
-      array (
-        'key' => 
-        array (
+      'parameters' => array(
+        'key' => array(
           'required' => true,
           'description' => 'Project API key - preferably sent in request header as `Authorization: Loco <key>`',
           'type' => 'string',
           'location' => 'query',
         ),
-        'format' => 
-        array (
+        'format' => array(
           'description' => 'Specific format, applicable to some file types only',
           'type' => 'string',
           'location' => 'query',
-          'enum' => 
-          array (
+          'enum' => array(
             0 => 'symfony',
             1 => 'zend',
             2 => 'codeigniter',
@@ -435,75 +369,63 @@ return array (
             11 => 'xcode',
           ),
         ),
-        'filter' => 
-        array (
+        'filter' => array(
           'description' => 'Comma-separated list of tags to filter subset of assets.',
           'type' => 'string',
           'location' => 'query',
         ),
-        'index' => 
-        array (
+        'index' => array(
           'description' => 'Override default lookup key in language pack. Leave blank for auto.',
           'type' => 'string',
           'location' => 'query',
-          'enum' => 
-          array (
+          'enum' => array(
             0 => 'id',
             1 => 'name',
             2 => 'text',
           ),
         ),
-        'namespace' => 
-        array (
+        'namespace' => array(
           'description' => 'Override the project name for some language packs that use it as a key prefix',
           'type' => 'string',
           'location' => 'query',
         ),
-        'fallback' => 
-        array (
+        'fallback' => array(
           'description' => 'Fallback locale for untranslated assets, specified as short code. e.g. `en` or `en_GB`',
           'type' => 'string',
           'location' => 'query',
         ),
-        'order' => 
-        array (
+        'order' => array(
           'description' => 'Export translations according to asset order',
           'type' => 'string',
           'location' => 'query',
-          'enum' => 
-          array (
+          'enum' => array(
             0 => 'created',
             1 => 'id',
           ),
         ),
-        'status' => 
-        array (
+        'status' => array(
           'description' => 'Export only translations with a specific status or flag',
           'type' => 'string',
           'location' => 'query',
-          'enum' => 
-          array (
+          'enum' => array(
             0 => 'translated',
             1 => 'untranslated',
             2 => '&lt;flag&gt;',
             3 => 'all',
           ),
         ),
-        'locale' => 
-        array (
+        'locale' => array(
           'required' => true,
           'description' => 'Locale to export, specified as short code. e.g. `en` or `en_GB`',
           'type' => 'string',
           'location' => 'uri',
         ),
-        'ext' => 
-        array (
+        'ext' => array(
           'required' => true,
           'description' => 'Target file type specified as a file extension',
           'type' => 'string',
           'location' => 'uri',
-          'enum' => 
-          array (
+          'enum' => array(
             0 => 'csv',
             1 => 'html',
             2 => 'ini',
@@ -529,17 +451,14 @@ return array (
           'default' => 'json',
         ),
       ),
-      'errorResponses' => 
-      array (
-        0 => 
-        array (
+      'errorResponses' => array(
+        0 => array(
           'code' => 401,
           'phrase' => 'Invalid API key',
         ),
       ),
     ),
-    'exportTemplate' => 
-    array (
+    'exportTemplate' => array(
       'httpMethod' => 'GET',
       'uri' => '/api/export/template.{ext}',
       'class' => '\\Loco\\Http\\Command\\LocoCommand',
@@ -549,22 +468,18 @@ return array (
            <p>This is different to exporting just your source language translations, because it only exports the left hand side of each mapping.</p>
            <p><a href="https://localise.biz/api#formats">See the full list of supported export formats</a>.</p>',
       'summary' => 'Export a template containing only source keys',
-      'parameters' => 
-      array (
-        'key' => 
-        array (
+      'parameters' => array(
+        'key' => array(
           'required' => true,
           'description' => 'Project API key - preferably sent in request header as `Authorization: Loco <key>`',
           'type' => 'string',
           'location' => 'query',
         ),
-        'format' => 
-        array (
+        'format' => array(
           'description' => 'Specific format, applicable to some file types only',
           'type' => 'string',
           'location' => 'query',
-          'enum' => 
-          array (
+          'enum' => array(
             0 => 'symfony',
             1 => 'zend',
             2 => 'codeigniter',
@@ -579,68 +494,57 @@ return array (
             11 => 'xcode',
           ),
         ),
-        'filter' => 
-        array (
+        'filter' => array(
           'description' => 'Comma-separated list of tags to filter subset of assets.',
           'type' => 'string',
           'location' => 'query',
         ),
-        'index' => 
-        array (
+        'index' => array(
           'description' => 'Override default lookup key in language pack. Leave blank for auto.',
           'type' => 'string',
           'location' => 'query',
-          'enum' => 
-          array (
+          'enum' => array(
             0 => 'id',
             1 => 'name',
             2 => 'text',
           ),
         ),
-        'namespace' => 
-        array (
+        'namespace' => array(
           'description' => 'Override the project name for some language packs that use it as a key prefix',
           'type' => 'string',
           'location' => 'query',
         ),
-        'fallback' => 
-        array (
+        'fallback' => array(
           'description' => 'Fallback locale for untranslated assets, specified as short code. e.g. `en` or `en_GB`',
           'type' => 'string',
           'location' => 'query',
         ),
-        'order' => 
-        array (
+        'order' => array(
           'description' => 'Export translations according to asset order',
           'type' => 'string',
           'location' => 'query',
-          'enum' => 
-          array (
+          'enum' => array(
             0 => 'created',
             1 => 'id',
           ),
         ),
-        'status' => 
-        array (
+        'status' => array(
           'description' => 'Export only translations with a specific status or flag',
           'type' => 'string',
           'location' => 'query',
-          'enum' => 
-          array (
+          'enum' => array(
             0 => 'translated',
             1 => 'untranslated',
             2 => '&lt;flag&gt;',
             3 => 'all',
           ),
         ),
-        'ext' => 
-        array (
+        'ext' => array(
           'required' => true,
           'description' => 'Target file type specified as a file extension',
           'type' => 'string',
           'location' => 'uri',
-          'enum' => 
-          array (
+          'enum' => array(
             0 => 'csv',
             1 => 'html',
             2 => 'ini',
@@ -666,17 +570,14 @@ return array (
           'default' => 'json',
         ),
       ),
-      'errorResponses' => 
-      array (
-        0 => 
-        array (
+      'errorResponses' => array(
+        0 => array(
           'code' => 401,
           'phrase' => 'Invalid API key',
         ),
       ),
     ),
-    'importProgress' => 
-    array (
+    'importProgress' => array(
       'httpMethod' => 'GET',
       'uri' => '/api/import/progress/{id}',
       'class' => '\\Loco\\Http\\Command\\LocoCommand',
@@ -689,44 +590,36 @@ return array (
              The full URL including job identifier will have been provided in the Location header of your original import response
            </p>',
       'summary' => 'Check the progress of an asynchronous import',
-      'parameters' => 
-      array (
-        'id' => 
-        array (
+      'parameters' => array(
+        'id' => array(
           'required' => true,
           'description' => 'Job identifier from original import action',
           'type' => 'string',
           'location' => 'uri',
         ),
-        'key' => 
-        array (
+        'key' => array(
           'required' => true,
           'description' => 'Project API key - preferably sent in request header as `Authorization: Loco <key>`',
           'type' => 'string',
           'location' => 'query',
         ),
       ),
-      'errorResponses' => 
-      array (
-        0 => 
-        array (
+      'errorResponses' => array(
+        0 => array(
           'code' => 422,
           'phrase' => 'Empty job id',
         ),
-        1 => 
-        array (
+        1 => array(
           'code' => 401,
           'phrase' => 'Invalid API key',
         ),
-        2 => 
-        array (
+        2 => array(
           'code' => 403,
           'phrase' => 'Insufficient privileges',
         ),
       ),
     ),
-    'import' => 
-    array (
+    'import' => array(
       'httpMethod' => 'POST',
       'uri' => '/api/import/{ext}',
       'class' => '\\Loco\\Http\\Command\\LocoCommand',
@@ -741,16 +634,13 @@ return array (
               pointing to a progress checking endpoint.
            </p>',
       'summary' => 'Import assets and translations from a language pack file',
-      'parameters' => 
-      array (
-        'ext' => 
-        array (
+      'parameters' => array(
+        'ext' => array(
           'required' => true,
           'description' => 'Import file type specified as a file extension',
           'type' => 'string',
           'location' => 'uri',
-          'enum' => 
-          array (
+          'enum' => array(
             0 => 'ini',
             1 => 'json',
             2 => 'mo',
@@ -770,77 +660,64 @@ return array (
           ),
           'default' => 'json',
         ),
-        'src' => 
-        array (
+        'src' => array(
           'required' => true,
           'description' => 'Raw source of file being imported',
           'type' => 'string',
           'location' => 'body',
           'default' => '{}',
         ),
-        'index' => 
-        array (
+        'index' => array(
           'description' => 'Specify whether file indexes translations by asset ID or source texts',
           'type' => 'string',
           'location' => 'query',
-          'enum' => 
-          array (
+          'enum' => array(
             0 => 'id',
             1 => 'text',
           ),
         ),
-        'locale' => 
-        array (
+        'locale' => array(
           'description' => 'Specify target locale if importing translations',
           'type' => 'string',
           'location' => 'query',
         ),
-        'tag' => 
-        array (
+        'tag' => array(
           'description' => 'Override name of default tag applied to new and modified assets',
           'type' => 'string',
           'location' => 'query',
         ),
-        'async' => 
-        array (
+        'async' => array(
           'description' => 'Specify that import should be done asynchronously',
           'type' => 'boolean',
           'location' => 'query',
         ),
-        'key' => 
-        array (
+        'key' => array(
           'required' => true,
           'description' => 'Project API key - preferably sent in request header as `Authorization: Loco <key>`',
           'type' => 'string',
           'location' => 'query',
         ),
       ),
-      'errorResponses' => 
-      array (
-        0 => 
-        array (
+      'errorResponses' => array(
+        0 => array(
           'code' => 422,
           'phrase' => 'Empty or invalid source data',
         ),
-        1 => 
-        array (
+        1 => array(
           'code' => 201,
           'phrase' => 'Asynchronous import job created',
         ),
-        2 => 
-        array (
+        2 => array(
           'code' => 401,
           'phrase' => 'Invalid API key',
         ),
-        3 => 
-        array (
+        3 => array(
           'code' => 403,
           'phrase' => 'Insufficient privileges',
         ),
       ),
     ),
-    'authVerify' => 
-    array (
+    'authVerify' => array(
       'httpMethod' => 'GET',
       'uri' => '/api/auth/verify',
       'class' => '\\Loco\\Http\\Command\\LocoCommand',
@@ -850,65 +727,53 @@ return array (
                 This endpoint verifies an API key and returns the authenticated user, account and project.</p>
              <p>If you want to verify whether the key has write access, just send this endpoint a POST request instead. A read-only key will give 403 for any POST request.</p>',
       'summary' => 'Verify an API project key',
-      'parameters' => 
-      array (
-        'key' => 
-        array (
+      'parameters' => array(
+        'key' => array(
           'required' => true,
           'description' => 'Project API key - preferably sent in request header as `Authorization: Loco <key>`',
           'type' => 'string',
           'location' => 'query',
         ),
       ),
-      'errorResponses' => 
-      array (
-        0 => 
-        array (
+      'errorResponses' => array(
+        0 => array(
           'code' => 401,
           'phrase' => 'Invalid API key',
         ),
-        1 => 
-        array (
+        1 => array(
           'code' => 403,
           'phrase' => 'Insufficient privileges',
         ),
       ),
     ),
-    'getAssets' => 
-    array (
+    'getAssets' => array(
       'httpMethod' => 'GET',
       'uri' => '/api/assets',
       'class' => '\\Loco\\Http\\Command\\LocoCommand',
       'responseClass' => 'array',
       'responseType' => 'primitive',
       'summary' => 'List all translatable assets in your project',
-      'parameters' => 
-      array (
-        'key' => 
-        array (
+      'parameters' => array(
+        'key' => array(
           'required' => true,
           'description' => 'Project API key - preferably sent in request header as `Authorization: Loco <key>`',
           'type' => 'string',
           'location' => 'query',
         ),
-        'filter' => 
-        array (
+        'filter' => array(
           'description' => 'Comma-separated list of tags to filter subset of assets.',
           'type' => 'string',
           'location' => 'query',
         ),
       ),
-      'errorResponses' => 
-      array (
-        0 => 
-        array (
+      'errorResponses' => array(
+        0 => array(
           'code' => 401,
           'phrase' => 'Invalid API key',
         ),
       ),
     ),
-    'createAsset' => 
-    array (
+    'createAsset' => array(
       'httpMethod' => 'POST',
       'uri' => '/api/assets',
       'class' => '\\Loco\\Http\\Command\\LocoCommand',
@@ -920,30 +785,25 @@ return array (
            <p>If another asset exists with the same name and you <strong>haven\'t specified the ID</strong>, a new asset will be created with a unique id.</p>
            <p>Creating a new asset also creates a translation in your source language with the value of the \'name\' parameter. Use the \'default\' parameter to control this behaviour.</p>',
       'summary' => 'Add a new translatable asset',
-      'parameters' => 
-      array (
-        'name' => 
-        array (
+      'parameters' => array(
+        'name' => array(
           'required' => true,
           'description' => 'Source text or just a name describing what the asset is',
           'type' => 'string',
           'location' => 'postField',
         ),
-        'id' => 
-        array (
+        'id' => array(
           'description' => 'Optional machine friendly ID if you want something specific',
           'type' => 'string',
           'location' => 'postField',
           'default' => '',
         ),
-        'type' => 
-        array (
+        'type' => array(
           'required' => true,
           'description' => 'Media type, defaults to plain old text',
           'type' => 'string',
           'location' => 'postField',
-          'enum' => 
-          array (
+          'enum' => array(
             0 => 'text',
             1 => 'html',
             2 => 'image',
@@ -953,13 +813,11 @@ return array (
           ),
           'default' => 'text',
         ),
-        'default' => 
-        array (
+        'default' => array(
           'description' => 'Status of the default source language translation. Specify \'untranslated\' to avoid creation',
           'type' => 'string',
           'location' => 'postField',
-          'enum' => 
-          array (
+          'enum' => array(
             0 => 'translated',
             1 => 'untranslated',
             2 => 'incorrect',
@@ -970,35 +828,29 @@ return array (
           ),
           'default' => 'translated',
         ),
-        'key' => 
-        array (
+        'key' => array(
           'required' => true,
           'description' => 'Project API key - preferably sent in request header as `Authorization: Loco <key>`',
           'type' => 'string',
           'location' => 'query',
         ),
       ),
-      'errorResponses' => 
-      array (
-        0 => 
-        array (
+      'errorResponses' => array(
+        0 => array(
           'code' => 201,
           'phrase' => 'Asset created',
         ),
-        1 => 
-        array (
+        1 => array(
           'code' => 401,
           'phrase' => 'Invalid API key',
         ),
-        2 => 
-        array (
+        2 => array(
           'code' => 403,
           'phrase' => 'Insufficient privileges',
         ),
       ),
     ),
-    'getAsset' => 
-    array (
+    'getAsset' => array(
       'httpMethod' => 'GET',
       'uri' => '/api/assets/{id}.json',
       'class' => '\\Loco\\Http\\Command\\LocoCommand',
@@ -1006,39 +858,32 @@ return array (
       'responseType' => 'model',
       'responseNotes' => 'Gets a single asset in currently authenticated project',
       'summary' => 'Get a project asset',
-      'parameters' => 
-      array (
-        'key' => 
-        array (
+      'parameters' => array(
+        'key' => array(
           'required' => true,
           'description' => 'Project API key - preferably sent in request header as `Authorization: Loco <key>`',
           'type' => 'string',
           'location' => 'query',
         ),
-        'id' => 
-        array (
+        'id' => array(
           'required' => true,
           'description' => 'Asset ID',
           'type' => 'string',
           'location' => 'uri',
         ),
       ),
-      'errorResponses' => 
-      array (
-        0 => 
-        array (
+      'errorResponses' => array(
+        0 => array(
           'code' => 401,
           'phrase' => 'Invalid API key',
         ),
-        1 => 
-        array (
+        1 => array(
           'code' => 404,
           'phrase' => 'Asset not in project',
         ),
       ),
     ),
-    'patchAsset' => 
-    array (
+    'patchAsset' => array(
       'httpMethod' => 'PATCH',
       'uri' => '/api/assets/{id}.json',
       'class' => '\\Loco\\Http\\Command\\LocoCommand',
@@ -1047,22 +892,18 @@ return array (
       'responseNotes' => '<p>Modifies the properties of an asset in the currently authenticated project.</p>
            <p>The full, modified asset object is returned.</p>',
       'summary' => 'Modify a single asset',
-      'parameters' => 
-      array (
-        'id_json' => 
-        array (
+      'parameters' => array(
+        'id_json' => array(
           'description' => 'Machine friendly name',
           'type' => 'string',
           'location' => 'json',
           'sentAs' => 'id',
         ),
-        'type' => 
-        array (
+        'type' => array(
           'description' => 'Broad content type, defaults to plain text',
           'type' => 'string',
           'location' => 'json',
-          'enum' => 
-          array (
+          'enum' => array(
             0 => 'text',
             1 => 'html',
             2 => 'image',
@@ -1071,60 +912,50 @@ return array (
             5 => 'bin',
           ),
         ),
-        'name' => 
-        array (
+        'name' => array(
           'description' => 'Human friendly name',
           'type' => 'string',
           'location' => 'json',
         ),
-        'context' => 
-        array (
+        'context' => array(
           'description' => 'Optional context descriptor',
           'type' => 'string',
           'location' => 'json',
         ),
-        'notes' => 
-        array (
+        'notes' => array(
           'description' => 'Optional notes for translators',
           'type' => 'string',
           'location' => 'json',
         ),
-        'key' => 
-        array (
+        'key' => array(
           'required' => true,
           'description' => 'Project API key - preferably sent in request header as `Authorization: Loco <key>`',
           'type' => 'string',
           'location' => 'query',
         ),
-        'id' => 
-        array (
+        'id' => array(
           'required' => true,
           'description' => 'Asset ID',
           'type' => 'string',
           'location' => 'uri',
         ),
       ),
-      'errorResponses' => 
-      array (
-        0 => 
-        array (
+      'errorResponses' => array(
+        0 => array(
           'code' => 401,
           'phrase' => 'Invalid API key',
         ),
-        1 => 
-        array (
+        1 => array(
           'code' => 403,
           'phrase' => 'Insufficient privileges',
         ),
-        2 => 
-        array (
+        2 => array(
           'code' => 404,
           'phrase' => 'Asset not in project',
         ),
       ),
     ),
-    'deleteAsset' => 
-    array (
+    'deleteAsset' => array(
       'httpMethod' => 'DELETE',
       'uri' => '/api/assets/{id}.json',
       'class' => '\\Loco\\Http\\Command\\LocoCommand',
@@ -1133,44 +964,36 @@ return array (
       'responseNotes' => '<p>Deletes an asset from the currently authenticated project.</p>
            <p><strong>Warning</strong>: This will permanently delete all translations made of this asset across all locales</p>',
       'summary' => 'Delete an asset permanently',
-      'parameters' => 
-      array (
-        'key' => 
-        array (
+      'parameters' => array(
+        'key' => array(
           'required' => true,
           'description' => 'Project API key - preferably sent in request header as `Authorization: Loco <key>`',
           'type' => 'string',
           'location' => 'query',
         ),
-        'id' => 
-        array (
+        'id' => array(
           'required' => true,
           'description' => 'Asset ID',
           'type' => 'string',
           'location' => 'uri',
         ),
       ),
-      'errorResponses' => 
-      array (
-        0 => 
-        array (
+      'errorResponses' => array(
+        0 => array(
           'code' => 401,
           'phrase' => 'Invalid API key',
         ),
-        1 => 
-        array (
+        1 => array(
           'code' => 404,
           'phrase' => 'Asset not in project',
         ),
-        2 => 
-        array (
+        2 => array(
           'code' => 403,
           'phrase' => 'Insufficient privileges',
         ),
       ),
     ),
-    'getAssetPlurals' => 
-    array (
+    'getAssetPlurals' => array(
       'httpMethod' => 'GET',
       'uri' => '/api/assets/{id}/plurals',
       'class' => '\\Loco\\Http\\Command\\LocoCommand',
@@ -1179,39 +1002,32 @@ return array (
       'responseNotes' => '<p>Lists all assets that are a plural form of the current asset.</p>
            <p>This list does <strong>not</strong> include the singular form itself.</p>',
       'summary' => 'Get plural forms of an asset',
-      'parameters' => 
-      array (
-        'key' => 
-        array (
+      'parameters' => array(
+        'key' => array(
           'required' => true,
           'description' => 'Project API key - preferably sent in request header as `Authorization: Loco <key>`',
           'type' => 'string',
           'location' => 'query',
         ),
-        'id' => 
-        array (
+        'id' => array(
           'required' => true,
           'description' => 'Asset ID',
           'type' => 'string',
           'location' => 'uri',
         ),
       ),
-      'errorResponses' => 
-      array (
-        0 => 
-        array (
+      'errorResponses' => array(
+        0 => array(
           'code' => 401,
           'phrase' => 'Invalid API key',
         ),
-        1 => 
-        array (
+        1 => array(
           'code' => 404,
           'phrase' => 'Asset not in project',
         ),
       ),
     ),
-    'createPlural' => 
-    array (
+    'createPlural' => array(
       'httpMethod' => 'POST',
       'uri' => '/api/assets/{id}/plurals',
       'class' => '\\Loco\\Http\\Command\\LocoCommand',
@@ -1221,58 +1037,48 @@ return array (
            <p>The singular form asset specified as <code>{id}</code> must already exist, but the plural form will created as a new asset.</p>
            <p>You can bind an existing asset as the new plural by specifying <code>{pid}</code>. In this case if <code>{name}</code> differs the asset will be renamed.</p>',
       'summary' => 'Add a new plural form of an existing asset',
-      'parameters' => 
-      array (
-        'name' => 
-        array (
+      'parameters' => array(
+        'name' => array(
           'required' => true,
           'description' => 'Source text for the plural form or just a name describing it',
           'type' => 'string',
           'location' => 'postField',
         ),
-        'pid' => 
-        array (
+        'pid' => array(
           'description' => 'Optional machine friendly ID if you want something specific, or converting an existing asset to a plural',
           'type' => 'string',
           'location' => 'postField',
           'default' => '',
         ),
-        'key' => 
-        array (
+        'key' => array(
           'required' => true,
           'description' => 'Project API key - preferably sent in request header as `Authorization: Loco <key>`',
           'type' => 'string',
           'location' => 'query',
         ),
-        'id' => 
-        array (
+        'id' => array(
           'required' => true,
           'description' => 'Asset ID',
           'type' => 'string',
           'location' => 'uri',
         ),
       ),
-      'errorResponses' => 
-      array (
-        0 => 
-        array (
+      'errorResponses' => array(
+        0 => array(
           'code' => 401,
           'phrase' => 'Invalid API key',
         ),
-        1 => 
-        array (
+        1 => array(
           'code' => 403,
           'phrase' => 'Insufficient privileges',
         ),
-        2 => 
-        array (
+        2 => array(
           'code' => 404,
           'phrase' => 'Asset not in project',
         ),
       ),
     ),
-    'unlinkPlural' => 
-    array (
+    'unlinkPlural' => array(
       'httpMethod' => 'DELETE',
       'uri' => '/api/assets/{id}/plurals/{pid}.json',
       'class' => '\\Loco\\Http\\Command\\LocoCommand',
@@ -1281,51 +1087,42 @@ return array (
       'responseNotes' => '<p>Reverts an asset from being a plural form to being a singular asset on its own.</p>
            <p>This action does <strong>not</strong> delete any assets.</p>',
       'summary' => 'Unlinks a plural form of an existing asset',
-      'parameters' => 
-      array (
-        'pid' => 
-        array (
+      'parameters' => array(
+        'pid' => array(
           'required' => true,
           'description' => 'ID of asset to unlink',
           'type' => 'string',
           'location' => 'uri',
         ),
-        'id' => 
-        array (
+        'id' => array(
           'required' => true,
           'description' => 'Asset ID',
           'type' => 'string',
           'location' => 'uri',
         ),
-        'key' => 
-        array (
+        'key' => array(
           'required' => true,
           'description' => 'Project API key - preferably sent in request header as `Authorization: Loco <key>`',
           'type' => 'string',
           'location' => 'query',
         ),
       ),
-      'errorResponses' => 
-      array (
-        0 => 
-        array (
+      'errorResponses' => array(
+        0 => array(
           'code' => 401,
           'phrase' => 'Invalid API key',
         ),
-        1 => 
-        array (
+        1 => array(
           'code' => 403,
           'phrase' => 'Insufficient privileges',
         ),
-        2 => 
-        array (
+        2 => array(
           'code' => 404,
           'phrase' => 'Asset not in project',
         ),
       ),
     ),
-    'tagAsset' => 
-    array (
+    'tagAsset' => array(
       'httpMethod' => 'POST',
       'uri' => '/api/assets/{id}/tags',
       'class' => '\\Loco\\Http\\Command\\LocoCommand',
@@ -1333,51 +1130,42 @@ return array (
       'responseType' => 'model',
       'responseNotes' => '<p>Tags an asset with a new or existing term. If the tag doesn\'t exist it will be created.</p>',
       'summary' => 'Tag an asset',
-      'parameters' => 
-      array (
-        'name' => 
-        array (
+      'parameters' => array(
+        'name' => array(
           'required' => true,
           'description' => 'Name of new or existing tag',
           'type' => 'string',
           'location' => 'postField',
         ),
-        'key' => 
-        array (
+        'key' => array(
           'required' => true,
           'description' => 'Project API key - preferably sent in request header as `Authorization: Loco <key>`',
           'type' => 'string',
           'location' => 'query',
         ),
-        'id' => 
-        array (
+        'id' => array(
           'required' => true,
           'description' => 'Asset ID',
           'type' => 'string',
           'location' => 'uri',
         ),
       ),
-      'errorResponses' => 
-      array (
-        0 => 
-        array (
+      'errorResponses' => array(
+        0 => array(
           'code' => 401,
           'phrase' => 'Invalid API key',
         ),
-        1 => 
-        array (
+        1 => array(
           'code' => 404,
           'phrase' => 'Asset not in project',
         ),
-        2 => 
-        array (
+        2 => array(
           'code' => 403,
           'phrase' => 'Insufficient privileges',
         ),
       ),
     ),
-    'untagAsset' => 
-    array (
+    'untagAsset' => array(
       'httpMethod' => 'DELETE',
       'uri' => '/api/assets/{id}/tags/{tag}.json',
       'class' => '\\Loco\\Http\\Command\\LocoCommand',
@@ -1385,51 +1173,42 @@ return array (
       'responseType' => 'model',
       'responseNotes' => '<p>Removes a single tag from the given asset.</p>',
       'summary' => 'Untag an asset',
-      'parameters' => 
-      array (
-        'tag' => 
-        array (
+      'parameters' => array(
+        'tag' => array(
           'required' => true,
           'description' => 'Term to remove from asset\'s tags',
           'type' => 'string',
           'location' => 'uri',
         ),
-        'id' => 
-        array (
+        'id' => array(
           'required' => true,
           'description' => 'Asset ID',
           'type' => 'string',
           'location' => 'uri',
         ),
-        'key' => 
-        array (
+        'key' => array(
           'required' => true,
           'description' => 'Project API key - preferably sent in request header as `Authorization: Loco <key>`',
           'type' => 'string',
           'location' => 'query',
         ),
       ),
-      'errorResponses' => 
-      array (
-        0 => 
-        array (
+      'errorResponses' => array(
+        0 => array(
           'code' => 401,
           'phrase' => 'Invalid API key',
         ),
-        1 => 
-        array (
+        1 => array(
           'code' => 404,
           'phrase' => 'Asset not in project',
         ),
-        2 => 
-        array (
+        2 => array(
           'code' => 403,
           'phrase' => 'Insufficient privileges',
         ),
       ),
     ),
-    'getLocales' => 
-    array (
+    'getLocales' => array(
       'httpMethod' => 'GET',
       'uri' => '/api/locales',
       'class' => '\\Loco\\Http\\Command\\LocoCommand',
@@ -1437,27 +1216,22 @@ return array (
       'responseType' => 'primitive',
       'responseNotes' => 'Lists all locales in currently authenticated project. Your native/source language will always be the first in the list',
       'summary' => 'List all locales in your project',
-      'parameters' => 
-      array (
-        'key' => 
-        array (
+      'parameters' => array(
+        'key' => array(
           'required' => true,
           'description' => 'Project API key - preferably sent in request header as `Authorization: Loco <key>`',
           'type' => 'string',
           'location' => 'query',
         ),
       ),
-      'errorResponses' => 
-      array (
-        0 => 
-        array (
+      'errorResponses' => array(
+        0 => array(
           'code' => 401,
           'phrase' => 'Invalid API key',
         ),
       ),
     ),
-    'createLocale' => 
-    array (
+    'createLocale' => array(
       'httpMethod' => 'POST',
       'uri' => '/api/locales',
       'class' => '\\Loco\\Http\\Command\\LocoCommand',
@@ -1467,49 +1241,40 @@ return array (
            <p>If the locale is created successfully the response will be 201 (created).</p>
            <p>If the locale already exists the response will be 409 (conflict).</p>',
       'summary' => 'Add a new project locale',
-      'parameters' => 
-      array (
-        'code' => 
-        array (
+      'parameters' => array(
+        'code' => array(
           'required' => true,
           'description' => 'Short code of locale to create, e.g. \'fr\' or \'fr_FR\'',
           'type' => 'string',
           'location' => 'postField',
         ),
-        'key' => 
-        array (
+        'key' => array(
           'required' => true,
           'description' => 'Project API key - preferably sent in request header as `Authorization: Loco <key>`',
           'type' => 'string',
           'location' => 'query',
         ),
       ),
-      'errorResponses' => 
-      array (
-        0 => 
-        array (
+      'errorResponses' => array(
+        0 => array(
           'code' => 409,
           'phrase' => 'Locale already exists',
         ),
-        1 => 
-        array (
+        1 => array(
           'code' => 201,
           'phrase' => 'Locale created',
         ),
-        2 => 
-        array (
+        2 => array(
           'code' => 401,
           'phrase' => 'Invalid API key',
         ),
-        3 => 
-        array (
+        3 => array(
           'code' => 403,
           'phrase' => 'Insufficient privileges',
         ),
       ),
     ),
-    'getLocale' => 
-    array (
+    'getLocale' => array(
       'httpMethod' => 'GET',
       'uri' => '/api/locales/{locale}',
       'class' => '\\Loco\\Http\\Command\\LocoCommand',
@@ -1517,39 +1282,32 @@ return array (
       'responseType' => 'model',
       'responseNotes' => 'Gets a single locale in currently authenticated project',
       'summary' => 'Get a project locale',
-      'parameters' => 
-      array (
-        'key' => 
-        array (
+      'parameters' => array(
+        'key' => array(
           'required' => true,
           'description' => 'Project API key - preferably sent in request header as `Authorization: Loco <key>`',
           'type' => 'string',
           'location' => 'query',
         ),
-        'locale' => 
-        array (
+        'locale' => array(
           'required' => true,
           'description' => 'Short code of project locale, e.g. `fr` or `fr_CH`',
           'type' => 'string',
           'location' => 'uri',
         ),
       ),
-      'errorResponses' => 
-      array (
-        0 => 
-        array (
+      'errorResponses' => array(
+        0 => array(
           'code' => 401,
           'phrase' => 'Invalid API key',
         ),
-        1 => 
-        array (
+        1 => array(
           'code' => 404,
           'phrase' => 'Locale not in project',
         ),
       ),
     ),
-    'patchLocale' => 
-    array (
+    'patchLocale' => array(
       'httpMethod' => 'PATCH',
       'uri' => '/api/locales/{locale}',
       'class' => '\\Loco\\Http\\Command\\LocoCommand',
@@ -1558,56 +1316,46 @@ return array (
       'responseNotes' => '<p>Modifies the properties of a locale in the currently authenticated project.</p>
            <p>The full, modified locale object is returned.</p>',
       'summary' => 'Modify a project locale',
-      'parameters' => 
-      array (
-        'code' => 
-        array (
+      'parameters' => array(
+        'code' => array(
           'description' => 'Locale short code',
           'type' => 'string',
           'location' => 'json',
         ),
-        'name' => 
-        array (
+        'name' => array(
           'description' => 'Friendly display name',
           'type' => 'string',
           'location' => 'json',
         ),
-        'key' => 
-        array (
+        'key' => array(
           'required' => true,
           'description' => 'Project API key - preferably sent in request header as `Authorization: Loco <key>`',
           'type' => 'string',
           'location' => 'query',
         ),
-        'locale' => 
-        array (
+        'locale' => array(
           'required' => true,
           'description' => 'Short code of project locale, e.g. `fr` or `fr_CH`',
           'type' => 'string',
           'location' => 'uri',
         ),
       ),
-      'errorResponses' => 
-      array (
-        0 => 
-        array (
+      'errorResponses' => array(
+        0 => array(
           'code' => 401,
           'phrase' => 'Invalid API key',
         ),
-        1 => 
-        array (
+        1 => array(
           'code' => 403,
           'phrase' => 'Insufficient privileges',
         ),
-        2 => 
-        array (
+        2 => array(
           'code' => 404,
           'phrase' => 'Locale not in project',
         ),
       ),
     ),
-    'deleteLocale' => 
-    array (
+    'deleteLocale' => array(
       'httpMethod' => 'DELETE',
       'uri' => '/api/locales/{locale}',
       'class' => '\\Loco\\Http\\Command\\LocoCommand',
@@ -1617,44 +1365,36 @@ return array (
            <p><strong>Warning</strong>: This will permanently delete any translations made in the specified locale across your project</p>
            <p>Note that you cannot delete your native/source locale.</p>',
       'summary' => 'Delete a project locale',
-      'parameters' => 
-      array (
-        'key' => 
-        array (
+      'parameters' => array(
+        'key' => array(
           'required' => true,
           'description' => 'Project API key - preferably sent in request header as `Authorization: Loco <key>`',
           'type' => 'string',
           'location' => 'query',
         ),
-        'locale' => 
-        array (
+        'locale' => array(
           'required' => true,
           'description' => 'Short code of project locale, e.g. `fr` or `fr_CH`',
           'type' => 'string',
           'location' => 'uri',
         ),
       ),
-      'errorResponses' => 
-      array (
-        0 => 
-        array (
+      'errorResponses' => array(
+        0 => array(
           'code' => 401,
           'phrase' => 'Invalid API key',
         ),
-        1 => 
-        array (
+        1 => array(
           'code' => 404,
           'phrase' => 'Locale not in project',
         ),
-        2 => 
-        array (
+        2 => array(
           'code' => 403,
           'phrase' => 'Insufficient privileges',
         ),
       ),
     ),
-    'getTranslations' => 
-    array (
+    'getTranslations' => array(
       'httpMethod' => 'GET',
       'uri' => '/api/translations/{id}.json',
       'class' => '\\Loco\\Http\\Command\\LocoCommand',
@@ -1663,39 +1403,32 @@ return array (
       'responseNotes' => '<p>Gets all translations of an asset across the currently authenticated project\'s locales.</p>
            <p>Locales not yet translated are included, but their <code>translated</code> field will be set to <code>false</code>.</p>',
       'summary' => 'Get all translations of an asset',
-      'parameters' => 
-      array (
-        'key' => 
-        array (
+      'parameters' => array(
+        'key' => array(
           'required' => true,
           'description' => 'Project API key - preferably sent in request header as `Authorization: Loco <key>`',
           'type' => 'string',
           'location' => 'query',
         ),
-        'id' => 
-        array (
+        'id' => array(
           'required' => true,
           'description' => 'Asset ID',
           'type' => 'string',
           'location' => 'uri',
         ),
       ),
-      'errorResponses' => 
-      array (
-        0 => 
-        array (
+      'errorResponses' => array(
+        0 => array(
           'code' => 401,
           'phrase' => 'Invalid API key',
         ),
-        1 => 
-        array (
+        1 => array(
           'code' => 404,
           'phrase' => 'Asset not in project',
         ),
       ),
     ),
-    'getTranslation' => 
-    array (
+    'getTranslation' => array(
       'httpMethod' => 'GET',
       'uri' => '/api/translations/{id}/{locale}',
       'class' => '\\Loco\\Http\\Command\\LocoCommand',
@@ -1705,51 +1438,42 @@ return array (
            <p>Translations implicitly exist as long as the asset and locale are in your project.</p>
            <p>Translations marked as complete have the <code>translated</code> field set to <code>true</code>.</p>',
       'summary' => 'Get a single translation',
-      'parameters' => 
-      array (
-        'key' => 
-        array (
+      'parameters' => array(
+        'key' => array(
           'required' => true,
           'description' => 'Project API key - preferably sent in request header as `Authorization: Loco <key>`',
           'type' => 'string',
           'location' => 'query',
         ),
-        'id' => 
-        array (
+        'id' => array(
           'required' => true,
           'description' => 'Asset ID',
           'type' => 'string',
           'location' => 'uri',
         ),
-        'locale' => 
-        array (
+        'locale' => array(
           'required' => true,
           'description' => 'Short code of project locale, e.g. `fr` or `fr_CH`',
           'type' => 'string',
           'location' => 'uri',
         ),
       ),
-      'errorResponses' => 
-      array (
-        0 => 
-        array (
+      'errorResponses' => array(
+        0 => array(
           'code' => 401,
           'phrase' => 'Invalid API key',
         ),
-        1 => 
-        array (
+        1 => array(
           'code' => 404,
           'phrase' => 'Asset not in project',
         ),
-        2 => 
-        array (
+        2 => array(
           'code' => 404,
           'phrase' => 'Locale not in project',
         ),
       ),
     ),
-    'translate' => 
-    array (
+    'translate' => array(
       'httpMethod' => 'POST',
       'uri' => '/api/translations/{id}/{locale}',
       'class' => '\\Loco\\Http\\Command\\LocoCommand',
@@ -1760,52 +1484,43 @@ return array (
            <p>If the asset is untranslated the locale must have already been added to the project.</p>
            <p>Binary file uploads are not yet supported via this endpoint.</p>',
       'summary' => 'Add a new translation in a given locale',
-      'parameters' => 
-      array (
-        'translation' => 
-        array (
+      'parameters' => array(
+        'translation' => array(
           'description' => 'Raw value of new translation. Leaving empty puts a blank translation.',
           'type' => 'string',
           'location' => 'body',
         ),
-        'key' => 
-        array (
+        'key' => array(
           'required' => true,
           'description' => 'Project API key - preferably sent in request header as `Authorization: Loco <key>`',
           'type' => 'string',
           'location' => 'query',
         ),
-        'id' => 
-        array (
+        'id' => array(
           'required' => true,
           'description' => 'Asset ID',
           'type' => 'string',
           'location' => 'uri',
         ),
-        'locale' => 
-        array (
+        'locale' => array(
           'required' => true,
           'description' => 'Short code of project locale, e.g. `fr` or `fr_CH`',
           'type' => 'string',
           'location' => 'uri',
         ),
       ),
-      'errorResponses' => 
-      array (
-        0 => 
-        array (
+      'errorResponses' => array(
+        0 => array(
           'code' => 401,
           'phrase' => 'Invalid API key',
         ),
-        1 => 
-        array (
+        1 => array(
           'code' => 404,
           'phrase' => 'Asset not in project',
         ),
       ),
     ),
-    'untranslate' => 
-    array (
+    'untranslate' => array(
       'httpMethod' => 'DELETE',
       'uri' => '/api/translations/{id}/{locale}',
       'class' => '\\Loco\\Http\\Command\\LocoCommand',
@@ -1815,51 +1530,42 @@ return array (
            <p><strong>Warning</strong>: Erasing is not the same as setting an empty translation. 
               This operation clears the asset\'s translation history and user comments for the given locale.</p>',
       'summary' => 'Erase translation data in a single locale',
-      'parameters' => 
-      array (
-        'key' => 
-        array (
+      'parameters' => array(
+        'key' => array(
           'required' => true,
           'description' => 'Project API key - preferably sent in request header as `Authorization: Loco <key>`',
           'type' => 'string',
           'location' => 'query',
         ),
-        'id' => 
-        array (
+        'id' => array(
           'required' => true,
           'description' => 'Asset ID',
           'type' => 'string',
           'location' => 'uri',
         ),
-        'locale' => 
-        array (
+        'locale' => array(
           'required' => true,
           'description' => 'Short code of project locale, e.g. `fr` or `fr_CH`',
           'type' => 'string',
           'location' => 'uri',
         ),
       ),
-      'errorResponses' => 
-      array (
-        0 => 
-        array (
+      'errorResponses' => array(
+        0 => array(
           'code' => 401,
           'phrase' => 'Invalid API key',
         ),
-        1 => 
-        array (
+        1 => array(
           'code' => 404,
           'phrase' => 'Asset not in project',
         ),
-        2 => 
-        array (
+        2 => array(
           'code' => 404,
           'phrase' => 'Asset not translated in this locale',
         ),
       ),
     ),
-    'flagTranslation' => 
-    array (
+    'flagTranslation' => array(
       'httpMethod' => 'POST',
       'uri' => '/api/translations/{id}/{locale}/flag',
       'class' => '\\Loco\\Http\\Command\\LocoCommand',
@@ -1868,16 +1574,13 @@ return array (
       'responseNotes' => '<p>Flag a single translation as being incomplete or in error for the given locale.</p>
            <p>Flagged translations reduce your project completeness.</p>',
       'summary' => 'Flag a translation as incomplete',
-      'parameters' => 
-      array (
-        'flag' => 
-        array (
+      'parameters' => array(
+        'flag' => array(
           'required' => true,
           'description' => 'Flag to set',
           'type' => 'string',
           'location' => 'postField',
-          'enum' => 
-          array (
+          'enum' => array(
             0 => 'incorrect',
             1 => 'provisional',
             2 => 'unapproved',
@@ -1886,44 +1589,37 @@ return array (
           ),
           'default' => 'fuzzy',
         ),
-        'key' => 
-        array (
+        'key' => array(
           'required' => true,
           'description' => 'Project API key - preferably sent in request header as `Authorization: Loco <key>`',
           'type' => 'string',
           'location' => 'query',
         ),
-        'id' => 
-        array (
+        'id' => array(
           'required' => true,
           'description' => 'Asset ID',
           'type' => 'string',
           'location' => 'uri',
         ),
-        'locale' => 
-        array (
+        'locale' => array(
           'required' => true,
           'description' => 'Short code of project locale, e.g. `fr` or `fr_CH`',
           'type' => 'string',
           'location' => 'uri',
         ),
       ),
-      'errorResponses' => 
-      array (
-        0 => 
-        array (
+      'errorResponses' => array(
+        0 => array(
           'code' => 401,
           'phrase' => 'Invalid API key',
         ),
-        1 => 
-        array (
+        1 => array(
           'code' => 404,
           'phrase' => 'Asset not in project',
         ),
       ),
     ),
-    'unflagTranslation' => 
-    array (
+    'unflagTranslation' => array(
       'httpMethod' => 'DELETE',
       'uri' => '/api/translations/{id}/{locale}/flag',
       'class' => '\\Loco\\Http\\Command\\LocoCommand',
@@ -1932,46 +1628,38 @@ return array (
       'responseNotes' => '<p>Removes current flag from a translation marked as incomplete or in error.</p>
            <p>It\'s not necessary to specify which flag to remove, because there can be only one.</p>',
       'summary' => 'Clear flag from a translation',
-      'parameters' => 
-      array (
-        'key' => 
-        array (
+      'parameters' => array(
+        'key' => array(
           'required' => true,
           'description' => 'Project API key - preferably sent in request header as `Authorization: Loco <key>`',
           'type' => 'string',
           'location' => 'query',
         ),
-        'id' => 
-        array (
+        'id' => array(
           'required' => true,
           'description' => 'Asset ID',
           'type' => 'string',
           'location' => 'uri',
         ),
-        'locale' => 
-        array (
+        'locale' => array(
           'required' => true,
           'description' => 'Short code of project locale, e.g. `fr` or `fr_CH`',
           'type' => 'string',
           'location' => 'uri',
         ),
       ),
-      'errorResponses' => 
-      array (
-        0 => 
-        array (
+      'errorResponses' => array(
+        0 => array(
           'code' => 401,
           'phrase' => 'Invalid API key',
         ),
-        1 => 
-        array (
+        1 => array(
           'code' => 404,
           'phrase' => 'Asset not in project',
         ),
       ),
     ),
-    'ping' => 
-    array (
+    'ping' => array(
       'httpMethod' => 'GET',
       'uri' => '/api/ping',
       'class' => '\\Loco\\Http\\Command\\LocoCommand',
@@ -1979,24 +1667,20 @@ return array (
       'responseType' => 'model',
       'responseNotes' => 'Checks the API is up and returns the API version number',
       'summary' => 'Check the API is up',
-      'parameters' => 
-      array (
+      'parameters' => array(
       ),
     ),
-    'ping404' => 
-    array (
+    'ping404' => array(
       'httpMethod' => 'GET',
       'uri' => '/api/ping/not-found',
       'class' => '\\Loco\\Http\\Command\\LocoCommand',
       'responseClass' => 'Error',
       'responseType' => 'model',
       'summary' => 'Get a test 404 response',
-      'parameters' => 
-      array (
+      'parameters' => array(
       ),
     ),
-    'convert' => 
-    array (
+    'convert' => array(
       'httpMethod' => 'POST',
       'uri' => '/api/convert/{from}/{name}.{ext}',
       'class' => '\\Loco\\Http\\Command\\LocoCommand',
@@ -2006,24 +1690,20 @@ return array (
              Precise options depend on the file formats you\'re converting between.
              <a href=\'https://localise.biz/free/converter/api\'>See some examples</a>.',
       'summary' => 'Convert a language pack to another file format',
-      'parameters' => 
-      array (
-        'src' => 
-        array (
+      'parameters' => array(
+        'src' => array(
           'required' => true,
           'description' => 'Raw source of file being converted',
           'type' => 'string',
           'location' => 'body',
           'default' => '{"foo":"bar"}',
         ),
-        'from' => 
-        array (
+        'from' => array(
           'required' => true,
           'description' => 'Source file format being imported',
           'type' => 'string',
           'location' => 'uri',
-          'enum' => 
-          array (
+          'enum' => array(
             0 => 'ini',
             1 => 'json',
             2 => 'mo',
@@ -2043,14 +1723,12 @@ return array (
           ),
           'default' => 'json',
         ),
-        'ext' => 
-        array (
+        'ext' => array(
           'required' => true,
           'description' => 'Target file format being exported, specified as a file extension',
           'type' => 'string',
           'location' => 'uri',
-          'enum' => 
-          array (
+          'enum' => array(
             0 => 'csv',
             1 => 'html',
             2 => 'ini',
@@ -2072,20 +1750,17 @@ return array (
           ),
           'default' => 'json',
         ),
-        'name' => 
-        array (
+        'name' => array(
           'description' => 'Domain/namespace, applicable to some file formats',
           'type' => 'string',
           'location' => 'uri',
           'default' => 'messages',
         ),
-        'format' => 
-        array (
+        'format' => array(
           'description' => 'Specific target format, required for some file types',
           'type' => 'string',
           'location' => 'query',
-          'enum' => 
-          array (
+          'enum' => array(
             0 => '',
             1 => 'symfony',
             2 => 'zend',
@@ -2099,63 +1774,51 @@ return array (
             10 => 'gettext',
           ),
         ),
-        'locale' => 
-        array (
+        'locale' => array(
           'description' => 'Locale of target language pack, required in most cases',
           'type' => 'string',
           'location' => 'query',
         ),
-        'native' => 
-        array (
+        'native' => array(
           'description' => 'Optional source locale, not required in many cases',
           'type' => 'string',
           'location' => 'query',
         ),
-        'index' => 
-        array (
+        'index' => array(
           'description' => 'Override default lookup key in exported file. Leave blank for auto.',
           'type' => 'string',
           'location' => 'query',
-          'enum' => 
-          array (
+          'enum' => array(
             0 => 'id',
             1 => 'name',
             2 => 'text',
           ),
         ),
       ),
-      'errorResponses' => 
-      array (
-        0 => 
-        array (
+      'errorResponses' => array(
+        0 => array(
           'code' => 204,
           'phrase' => 'No messages could be extracted from source',
         ),
-        1 => 
-        array (
+        1 => array(
           'code' => 422,
           'phrase' => 'Empty or invalid source data',
         ),
       ),
     ),
   ),
-  'models' => 
-  array (
-    'Success' => 
-    array (
+  'models' => array(
+    'Success' => array(
       'type' => 'object',
       'additionalProperties' => false,
-      'properties' => 
-      array (
-        'status' => 
-        array (
+      'properties' => array(
+        'status' => array(
           'required' => true,
           'description' => 'HTTP status 2xx code',
           'type' => 'integer',
           'location' => 'json',
         ),
-        'message' => 
-        array (
+        'message' => array(
           'required' => true,
           'description' => 'Descriptive success message',
           'type' => 'string',
@@ -2163,46 +1826,37 @@ return array (
         ),
       ),
     ),
-    'TagPatch' => 
-    array (
+    'TagPatch' => array(
       'description' => 'Patch structure for modifying tags',
       'type' => 'object',
       'additionalProperties' => false,
-      'properties' => 
-      array (
-        'name' => 
-        array (
+      'properties' => array(
+        'name' => array(
           'description' => 'Display name of tag',
           'type' => 'string',
           'location' => 'json',
         ),
       ),
     ),
-    'anon_type_string' => 
-    array (
+    'anon_type_string' => array(
       'type' => 'string',
     ),
-    'Asset' => 
-    array (
+    'Asset' => array(
       'type' => 'object',
       'additionalProperties' => false,
-      'properties' => 
-      array (
-        'id' => 
-        array (
+      'properties' => array(
+        'id' => array(
           'required' => true,
           'description' => 'Machine friendly name',
           'type' => 'string',
           'location' => 'json',
         ),
-        'type' => 
-        array (
+        'type' => array(
           'required' => true,
           'description' => 'Broad content type, defaults to plain text',
           'type' => 'string',
           'location' => 'json',
-          'enum' => 
-          array (
+          'enum' => array(
             0 => 'text',
             1 => 'html',
             2 => 'image',
@@ -2211,83 +1865,70 @@ return array (
             5 => 'bin',
           ),
         ),
-        'name' => 
-        array (
+        'name' => array(
           'required' => true,
           'description' => 'Human friendly name',
           'type' => 'string',
           'location' => 'json',
         ),
-        'context' => 
-        array (
+        'context' => array(
           'required' => true,
           'description' => 'Optional context descriptor',
           'type' => 'string',
           'location' => 'json',
         ),
-        'notes' => 
-        array (
+        'notes' => array(
           'required' => true,
           'description' => 'Optional notes for translators',
           'type' => 'string',
           'location' => 'json',
         ),
-        'modified' => 
-        array (
+        'modified' => array(
           'required' => true,
           'description' => 'Time last modified in UTC',
           'type' => 'string',
           'format' => 'date-time',
           'location' => 'json',
         ),
-        'translated' => 
-        array (
+        'translated' => array(
           'required' => true,
           'description' => 'Number of locales asset is translated into',
           'type' => 'integer',
           'location' => 'json',
         ),
-        'untranslated' => 
-        array (
+        'untranslated' => array(
           'required' => true,
           'description' => 'Number of locales left to translate',
           'type' => 'integer',
           'location' => 'json',
         ),
-        'incomplete' => 
-        array (
+        'incomplete' => array(
           'description' => 'Number of translations that are flagged as requiring attention',
           'type' => 'integer',
           'location' => 'json',
         ),
-        'plurals' => 
-        array (
+        'plurals' => array(
           'required' => true,
           'description' => 'Number of associated plural forms',
           'type' => 'integer',
           'location' => 'json',
         ),
-        'tags' => 
-        array (
+        'tags' => array(
           'required' => true,
           'description' => 'List of terms asset is tagged with',
           'type' => 'array',
           'location' => 'json',
-          'items' => 
-          array (
+          'items' => array(
             'type' => 'string',
           ),
         ),
       ),
     ),
-    'PluralRules' => 
-    array (
+    'PluralRules' => array(
       'type' => 'object',
       'additionalProperties' => false,
-      'properties' => 
-      array (
-        'length' => 
-        array (
+      'properties' => array(
+        'length' => array(
           'required' => true,
           'description' => 'Number of forms including singular',
           'type' => 'integer',
@@ -2295,21 +1936,18 @@ return array (
           'minimum' => 1,
           'maximum' => 6,
         ),
-        'equation' => 
-        array (
+        'equation' => array(
           'required' => true,
           'description' => 'Equation for calculating offset in forms. The formula takes a multiplier <code>(n)</code> to yield a plural form offset. <code>( 0 <= offset < length )</code>.',
           'type' => 'string',
           'location' => 'json',
         ),
-        'forms' => 
-        array (
+        'forms' => array(
           'required' => true,
           'description' => 'Plural form names. See <a href="http://unicode.org/reports/tr35/tr35-numbers.html#Language_Plural_Rules">Unicode tr35</a>.',
           'type' => 'array',
           'location' => 'json',
-          'enum' => 
-          array (
+          'enum' => array(
             0 => 'zero',
             1 => 'one',
             2 => 'two',
@@ -2317,72 +1955,59 @@ return array (
             4 => 'many',
             5 => 'other',
           ),
-          'items' => 
-          array (
+          'items' => array(
             'type' => 'string',
           ),
         ),
       ),
     ),
-    'Progress' => 
-    array (
+    'Progress' => array(
       'description' => 'Job progress for checking asynchronous operations',
       'type' => 'object',
       'additionalProperties' => false,
-      'properties' => 
-      array (
-        'progress' => 
-        array (
+      'properties' => array(
+        'progress' => array(
           'required' => true,
           'description' => 'Percentage progress through job',
           'type' => 'integer',
           'location' => 'json',
         ),
-        'error' => 
-        array (
+        'error' => array(
           'description' => 'Description of any error that prevented job from finishing',
           'type' => 'string',
           'location' => 'json',
         ),
       ),
     ),
-    'Locale' => 
-    array (
+    'Locale' => array(
       'type' => 'object',
       'additionalProperties' => false,
-      'properties' => 
-      array (
-        'code' => 
-        array (
+      'properties' => array(
+        'code' => array(
           'required' => true,
           'description' => 'Locale short code, or language tag',
           'type' => 'string',
           'location' => 'json',
         ),
-        'name' => 
-        array (
+        'name' => array(
           'required' => true,
           'description' => 'Friendly display name',
           'type' => 'string',
           'location' => 'json',
         ),
-        'native' => 
-        array (
+        'native' => array(
           'required' => true,
           'description' => 'Whether the source locale of project',
           'type' => 'boolean',
           'location' => 'json',
         ),
-        'plurals' => 
-        array (
+        'plurals' => array(
           'required' => true,
           'type' => 'object',
           'location' => 'json',
           'additionalProperties' => false,
-          'properties' => 
-          array (
-            'length' => 
-            array (
+          'properties' => array(
+            'length' => array(
               'required' => true,
               'description' => 'Number of forms including singular',
               'type' => 'integer',
@@ -2390,21 +2015,18 @@ return array (
               'minimum' => 1,
               'maximum' => 6,
             ),
-            'equation' => 
-            array (
+            'equation' => array(
               'required' => true,
               'description' => 'Equation for calculating offset in forms. The formula takes a multiplier <code>(n)</code> to yield a plural form offset. <code>( 0 <= offset < length )</code>.',
               'type' => 'string',
               'location' => 'json',
             ),
-            'forms' => 
-            array (
+            'forms' => array(
               'required' => true,
               'description' => 'Plural form names. See <a href="http://unicode.org/reports/tr35/tr35-numbers.html#Language_Plural_Rules">Unicode tr35</a>.',
               'type' => 'array',
               'location' => 'json',
-              'enum' => 
-              array (
+              'enum' => array(
                 0 => 'zero',
                 1 => 'one',
                 2 => 'two',
@@ -2412,8 +2034,7 @@ return array (
                 4 => 'many',
                 5 => 'other',
               ),
-              'items' => 
-              array (
+              'items' => array(
                 'type' => 'string',
               ),
             ),
@@ -2421,38 +2042,30 @@ return array (
         ),
       ),
     ),
-    'Imported' => 
-    array (
+    'Imported' => array(
       'type' => 'object',
       'additionalProperties' => false,
-      'properties' => 
-      array (
-        'assets' => 
-        array (
+      'properties' => array(
+        'assets' => array(
           'description' => 'Assets present in imported data',
           'type' => 'array',
           'location' => 'json',
-          'items' => 
-          array (
+          'items' => array(
             'type' => 'object',
             'additionalProperties' => false,
-            'properties' => 
-            array (
-              'id' => 
-              array (
+            'properties' => array(
+              'id' => array(
                 'required' => true,
                 'description' => 'Machine friendly name',
                 'type' => 'string',
                 'location' => 'json',
               ),
-              'type' => 
-              array (
+              'type' => array(
                 'required' => true,
                 'description' => 'Broad content type, defaults to plain text',
                 'type' => 'string',
                 'location' => 'json',
-                'enum' => 
-                array (
+                'enum' => array(
                   0 => 'text',
                   1 => 'html',
                   2 => 'image',
@@ -2461,118 +2074,99 @@ return array (
                   5 => 'bin',
                 ),
               ),
-              'name' => 
-              array (
+              'name' => array(
                 'required' => true,
                 'description' => 'Human friendly name',
                 'type' => 'string',
                 'location' => 'json',
               ),
-              'context' => 
-              array (
+              'context' => array(
                 'required' => true,
                 'description' => 'Optional context descriptor',
                 'type' => 'string',
                 'location' => 'json',
               ),
-              'notes' => 
-              array (
+              'notes' => array(
                 'required' => true,
                 'description' => 'Optional notes for translators',
                 'type' => 'string',
                 'location' => 'json',
               ),
-              'modified' => 
-              array (
+              'modified' => array(
                 'required' => true,
                 'description' => 'Time last modified in UTC',
                 'type' => 'string',
                 'format' => 'date-time',
                 'location' => 'json',
               ),
-              'translated' => 
-              array (
+              'translated' => array(
                 'required' => true,
                 'description' => 'Number of locales asset is translated into',
                 'type' => 'integer',
                 'location' => 'json',
               ),
-              'untranslated' => 
-              array (
+              'untranslated' => array(
                 'required' => true,
                 'description' => 'Number of locales left to translate',
                 'type' => 'integer',
                 'location' => 'json',
               ),
-              'incomplete' => 
-              array (
+              'incomplete' => array(
                 'description' => 'Number of translations that are flagged as requiring attention',
                 'type' => 'integer',
                 'location' => 'json',
               ),
-              'plurals' => 
-              array (
+              'plurals' => array(
                 'required' => true,
                 'description' => 'Number of associated plural forms',
                 'type' => 'integer',
                 'location' => 'json',
               ),
-              'tags' => 
-              array (
+              'tags' => array(
                 'required' => true,
                 'description' => 'List of terms asset is tagged with',
                 'type' => 'array',
                 'location' => 'json',
-                'items' => 
-                array (
+                'items' => array(
                   'type' => 'string',
                 ),
               ),
             ),
           ),
         ),
-        'locales' => 
-        array (
+        'locales' => array(
           'description' => 'Locales present in imported data',
           'type' => 'array',
           'location' => 'json',
-          'items' => 
-          array (
+          'items' => array(
             'type' => 'object',
             'additionalProperties' => false,
-            'properties' => 
-            array (
-              'code' => 
-              array (
+            'properties' => array(
+              'code' => array(
                 'required' => true,
                 'description' => 'Locale short code, or language tag',
                 'type' => 'string',
                 'location' => 'json',
               ),
-              'name' => 
-              array (
+              'name' => array(
                 'required' => true,
                 'description' => 'Friendly display name',
                 'type' => 'string',
                 'location' => 'json',
               ),
-              'native' => 
-              array (
+              'native' => array(
                 'required' => true,
                 'description' => 'Whether the source locale of project',
                 'type' => 'boolean',
                 'location' => 'json',
               ),
-              'plurals' => 
-              array (
+              'plurals' => array(
                 'required' => true,
                 'type' => 'object',
                 'location' => 'json',
                 'additionalProperties' => false,
-                'properties' => 
-                array (
-                  'length' => 
-                  array (
+                'properties' => array(
+                  'length' => array(
                     'required' => true,
                     'description' => 'Number of forms including singular',
                     'type' => 'integer',
@@ -2580,21 +2174,18 @@ return array (
                     'minimum' => 1,
                     'maximum' => 6,
                   ),
-                  'equation' => 
-                  array (
+                  'equation' => array(
                     'required' => true,
                     'description' => 'Equation for calculating offset in forms. The formula takes a multiplier <code>(n)</code> to yield a plural form offset. <code>( 0 <= offset < length )</code>.',
                     'type' => 'string',
                     'location' => 'json',
                   ),
-                  'forms' => 
-                  array (
+                  'forms' => array(
                     'required' => true,
                     'description' => 'Plural form names. See <a href="http://unicode.org/reports/tr35/tr35-numbers.html#Language_Plural_Rules">Unicode tr35</a>.',
                     'type' => 'array',
                     'location' => 'json',
-                    'enum' => 
-                    array (
+                    'enum' => array(
                       0 => 'zero',
                       1 => 'one',
                       2 => 'two',
@@ -2602,8 +2193,7 @@ return array (
                       4 => 'many',
                       5 => 'other',
                     ),
-                    'items' => 
-                    array (
+                    'items' => array(
                       'type' => 'string',
                     ),
                   ),
@@ -2614,158 +2204,128 @@ return array (
         ),
       ),
     ),
-    'User' => 
-    array (
+    'User' => array(
       'type' => 'object',
       'additionalProperties' => false,
-      'properties' => 
-      array (
-        'id' => 
-        array (
+      'properties' => array(
+        'id' => array(
           'required' => true,
           'description' => 'User id',
           'type' => 'integer',
           'location' => 'json',
         ),
-        'name' => 
-        array (
+        'name' => array(
           'description' => 'Full user name',
           'type' => 'string',
           'location' => 'json',
         ),
-        'email' => 
-        array (
+        'email' => array(
           'description' => 'Contact email address if you have permission to see it',
           'type' => 'string',
           'location' => 'json',
         ),
       ),
     ),
-    'Group' => 
-    array (
+    'Group' => array(
       'type' => 'object',
       'additionalProperties' => false,
-      'properties' => 
-      array (
-        'id' => 
-        array (
+      'properties' => array(
+        'id' => array(
           'description' => 'Loco account id',
           'type' => 'integer',
           'location' => 'json',
         ),
-        'name' => 
-        array (
+        'name' => array(
           'description' => 'Loco account name',
           'type' => 'string',
           'location' => 'json',
         ),
       ),
     ),
-    'Project' => 
-    array (
+    'Project' => array(
       'type' => 'object',
       'additionalProperties' => false,
-      'properties' => 
-      array (
-        'id' => 
-        array (
+      'properties' => array(
+        'id' => array(
           'description' => 'Project id',
           'type' => 'integer',
           'location' => 'json',
         ),
-        'name' => 
-        array (
+        'name' => array(
           'description' => 'Project name',
           'type' => 'string',
           'location' => 'json',
         ),
-        'url' => 
-        array (
+        'url' => array(
           'description' => 'Project dashboard URL',
           'type' => 'string',
           'location' => 'json',
         ),
       ),
     ),
-    'Creds' => 
-    array (
+    'Creds' => array(
       'type' => 'object',
       'additionalProperties' => false,
-      'properties' => 
-      array (
-        'user' => 
-        array (
+      'properties' => array(
+        'user' => array(
           'required' => true,
           'type' => 'object',
           'location' => 'json',
           'additionalProperties' => false,
-          'properties' => 
-          array (
-            'id' => 
-            array (
+          'properties' => array(
+            'id' => array(
               'required' => true,
               'description' => 'User id',
               'type' => 'integer',
               'location' => 'json',
             ),
-            'name' => 
-            array (
+            'name' => array(
               'description' => 'Full user name',
               'type' => 'string',
               'location' => 'json',
             ),
-            'email' => 
-            array (
+            'email' => array(
               'description' => 'Contact email address if you have permission to see it',
               'type' => 'string',
               'location' => 'json',
             ),
           ),
         ),
-        'group' => 
-        array (
+        'group' => array(
           'required' => true,
           'type' => 'object',
           'location' => 'json',
           'additionalProperties' => false,
-          'properties' => 
-          array (
-            'id' => 
-            array (
+          'properties' => array(
+            'id' => array(
               'description' => 'Loco account id',
               'type' => 'integer',
               'location' => 'json',
             ),
-            'name' => 
-            array (
+            'name' => array(
               'description' => 'Loco account name',
               'type' => 'string',
               'location' => 'json',
             ),
           ),
         ),
-        'project' => 
-        array (
+        'project' => array(
           'required' => true,
           'type' => 'object',
           'location' => 'json',
           'additionalProperties' => false,
-          'properties' => 
-          array (
-            'id' => 
-            array (
+          'properties' => array(
+            'id' => array(
               'description' => 'Project id',
               'type' => 'integer',
               'location' => 'json',
             ),
-            'name' => 
-            array (
+            'name' => array(
               'description' => 'Project name',
               'type' => 'string',
               'location' => 'json',
             ),
-            'url' => 
-            array (
+            'url' => array(
               'description' => 'Project dashboard URL',
               'type' => 'string',
               'location' => 'json',
@@ -2774,26 +2334,21 @@ return array (
         ),
       ),
     ),
-    'AssetPatch' => 
-    array (
+    'AssetPatch' => array(
       'description' => 'Patch structure for modifying assets',
       'type' => 'object',
       'additionalProperties' => false,
-      'properties' => 
-      array (
-        'id' => 
-        array (
+      'properties' => array(
+        'id' => array(
           'description' => 'Machine friendly name',
           'type' => 'string',
           'location' => 'json',
         ),
-        'type' => 
-        array (
+        'type' => array(
           'description' => 'Broad content type, defaults to plain text',
           'type' => 'string',
           'location' => 'json',
-          'enum' => 
-          array (
+          'enum' => array(
             0 => 'text',
             1 => 'html',
             2 => 'image',
@@ -2802,169 +2357,141 @@ return array (
             5 => 'bin',
           ),
         ),
-        'name' => 
-        array (
+        'name' => array(
           'description' => 'Human friendly name',
           'type' => 'string',
           'location' => 'json',
         ),
-        'context' => 
-        array (
+        'context' => array(
           'description' => 'Optional context descriptor',
           'type' => 'string',
           'location' => 'json',
         ),
-        'notes' => 
-        array (
+        'notes' => array(
           'description' => 'Optional notes for translators',
           'type' => 'string',
           'location' => 'json',
         ),
       ),
     ),
-    'LocalePatch' => 
-    array (
+    'LocalePatch' => array(
       'description' => 'Patch structure for modifying locales',
       'type' => 'object',
       'additionalProperties' => false,
-      'properties' => 
-      array (
-        'code' => 
-        array (
+      'properties' => array(
+        'code' => array(
           'description' => 'Locale short code',
           'type' => 'string',
           'location' => 'json',
         ),
-        'name' => 
-        array (
+        'name' => array(
           'description' => 'Friendly display name',
           'type' => 'string',
           'location' => 'json',
         ),
       ),
     ),
-    'PluralTranslation' => 
-    array (
+    'PluralTranslation' => array(
       'description' => 'Base class containing subset of the fields of LocoApiTranslationModel Doesn\'t need $plurals or $locale',
       'type' => 'object',
       'additionalProperties' => false,
-      'properties' => 
-      array (
-        'id' => 
-        array (
+      'properties' => array(
+        'id' => array(
           'required' => true,
           'description' => 'Asset ID',
           'type' => 'string',
           'location' => 'json',
         ),
-        'type' => 
-        array (
+        'type' => array(
           'required' => true,
           'description' => 'Specific media type, e.g. text/plain, image/jpeg',
           'type' => 'string',
           'location' => 'json',
         ),
-        'translated' => 
-        array (
+        'translated' => array(
           'required' => true,
           'description' => 'Whether asset is translated and contributing to project completion',
           'type' => 'boolean',
           'location' => 'json',
           'default' => false,
         ),
-        'flagged' => 
-        array (
+        'flagged' => array(
           'required' => true,
           'description' => 'Whether translation is flagged by user action',
           'type' => 'boolean',
           'location' => 'json',
           'default' => false,
         ),
-        'status' => 
-        array (
+        'status' => array(
           'description' => 'Status of translation as string compatible with export status parameter',
           'type' => 'string',
           'location' => 'json',
         ),
-        'translation' => 
-        array (
+        'translation' => array(
           'required' => true,
           'description' => 'Translated text in specified locale',
           'type' => 'string',
           'location' => 'json',
         ),
-        'revision' => 
-        array (
+        'revision' => array(
           'required' => true,
           'description' => 'Number of edits made, zero if never translated',
           'type' => 'integer',
           'location' => 'json',
           'default' => 0,
         ),
-        'comments' => 
-        array (
+        'comments' => array(
           'required' => true,
           'description' => 'Number of comments available',
           'type' => 'integer',
           'location' => 'json',
         ),
-        'modified' => 
-        array (
+        'modified' => array(
           'description' => 'Time last modified in UTC, null if translation doesn\'t exist',
           'type' => 'string',
           'format' => 'date-time',
           'location' => 'json',
         ),
-        'author' => 
-        array (
+        'author' => array(
           'type' => 'object',
           'location' => 'json',
           'additionalProperties' => false,
-          'properties' => 
-          array (
-            'id' => 
-            array (
+          'properties' => array(
+            'id' => array(
               'required' => true,
               'description' => 'User id',
               'type' => 'integer',
               'location' => 'json',
             ),
-            'name' => 
-            array (
+            'name' => array(
               'description' => 'Full user name',
               'type' => 'string',
               'location' => 'json',
             ),
-            'email' => 
-            array (
+            'email' => array(
               'description' => 'Contact email address if you have permission to see it',
               'type' => 'string',
               'location' => 'json',
             ),
           ),
         ),
-        'flagger' => 
-        array (
+        'flagger' => array(
           'type' => 'object',
           'location' => 'json',
           'additionalProperties' => false,
-          'properties' => 
-          array (
-            'id' => 
-            array (
+          'properties' => array(
+            'id' => array(
               'required' => true,
               'description' => 'User id',
               'type' => 'integer',
               'location' => 'json',
             ),
-            'name' => 
-            array (
+            'name' => array(
               'description' => 'Full user name',
               'type' => 'string',
               'location' => 'json',
             ),
-            'email' => 
-            array (
+            'email' => array(
               'description' => 'Contact email address if you have permission to see it',
               'type' => 'string',
               'location' => 'json',
@@ -2973,172 +2500,143 @@ return array (
         ),
       ),
     ),
-    'Translation' => 
-    array (
+    'Translation' => array(
       'type' => 'object',
       'additionalProperties' => false,
-      'properties' => 
-      array (
-        'id' => 
-        array (
+      'properties' => array(
+        'id' => array(
           'required' => true,
           'description' => 'Asset ID',
           'type' => 'string',
           'location' => 'json',
         ),
-        'type' => 
-        array (
+        'type' => array(
           'required' => true,
           'description' => 'Specific media type, e.g. text/plain, image/jpeg',
           'type' => 'string',
           'location' => 'json',
         ),
-        'translated' => 
-        array (
+        'translated' => array(
           'required' => true,
           'description' => 'Whether asset is translated and contributing to project completion',
           'type' => 'boolean',
           'location' => 'json',
           'default' => false,
         ),
-        'flagged' => 
-        array (
+        'flagged' => array(
           'required' => true,
           'description' => 'Whether translation is flagged by user action',
           'type' => 'boolean',
           'location' => 'json',
           'default' => false,
         ),
-        'status' => 
-        array (
+        'status' => array(
           'description' => 'Status of translation as string compatible with export status parameter',
           'type' => 'string',
           'location' => 'json',
         ),
-        'translation' => 
-        array (
+        'translation' => array(
           'required' => true,
           'description' => 'Translated text in specified locale',
           'type' => 'string',
           'location' => 'json',
         ),
-        'revision' => 
-        array (
+        'revision' => array(
           'required' => true,
           'description' => 'Number of edits made, zero if never translated',
           'type' => 'integer',
           'location' => 'json',
           'default' => 0,
         ),
-        'comments' => 
-        array (
+        'comments' => array(
           'required' => true,
           'description' => 'Number of comments available',
           'type' => 'integer',
           'location' => 'json',
         ),
-        'modified' => 
-        array (
+        'modified' => array(
           'description' => 'Time last modified in UTC, null if translation doesn\'t exist',
           'type' => 'string',
           'format' => 'date-time',
           'location' => 'json',
         ),
-        'author' => 
-        array (
+        'author' => array(
           'type' => 'object',
           'location' => 'json',
           'additionalProperties' => false,
-          'properties' => 
-          array (
-            'id' => 
-            array (
+          'properties' => array(
+            'id' => array(
               'required' => true,
               'description' => 'User id',
               'type' => 'integer',
               'location' => 'json',
             ),
-            'name' => 
-            array (
+            'name' => array(
               'description' => 'Full user name',
               'type' => 'string',
               'location' => 'json',
             ),
-            'email' => 
-            array (
+            'email' => array(
               'description' => 'Contact email address if you have permission to see it',
               'type' => 'string',
               'location' => 'json',
             ),
           ),
         ),
-        'flagger' => 
-        array (
+        'flagger' => array(
           'type' => 'object',
           'location' => 'json',
           'additionalProperties' => false,
-          'properties' => 
-          array (
-            'id' => 
-            array (
+          'properties' => array(
+            'id' => array(
               'required' => true,
               'description' => 'User id',
               'type' => 'integer',
               'location' => 'json',
             ),
-            'name' => 
-            array (
+            'name' => array(
               'description' => 'Full user name',
               'type' => 'string',
               'location' => 'json',
             ),
-            'email' => 
-            array (
+            'email' => array(
               'description' => 'Contact email address if you have permission to see it',
               'type' => 'string',
               'location' => 'json',
             ),
           ),
         ),
-        'locale' => 
-        array (
+        'locale' => array(
           'required' => true,
           'type' => 'object',
           'location' => 'json',
           'additionalProperties' => false,
-          'properties' => 
-          array (
-            'code' => 
-            array (
+          'properties' => array(
+            'code' => array(
               'required' => true,
               'description' => 'Locale short code, or language tag',
               'type' => 'string',
               'location' => 'json',
             ),
-            'name' => 
-            array (
+            'name' => array(
               'required' => true,
               'description' => 'Friendly display name',
               'type' => 'string',
               'location' => 'json',
             ),
-            'native' => 
-            array (
+            'native' => array(
               'required' => true,
               'description' => 'Whether the source locale of project',
               'type' => 'boolean',
               'location' => 'json',
             ),
-            'plurals' => 
-            array (
+            'plurals' => array(
               'required' => true,
               'type' => 'object',
               'location' => 'json',
               'additionalProperties' => false,
-              'properties' => 
-              array (
-                'length' => 
-                array (
+              'properties' => array(
+                'length' => array(
                   'required' => true,
                   'description' => 'Number of forms including singular',
                   'type' => 'integer',
@@ -3146,21 +2644,18 @@ return array (
                   'minimum' => 1,
                   'maximum' => 6,
                 ),
-                'equation' => 
-                array (
+                'equation' => array(
                   'required' => true,
                   'description' => 'Equation for calculating offset in forms. The formula takes a multiplier <code>(n)</code> to yield a plural form offset. <code>( 0 <= offset < length )</code>.',
                   'type' => 'string',
                   'location' => 'json',
                 ),
-                'forms' => 
-                array (
+                'forms' => array(
                   'required' => true,
                   'description' => 'Plural form names. See <a href="http://unicode.org/reports/tr35/tr35-numbers.html#Language_Plural_Rules">Unicode tr35</a>.',
                   'type' => 'array',
                   'location' => 'json',
-                  'enum' => 
-                  array (
+                  'enum' => array(
                     0 => 'zero',
                     1 => 'one',
                     2 => 'two',
@@ -3168,8 +2663,7 @@ return array (
                     4 => 'many',
                     5 => 'other',
                   ),
-                  'items' => 
-                  array (
+                  'items' => array(
                     'type' => 'string',
                   ),
                 ),
@@ -3177,134 +2671,112 @@ return array (
             ),
           ),
         ),
-        'plurals' => 
-        array (
+        'plurals' => array(
           'required' => true,
           'description' => 'Plural forms of this translation',
           'type' => 'array',
           'location' => 'json',
-          'items' => 
-          array (
+          'items' => array(
             'description' => 'Base class containing subset of the fields of LocoApiTranslationModel Doesn\'t need $plurals or $locale',
             'type' => 'object',
             'additionalProperties' => false,
-            'properties' => 
-            array (
-              'id' => 
-              array (
+            'properties' => array(
+              'id' => array(
                 'required' => true,
                 'description' => 'Asset ID',
                 'type' => 'string',
                 'location' => 'json',
               ),
-              'type' => 
-              array (
+              'type' => array(
                 'required' => true,
                 'description' => 'Specific media type, e.g. text/plain, image/jpeg',
                 'type' => 'string',
                 'location' => 'json',
               ),
-              'translated' => 
-              array (
+              'translated' => array(
                 'required' => true,
                 'description' => 'Whether asset is translated and contributing to project completion',
                 'type' => 'boolean',
                 'location' => 'json',
                 'default' => false,
               ),
-              'flagged' => 
-              array (
+              'flagged' => array(
                 'required' => true,
                 'description' => 'Whether translation is flagged by user action',
                 'type' => 'boolean',
                 'location' => 'json',
                 'default' => false,
               ),
-              'status' => 
-              array (
+              'status' => array(
                 'description' => 'Status of translation as string compatible with export status parameter',
                 'type' => 'string',
                 'location' => 'json',
               ),
-              'translation' => 
-              array (
+              'translation' => array(
                 'required' => true,
                 'description' => 'Translated text in specified locale',
                 'type' => 'string',
                 'location' => 'json',
               ),
-              'revision' => 
-              array (
+              'revision' => array(
                 'required' => true,
                 'description' => 'Number of edits made, zero if never translated',
                 'type' => 'integer',
                 'location' => 'json',
                 'default' => 0,
               ),
-              'comments' => 
-              array (
+              'comments' => array(
                 'required' => true,
                 'description' => 'Number of comments available',
                 'type' => 'integer',
                 'location' => 'json',
               ),
-              'modified' => 
-              array (
+              'modified' => array(
                 'description' => 'Time last modified in UTC, null if translation doesn\'t exist',
                 'type' => 'string',
                 'format' => 'date-time',
                 'location' => 'json',
               ),
-              'author' => 
-              array (
+              'author' => array(
                 'type' => 'object',
                 'location' => 'json',
                 'additionalProperties' => false,
-                'properties' => 
-                array (
-                  'id' => 
-                  array (
+                'properties' => array(
+                  'id' => array(
                     'required' => true,
                     'description' => 'User id',
                     'type' => 'integer',
                     'location' => 'json',
                   ),
-                  'name' => 
-                  array (
+                  'name' => array(
                     'description' => 'Full user name',
                     'type' => 'string',
                     'location' => 'json',
                   ),
-                  'email' => 
-                  array (
+                  'email' => array(
                     'description' => 'Contact email address if you have permission to see it',
                     'type' => 'string',
                     'location' => 'json',
                   ),
                 ),
               ),
-              'flagger' => 
-              array (
+              'flagger' => array(
                 'type' => 'object',
                 'location' => 'json',
                 'additionalProperties' => false,
-                'properties' => 
-                array (
-                  'id' => 
-                  array (
+                'properties' => array(
+                  'id' => array(
                     'required' => true,
                     'description' => 'User id',
                     'type' => 'integer',
                     'location' => 'json',
                   ),
-                  'name' => 
-                  array (
+                  'name' => array(
                     'description' => 'Full user name',
                     'type' => 'string',
                     'location' => 'json',
                   ),
-                  'email' => 
-                  array (
+                  'email' => array(
                     'description' => 'Contact email address if you have permission to see it',
                     'type' => 'string',
                     'location' => 'json',
@@ -3316,42 +2788,34 @@ return array (
         ),
       ),
     ),
-    'Echo' => 
-    array (
+    'Echo' => array(
       'type' => 'object',
       'additionalProperties' => false,
-      'properties' => 
-      array (
-        'version' => 
-        array (
+      'properties' => array(
+        'version' => array(
           'required' => true,
           'description' => 'Current API version',
           'type' => 'string',
           'location' => 'json',
         ),
-        'build' => 
-        array (
+        'build' => array(
           'description' => 'Current build',
           'type' => 'string',
           'location' => 'json',
         ),
       ),
     ),
-    'Error' => 
-    array (
+    'Error' => array(
       'type' => 'object',
       'additionalProperties' => false,
-      'properties' => 
-      array (
-        'status' => 
-        array (
+      'properties' => array(
+        'status' => array(
           'required' => true,
           'description' => 'HTTP status code',
           'type' => 'integer',
           'location' => 'json',
         ),
-        'error' => 
-        array (
+        'error' => array(
           'required' => true,
           'description' => 'Description of error',
           'type' => 'string',

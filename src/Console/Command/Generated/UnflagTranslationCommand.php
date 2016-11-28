@@ -9,21 +9,22 @@ use Symfony\Component\Console\Input\InputArgument;
 /**
  * Auto-generated Loco API console command.
  */
-class UnflagTranslationCommand extends Command {
-    
+class UnflagTranslationCommand extends Command
+{
     /**
-     * Configure loco:unflag:translation command
+     * Configure loco:unflag:translation command.
+     *
      * @internal
      */
-    protected function configure(){
+    protected function configure()
+    {
         $this
-            ->setName( 'loco:unflag:translation' )
-            ->setMethod( 'unflagTranslation' )
-            ->setDescription( 'Clear flag from a translation' )
-            ->addOption('key','k',InputOption::VALUE_OPTIONAL,'Override configured API key for this request','')
-            ->addArgument('id',InputArgument::REQUIRED,'Asset ID',null)
-            ->addArgument('locale',InputArgument::REQUIRED,'Short code of project locale, e.g. `fr` or `fr_CH`',null)
+            ->setName('loco:unflag:translation')
+            ->setMethod('unflagTranslation')
+            ->setDescription('Clear flag from a translation')
+            ->addOption('key', 'k', InputOption::VALUE_OPTIONAL, 'Override configured API key for this request', '')
+            ->addArgument('id', InputArgument::REQUIRED, 'Asset ID', null)
+            ->addArgument('locale', InputArgument::REQUIRED, 'Short code of project locale, e.g. `fr` or `fr_CH`', null)
         ;
     }
-    
 }

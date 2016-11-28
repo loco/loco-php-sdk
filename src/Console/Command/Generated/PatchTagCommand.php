@@ -9,21 +9,22 @@ use Symfony\Component\Console\Input\InputArgument;
 /**
  * Auto-generated Loco API console command.
  */
-class PatchTagCommand extends Command {
-    
+class PatchTagCommand extends Command
+{
     /**
-     * Configure loco:patch:tag command
+     * Configure loco:patch:tag command.
+     *
      * @internal
      */
-    protected function configure(){
+    protected function configure()
+    {
         $this
-            ->setName( 'loco:patch:tag' )
-            ->setMethod( 'patchTag' )
-            ->setDescription( 'Modify a single tag' )
-            ->addOption('name','',InputOption::VALUE_REQUIRED,'Display name of tag',null)
-            ->addOption('key','k',InputOption::VALUE_OPTIONAL,'Override configured API key for this request','')
-            ->addArgument('tag',InputArgument::REQUIRED,'Name of a single asset tag.',null)
+            ->setName('loco:patch:tag')
+            ->setMethod('patchTag')
+            ->setDescription('Modify a single tag')
+            ->addOption('name', '', InputOption::VALUE_REQUIRED, 'Display name of tag', null)
+            ->addOption('key', 'k', InputOption::VALUE_OPTIONAL, 'Override configured API key for this request', '')
+            ->addArgument('tag', InputArgument::REQUIRED, 'Name of a single asset tag.', null)
         ;
     }
-    
 }
