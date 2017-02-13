@@ -5,7 +5,10 @@ namespace Loco\Tests\Http;
 use Loco\Http\ApiClient;
 
 /**
- * Test the live /convert API.
+ * 
+ * The public converter API has been deprecated.
+ * @group deprecated
+ * 
  * Skip tests requiring internet connection with --exclude-group live
  * @group live
  * @group converter

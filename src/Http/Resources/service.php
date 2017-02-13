@@ -1,10 +1,10 @@
 <?php
 /**
- * Auto-generated with Swizzle at 2016-03-19 18:33:36 +0000
+ * Auto-generated with Swizzle at 2017-02-13 12:37:53 +0000
  */
 return array (
   'name' => 'Loco',
-  'apiVersion' => '1.0.14',
+  'apiVersion' => '1.0.15',
   'baseUrl' => 'https://localise.biz/',
   'description' => 'Loco REST API',
   'operations' => 
@@ -237,8 +237,13 @@ return array (
           array (
             0 => 'translated',
             1 => 'untranslated',
-            2 => '&lt;flag&gt;',
-            3 => 'all',
+            2 => 'incorrect',
+            3 => 'provisional',
+            4 => 'unapproved',
+            5 => 'fuzzy',
+            6 => 'incomplete',
+            7 => 'rejected',
+            8 => 'all',
           ),
         ),
       ),
@@ -342,8 +347,13 @@ return array (
           array (
             0 => 'translated',
             1 => 'untranslated',
-            2 => '&lt;flag&gt;',
-            3 => 'all',
+            2 => 'incorrect',
+            3 => 'provisional',
+            4 => 'unapproved',
+            5 => 'fuzzy',
+            6 => 'incomplete',
+            7 => 'rejected',
+            8 => 'all',
           ),
         ),
         'path' => 
@@ -485,8 +495,13 @@ return array (
           array (
             0 => 'translated',
             1 => 'untranslated',
-            2 => '&lt;flag&gt;',
-            3 => 'all',
+            2 => 'incorrect',
+            3 => 'provisional',
+            4 => 'unapproved',
+            5 => 'fuzzy',
+            6 => 'incomplete',
+            7 => 'rejected',
+            8 => 'all',
           ),
         ),
         'locale' => 
@@ -629,8 +644,13 @@ return array (
           array (
             0 => 'translated',
             1 => 'untranslated',
-            2 => '&lt;flag&gt;',
-            3 => 'all',
+            2 => 'incorrect',
+            3 => 'provisional',
+            4 => 'unapproved',
+            5 => 'fuzzy',
+            6 => 'incomplete',
+            7 => 'rejected',
+            8 => 'all',
           ),
         ),
         'ext' => 
@@ -795,9 +815,51 @@ return array (
           'type' => 'string',
           'location' => 'query',
         ),
-        'tag' => 
+        'ignore-new' => 
         array (
-          'description' => 'Override name of default tag applied to new and modified assets',
+          'description' => 'Specify that new assets are NOT added to the project',
+          'type' => 'boolean',
+          'location' => 'query',
+        ),
+        'ignore-existing' => 
+        array (
+          'description' => 'Specify that existing assets encountered in the file are NOT updated',
+          'type' => 'boolean',
+          'location' => 'query',
+        ),
+        'delete-absent' => 
+        array (
+          'description' => 'Specify that project assets not found in the file are DELETED from the project',
+          'type' => 'boolean',
+          'location' => 'query',
+        ),
+        'tag-new' => 
+        array (
+          'description' => 'Tag any NEW assets with a new or existing tag',
+          'type' => 'string',
+          'location' => 'query',
+        ),
+        'tag-updated' => 
+        array (
+          'description' => 'Tag any MODIFIED assets with a new or existing tag',
+          'type' => 'string',
+          'location' => 'query',
+        ),
+        'untag-updated' => 
+        array (
+          'description' => 'Remove existing tag from any assets modified during import',
+          'type' => 'string',
+          'location' => 'query',
+        ),
+        'tag-absent' => 
+        array (
+          'description' => 'Tag any assets in the project that are not found in this file',
+          'type' => 'string',
+          'location' => 'query',
+        ),
+        'untag-absent' => 
+        array (
+          'description' => 'Remove existing tag from any existing assets NOT found in the file',
           'type' => 'string',
           'location' => 'query',
         ),
@@ -946,10 +1008,6 @@ return array (
           array (
             0 => 'text',
             1 => 'html',
-            2 => 'image',
-            3 => 'audio',
-            4 => 'video',
-            5 => 'bin',
           ),
           'default' => 'text',
         ),
@@ -1066,9 +1124,7 @@ return array (
             0 => 'text',
             1 => 'html',
             2 => 'image',
-            3 => 'audio',
-            4 => 'video',
-            5 => 'bin',
+            3 => 'bin',
           ),
         ),
         'name' => 
@@ -1757,8 +1813,7 @@ return array (
       'responseType' => 'model',
       'responseNotes' => '<p>Translates a single asset in a single locale in the currently authenticated project.</p>
            <p>If the asset is already translated, a new revision will be added and the <code>revision</code> field incremented.</p>
-           <p>If the asset is untranslated the locale must have already been added to the project.</p>
-           <p>Binary file uploads are not yet supported via this endpoint.</p>',
+           <p>If the asset is untranslated the locale must have already been added to the project.</p>',
       'summary' => 'Add a new translation in a given locale',
       'parameters' => 
       array (
@@ -1995,149 +2050,6 @@ return array (
       array (
       ),
     ),
-    'convert' => 
-    array (
-      'httpMethod' => 'POST',
-      'uri' => '/api/convert/{from}/{name}.{ext}',
-      'class' => '\\Loco\\Http\\Command\\LocoCommand',
-      'responseClass' => '\\Loco\\Http\\Response\\RawResponse',
-      'responseType' => 'class',
-      'responseNotes' => 'Use this API to convert between language pack file formats without a Loco account.<br /> 
-             Precise options depend on the file formats you\'re converting between.
-             <a href=\'https://localise.biz/free/converter/api\'>See some examples</a>.',
-      'summary' => 'Convert a language pack to another file format',
-      'parameters' => 
-      array (
-        'src' => 
-        array (
-          'required' => true,
-          'description' => 'Raw source of file being converted',
-          'type' => 'string',
-          'location' => 'body',
-          'default' => '{"foo":"bar"}',
-        ),
-        'from' => 
-        array (
-          'required' => true,
-          'description' => 'Source file format being imported',
-          'type' => 'string',
-          'location' => 'uri',
-          'enum' => 
-          array (
-            0 => 'ini',
-            1 => 'json',
-            2 => 'mo',
-            3 => 'php',
-            4 => 'po',
-            5 => 'pot',
-            6 => 'plist',
-            7 => 'bplist',
-            8 => 'properties',
-            9 => 'resx',
-            10 => 'strings',
-            11 => 'tmx',
-            12 => 'ts',
-            13 => 'xlf',
-            14 => 'xml',
-            15 => 'yml',
-          ),
-          'default' => 'json',
-        ),
-        'ext' => 
-        array (
-          'required' => true,
-          'description' => 'Target file format being exported, specified as a file extension',
-          'type' => 'string',
-          'location' => 'uri',
-          'enum' => 
-          array (
-            0 => 'csv',
-            1 => 'html',
-            2 => 'ini',
-            3 => 'js',
-            4 => 'json',
-            5 => 'mo',
-            6 => 'php',
-            7 => 'po',
-            8 => 'pot',
-            9 => 'properties',
-            10 => 'resx',
-            11 => 'sql',
-            12 => 'strings',
-            13 => 'tmx',
-            14 => 'ts',
-            15 => 'xlf',
-            16 => 'xml',
-            17 => 'yml',
-          ),
-          'default' => 'json',
-        ),
-        'name' => 
-        array (
-          'description' => 'Domain/namespace, applicable to some file formats',
-          'type' => 'string',
-          'location' => 'uri',
-          'default' => 'messages',
-        ),
-        'format' => 
-        array (
-          'description' => 'Specific target format, required for some file types',
-          'type' => 'string',
-          'location' => 'query',
-          'enum' => 
-          array (
-            0 => '',
-            1 => 'symfony',
-            2 => 'zend',
-            3 => 'codeigniter',
-            4 => 'constants',
-            5 => 'chrome',
-            6 => 'nested',
-            7 => 'rails',
-            8 => 'java',
-            9 => 'tizen',
-            10 => 'gettext',
-          ),
-        ),
-        'locale' => 
-        array (
-          'description' => 'Locale of target language pack, required in most cases',
-          'type' => 'string',
-          'location' => 'query',
-        ),
-        'native' => 
-        array (
-          'description' => 'Optional source locale, not required in many cases',
-          'type' => 'string',
-          'location' => 'query',
-        ),
-        'index' => 
-        array (
-          'description' => 'Override default lookup key in exported file. Leave blank for auto.',
-          'type' => 'string',
-          'location' => 'query',
-          'enum' => 
-          array (
-            0 => 'id',
-            1 => 'name',
-            2 => 'text',
-          ),
-        ),
-      ),
-      'errorResponses' => 
-      array (
-        0 => 
-        array (
-          'code' => 204,
-          'phrase' => 'No messages could be extracted from source',
-        ),
-        1 => 
-        array (
-          'code' => 422,
-          'phrase' => 'Empty or invalid source data',
-        ),
-      ),
-    ),
   ),
   'models' => 
   array (
@@ -2206,9 +2118,7 @@ return array (
             0 => 'text',
             1 => 'html',
             2 => 'image',
-            3 => 'audio',
-            4 => 'video',
-            5 => 'bin',
+            3 => 'bin',
           ),
         ),
         'name' => 
@@ -2456,9 +2366,7 @@ return array (
                   0 => 'text',
                   1 => 'html',
                   2 => 'image',
-                  3 => 'audio',
-                  4 => 'video',
-                  5 => 'bin',
+                  3 => 'bin',
                 ),
               ),
               'name' => 
@@ -2797,9 +2705,7 @@ return array (
             0 => 'text',
             1 => 'html',
             2 => 'image',
-            3 => 'audio',
-            4 => 'video',
-            5 => 'bin',
+            3 => 'bin',
           ),
         ),
         'name' => 

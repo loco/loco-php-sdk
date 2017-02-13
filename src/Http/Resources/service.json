@@ -1,6 +1,6 @@
 {
     "name": "Loco",
-    "apiVersion": "1.0.14",
+    "apiVersion": "1.0.15",
     "baseUrl": "https:\/\/localise.biz\/",
     "description": "Loco REST API",
     "operations": {
@@ -191,7 +191,12 @@
                     "enum": [
                         "translated",
                         "untranslated",
-                        "&lt;flag&gt;",
+                        "incorrect",
+                        "provisional",
+                        "unapproved",
+                        "fuzzy",
+                        "incomplete",
+                        "rejected",
                         "all"
                     ]
                 }
@@ -278,7 +283,12 @@
                     "enum": [
                         "translated",
                         "untranslated",
-                        "&lt;flag&gt;",
+                        "incorrect",
+                        "provisional",
+                        "unapproved",
+                        "fuzzy",
+                        "incomplete",
+                        "rejected",
                         "all"
                     ]
                 },
@@ -400,7 +410,12 @@
                     "enum": [
                         "translated",
                         "untranslated",
-                        "&lt;flag&gt;",
+                        "incorrect",
+                        "provisional",
+                        "unapproved",
+                        "fuzzy",
+                        "incomplete",
+                        "rejected",
                         "all"
                     ]
                 },
@@ -523,7 +538,12 @@
                     "enum": [
                         "translated",
                         "untranslated",
-                        "&lt;flag&gt;",
+                        "incorrect",
+                        "provisional",
+                        "unapproved",
+                        "fuzzy",
+                        "incomplete",
+                        "rejected",
                         "all"
                     ]
                 },
@@ -657,8 +677,43 @@
                     "type": "string",
                     "location": "query"
                 },
-                "tag": {
-                    "description": "Override name of default tag applied to new and modified assets",
+                "ignore-new": {
+                    "description": "Specify that new assets are NOT added to the project",
+                    "type": "boolean",
+                    "location": "query"
+                },
+                "ignore-existing": {
+                    "description": "Specify that existing assets encountered in the file are NOT updated",
+                    "type": "boolean",
+                    "location": "query"
+                },
+                "delete-absent": {
+                    "description": "Specify that project assets not found in the file are DELETED from the project",
+                    "type": "boolean",
+                    "location": "query"
+                },
+                "tag-new": {
+                    "description": "Tag any NEW assets with a new or existing tag",
+                    "type": "string",
+                    "location": "query"
+                },
+                "tag-updated": {
+                    "description": "Tag any MODIFIED assets with a new or existing tag",
+                    "type": "string",
+                    "location": "query"
+                },
+                "untag-updated": {
+                    "description": "Remove existing tag from any assets modified during import",
+                    "type": "string",
+                    "location": "query"
+                },
+                "tag-absent": {
+                    "description": "Tag any assets in the project that are not found in this file",
+                    "type": "string",
+                    "location": "query"
+                },
+                "untag-absent": {
+                    "description": "Remove existing tag from any existing assets NOT found in the file",
                     "type": "string",
                     "location": "query"
                 },
@@ -775,11 +830,7 @@
                     "location": "postField",
                     "enum": [
                         "text",
-                        "html",
-                        "image",
-                        "audio",
-                        "video",
-                        "bin"
+                        "html"
                     ],
                     "default": "text"
                 },
@@ -876,8 +927,6 @@
                         "text",
                         "html",
                         "image",
-                        "audio",
-                        "video",
                         "bin"
                     ]
                 },
@@ -1435,7 +1484,7 @@
             "class": "\\Loco\\Http\\Command\\LocoCommand",
             "responseClass": "Translation",
             "responseType": "model",
-            "responseNotes": "<p>Translates a single asset in a single locale in the currently authenticated project.<\/p>\n           <p>If the asset is already translated, a new revision will be added and the <code>revision<\/code> field incremented.<\/p>\n           <p>If the asset is untranslated the locale must have already been added to the project.<\/p>\n           <p>Binary file uploads are not yet supported via this endpoint.<\/p>",
+            "responseNotes": "<p>Translates a single asset in a single locale in the currently authenticated project.<\/p>\n           <p>If the asset is already translated, a new revision will be added and the <code>revision<\/code> field incremented.<\/p>\n           <p>If the asset is untranslated the locale must have already been added to the project.<\/p>",
             "summary": "Add a new translation in a given locale",
             "parameters": {
                 "translation": {
@@ -1626,130 +1675,6 @@
             "responseType": "model",
             "summary": "Get a test 404 response",
             "parameters": []
-        },
-        "convert": {
-            "httpMethod": "POST",
-            "uri": "\/api\/convert\/{from}\/{name}.{ext}",
-            "class": "\\Loco\\Http\\Command\\LocoCommand",
-            "responseClass": "\\Loco\\Http\\Response\\RawResponse",
-            "responseType": "class",
-            "responseNotes": "Use this API to convert between language pack file formats without a Loco account.<br \/> \n             Precise options depend on the file formats you're converting between.\n             <a href='https:\/\/localise.biz\/free\/converter\/api'>See some examples<\/a>.",
-            "summary": "Convert a language pack to another file format",
-            "parameters": {
-                "src": {
-                    "required": true,
-                    "description": "Raw source of file being converted",
-                    "type": "string",
-                    "location": "body",
-                    "default": "{\"foo\":\"bar\"}"
-                },
-                "from": {
-                    "required": true,
-                    "description": "Source file format being imported",
-                    "type": "string",
-                    "location": "uri",
-                    "enum": [
-                        "ini",
-                        "json",
-                        "mo",
-                        "php",
-                        "po",
-                        "pot",
-                        "plist",
-                        "bplist",
-                        "properties",
-                        "resx",
-                        "strings",
-                        "tmx",
-                        "ts",
-                        "xlf",
-                        "xml",
-                        "yml"
-                    ],
-                    "default": "json"
-                },
-                "ext": {
-                    "required": true,
-                    "description": "Target file format being exported, specified as a file extension",
-                    "type": "string",
-                    "location": "uri",
-                    "enum": [
-                        "csv",
-                        "html",
-                        "ini",
-                        "js",
-                        "json",
-                        "mo",
-                        "php",
-                        "po",
-                        "pot",
-                        "properties",
-                        "resx",
-                        "sql",
-                        "strings",
-                        "tmx",
-                        "ts",
-                        "xlf",
-                        "xml",
-                        "yml"
-                    ],
-                    "default": "json"
-                },
-                "name": {
-                    "description": "Domain\/namespace, applicable to some file formats",
-                    "type": "string",
-                    "location": "uri",
-                    "default": "messages"
-                },
-                "format": {
-                    "description": "Specific target format, required for some file types",
-                    "type": "string",
-                    "location": "query",
-                    "enum": [
-                        "",
-                        "symfony",
-                        "zend",
-                        "codeigniter",
-                        "constants",
-                        "chrome",
-                        "nested",
-                        "rails",
-                        "java",
-                        "tizen",
-                        "gettext"
-                    ]
-                },
-                "locale": {
-                    "description": "Locale of target language pack, required in most cases",
-                    "type": "string",
-                    "location": "query"
-                },
-                "native": {
-                    "description": "Optional source locale, not required in many cases",
-                    "type": "string",
-                    "location": "query"
-                },
-                "index": {
-                    "description": "Override default lookup key in exported file. Leave blank for auto.",
-                    "type": "string",
-                    "location": "query",
-                    "enum": [
-                        "id",
-                        "name",
-                        "text"
-                    ]
-                }
-            },
-            "errorResponses": [
-                {
-                    "code": 204,
-                    "phrase": "No messages could be extracted from source"
-                },
-                {
-                    "code": 422,
-                    "phrase": "Empty or invalid source data"
-                }
-            ]
         }
     },
     "models": {
@@ -1805,8 +1730,6 @@
                         "text",
                         "html",
                         "image",
-                        "audio",
-                        "video",
                         "bin"
                     ]
                 },
@@ -2014,8 +1937,6 @@
                                     "text",
                                     "html",
                                     "image",
-                                    "audio",
-                                    "video",
                                     "bin"
                                 ]
                             },
@@ -2297,8 +2218,6 @@
                         "text",
                         "html",
                         "image",
-                        "audio",
-                        "video",
                         "bin"
                     ]
                 },
