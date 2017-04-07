@@ -1,10 +1,10 @@
 <?php
 /**
- * Auto-generated with Swizzle at 2017-02-13 12:37:53 +0000
+ * Auto-generated with Swizzle at 2017-04-07 16:14:06 +0100
  */
 return array (
   'name' => 'Loco',
-  'apiVersion' => '1.0.15',
+  'apiVersion' => '1.0.16',
   'baseUrl' => 'https://localise.biz/',
   'description' => 'Loco REST API',
   'operations' => 
@@ -246,6 +246,18 @@ return array (
             8 => 'all',
           ),
         ),
+        'printf' => 
+        array (
+          'description' => 'Force alternative "printf" style. <a href="/help/developers/printf">See string formatting</a>',
+          'type' => 'string',
+          'location' => 'query',
+          'enum' => 
+          array (
+            0 => 'php',
+            1 => 'java',
+            2 => 'objc',
+          ),
+        ),
       ),
       'errorResponses' => 
       array (
@@ -361,6 +373,18 @@ return array (
           'description' => 'Custom pattern for file paths. <a href="/help/developers/locales/export-paths">See syntax</a>',
           'type' => 'string',
           'location' => 'query',
+        ),
+        'printf' => 
+        array (
+          'description' => 'Force alternative "printf" style. <a href="/help/developers/printf">See string formatting</a>',
+          'type' => 'string',
+          'location' => 'query',
+          'enum' => 
+          array (
+            0 => 'php',
+            1 => 'java',
+            2 => 'objc',
+          ),
         ),
         'ext' => 
         array (
@@ -502,6 +526,18 @@ return array (
             6 => 'incomplete',
             7 => 'rejected',
             8 => 'all',
+          ),
+        ),
+        'printf' => 
+        array (
+          'description' => 'Force alternative "printf" style. <a href="/help/developers/printf">See string formatting</a>',
+          'type' => 'string',
+          'location' => 'query',
+          'enum' => 
+          array (
+            0 => 'php',
+            1 => 'java',
+            2 => 'objc',
           ),
         ),
         'locale' => 
@@ -651,6 +687,18 @@ return array (
             6 => 'incomplete',
             7 => 'rejected',
             8 => 'all',
+          ),
+        ),
+        'printf' => 
+        array (
+          'description' => 'Force alternative "printf" style. <a href="/help/developers/printf">See string formatting</a>',
+          'type' => 'string',
+          'location' => 'query',
+          'enum' => 
+          array (
+            0 => 'php',
+            1 => 'java',
+            2 => 'objc',
           ),
         ),
         'ext' => 

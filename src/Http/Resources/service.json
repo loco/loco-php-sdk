@@ -1,6 +1,6 @@
 {
     "name": "Loco",
-    "apiVersion": "1.0.15",
+    "apiVersion": "1.0.16",
     "baseUrl": "https:\/\/localise.biz\/",
     "description": "Loco REST API",
     "operations": {
@@ -199,6 +199,16 @@
                         "rejected",
                         "all"
                     ]
+                },
+                "printf": {
+                    "description": "Force alternative \"printf\" style. <a href=\"\/help\/developers\/printf\">See string formatting<\/a>",
+                    "type": "string",
+                    "location": "query",
+                    "enum": [
+                        "php",
+                        "java",
+                        "objc"
+                    ]
                 }
             },
             "errorResponses": [
@@ -296,6 +306,16 @@
                     "description": "Custom pattern for file paths. <a href=\"\/help\/developers\/locales\/export-paths\">See syntax<\/a>",
                     "type": "string",
                     "location": "query"
+                },
+                "printf": {
+                    "description": "Force alternative \"printf\" style. <a href=\"\/help\/developers\/printf\">See string formatting<\/a>",
+                    "type": "string",
+                    "location": "query",
+                    "enum": [
+                        "php",
+                        "java",
+                        "objc"
+                    ]
                 },
                 "ext": {
                     "required": true,
@@ -417,6 +437,16 @@
                         "incomplete",
                         "rejected",
                         "all"
+                    ]
+                },
+                "printf": {
+                    "description": "Force alternative \"printf\" style. <a href=\"\/help\/developers\/printf\">See string formatting<\/a>",
+                    "type": "string",
+                    "location": "query",
+                    "enum": [
+                        "php",
+                        "java",
+                        "objc"
                     ]
                 },
                 "locale": {
@@ -545,6 +575,16 @@
                         "incomplete",
                         "rejected",
                         "all"
+                    ]
+                },
+                "printf": {
+                    "description": "Force alternative \"printf\" style. <a href=\"\/help\/developers\/printf\">See string formatting<\/a>",
+                    "type": "string",
+                    "location": "query",
+                    "enum": [
+                        "php",
+                        "java",
+                        "objc"
                     ]
                 },
                 "ext": {

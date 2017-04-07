@@ -28,6 +28,7 @@ class ExportTemplateCommand extends Command {
             ->addOption('fallback','',InputOption::VALUE_REQUIRED,'Fallback locale for untranslated assets, specified as short code. e.g. `en` or `en_GB`',null)
             ->addOption('order','',InputOption::VALUE_REQUIRED,'Export translations according to asset order',null)
             ->addOption('status','',InputOption::VALUE_REQUIRED,'Export only translations with a specific status or flag',null)
+            ->addOption('printf','',InputOption::VALUE_REQUIRED,'Force alternative "printf" style. <a href="/help/developers/printf">See string formatting</a>',null)
             ->addArgument('ext',InputArgument::OPTIONAL,'Target file type specified as a file extension','json')
         ;
     }
