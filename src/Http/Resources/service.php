@@ -1,10 +1,10 @@
 <?php
 /**
- * Auto-generated with Swizzle at 2017-04-07 16:14:06 +0100
+ * Auto-generated with Swizzle at 2017-05-03 13:41:19 +0100
  */
 return array (
   'name' => 'Loco',
-  'apiVersion' => '1.0.16',
+  'apiVersion' => '1.0.17',
   'baseUrl' => 'https://localise.biz/',
   'description' => 'Loco REST API',
   'operations' => 
@@ -748,7 +748,7 @@ return array (
       'httpMethod' => 'GET',
       'uri' => '/api/import/progress/{id}',
       'class' => '\\Loco\\Http\\Command\\LocoCommand',
-      'responseClass' => 'Progress',
+      'responseClass' => 'AsyncProgress',
       'responseType' => 'model',
       'responseNotes' => '<p>
              If you specified <code>async=1</code> in your original import API request, you can check on its progress with this endpoint.
@@ -883,31 +883,43 @@ return array (
         ),
         'tag-new' => 
         array (
-          'description' => 'Tag any NEW assets with a new or existing tag',
+          'description' => 'Tag any NEW assets added during the import with the given tags (comma separated)',
+          'type' => 'string',
+          'location' => 'query',
+        ),
+        'tag-all' => 
+        array (
+          'description' => 'Tag ALL assets in the file with the given tags (comma separated)',
+          'type' => 'string',
+          'location' => 'query',
+        ),
+        'untag-all' => 
+        array (
+          'description' => 'Remove existing tags from any assets matched in the imported file (comma separated)',
           'type' => 'string',
           'location' => 'query',
         ),
         'tag-updated' => 
         array (
-          'description' => 'Tag any MODIFIED assets with a new or existing tag',
+          'description' => 'Tag existing assets that are MODIFIED by this import',
           'type' => 'string',
           'location' => 'query',
         ),
         'untag-updated' => 
         array (
-          'description' => 'Remove existing tag from any assets modified during import',
+          'description' => 'Remove existing tags from assets that are MODIFIED during import',
           'type' => 'string',
           'location' => 'query',
         ),
         'tag-absent' => 
         array (
-          'description' => 'Tag any assets in the project that are not found in this file',
+          'description' => 'Tag existing assets in the project that are NOT found in the imported file',
           'type' => 'string',
           'location' => 'query',
         ),
         'untag-absent' => 
         array (
-          'description' => 'Remove existing tag from any existing assets NOT found in the file',
+          'description' => 'Remove existing tags from assets NOT found in the imported file',
           'type' => 'string',
           'location' => 'query',
         ),
@@ -2138,9 +2150,135 @@ return array (
         ),
       ),
     ),
+    'AssetProgress' => 
+    array (
+      'description' => 'Statistical summary of translation progress for an individual locale',
+      'type' => 'object',
+      'additionalProperties' => false,
+      'properties' => 
+      array (
+        'translated' => 
+        array (
+          'required' => true,
+          'description' => 'Number of locales for which a translation exists (including those flagged)',
+          'type' => 'integer',
+          'location' => 'json',
+        ),
+        'untranslated' => 
+        array (
+          'required' => true,
+          'description' => 'Number of locales that do not yet have a translation of this asset',
+          'type' => 'integer',
+          'location' => 'json',
+        ),
+        'flagged' => 
+        array (
+          'required' => true,
+          'description' => 'Number of locales whose translations are flagged as requiring attention',
+          'type' => 'integer',
+          'location' => 'json',
+        ),
+      ),
+    ),
     'anon_type_string' => 
     array (
       'type' => 'string',
+    ),
+    'PluralRules' => 
+    array (
+      'type' => 'object',
+      'additionalProperties' => false,
+      'properties' => 
+      array (
+        'length' => 
+        array (
+          'required' => true,
+          'description' => 'Number of forms including singular',
+          'type' => 'integer',
+          'location' => 'json',
+          'minimum' => 1,
+          'maximum' => 6,
+        ),
+        'equation' => 
+        array (
+          'required' => true,
+          'description' => 'Equation for calculating offset in forms. The formula takes a multiplier <code>(n)</code> to yield a plural form offset. <code>( 0 <= offset < length )</code>.',
+          'type' => 'string',
+          'location' => 'json',
+        ),
+        'forms' => 
+        array (
+          'required' => true,
+          'description' => 'Plural form names. See <a href="http://unicode.org/reports/tr35/tr35-numbers.html#Language_Plural_Rules">Unicode tr35</a>.',
+          'type' => 'array',
+          'location' => 'json',
+          'enum' => 
+          array (
+            0 => 'zero',
+            1 => 'one',
+            2 => 'two',
+            3 => 'few',
+            4 => 'many',
+            5 => 'other',
+          ),
+          'items' => 
+          array (
+            'type' => 'string',
+          ),
+        ),
+      ),
+    ),
+    'LocaleProgress' => 
+    array (
+      'description' => 'Statistical summary of translation progress for an individual locale',
+      'type' => 'object',
+      'additionalProperties' => false,
+      'properties' => 
+      array (
+        'translated' => 
+        array (
+          'required' => true,
+          'description' => 'Number of assets for which a translation exists (including those flagged)',
+          'type' => 'integer',
+          'location' => 'json',
+        ),
+        'untranslated' => 
+        array (
+          'required' => true,
+          'description' => 'Number of assets that are not yet translated to this language',
+          'type' => 'integer',
+          'location' => 'json',
+        ),
+        'flagged' => 
+        array (
+          'required' => true,
+          'description' => 'Number of translations that are flagged as requiring attention',
+          'type' => 'integer',
+          'location' => 'json',
+        ),
+      ),
+    ),
+    'AsyncProgress' => 
+    array (
+      'description' => 'Job progress for checking asynchronous operations',
+      'type' => 'object',
+      'additionalProperties' => false,
+      'properties' => 
+      array (
+        'progress' => 
+        array (
+          'required' => true,
+          'description' => 'Percentage progress through asynchronous operation',
+          'type' => 'integer',
+          'location' => 'json',
+        ),
+        'error' => 
+        array (
+          'description' => 'Description of any error that prevented job from finishing',
+          'type' => 'string',
+          'location' => 'json',
+        ),
+      ),
     ),
     'Asset' => 
     array (
@@ -2198,26 +2336,6 @@ return array (
           'format' => 'date-time',
           'location' => 'json',
         ),
-        'translated' => 
-        array (
-          'required' => true,
-          'description' => 'Number of locales asset is translated into',
-          'type' => 'integer',
-          'location' => 'json',
-        ),
-        'untranslated' => 
-        array (
-          'required' => true,
-          'description' => 'Number of locales left to translate',
-          'type' => 'integer',
-          'location' => 'json',
-        ),
-        'incomplete' => 
-        array (
-          'description' => 'Number of translations that are flagged as requiring attention',
-          'type' => 'integer',
-          'location' => 'json',
-        ),
         'plurals' => 
         array (
           'required' => true,
@@ -2236,70 +2354,55 @@ return array (
             'type' => 'string',
           ),
         ),
-      ),
-    ),
-    'PluralRules' => 
-    array (
-      'type' => 'object',
-      'additionalProperties' => false,
-      'properties' => 
-      array (
-        'length' => 
-        array (
-          'required' => true,
-          'description' => 'Number of forms including singular',
-          'type' => 'integer',
-          'location' => 'json',
-          'minimum' => 1,
-          'maximum' => 6,
-        ),
-        'equation' => 
-        array (
-          'required' => true,
-          'description' => 'Equation for calculating offset in forms. The formula takes a multiplier <code>(n)</code> to yield a plural form offset. <code>( 0 <= offset < length )</code>.',
-          'type' => 'string',
-          'location' => 'json',
-        ),
-        'forms' => 
-        array (
-          'required' => true,
-          'description' => 'Plural form names. See <a href="http://unicode.org/reports/tr35/tr35-numbers.html#Language_Plural_Rules">Unicode tr35</a>.',
-          'type' => 'array',
-          'location' => 'json',
-          'enum' => 
-          array (
-            0 => 'zero',
-            1 => 'one',
-            2 => 'two',
-            3 => 'few',
-            4 => 'many',
-            5 => 'other',
-          ),
-          'items' => 
-          array (
-            'type' => 'string',
-          ),
-        ),
-      ),
-    ),
-    'Progress' => 
-    array (
-      'description' => 'Job progress for checking asynchronous operations',
-      'type' => 'object',
-      'additionalProperties' => false,
-      'properties' => 
-      array (
         'progress' => 
         array (
+          'description' => 'Statistical summary of translation progress for an individual locale',
+          'type' => 'object',
+          'location' => 'json',
+          'additionalProperties' => false,
+          'properties' => 
+          array (
+            'translated' => 
+            array (
+              'required' => true,
+              'description' => 'Number of locales for which a translation exists (including those flagged)',
+              'type' => 'integer',
+              'location' => 'json',
+            ),
+            'untranslated' => 
+            array (
+              'required' => true,
+              'description' => 'Number of locales that do not yet have a translation of this asset',
+              'type' => 'integer',
+              'location' => 'json',
+            ),
+            'flagged' => 
+            array (
+              'required' => true,
+              'description' => 'Number of locales whose translations are flagged as requiring attention',
+              'type' => 'integer',
+              'location' => 'json',
+            ),
+          ),
+        ),
+        'translated' => 
+        array (
           'required' => true,
-          'description' => 'Percentage progress through job',
+          'description' => 'DEPRECATED use progress.translated',
           'type' => 'integer',
           'location' => 'json',
         ),
-        'error' => 
+        'untranslated' => 
         array (
-          'description' => 'Description of any error that prevented job from finishing',
-          'type' => 'string',
+          'required' => true,
+          'description' => 'DEPRECATED use progress.untranslated',
+          'type' => 'integer',
+          'location' => 'json',
+        ),
+        'incomplete' => 
+        array (
+          'description' => 'DEPRECATED use progress.flagged',
+          'type' => 'integer',
           'location' => 'json',
         ),
       ),
@@ -2377,6 +2480,38 @@ return array (
             ),
           ),
         ),
+        'progress' => 
+        array (
+          'required' => true,
+          'description' => 'Statistical summary of translation progress for an individual locale',
+          'type' => 'object',
+          'location' => 'json',
+          'additionalProperties' => false,
+          'properties' => 
+          array (
+            'translated' => 
+            array (
+              'required' => true,
+              'description' => 'Number of assets for which a translation exists (including those flagged)',
+              'type' => 'integer',
+              'location' => 'json',
+            ),
+            'untranslated' => 
+            array (
+              'required' => true,
+              'description' => 'Number of assets that are not yet translated to this language',
+              'type' => 'integer',
+              'location' => 'json',
+            ),
+            'flagged' => 
+            array (
+              'required' => true,
+              'description' => 'Number of translations that are flagged as requiring attention',
+              'type' => 'integer',
+              'location' => 'json',
+            ),
+          ),
+        ),
       ),
     ),
     'Imported' => 
@@ -2446,26 +2581,6 @@ return array (
                 'format' => 'date-time',
                 'location' => 'json',
               ),
-              'translated' => 
-              array (
-                'required' => true,
-                'description' => 'Number of locales asset is translated into',
-                'type' => 'integer',
-                'location' => 'json',
-              ),
-              'untranslated' => 
-              array (
-                'required' => true,
-                'description' => 'Number of locales left to translate',
-                'type' => 'integer',
-                'location' => 'json',
-              ),
-              'incomplete' => 
-              array (
-                'description' => 'Number of translations that are flagged as requiring attention',
-                'type' => 'integer',
-                'location' => 'json',
-              ),
               'plurals' => 
               array (
                 'required' => true,
@@ -2483,6 +2598,57 @@ return array (
                 array (
                   'type' => 'string',
                 ),
+              ),
+              'progress' => 
+              array (
+                'description' => 'Statistical summary of translation progress for an individual locale',
+                'type' => 'object',
+                'location' => 'json',
+                'additionalProperties' => false,
+                'properties' => 
+                array (
+                  'translated' => 
+                  array (
+                    'required' => true,
+                    'description' => 'Number of locales for which a translation exists (including those flagged)',
+                    'type' => 'integer',
+                    'location' => 'json',
+                  ),
+                  'untranslated' => 
+                  array (
+                    'required' => true,
+                    'description' => 'Number of locales that do not yet have a translation of this asset',
+                    'type' => 'integer',
+                    'location' => 'json',
+                  ),
+                  'flagged' => 
+                  array (
+                    'required' => true,
+                    'description' => 'Number of locales whose translations are flagged as requiring attention',
+                    'type' => 'integer',
+                    'location' => 'json',
+                  ),
+                ),
+              ),
+              'translated' => 
+              array (
+                'required' => true,
+                'description' => 'DEPRECATED use progress.translated',
+                'type' => 'integer',
+                'location' => 'json',
+              ),
+              'untranslated' => 
+              array (
+                'required' => true,
+                'description' => 'DEPRECATED use progress.untranslated',
+                'type' => 'integer',
+                'location' => 'json',
+              ),
+              'incomplete' => 
+              array (
+                'description' => 'DEPRECATED use progress.flagged',
+                'type' => 'integer',
+                'location' => 'json',
               ),
             ),
           ),
@@ -2562,6 +2728,38 @@ return array (
                     array (
                       'type' => 'string',
                     ),
+                  ),
+                ),
+              ),
+              'progress' => 
+              array (
+                'required' => true,
+                'description' => 'Statistical summary of translation progress for an individual locale',
+                'type' => 'object',
+                'location' => 'json',
+                'additionalProperties' => false,
+                'properties' => 
+                array (
+                  'translated' => 
+                  array (
+                    'required' => true,
+                    'description' => 'Number of assets for which a translation exists (including those flagged)',
+                    'type' => 'integer',
+                    'location' => 'json',
+                  ),
+                  'untranslated' => 
+                  array (
+                    'required' => true,
+                    'description' => 'Number of assets that are not yet translated to this language',
+                    'type' => 'integer',
+                    'location' => 'json',
+                  ),
+                  'flagged' => 
+                  array (
+                    'required' => true,
+                    'description' => 'Number of translations that are flagged as requiring attention',
+                    'type' => 'integer',
+                    'location' => 'json',
                   ),
                 ),
               ),
@@ -2950,7 +3148,7 @@ return array (
         'translated' => 
         array (
           'required' => true,
-          'description' => 'Whether asset is translated and contributing to project completion',
+          'description' => 'Whether the translation exists (even if flagged)',
           'type' => 'boolean',
           'location' => 'json',
           'default' => false,
@@ -3126,6 +3324,38 @@ return array (
                   array (
                     'type' => 'string',
                   ),
+                ),
+              ),
+            ),
+            'progress' => 
+            array (
+              'required' => true,
+              'description' => 'Statistical summary of translation progress for an individual locale',
+              'type' => 'object',
+              'location' => 'json',
+              'additionalProperties' => false,
+              'properties' => 
+              array (
+                'translated' => 
+                array (
+                  'required' => true,
+                  'description' => 'Number of assets for which a translation exists (including those flagged)',
+                  'type' => 'integer',
+                  'location' => 'json',
+                ),
+                'untranslated' => 
+                array (
+                  'required' => true,
+                  'description' => 'Number of assets that are not yet translated to this language',
+                  'type' => 'integer',
+                  'location' => 'json',
+                ),
+                'flagged' => 
+                array (
+                  'required' => true,
+                  'description' => 'Number of translations that are flagged as requiring attention',
+                  'type' => 'integer',
+                  'location' => 'json',
                 ),
               ),
             ),

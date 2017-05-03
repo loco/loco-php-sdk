@@ -1,6 +1,6 @@
 {
     "name": "Loco",
-    "apiVersion": "1.0.16",
+    "apiVersion": "1.0.17",
     "baseUrl": "https:\/\/localise.biz\/",
     "description": "Loco REST API",
     "operations": {
@@ -629,7 +629,7 @@
             "httpMethod": "GET",
             "uri": "\/api\/import\/progress\/{id}",
             "class": "\\Loco\\Http\\Command\\LocoCommand",
-            "responseClass": "Progress",
+            "responseClass": "AsyncProgress",
             "responseType": "model",
             "responseNotes": "<p>\n             If you specified <code>async=1<\/code> in your original import API request, you can check on its progress with this endpoint.\n           <\/p>\n           <p>\n             The full URL including job identifier will have been provided in the Location header of your original import response\n           <\/p>",
             "summary": "Check the progress of an asynchronous import",
@@ -733,27 +733,37 @@
                     "location": "query"
                 },
                 "tag-new": {
-                    "description": "Tag any NEW assets with a new or existing tag",
+                    "description": "Tag any NEW assets added during the import with the given tags (comma separated)",
+                    "type": "string",
+                    "location": "query"
+                },
+                "tag-all": {
+                    "description": "Tag ALL assets in the file with the given tags (comma separated)",
+                    "type": "string",
+                    "location": "query"
+                },
+                "untag-all": {
+                    "description": "Remove existing tags from any assets matched in the imported file (comma separated)",
                     "type": "string",
                     "location": "query"
                 },
                 "tag-updated": {
-                    "description": "Tag any MODIFIED assets with a new or existing tag",
+                    "description": "Tag existing assets that are MODIFIED by this import",
                     "type": "string",
                     "location": "query"
                 },
                 "untag-updated": {
-                    "description": "Remove existing tag from any assets modified during import",
+                    "description": "Remove existing tags from assets that are MODIFIED during import",
                     "type": "string",
                     "location": "query"
                 },
                 "tag-absent": {
-                    "description": "Tag any assets in the project that are not found in this file",
+                    "description": "Tag existing assets in the project that are NOT found in the imported file",
                     "type": "string",
                     "location": "query"
                 },
                 "untag-absent": {
-                    "description": "Remove existing tag from any existing assets NOT found in the file",
+                    "description": "Remove existing tags from assets NOT found in the imported file",
                     "type": "string",
                     "location": "query"
                 },
@@ -1748,8 +1758,113 @@
                 }
             }
         },
+        "AssetProgress": {
+            "description": "Statistical summary of translation progress for an individual locale",
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "translated": {
+                    "required": true,
+                    "description": "Number of locales for which a translation exists (including those flagged)",
+                    "type": "integer",
+                    "location": "json"
+                },
+                "untranslated": {
+                    "required": true,
+                    "description": "Number of locales that do not yet have a translation of this asset",
+                    "type": "integer",
+                    "location": "json"
+                },
+                "flagged": {
+                    "required": true,
+                    "description": "Number of locales whose translations are flagged as requiring attention",
+                    "type": "integer",
+                    "location": "json"
+                }
+            }
+        },
         "anon_type_string": {
             "type": "string"
+        },
+        "PluralRules": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "length": {
+                    "required": true,
+                    "description": "Number of forms including singular",
+                    "type": "integer",
+                    "location": "json",
+                    "minimum": 1,
+                    "maximum": 6
+                },
+                "equation": {
+                    "required": true,
+                    "description": "Equation for calculating offset in forms. The formula takes a multiplier <code>(n)<\/code> to yield a plural form offset. <code>( 0 <= offset < length )<\/code>.",
+                    "type": "string",
+                    "location": "json"
+                },
+                "forms": {
+                    "required": true,
+                    "description": "Plural form names. See <a href=\"http:\/\/unicode.org\/reports\/tr35\/tr35-numbers.html#Language_Plural_Rules\">Unicode tr35<\/a>.",
+                    "type": "array",
+                    "location": "json",
+                    "enum": [
+                        "zero",
+                        "one",
+                        "two",
+                        "few",
+                        "many",
+                        "other"
+                    ],
+                    "items": {
+                        "type": "string"
+                    }
+                }
+            }
+        },
+        "LocaleProgress": {
+            "description": "Statistical summary of translation progress for an individual locale",
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "translated": {
+                    "required": true,
+                    "description": "Number of assets for which a translation exists (including those flagged)",
+                    "type": "integer",
+                    "location": "json"
+                },
+                "untranslated": {
+                    "required": true,
+                    "description": "Number of assets that are not yet translated to this language",
+                    "type": "integer",
+                    "location": "json"
+                },
+                "flagged": {
+                    "required": true,
+                    "description": "Number of translations that are flagged as requiring attention",
+                    "type": "integer",
+                    "location": "json"
+                }
+            }
+        },
+        "AsyncProgress": {
+            "description": "Job progress for checking asynchronous operations",
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "progress": {
+                    "required": true,
+                    "description": "Percentage progress through asynchronous operation",
+                    "type": "integer",
+                    "location": "json"
+                },
+                "error": {
+                    "description": "Description of any error that prevented job from finishing",
+                    "type": "string",
+                    "location": "json"
+                }
+            }
         },
         "Asset": {
             "type": "object",
@@ -1798,23 +1913,6 @@
                     "format": "date-time",
                     "location": "json"
                 },
-                "translated": {
-                    "required": true,
-                    "description": "Number of locales asset is translated into",
-                    "type": "integer",
-                    "location": "json"
-                },
-                "untranslated": {
-                    "required": true,
-                    "description": "Number of locales left to translate",
-                    "type": "integer",
-                    "location": "json"
-                },
-                "incomplete": {
-                    "description": "Number of translations that are flagged as requiring attention",
-                    "type": "integer",
-                    "location": "json"
-                },
                 "plurals": {
                     "required": true,
                     "description": "Number of associated plural forms",
@@ -1829,60 +1927,48 @@
                     "items": {
                         "type": "string"
                     }
-                }
-            }
-        },
-        "PluralRules": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "length": {
-                    "required": true,
-                    "description": "Number of forms including singular",
-                    "type": "integer",
-                    "location": "json",
-                    "minimum": 1,
-                    "maximum": 6
                 },
-                "equation": {
-                    "required": true,
-                    "description": "Equation for calculating offset in forms. The formula takes a multiplier <code>(n)<\/code> to yield a plural form offset. <code>( 0 <= offset < length )<\/code>.",
-                    "type": "string",
-                    "location": "json"
-                },
-                "forms": {
-                    "required": true,
-                    "description": "Plural form names. See <a href=\"http:\/\/unicode.org\/reports\/tr35\/tr35-numbers.html#Language_Plural_Rules\">Unicode tr35<\/a>.",
-                    "type": "array",
-                    "location": "json",
-                    "enum": [
-                        "zero",
-                        "one",
-                        "two",
-                        "few",
-                        "many",
-                        "other"
-                    ],
-                    "items": {
-                        "type": "string"
-                    }
-                }
-            }
-        },
-        "Progress": {
-            "description": "Job progress for checking asynchronous operations",
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
                 "progress": {
+                    "description": "Statistical summary of translation progress for an individual locale",
+                    "type": "object",
+                    "location": "json",
+                    "additionalProperties": false,
+                    "properties": {
+                        "translated": {
+                            "required": true,
+                            "description": "Number of locales for which a translation exists (including those flagged)",
+                            "type": "integer",
+                            "location": "json"
+                        },
+                        "untranslated": {
+                            "required": true,
+                            "description": "Number of locales that do not yet have a translation of this asset",
+                            "type": "integer",
+                            "location": "json"
+                        },
+                        "flagged": {
+                            "required": true,
+                            "description": "Number of locales whose translations are flagged as requiring attention",
+                            "type": "integer",
+                            "location": "json"
+                        }
+                    }
+                },
+                "translated": {
                     "required": true,
-                    "description": "Percentage progress through job",
+                    "description": "DEPRECATED use progress.translated",
                     "type": "integer",
                     "location": "json"
                 },
-                "error": {
-                    "description": "Description of any error that prevented job from finishing",
-                    "type": "string",
+                "untranslated": {
+                    "required": true,
+                    "description": "DEPRECATED use progress.untranslated",
+                    "type": "integer",
+                    "location": "json"
+                },
+                "incomplete": {
+                    "description": "DEPRECATED use progress.flagged",
+                    "type": "integer",
                     "location": "json"
                 }
             }
@@ -1947,6 +2033,33 @@
                             }
                         }
                     }
+                },
+                "progress": {
+                    "required": true,
+                    "description": "Statistical summary of translation progress for an individual locale",
+                    "type": "object",
+                    "location": "json",
+                    "additionalProperties": false,
+                    "properties": {
+                        "translated": {
+                            "required": true,
+                            "description": "Number of assets for which a translation exists (including those flagged)",
+                            "type": "integer",
+                            "location": "json"
+                        },
+                        "untranslated": {
+                            "required": true,
+                            "description": "Number of assets that are not yet translated to this language",
+                            "type": "integer",
+                            "location": "json"
+                        },
+                        "flagged": {
+                            "required": true,
+                            "description": "Number of translations that are flagged as requiring attention",
+                            "type": "integer",
+                            "location": "json"
+                        }
+                    }
                 }
             }
         },
@@ -2005,23 +2118,6 @@
                                 "format": "date-time",
                                 "location": "json"
                             },
-                            "translated": {
-                                "required": true,
-                                "description": "Number of locales asset is translated into",
-                                "type": "integer",
-                                "location": "json"
-                            },
-                            "untranslated": {
-                                "required": true,
-                                "description": "Number of locales left to translate",
-                                "type": "integer",
-                                "location": "json"
-                            },
-                            "incomplete": {
-                                "description": "Number of translations that are flagged as requiring attention",
-                                "type": "integer",
-                                "location": "json"
-                            },
                             "plurals": {
                                 "required": true,
                                 "description": "Number of associated plural forms",
@@ -2036,6 +2132,49 @@
                                 "items": {
                                     "type": "string"
                                 }
+                            },
+                            "progress": {
+                                "description": "Statistical summary of translation progress for an individual locale",
+                                "type": "object",
+                                "location": "json",
+                                "additionalProperties": false,
+                                "properties": {
+                                    "translated": {
+                                        "required": true,
+                                        "description": "Number of locales for which a translation exists (including those flagged)",
+                                        "type": "integer",
+                                        "location": "json"
+                                    },
+                                    "untranslated": {
+                                        "required": true,
+                                        "description": "Number of locales that do not yet have a translation of this asset",
+                                        "type": "integer",
+                                        "location": "json"
+                                    },
+                                    "flagged": {
+                                        "required": true,
+                                        "description": "Number of locales whose translations are flagged as requiring attention",
+                                        "type": "integer",
+                                        "location": "json"
+                                    }
+                                }
+                            },
+                            "translated": {
+                                "required": true,
+                                "description": "DEPRECATED use progress.translated",
+                                "type": "integer",
+                                "location": "json"
+                            },
+                            "untranslated": {
+                                "required": true,
+                                "description": "DEPRECATED use progress.untranslated",
+                                "type": "integer",
+                                "location": "json"
+                            },
+                            "incomplete": {
+                                "description": "DEPRECATED use progress.flagged",
+                                "type": "integer",
+                                "location": "json"
                             }
                         }
                     }
@@ -2102,6 +2241,33 @@
                                         "items": {
                                             "type": "string"
                                         }
+                                    }
+                                }
+                            },
+                            "progress": {
+                                "required": true,
+                                "description": "Statistical summary of translation progress for an individual locale",
+                                "type": "object",
+                                "location": "json",
+                                "additionalProperties": false,
+                                "properties": {
+                                    "translated": {
+                                        "required": true,
+                                        "description": "Number of assets for which a translation exists (including those flagged)",
+                                        "type": "integer",
+                                        "location": "json"
+                                    },
+                                    "untranslated": {
+                                        "required": true,
+                                        "description": "Number of assets that are not yet translated to this language",
+                                        "type": "integer",
+                                        "location": "json"
+                                    },
+                                    "flagged": {
+                                        "required": true,
+                                        "description": "Number of translations that are flagged as requiring attention",
+                                        "type": "integer",
+                                        "location": "json"
                                     }
                                 }
                             }
@@ -2422,7 +2588,7 @@
                 },
                 "translated": {
                     "required": true,
-                    "description": "Whether asset is translated and contributing to project completion",
+                    "description": "Whether the translation exists (even if flagged)",
                     "type": "boolean",
                     "location": "json",
                     "default": false
@@ -2570,6 +2736,33 @@
                                     "items": {
                                         "type": "string"
                                     }
+                                }
+                            }
+                        },
+                        "progress": {
+                            "required": true,
+                            "description": "Statistical summary of translation progress for an individual locale",
+                            "type": "object",
+                            "location": "json",
+                            "additionalProperties": false,
+                            "properties": {
+                                "translated": {
+                                    "required": true,
+                                    "description": "Number of assets for which a translation exists (including those flagged)",
+                                    "type": "integer",
+                                    "location": "json"
+                                },
+                                "untranslated": {
+                                    "required": true,
+                                    "description": "Number of assets that are not yet translated to this language",
+                                    "type": "integer",
+                                    "location": "json"
+                                },
+                                "flagged": {
+                                    "required": true,
+                                    "description": "Number of translations that are flagged as requiring attention",
+                                    "type": "integer",
+                                    "location": "json"
                                 }
                             }
                         }
