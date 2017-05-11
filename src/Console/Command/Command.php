@@ -57,32 +57,36 @@ abstract class Command extends BaseCommand {
             $client = $this->getApplication()->getRestClient();
             unset( $args['key'] );
         }
-        
-        if( 1 < $output->getVerbosity() ){
+        // noisy output if -v or higher
+        $verbosity = $output->getVerbosity();
+        if( OutputInterface::VERBOSITY_NORMAL < $verbosity ){
             $output->writeln( sprintf('Calling <comment>%s</comment>', $this->method) );
-            // inspect request before sending
-            $dispatcher = $client->getEventDispatcher();
-            $dispatcher->addListener('request.before_send', function( Event $e )use( $output ){
-                $request = $e['request'];
-                /* @var $request EntityEnclosingRequest */
-                $output->writeln( sprintf('Requesting <comment>%s</comment>', $request->getPath() ) );
-                $lines = explode( "\n", trim( $request->__toString() ) );
-                echo ' > ',implode("\n > ", $lines ),"\n";
-            } );
-            // inspect response after receiving
-            $dispatcher->addListener('request.sent', function( Event $e )use( $output ){
-                $response = $e['response'];
-                /* @var $response Response */
-                $output->writeln( sprintf('Responded <comment>%u</comment>', $response->getStatusCode() ) );
-                $lines = explode( "\n", trim( $response->__toString() ) );
-                echo ' < ',implode("\n < ", $lines ),"\n";
-            } );
+            // print request/response if -vv or higher
+            if( OutputInterface::VERBOSITY_VERBOSE < $verbosity ){
+                // inspect request before sending
+                $dispatcher = $client->getEventDispatcher();
+                $dispatcher->addListener('request.before_send', function( Event $e )use( $output ){
+                    $request = $e['request'];
+                    /* @var $request EntityEnclosingRequest */
+                    $output->writeln( sprintf('Requesting <comment>%s</comment>', $request->getPath() ) );
+                    $lines = explode( "\n", trim( $request->__toString() ) );
+                    echo ' > ',implode("\n > ", $lines ),"\n";
+                } );
+                // inspect response after receiving
+                $dispatcher->addListener('request.sent', function( Event $e )use( $output ){
+                    $response = $e['response'];
+                    /* @var $response Response */
+                    $output->writeln( sprintf('Responded <comment>%u</comment>', $response->getStatusCode() ) );
+                    $lines = explode( "\n", trim( $response->__toString() ) );
+                    echo ' < ',implode("\n < ", $lines ),"\n";
+                } );
+            }
         }        
-        
-        // call overloaded function  and show body on error
+        // call overloaded function and show body on error
         try {
             $result = $client->__call( $this->method, array( $args ) );
-            if( 0 !== $output->getVerbosity() ){
+            // print result unless -q
+            if( OutputInterface::VERBOSITY_QUIET < $output->getVerbosity() ){
                 $this->showResult( $result, $output );
             }
         }
@@ -91,16 +95,19 @@ abstract class Command extends BaseCommand {
             $output->writeln( (string) $e->getResponse()->getBody() );
             throw $e;
         }
-
     }
 
 
 
     /**
      * Overridable default shows result on successful api call
+     * @param Guzzle\Service\Resource\Model | array
+     * @return void
      */    
     protected function showResult( $result, OutputInterface $output ){
-        $output->writeln('<info>'.$this->getName().' OK</info>');
+        if( OutputInterface::VERBOSITY_NORMAL < $output->getVerbosity() ){
+            $output->writeln('<info>'.$this->getName().' OK</info>');
+        }
         if( $result instanceof Model ){
             $result = $result->toArray();
         }
@@ -116,8 +123,5 @@ abstract class Command extends BaseCommand {
             echo $result;
         }
     }
-    
-    
-}
 
- 
+}
