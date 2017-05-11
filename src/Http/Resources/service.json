@@ -224,7 +224,7 @@
             "class": "\\Loco\\Http\\Command\\LocoCommand",
             "responseClass": "\\Loco\\Http\\Response\\ZipResponse",
             "responseType": "class",
-            "responseNotes": "Export all translations from your project to a zip archive of language packs.<br \/>\n           <br \/>\n           If you're exporting to a file format that supports multiple locales within the same file, you can use the <code>\/export\/all<\/code> method ",
+            "responseNotes": "Export all translations from your project to an archive of individual locale files. You can also specify .tar instead of .zip.<br \/>\n           If you're exporting to a format that supports multiple locales per file, you can use the <code>\/export\/all<\/code> method instead.",
             "summary": "Export all locales to a zip archive",
             "parameters": {
                 "key": {
@@ -1890,7 +1890,7 @@
                 },
                 "name": {
                     "required": true,
-                    "description": "Human friendly name",
+                    "description": "Human friendly description",
                     "type": "string",
                     "location": "json"
                 },
@@ -2095,7 +2095,7 @@
                             },
                             "name": {
                                 "required": true,
-                                "description": "Human friendly name",
+                                "description": "Human friendly description",
                                 "type": "string",
                                 "location": "json"
                             },

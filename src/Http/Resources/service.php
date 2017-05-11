@@ -1,6 +1,6 @@
 <?php
 /**
- * Auto-generated with Swizzle at 2017-05-03 13:41:19 +0100
+ * Auto-generated with Swizzle at 2017-05-11 13:13:54 +0100
  */
 return array (
   'name' => 'Loco',
@@ -275,9 +275,8 @@ return array (
       'class' => '\\Loco\\Http\\Command\\LocoCommand',
       'responseClass' => '\\Loco\\Http\\Response\\ZipResponse',
       'responseType' => 'class',
-      'responseNotes' => 'Export all translations from your project to a zip archive of language packs.<br />
-           <br />
-           If you\'re exporting to a file format that supports multiple locales within the same file, you can use the <code>/export/all</code> method ',
+      'responseNotes' => 'Export all translations from your project to an archive of individual locale files. You can also specify .tar instead of .zip.<br />
+           If you\'re exporting to a format that supports multiple locales per file, you can use the <code>/export/all</code> method instead.',
       'summary' => 'Export all locales to a zip archive',
       'parameters' => 
       array (
@@ -2310,7 +2309,7 @@ return array (
         'name' => 
         array (
           'required' => true,
-          'description' => 'Human friendly name',
+          'description' => 'Human friendly description',
           'type' => 'string',
           'location' => 'json',
         ),
@@ -2555,7 +2554,7 @@ return array (
               'name' => 
               array (
                 'required' => true,
-                'description' => 'Human friendly name',
+                'description' => 'Human friendly description',
                 'type' => 'string',
                 'location' => 'json',
               ),
