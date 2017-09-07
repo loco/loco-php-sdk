@@ -1,6 +1,6 @@
 <?php
 /**
- * Auto-generated with Swizzle at 2017-05-11 13:13:54 +0100
+ * Auto-generated with Swizzle at 2017-09-07 14:51:58 +0100
  */
 return array (
   'name' => 'Loco',
@@ -306,6 +306,7 @@ return array (
             9 => 'gettext',
             10 => 'ng-gettext',
             11 => 'xcode',
+            12 => 'script'
           ),
         ),
         'filter' => 
@@ -466,6 +467,7 @@ return array (
             9 => 'gettext',
             10 => 'ng-gettext',
             11 => 'xcode',
+            12 => 'script'
           ),
         ),
         'filter' => 
@@ -627,6 +629,7 @@ return array (
             9 => 'gettext',
             10 => 'ng-gettext',
             11 => 'xcode',
+            12 => 'script'
           ),
         ),
         'filter' => 

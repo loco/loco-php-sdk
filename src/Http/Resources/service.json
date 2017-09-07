@@ -249,7 +249,8 @@
                         "tizen",
                         "gettext",
                         "ng-gettext",
-                        "xcode"
+                        "xcode",
+                        "script"
                     ]
                 },
                 "filter": {
@@ -386,7 +387,8 @@
                         "tizen",
                         "gettext",
                         "ng-gettext",
-                        "xcode"
+                        "xcode",
+                        "script"
                     ]
                 },
                 "filter": {
@@ -524,7 +526,8 @@
                         "tizen",
                         "gettext",
                         "ng-gettext",
-                        "xcode"
+                        "xcode",
+                        "script"
                     ]
                 },
                 "filter": {
