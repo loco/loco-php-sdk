@@ -22,7 +22,7 @@ class ExportLocaleCommand extends Command {
             ->setDescription( 'Export a single locale to a language pack.' )
             ->addOption('key','k',InputOption::VALUE_OPTIONAL,'Override configured API key for this request','')
             ->addOption('format','',InputOption::VALUE_REQUIRED,'Specific format, applicable to some file types only',null)
-            ->addOption('filter','',InputOption::VALUE_REQUIRED,'Comma-separated list of tags to filter subset of assets.',null)
+            ->addOption('filter','',InputOption::VALUE_REQUIRED,'Comma-separated list of tags to filter assets. Negate tag names by prefixing with \'!\'.',null)
             ->addOption('index','',InputOption::VALUE_REQUIRED,'Override default lookup key in language pack. Leave blank for auto.',null)
             ->addOption('namespace','',InputOption::VALUE_REQUIRED,'Override the project name for some language packs that use it as a key prefix',null)
             ->addOption('fallback','',InputOption::VALUE_REQUIRED,'Fallback locale for untranslated assets, specified as short code. e.g. `en` or `en_GB`',null)

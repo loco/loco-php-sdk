@@ -1,10 +1,10 @@
 <?php
 /**
- * Auto-generated with Swizzle at 2017-09-07 14:51:58 +0100
+ * Auto-generated with Swizzle at 2017-10-09 16:47:58 +0100
  */
 return array (
   'name' => 'Loco',
-  'apiVersion' => '1.0.17',
+  'apiVersion' => '1.0.18',
   'baseUrl' => 'https://localise.biz/',
   'description' => 'Loco REST API',
   'operations' => 
@@ -195,7 +195,7 @@ return array (
         ),
         'filter' => 
         array (
-          'description' => 'Comma-separated list of tags to filter subset of assets.',
+          'description' => 'Comma-separated list of tags to filter assets. Negate tag names by prefixing with \'!\'.',
           'type' => 'string',
           'location' => 'query',
         ),
@@ -306,12 +306,12 @@ return array (
             9 => 'gettext',
             10 => 'ng-gettext',
             11 => 'xcode',
-            12 => 'script'
+            12 => 'script',
           ),
         ),
         'filter' => 
         array (
-          'description' => 'Comma-separated list of tags to filter subset of assets.',
+          'description' => 'Comma-separated list of tags to filter assets. Negate tag names by prefixing with \'!\'.',
           'type' => 'string',
           'location' => 'query',
         ),
@@ -467,12 +467,12 @@ return array (
             9 => 'gettext',
             10 => 'ng-gettext',
             11 => 'xcode',
-            12 => 'script'
+            12 => 'script',
           ),
         ),
         'filter' => 
         array (
-          'description' => 'Comma-separated list of tags to filter subset of assets.',
+          'description' => 'Comma-separated list of tags to filter assets. Negate tag names by prefixing with \'!\'.',
           'type' => 'string',
           'location' => 'query',
         ),
@@ -629,12 +629,12 @@ return array (
             9 => 'gettext',
             10 => 'ng-gettext',
             11 => 'xcode',
-            12 => 'script'
+            12 => 'script',
           ),
         ),
         'filter' => 
         array (
-          'description' => 'Comma-separated list of tags to filter subset of assets.',
+          'description' => 'Comma-separated list of tags to filter assets. Negate tag names by prefixing with \'!\'.',
           'type' => 'string',
           'location' => 'query',
         ),
@@ -1017,7 +1017,7 @@ return array (
         ),
         'filter' => 
         array (
-          'description' => 'Comma-separated list of tags to filter subset of assets.',
+          'description' => 'Comma-separated list of tags to filter assets. Negate tag names by prefixing with \'!\'.',
           'type' => 'string',
           'location' => 'query',
         ),
@@ -1072,6 +1072,18 @@ return array (
             1 => 'html',
           ),
           'default' => 'text',
+        ),
+        'context' => 
+        array (
+          'description' => 'Optional context descriptor',
+          'type' => 'string',
+          'location' => 'postField',
+        ),
+        'notes' => 
+        array (
+          'description' => 'Optional notes for translators',
+          'type' => 'string',
+          'location' => 'postField',
         ),
         'default' => 
         array (
@@ -2387,26 +2399,6 @@ return array (
             ),
           ),
         ),
-        'translated' => 
-        array (
-          'required' => true,
-          'description' => 'DEPRECATED use progress.translated',
-          'type' => 'integer',
-          'location' => 'json',
-        ),
-        'untranslated' => 
-        array (
-          'required' => true,
-          'description' => 'DEPRECATED use progress.untranslated',
-          'type' => 'integer',
-          'location' => 'json',
-        ),
-        'incomplete' => 
-        array (
-          'description' => 'DEPRECATED use progress.flagged',
-          'type' => 'integer',
-          'location' => 'json',
-        ),
       ),
     ),
     'Locale' => 
@@ -2631,26 +2623,6 @@ return array (
                     'location' => 'json',
                   ),
                 ),
-              ),
-              'translated' => 
-              array (
-                'required' => true,
-                'description' => 'DEPRECATED use progress.translated',
-                'type' => 'integer',
-                'location' => 'json',
-              ),
-              'untranslated' => 
-              array (
-                'required' => true,
-                'description' => 'DEPRECATED use progress.untranslated',
-                'type' => 'integer',
-                'location' => 'json',
-              ),
-              'incomplete' => 
-              array (
-                'description' => 'DEPRECATED use progress.flagged',
-                'type' => 'integer',
-                'location' => 'json',
               ),
             ),
           ),

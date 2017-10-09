@@ -1,6 +1,6 @@
 {
     "name": "Loco",
-    "apiVersion": "1.0.17",
+    "apiVersion": "1.0.18",
     "baseUrl": "https:\/\/localise.biz\/",
     "description": "Loco REST API",
     "operations": {
@@ -156,7 +156,7 @@
                     "location": "query"
                 },
                 "filter": {
-                    "description": "Comma-separated list of tags to filter subset of assets.",
+                    "description": "Comma-separated list of tags to filter assets. Negate tag names by prefixing with '!'.",
                     "type": "string",
                     "location": "query"
                 },
@@ -254,7 +254,7 @@
                     ]
                 },
                 "filter": {
-                    "description": "Comma-separated list of tags to filter subset of assets.",
+                    "description": "Comma-separated list of tags to filter assets. Negate tag names by prefixing with '!'.",
                     "type": "string",
                     "location": "query"
                 },
@@ -392,7 +392,7 @@
                     ]
                 },
                 "filter": {
-                    "description": "Comma-separated list of tags to filter subset of assets.",
+                    "description": "Comma-separated list of tags to filter assets. Negate tag names by prefixing with '!'.",
                     "type": "string",
                     "location": "query"
                 },
@@ -531,7 +531,7 @@
                     ]
                 },
                 "filter": {
-                    "description": "Comma-separated list of tags to filter subset of assets.",
+                    "description": "Comma-separated list of tags to filter assets. Negate tag names by prefixing with '!'.",
                     "type": "string",
                     "location": "query"
                 },
@@ -843,7 +843,7 @@
                     "location": "query"
                 },
                 "filter": {
-                    "description": "Comma-separated list of tags to filter subset of assets.",
+                    "description": "Comma-separated list of tags to filter assets. Negate tag names by prefixing with '!'.",
                     "type": "string",
                     "location": "query"
                 }
@@ -886,6 +886,16 @@
                         "html"
                     ],
                     "default": "text"
+                },
+                "context": {
+                    "description": "Optional context descriptor",
+                    "type": "string",
+                    "location": "postField"
+                },
+                "notes": {
+                    "description": "Optional notes for translators",
+                    "type": "string",
+                    "location": "postField"
                 },
                 "default": {
                     "description": "Status of the default source language translation. Specify 'untranslated' to avoid creation",
@@ -1956,23 +1966,6 @@
                             "location": "json"
                         }
                     }
-                },
-                "translated": {
-                    "required": true,
-                    "description": "DEPRECATED use progress.translated",
-                    "type": "integer",
-                    "location": "json"
-                },
-                "untranslated": {
-                    "required": true,
-                    "description": "DEPRECATED use progress.untranslated",
-                    "type": "integer",
-                    "location": "json"
-                },
-                "incomplete": {
-                    "description": "DEPRECATED use progress.flagged",
-                    "type": "integer",
-                    "location": "json"
                 }
             }
         },
@@ -2161,23 +2154,6 @@
                                         "location": "json"
                                     }
                                 }
-                            },
-                            "translated": {
-                                "required": true,
-                                "description": "DEPRECATED use progress.translated",
-                                "type": "integer",
-                                "location": "json"
-                            },
-                            "untranslated": {
-                                "required": true,
-                                "description": "DEPRECATED use progress.untranslated",
-                                "type": "integer",
-                                "location": "json"
-                            },
-                            "incomplete": {
-                                "description": "DEPRECATED use progress.flagged",
-                                "type": "integer",
-                                "location": "json"
                             }
                         }
                     }

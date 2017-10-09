@@ -127,7 +127,7 @@ class ApiClientAssetsTest  extends ApiClientTest {
         $this->assertInstanceOf( '\Guzzle\Service\Resource\Model', $model );
         $this->assertEquals( $name, $model['name'] );
         // number translated will depend on whether locales exist that must have this blank (e.g. zero plural langs)
-        $this->assertGreaterThan( 0, $model['translated'] );
+        $this->assertGreaterThan( 0, $model['progress']['translated'] );
         return $model['id'];
     }
     
