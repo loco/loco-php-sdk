@@ -2,84 +2,87 @@
 
 namespace Loco\Http;
 
-use Guzzle\Common\Collection;
-use Guzzle\Service\Client;
-use Guzzle\Service\Description\ServiceDescription;
-use Guzzle\Common\Exception\InvalidArgumentException;
+use GuzzleHttp\Client;
+use GuzzleHttp\Command\Guzzle\Description;
+use GuzzleHttp\Command\Guzzle\GuzzleClient;
 
 /**
  * Loco REST API Client.
  * 
  * @usage $client = ApiClient::factory( array( 'key' => 'my-api-key' ) );
  */
-class ApiClient extends Client {
-    
+class ApiClient extends GuzzleClient
+{
     const VERSION = '1.0.18';
-    
+
     /**
      * Factory method to create a new Loco API client.
-     * @param array|Collection $config Configuration data
+     *
+     * @param array $config Configuration data
+     *
      * @return ApiClient
+     *
+     * @throws \InvalidArgumentException
      */
-    public static function factory( $config = array() ){
+    public static function factory(array $config = [])
+    {
        
-        // Provide a hash of default client configuration options
-        $default = array (
+        // Provide an array of default client configuration options
+        $defaults = [
             'key' => '',
-        );
-
+        ];
         // No values are currently required when creating the client
-        $required = array ();
+        $required = [];
 
-        // Merge in default settings and validate the config
-        $config = Collection::fromConfig( $config, $default, $required );
-
-        // Add configured API key as default command parameter although individual command execution may override
-        $config->add( Client::COMMAND_PARAMS, array ( 
-            'key' => $config->get('key'),
-        ) );
-        
-        // Sanitize authentication type now to pre-empty errors
-        if( $mode = $config->get('auth') ){
-            if( ! in_array( $mode, array('loco','basic','query'), true ) ){
-                throw new InvalidArgumentException('No such authentication mode, '.json_encode($mode) ); 
-            }
+        $config += $defaults;
+        if ($missing = array_diff($required, array_keys($config))) {
+            throw new \InvalidArgumentException('Config is missing the following keys: ' . implode(', ', $missing));
         }
+
+        // Sanitize authentication type now to pre-empty errors
+        if (isset($config['auth']) && !in_array($config['auth'], ['loco', 'basic', 'query'], true)) {
+            throw new \InvalidArgumentException('No such authentication mode, '.json_encode($config['auth']));
+        }
+
+        $serviceConfig = json_decode(file_get_contents(__DIR__.'/Resources/service.json'), true);
+        // allow override of base_uri after it's been set by service description
+        if (isset($config['base_uri'])) {
+            $serviceConfig['baseUri'] = $config['base_uri'];
+        }
+        // describe service from included config file.
+        $description = new Description($serviceConfig);
+
+        // Prefix Loco identifier to user agent string
+        $config['headers']['User-Agent'] = $description->getName().'/'.$description->getApiVersion().' '.\GuzzleHttp\default_user_agent();
 
         // Create a new instance of self
-        $client = new self( '', $config );
+        $client = new Client($config);
 
-        // describe service from included php file.
-        $service = ServiceDescription::factory( __DIR__.'/Resources/service.php');
-        
-        // allow override of base_url after it's been set by service description
-        if( $baseUrl = $config->get('base_url') ){
-            $service->setBaseUrl( $baseUrl );
-        }
-        
-        // Prefix Loco identifier to user agent string
-        $client->setUserAgent( $service->getName().'/'.$service->getApiVersion(), true );
+        // Add configured API key as default command parameter although individual command execution may override
+        $serviceClientConfig['defaults'] = [
+            'key' => $config['key'],
+        ];
 
-        return $client->setDescription( $service );
-                
-    }   
-
-
+        return new self($client, $description, null, null, null, $serviceClientConfig);
+    }
 
     /**
      * Get API version that service was built against.
+     *
      * @return string
      */
-    public function getApiVersion(){
+    public function getApiVersion()
+    {
         return $this->getDescription()->getApiVersion();
     }
 
-
     /**
      * Get canonical API version that library is expecting to find on the server
+     *
      * @return string
      */
-    public function getVersion(){
+    public function getVersion()
+    {
         return self::VERSION;
     }
 

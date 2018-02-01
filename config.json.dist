@@ -5,7 +5,7 @@
             "params": {
                 "key": "",
                 "auth": "loco",
-                "base_url": "https://localise.biz/api"
+                "base_uri": "https://localise.biz/api/swagger"
             }
         }
     }
