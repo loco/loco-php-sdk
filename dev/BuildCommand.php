@@ -55,7 +55,7 @@ final class BuildCommand extends Command
         }
 
         $conf = json_decode(file_get_contents($configPath), true);
-        if (isset($conf['services']['loco']['params']['base_uri']) === false) {
+        if (isset($conf['base_uri']) === false) {
             throw new \RuntimeException('Invalid config.json, need services.loco.params.base_uri');
         }
 
@@ -73,9 +73,9 @@ final class BuildCommand extends Command
             ->registerResponseClass('convert', RawResponse::class);
 
         // Enable response validation and locale URL if building for local test
-        $base_uri = $conf['services']['loco']['params']['base_uri'];
+        $base_uri = $conf['base_uri'];
         $domain = parse_url($base_uri, PHP_URL_HOST);
-        if (empty($conf['services']['loco']['strict'])) {
+        if (empty($conf['strict'])) {
             $builder->registerCommandClass('', LocoCommand::class);
         } else {
             $builder->registerCommandClass('', StrictCommand::class);

@@ -1,12 +1,5 @@
 {
-    "services": {
-        "loco": {
-            "class": "Loco\\Http\\ApiClient",
-            "params": {
-                "key": "",
-                "auth": "loco",
-                "base_uri": "https://localise.biz/api/swagger"
-            }
-        }
-    }
+    "key": "",
+    "auth": "loco",
+    "base_uri": "https://localise.biz/api"
 }
