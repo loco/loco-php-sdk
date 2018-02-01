@@ -2,9 +2,11 @@
 /**
  * Check your Loco project key with the REST API.
  */
-require __DIR__.'/../vendor/autoload.php';
+$basedir = \dirname(__DIR__);
 
-$client = Loco\Http\ApiClient::factory(['key' => 'your-api-key']);
+require_once $basedir.'/vendor/autoload.php';
+
+$client = Loco\Http\ApiClient::factory(json_decode(file_get_contents($basedir.'/config.json'), true));
 
 /** @var \GuzzleHttp\Command\Result $result */
 $result = $client->authVerify();

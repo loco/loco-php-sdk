@@ -69,15 +69,15 @@ final class Application extends BaseApplication
     /**
      * Get instance of the Loco API client
      *
-     * @param string api key to override any current configuration
+     * @param array $config client configuration to override current configuration
      *
      * @return ApiClient
      *
      * @throws \InvalidArgumentException
      */
-    public function getRestClient($apiKey = null)
+    public function getRestClient($config = [])
     {
-        $this->initRestClient($apiKey);
+        $this->initRestClient($config);
 
         return $this->restClient;
     }
@@ -85,19 +85,14 @@ final class Application extends BaseApplication
     /**
      * Init instance of the Loco API client
      *
-     * @param string api key to override any current configuration
+     * @param array $config client configuration to override current configuration
      *
      * @throws \InvalidArgumentException
      */
-    public function initRestClient($apiKey = null)
+    public function initRestClient($config = [])
     {
-        if ($this->restClient === null || $apiKey !== null) {
-            $this->restClient = ApiClient::factory(
-                [
-                    'key' => $apiKey,
-                    'base_uri' => 'https://localise.biz/api',
-                ]
-            );
+        if ($this->restClient === null || empty($config)) {
+            $this->restClient = ApiClient::factory($config);
         }
     }
 
