@@ -98,7 +98,7 @@ final class BuildCommand extends Command
         /* @var $service array[][] */
         foreach ($service['operations'] as $functionName => $operation) {
             $commandName = 'loco:'.strtolower(preg_replace('/[A-Z][a-z]/', ':\\0', $functionName));
-            $className = strtoupper($functionName{0}).substr($functionName, 1).'Command';
+            $className = ucfirst($functionName).'Command';
 
             $options = [];
             $usesAvailable = [
