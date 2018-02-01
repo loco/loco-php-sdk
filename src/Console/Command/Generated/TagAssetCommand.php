@@ -9,13 +9,16 @@ use Symfony\Component\Console\Input\InputArgument;
 /**
  * Auto-generated Loco API console command.
  */
-class TagAssetCommand extends Command {
-    
+class TagAssetCommand extends Command
+{
     /**
-     * Configure loco:tag:asset command
+     * Configure %name% command
+     *
      * @internal
+     * @throws \Symfony\Component\Console\Exception\InvalidArgumentException
      */
-    protected function configure(){
+    protected function configure()
+    {
         $this
             ->setName( 'loco:tag:asset' )
             ->setMethod( 'tagAsset' )

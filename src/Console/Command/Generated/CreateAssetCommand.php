@@ -4,18 +4,20 @@ namespace Loco\Console\Command\Generated;
 
 use Loco\Console\Command\Command;
 use Symfony\Component\Console\Input\InputOption;
-use Symfony\Component\Console\Input\InputArgument;
 
 /**
  * Auto-generated Loco API console command.
  */
-class CreateAssetCommand extends Command {
-    
+class CreateAssetCommand extends Command
+{
     /**
-     * Configure loco:create:asset command
+     * Configure %name% command
+     *
      * @internal
+     * @throws \Symfony\Component\Console\Exception\InvalidArgumentException
      */
-    protected function configure(){
+    protected function configure()
+    {
         $this
             ->setName( 'loco:create:asset' )
             ->setMethod( 'createAsset' )

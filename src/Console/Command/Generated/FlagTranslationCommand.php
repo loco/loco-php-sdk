@@ -9,13 +9,16 @@ use Symfony\Component\Console\Input\InputArgument;
 /**
  * Auto-generated Loco API console command.
  */
-class FlagTranslationCommand extends Command {
-    
+class FlagTranslationCommand extends Command
+{
     /**
-     * Configure loco:flag:translation command
+     * Configure %name% command
+     *
      * @internal
+     * @throws \Symfony\Component\Console\Exception\InvalidArgumentException
      */
-    protected function configure(){
+    protected function configure()
+    {
         $this
             ->setName( 'loco:flag:translation' )
             ->setMethod( 'flagTranslation' )

@@ -9,13 +9,16 @@ use Symfony\Component\Console\Input\InputArgument;
 /**
  * Auto-generated Loco API console command.
  */
-class GetAssetPluralsCommand extends Command {
-    
+class GetAssetPluralsCommand extends Command
+{
     /**
-     * Configure loco:get:asset:plurals command
+     * Configure %name% command
+     *
      * @internal
+     * @throws \Symfony\Component\Console\Exception\InvalidArgumentException
      */
-    protected function configure(){
+    protected function configure()
+    {
         $this
             ->setName( 'loco:get:asset:plurals' )
             ->setMethod( 'getAssetPlurals' )
