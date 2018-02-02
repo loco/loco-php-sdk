@@ -91,7 +91,7 @@ final class Application extends BaseApplication
      */
     public function initRestClient($config = [])
     {
-        if ($this->restClient === null || empty($config)) {
+        if ($this->restClient === null || empty($config) === false) {
             $this->restClient = ApiClient::factory($config);
         }
     }
