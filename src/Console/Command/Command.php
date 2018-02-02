@@ -73,27 +73,28 @@ abstract class Command extends BaseCommand
             // print request/response if -vv or higher
             if (OutputInterface::VERBOSITY_VERBOSE < $verbosity) {
 
+                // TODO: Fix these middlewares. They crash...
                 // inspect request before sending
-                $client->getHandlerStack()->push(
-                    Middleware::mapRequest(
-                        function (RequestInterface $request) use ($output) {
-                            $output->writeln(sprintf('Requesting <comment>%s</comment>', $request->getRequestTarget()));
-//                            $lines = explode("\n", trim($request->__toString()));
-//                            echo ' > ', implode("\n > ", $lines), "\n";
-                        }
-                    )
-                );
+//                $client->getHandlerStack()->push(
+//                    Middleware::mapRequest(
+//                        function (RequestInterface $request) use ($output) {
+//                            $output->writeln(sprintf('Requesting <comment>%s</comment>', $request->getRequestTarget()));
+////                            $lines = explode("\n", trim($request->__toString()));
+////                            echo ' > ', implode("\n > ", $lines), "\n";
+//                        }
+//                    )
+//                );
 
 //                 inspect response after receiving
-                $client->getHandlerStack()->push(
-                    Middleware::mapResponse(
-                        function (ResponseInterface $response) use ($output) {
-                            $output->writeln(sprintf('Responded <comment>%u</comment>', $response->getStatusCode()));
-//                            $lines = explode("\n", trim($response->__toString()));
-//                            echo ' < ', implode("\n < ", $lines), "\n";
-                        }
-                    )
-                );
+//                $client->getHandlerStack()->push(
+//                    Middleware::mapResponse(
+//                        function (ResponseInterface $response) use ($output) {
+//                            $output->writeln(sprintf('Responded <comment>%u</comment>', $response->getStatusCode()));
+////                            $lines = explode("\n", trim($response->__toString()));
+////                            echo ' < ', implode("\n < ", $lines), "\n";
+//                        }
+//                    )
+//                );
             }
         }
         // call overloaded function and show body on error
