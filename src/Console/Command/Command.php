@@ -43,11 +43,20 @@ abstract class Command extends BaseCommand
      * @param InputInterface $input
      * @param OutputInterface $output
      *
+     * @throws \InvalidArgumentException
      * @throws \GuzzleHttp\Exception\BadResponseException
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $args = $input->getArguments() + $input->getOptions();
+
+        $client = $this->getApplication()->getRestClient();
+        $config = $client->getConfig();
+        if (empty($args['key']) === false) {
+            $config['key'] = $args['key'];
+            $client = $this->getApplication()->getRestClient($config);
+        }
+
 
         // override API key
         if (isset($args['key']) && ($apiKey = trim($args['key']))) {
