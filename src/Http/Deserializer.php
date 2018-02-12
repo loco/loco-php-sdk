@@ -1,6 +1,6 @@
 <?php
 
-namespace Loco;
+namespace Loco\Http;
 
 use GuzzleHttp\Command\CommandInterface;
 use GuzzleHttp\Command\Guzzle\DescriptionInterface;

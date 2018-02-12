@@ -5,7 +5,6 @@ namespace Loco\Http;
 use GuzzleHttp\Client;
 use GuzzleHttp\Command\Guzzle\Description;
 use GuzzleHttp\Command\Guzzle\GuzzleClient;
-use Loco\Deserializer;
 
 /**
  * Loco REST API Client.
@@ -27,23 +26,7 @@ class ApiClient extends GuzzleClient
      */
     public static function factory(array $config = [])
     {
-       
-        // Provide an array of default client configuration options
-        $defaults = [
-            'key' => '',
-        ];
-        // No values are currently required when creating the client
-        $required = [];
-
-        $config += $defaults;
-        if ($missing = array_diff($required, array_keys($config))) {
-            throw new \InvalidArgumentException('Config is missing the following keys: ' . implode(', ', $missing));
-        }
-
-        // Sanitize authentication type now to pre-empty errors
-        if (isset($config['auth']) && !in_array($config['auth'], ['loco', 'basic', 'query'], true)) {
-            throw new \InvalidArgumentException('No such authentication mode, '.json_encode($config['auth']));
-        }
+        $config = static::processFactoryConfig($config);
 
         $serviceConfig = json_decode(file_get_contents(__DIR__.'/Resources/service.json'), true);
         // allow override of base_uri after it's been set by service description
@@ -53,27 +36,59 @@ class ApiClient extends GuzzleClient
         // describe service from included config file.
         $description = new Description($serviceConfig);
 
+        $clientConfig = [];
         // Prefix Loco identifier to user agent string
-        $config['headers']['User-Agent'] = $description->getName().'/'.$description->getApiVersion().' '.\GuzzleHttp\default_user_agent();
-
+        $clientConfig['headers']['User-Agent'] = $description->getName().'/'.$description->getApiVersion().' '
+            .\GuzzleHttp\default_user_agent();
         // Create a new HTTP Client
-        $client = new Client($config);
+        $client = new Client($clientConfig);
 
-        // Add configured API key as default command parameter although individual command execution may override
+        // Add configured API key as default command parameter although individual command execution may override it
+        // Pass auth type, we need it in LocoRequestSerializer
         $serviceClientConfig['defaults'] = [
             'key' => $config['key'],
+            'auth' => $config['auth'],
         ];
-
         $validateResponse = isset($config['validate_response']) ? (bool)$config['validate_response'] : false;
 
         return new self(
             $client,
             $description,
-            null,
+            new LocoRequestSerializer($description),
             new Deserializer($description, true, [], $validateResponse),
             null,
             $serviceClientConfig
         );
+    }
+
+    /**
+     * @param array $config
+     *
+     * @return array
+     *
+     * @throws \InvalidArgumentException
+     */
+    protected static function processFactoryConfig(array $config)
+    {
+        // Provide an array of default client configuration options
+        $defaults = [
+            'key' => '',
+            'auth' => 'loco',
+        ];
+        // No values are currently required when creating the client
+        $required = [];
+
+        $config += $defaults;
+        if ($missing = array_diff($required, array_keys($config))) {
+            throw new \InvalidArgumentException('Config is missing the following keys: '.implode(', ', $missing));
+        }
+
+        // Validate authentication type
+        if (isset($config['auth']) && !in_array($config['auth'], ['loco', 'basic', 'query'], true)) {
+            throw new \InvalidArgumentException('No such authentication mode, '.json_encode($config['auth']));
+        }
+
+        return $config;
     }
 
     /**
@@ -95,6 +110,5 @@ class ApiClient extends GuzzleClient
     {
         return self::VERSION;
     }
-
 }
 
