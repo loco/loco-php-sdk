@@ -75,12 +75,6 @@ final class BuildCommand extends Command
         // Enable response validation and locale URL if building for local test
         $base_uri = $conf['base_uri'];
         $domain = parse_url($base_uri, PHP_URL_HOST);
-        // TODO: add a config option to enable/disable validation and pass it to Deserializer
-//        if (empty($conf['strict'])) {
-//            $builder->registerCommandClass('', LocoCommand::class);
-//        } else {
-//            $builder->registerCommandClass('', StrictCommand::class);
-//        }
 
         $base_uri .= '/swagger';
         $output->writeln('<comment>Pulling docs from '.$base_uri.'</comment>');

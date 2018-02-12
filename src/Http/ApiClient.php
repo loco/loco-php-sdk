@@ -64,11 +64,13 @@ class ApiClient extends GuzzleClient
             'key' => $config['key'],
         ];
 
+        $validateResponse = isset($config['validate_response']) ? (bool)$config['validate_response'] : false;
+
         return new self(
             $client,
             $description,
             null,
-            new Deserializer($description, true),
+            new Deserializer($description, true, [], $validateResponse),
             null,
             $serviceClientConfig
         );

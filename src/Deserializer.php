@@ -3,6 +3,7 @@
 namespace Loco;
 
 use GuzzleHttp\Command\CommandInterface;
+use GuzzleHttp\Command\Guzzle\DescriptionInterface;
 use GuzzleHttp\Command\Guzzle\Deserializer as DefaultDeserializer;
 use GuzzleHttp\Command\Guzzle\Parameter;
 use GuzzleHttp\Command\Guzzle\SchemaValidator;
@@ -14,10 +15,26 @@ use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 
 class Deserializer extends DefaultDeserializer
-{   /**
- * @var CommandInterface
- */
+{
+    /**
+     * @var CommandInterface
+     */
     protected $command;
+
+    /**
+     * @var bool
+     */
+    protected $validateResponse;
+
+    public function __construct(
+        DescriptionInterface $description,
+        $process,
+        array $responseLocations = [],
+        $validateResponse = false
+    ) {
+        $this->validateResponse = $validateResponse;
+        parent::__construct($description, $process, $responseLocations);
+    }
 
     /**
      * Deserialize the response into the specified result representation
@@ -27,11 +44,12 @@ class Deserializer extends DefaultDeserializer
      * @param CommandInterface $command
      *
      * @return Result|ResultInterface|ResponseInterface|ClassResultInterface
-     * @throws \Loco\Utils\Swizzle\Exception\ValidationException
+     * @throws \Loco\Exception\ValidationException
      */
     public function __invoke(ResponseInterface $response, RequestInterface $request, CommandInterface $command)
     {
         $this->command = $command;
+
         return parent::__invoke($response, $request, $command);
     }
 
@@ -44,7 +62,7 @@ class Deserializer extends DefaultDeserializer
      * @return Result|ResultInterface|ResponseInterface|ClassResultInterface
      *
      * @throws \InvalidArgumentException
-     * @throws \Loco\Utils\Swizzle\Exception\ValidationException
+     * @throws \Loco\Exception\ValidationException
      */
     protected function visit(Parameter $model, ResponseInterface $response)
     {
@@ -82,16 +100,17 @@ class Deserializer extends DefaultDeserializer
             }
         }
 
-        if ($result instanceof ResultInterface) {
+        if ($this->validateResponse === true && $result instanceof ResultInterface) {
             $validator = new SchemaValidator();
             $res = $result->toArray();
             if ($validator->validate($model, $res) === false) {
                 throw new ValidationException(
-                    'Response failed model validation: ' . implode("\n", $validator->getErrors()),
+                    'Response failed model validation: '.implode("\n", $validator->getErrors()),
                     $this->command
                 );
             }
         }
+
         return $result;
     }
 

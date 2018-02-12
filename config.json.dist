@@ -1,5 +1,6 @@
 {
     "key": "",
     "auth": "loco",
+    "validate_response": false,
     "base_uri": "https://localise.biz/api"
 }
