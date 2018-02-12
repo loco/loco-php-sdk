@@ -5,6 +5,7 @@ namespace Loco\Http;
 use GuzzleHttp\Client;
 use GuzzleHttp\Command\Guzzle\Description;
 use GuzzleHttp\Command\Guzzle\GuzzleClient;
+use Loco\Deserializer;
 
 /**
  * Loco REST API Client.
@@ -55,7 +56,7 @@ class ApiClient extends GuzzleClient
         // Prefix Loco identifier to user agent string
         $config['headers']['User-Agent'] = $description->getName().'/'.$description->getApiVersion().' '.\GuzzleHttp\default_user_agent();
 
-        // Create a new instance of self
+        // Create a new HTTP Client
         $client = new Client($config);
 
         // Add configured API key as default command parameter although individual command execution may override
@@ -63,7 +64,14 @@ class ApiClient extends GuzzleClient
             'key' => $config['key'],
         ];
 
-        return new self($client, $description, null, null, null, $serviceClientConfig);
+        return new self(
+            $client,
+            $description,
+            null,
+            new Deserializer($description, true),
+            null,
+            $serviceClientConfig
+        );
     }
 
     /**

@@ -4,8 +4,8 @@ namespace Loco\Dev;
 
 use Loco\Http\Command\LocoCommand;
 use Loco\Http\Command\StrictCommand;
-use Loco\Http\Response\RawResponse;
-use Loco\Http\Response\ZipResponse;
+use Loco\Http\Result\RawResult;
+use Loco\Http\Result\ZipResult;
 use Loco\Utils\Swizzle\Swizzle;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
@@ -66,20 +66,21 @@ final class BuildCommand extends Command
         }
 
         // Register custom Guzzle response classes
-        $builder->registerResponseClass('exportArchive', ZipResponse::class)
-            ->registerResponseClass('exportTemplate', RawResponse::class)
-            ->registerResponseClass('exportLocale', RawResponse::class)
-            ->registerResponseClass('exportAll', RawResponse::class)
-            ->registerResponseClass('convert', RawResponse::class);
+        $builder->registerResponseClass('exportArchive', ZipResult::class)
+            ->registerResponseClass('exportTemplate', RawResult::class)
+            ->registerResponseClass('exportLocale', RawResult::class)
+            ->registerResponseClass('exportAll', RawResult::class)
+            ->registerResponseClass('convert', RawResult::class);
 
         // Enable response validation and locale URL if building for local test
         $base_uri = $conf['base_uri'];
         $domain = parse_url($base_uri, PHP_URL_HOST);
-        if (empty($conf['strict'])) {
-            $builder->registerCommandClass('', LocoCommand::class);
-        } else {
-            $builder->registerCommandClass('', StrictCommand::class);
-        }
+        // TODO: add a config option to enable/disable validation and pass it to Deserializer
+//        if (empty($conf['strict'])) {
+//            $builder->registerCommandClass('', LocoCommand::class);
+//        } else {
+//            $builder->registerCommandClass('', StrictCommand::class);
+//        }
 
         $base_uri .= '/swagger';
         $output->writeln('<comment>Pulling docs from '.$base_uri.'</comment>');
