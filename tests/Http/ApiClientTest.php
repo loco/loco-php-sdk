@@ -2,88 +2,98 @@
 
 namespace Loco\Tests\Http;
 
+use GuzzleHttp\Command\Result;
+use GuzzleHttp\Handler\MockHandler;
+use GuzzleHttp\Psr7\Response;
 use Loco\Http\ApiClient;
-use Guzzle\Tests\GuzzleTestCase;
-use Guzzle\Service\Builder\ServiceBuilder;
-use Guzzle\Http\Message\Response;
 
 /**
  * Mock ApiClient tests.
+ *
  * @group client
  */
-class ApiClientTest extends GuzzleTestCase {
-    
-    
+class ApiClientTest extends ApiClientTestCase
+{
+
     /**
-     * Get api client via config applied in bootstrap.php
+     * @covers \Loco\Http\ApiClient::factory
      * @return ApiClient
      */
-    protected function getClient(){
-        return $this->getServiceBuilder()->get('loco');
-    }    
-    
-    
-    
-    /**
-     * @covers Loco\Http\ApiClient::factory
-     * @return ApiClient
-     */
-    public function testFactoryInitializesClient(){
-        $client = ApiClient::factory( array(
-            'key' => 'dummy',
-            'base_url' => 'https://example.com/api',
-        ) );
-        $this->assertEquals( 'https://example.com/api', $client->getBaseUrl() );
-        $this->assertEquals('dummy', $client->getConfig('key') );
+    public function testFactoryInitializesClient()
+    {
+        $client = ApiClient::factory(
+            [
+                'key' => 'dummy',
+                'base_uri' => 'https://example.com/api',
+            ]
+        );
+        $this->assertEquals('https://example.com/api', $client->getHttpClient()->getConfig('base_uri')->__toString());
+        $this->assertEquals('https://example.com/api', $client->getDescription()->getBaseUri()->__toString());
+        $this->assertEquals('dummy', $client->getConfig('defaults')['key']);
+
         return $client;
     }
-    
-    
+
     /**
-     * @expectedException Guzzle\Common\Exception\InvalidArgumentException
-     */ 
-    public function testClientRejectsInvalidAuthType(){
-        $client = ApiClient::factory( array( 'auth' => 'Foo' ) );
+     * @expectedException \InvalidArgumentException
+     */
+    public function testClientRejectsInvalidAuthType()
+    {
+        ApiClient::factory(['auth' => 'Foo']);
     }
-    
-
 
     /**
-     * Fake ping over Guzzle Node test server
+     * Test ping request with mocked response
+     *
      * @group node
      */
-    public function testNodePing(){
-        $client = ApiClient::factory( array( 'base_url' => 'https://example.com/api' ) );
-        $this->enqueueJson( $client, array( 'version' => '1.1' ) );
-        $version = $client->ping()->get('version');
-        $this->assertEquals( '1.1', $version );
+    public function testPing()
+    {
+        $client = $this->getClientWithMockedResponse(
+            ['base_uri' => 'https://example.com/api'],
+            ['version' => '1.1']
+        );
+        /** @var Result $result */
+        $result = $client->ping();
+        $this->assertArrayHasKey('version', $result);
+        $this->assertEquals('1.1', $result['version']);
     }
-
-
 
     /**
      * Fake an invalid ping
+     *
      * @group node
      * @group strict
-     * @expectedException \Guzzle\Service\Exception\ValidationException
+     * @expectedException \Loco\Exception\ValidationException
      */
-    public function testMockInvalidPing(){
-        $client = ApiClient::factory( array( 'base_url' => 'https://example.com/api' ) );
-        $this->enqueueJson( $client, array( 'fail' => 'woops' ) );
+    public function testMockInvalidPing()
+    {
+        $client = $this->getClientWithMockedResponse(
+            ['base_uri' => 'https://example.com/api'],
+            ['fail' => 'woops']
+        );
         $client->ping();
     }
 
-
-
     /**
-     * Queue up o a fake JSON response via node test server
-     */    
-    private function enqueueJson( ApiClient $client, array $data ){
-        $json = json_encode( $data );
-        $http = sprintf("HTTP/1.1 200 OK\r\nContent-Length: %u\r\n\r\n%s", strlen($json), $json );
-        $this->getServer()->enqueue( $http );
-        $client->setBaseUrl( $this->getServer()->getUrl() );
-    }    
+     * Create client with mocked fake response
+     *
+     * @param array $config
+     * @param $responseBody
+     *
+     * @return ApiClient
+     */
+    private function getClientWithMockedResponse(array $config = [], $responseBody)
+    {
+        $response = new Response(200, [], json_encode($responseBody));
+        $handlerStack = MockHandler::createWithMiddleware([$response]);
+        $config['httpHandlerStack'] = $handlerStack;
+
+        $defaults = [
+            'base_uri' => 'https://localise.biz/api/docs'
+        ];
+        return static::getClient($config + $defaults);
+    }
 
 }
 

@@ -2,39 +2,43 @@
 
 namespace Loco\Tests\Http;
 
-use Loco\Http\ApiClient;
+use GuzzleHttp\Exception\ClientException;
 
 /**
  * Test the live /ping API.
+ *
  * @group live
  * @group ping
  * @group readonly
  */
-class ApiClientPingTest  extends ApiClientTest {
-    
-    
+class ApiClientPingTest extends ApiClientTestCase
+{
+
     /**
      * Live ping test via overloaded service method
      */
-    public function testLivePing(){
-        $client = $this->getClient();
-        $sdk_version = $client->getVersion();
-        $api_version = $client->getApiVersion();
-        $this->assertEquals( $sdk_version, $api_version, 'API version does not match SDK version' );
-        $api_version = $client->ping()->get('version');
-        $this->assertEquals( $sdk_version, $api_version, 'Live API version does not match local SDK version' );
+    public function testLivePing()
+    {
+        $client = static::getClient();
+        $sdkVersion = $client->getVersion();
+        $apiVersion = $client->getApiVersion();
+        $this->assertEquals($sdkVersion, $apiVersion, 'API version does not match SDK version');
+        $result = $client->ping();
+        $apiVersion = $result['version'];
+        $this->assertEquals($sdkVersion, $apiVersion, 'Live API version does not match local SDK version');
     }
-
 
     /**
      * Live 404 test via custom endpoint
-     * @expectedException \Guzzle\Http\Exception\BadResponseException
-     */    
-    public function testLiveFail(){
-        $client = $this->getClient();
-        $client->get('ping/not-found.json')->send();
+     *
+     * @expectedException \GuzzleHttp\Exception\ClientException
+     * @expectExceptionCode 404
+     */
+    public function testLiveFail()
+    {
+        $client = static::getClient();
+        $client->getHttpClient()->get('ping/not-found.json')->send();
     }
-    
-    
+
 }
 
