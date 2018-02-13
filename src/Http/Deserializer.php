@@ -22,9 +22,9 @@ class Deserializer extends DefaultDeserializer
     protected $command;
 
     /**
-     * @var bool
+     * @var SchemaValidator
      */
-    protected $validateResponse;
+    protected $validator;
 
     public function __construct(
         DescriptionInterface $description,
@@ -32,7 +32,9 @@ class Deserializer extends DefaultDeserializer
         array $responseLocations = [],
         $validateResponse = false
     ) {
-        $this->validateResponse = $validateResponse;
+        if ($validateResponse === true) {
+            $this->validator = new SchemaValidator();
+        }
         parent::__construct($description, $process, $responseLocations);
     }
 
@@ -100,12 +102,11 @@ class Deserializer extends DefaultDeserializer
             }
         }
 
-        if ($this->validateResponse === true && $result instanceof ResultInterface) {
-            $validator = new SchemaValidator();
+        if ($this->validator instanceof SchemaValidator && $result instanceof ResultInterface) {
             $res = $result->toArray();
-            if ($validator->validate($model, $res) === false) {
+            if ($this->validator->validate($model, $res) === false) {
                 throw new ValidationException(
-                    'Response failed model validation: '.implode("\n", $validator->getErrors()),
+                    'Response failed model validation: '.implode("\n", $this->validator->getErrors()),
                     $this->command
                 );
             }
