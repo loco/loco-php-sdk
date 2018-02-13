@@ -41,6 +41,7 @@
             "httpMethod": "POST",
             "uri": "\/api\/tags.json",
             "name": "createTag",
+            "responseModel": "Success",
             "parameters": {
                 "name": {
                     "name": "name",
@@ -63,7 +64,6 @@
                     "phrase": "Invalid API key"
                 }
             ],
-            "responseModel": null,
             "notes": "",
             "documentationUrl": null,
             "deprecated": false,
@@ -76,6 +76,7 @@
             "httpMethod": "PATCH",
             "uri": "\/api\/tags\/{tag}.json",
             "name": "patchTag",
+            "responseModel": "Success",
             "parameters": {
                 "name": {
                     "description": "Display name of tag",
@@ -108,7 +109,6 @@
                     "phrase": "Tag not in project"
                 }
             ],
-            "responseModel": null,
             "notes": "",
             "documentationUrl": null,
             "deprecated": false,
@@ -121,6 +121,7 @@
             "httpMethod": "DELETE",
             "uri": "\/api\/tags\/{tag}.json",
             "name": "deleteTag",
+            "responseModel": "Success",
             "parameters": {
                 "key": {
                     "name": "key",
@@ -147,7 +148,6 @@
                     "phrase": "Tag not in project"
                 }
             ],
-            "responseModel": null,
             "notes": "",
             "documentationUrl": null,
             "deprecated": false,
@@ -750,6 +750,7 @@
             "httpMethod": "GET",
             "uri": "\/api\/import\/progress\/{id}",
             "name": "importProgress",
+            "responseModel": "AsyncProgress",
             "parameters": {
                 "id": {
                     "name": "id",
@@ -780,7 +781,6 @@
                     "phrase": "Insufficient privileges"
                 }
             ],
-            "responseModel": null,
             "notes": "",
             "documentationUrl": null,
             "deprecated": false,
@@ -793,6 +793,7 @@
             "httpMethod": "POST",
             "uri": "\/api\/import\/{ext}",
             "name": "import",
+            "responseModel": "Imported",
             "parameters": {
                 "ext": {
                     "name": "ext",
@@ -949,7 +950,6 @@
                     "phrase": "Insufficient privileges"
                 }
             ],
-            "responseModel": null,
             "notes": "",
             "documentationUrl": null,
             "deprecated": false,
@@ -962,6 +962,7 @@
             "httpMethod": "GET",
             "uri": "\/api\/auth\/verify",
             "name": "authVerify",
+            "responseModel": "Creds",
             "parameters": {
                 "key": {
                     "name": "key",
@@ -981,7 +982,6 @@
                     "phrase": "Insufficient privileges"
                 }
             ],
-            "responseModel": null,
             "notes": "",
             "documentationUrl": null,
             "deprecated": false,
@@ -1032,6 +1032,7 @@
             "httpMethod": "POST",
             "uri": "\/api\/assets",
             "name": "createAsset",
+            "responseModel": "Asset",
             "parameters": {
                 "name": {
                     "name": "name",
@@ -1114,7 +1115,6 @@
                     "phrase": "Insufficient privileges"
                 }
             ],
-            "responseModel": null,
             "notes": "",
             "documentationUrl": null,
             "deprecated": false,
@@ -1127,6 +1127,7 @@
             "httpMethod": "GET",
             "uri": "\/api\/assets\/{id}.json",
             "name": "getAsset",
+            "responseModel": "Asset",
             "parameters": {
                 "key": {
                     "name": "key",
@@ -1153,7 +1154,6 @@
                     "phrase": "Asset not in project"
                 }
             ],
-            "responseModel": null,
             "notes": "",
             "documentationUrl": null,
             "deprecated": false,
@@ -1166,6 +1166,7 @@
             "httpMethod": "PATCH",
             "uri": "\/api\/assets\/{id}.json",
             "name": "patchAsset",
+            "responseModel": "Asset",
             "parameters": {
                 "id_json": {
                     "description": "Machine friendly name",
@@ -1233,7 +1234,6 @@
                     "phrase": "Asset not in project"
                 }
             ],
-            "responseModel": null,
             "notes": "",
             "documentationUrl": null,
             "deprecated": false,
@@ -1246,6 +1246,7 @@
             "httpMethod": "DELETE",
             "uri": "\/api\/assets\/{id}.json",
             "name": "deleteAsset",
+            "responseModel": "Success",
             "parameters": {
                 "key": {
                     "name": "key",
@@ -1276,7 +1277,6 @@
                     "phrase": "Insufficient privileges"
                 }
             ],
-            "responseModel": null,
             "notes": "",
             "documentationUrl": null,
             "deprecated": false,
@@ -1292,7 +1292,7 @@
             "httpMethod": "GET",
             "uri": "\/api\/assets\/{id}\/plurals",
             "name": "getAssetPlurals",
-            "responseModel": "AssetPluralList",
+            "responseModel": "AssetList",
             "parameters": {
                 "key": {
                     "name": "key",
@@ -1331,6 +1331,7 @@
             "httpMethod": "POST",
             "uri": "\/api\/assets\/{id}\/plurals",
             "name": "createPlural",
+            "responseModel": "Asset",
             "parameters": {
                 "name": {
                     "name": "name",
@@ -1376,7 +1377,6 @@
                     "phrase": "Asset not in project"
                 }
             ],
-            "responseModel": null,
             "notes": "",
             "documentationUrl": null,
             "deprecated": false,
@@ -1389,6 +1389,7 @@
             "httpMethod": "DELETE",
             "uri": "\/api\/assets\/{id}\/plurals\/{pid}.json",
             "name": "unlinkPlural",
+            "responseModel": "Success",
             "parameters": {
                 "pid": {
                     "name": "pid",
@@ -1426,7 +1427,6 @@
                     "phrase": "Asset not in project"
                 }
             ],
-            "responseModel": null,
             "notes": "",
             "documentationUrl": null,
             "deprecated": false,
@@ -1439,6 +1439,7 @@
             "httpMethod": "POST",
             "uri": "\/api\/assets\/{id}\/tags",
             "name": "tagAsset",
+            "responseModel": "Asset",
             "parameters": {
                 "name": {
                     "name": "name",
@@ -1476,7 +1477,6 @@
                     "phrase": "Insufficient privileges"
                 }
             ],
-            "responseModel": null,
             "notes": "",
             "documentationUrl": null,
             "deprecated": false,
@@ -1489,6 +1489,7 @@
             "httpMethod": "DELETE",
             "uri": "\/api\/assets\/{id}\/tags\/{tag}.json",
             "name": "untagAsset",
+            "responseModel": "Success",
             "parameters": {
                 "tag": {
                     "name": "tag",
@@ -1526,7 +1527,6 @@
                     "phrase": "Insufficient privileges"
                 }
             ],
-            "responseModel": null,
             "notes": "",
             "documentationUrl": null,
             "deprecated": false,
@@ -1570,6 +1570,7 @@
             "httpMethod": "POST",
             "uri": "\/api\/locales",
             "name": "createLocale",
+            "responseModel": "Locale",
             "parameters": {
                 "code": {
                     "name": "code",
@@ -1604,7 +1605,6 @@
                     "phrase": "Insufficient privileges"
                 }
             ],
-            "responseModel": null,
             "notes": "",
             "documentationUrl": null,
             "deprecated": false,
@@ -1617,6 +1617,7 @@
             "httpMethod": "GET",
             "uri": "\/api\/locales\/{locale}",
             "name": "getLocale",
+            "responseModel": "Locale",
             "parameters": {
                 "key": {
                     "name": "key",
@@ -1643,7 +1644,6 @@
                     "phrase": "Locale not in project"
                 }
             ],
-            "responseModel": null,
             "notes": "",
             "documentationUrl": null,
             "deprecated": false,
@@ -1656,6 +1656,7 @@
             "httpMethod": "PATCH",
             "uri": "\/api\/locales\/{locale}",
             "name": "patchLocale",
+            "responseModel": "Locale",
             "parameters": {
                 "code": {
                     "description": "Locale short code",
@@ -1698,7 +1699,6 @@
                     "phrase": "Locale not in project"
                 }
             ],
-            "responseModel": null,
             "notes": "",
             "documentationUrl": null,
             "deprecated": false,
@@ -1711,6 +1711,7 @@
             "httpMethod": "DELETE",
             "uri": "\/api\/locales\/{locale}",
             "name": "deleteLocale",
+            "responseModel": "Success",
             "parameters": {
                 "key": {
                     "name": "key",
@@ -1741,7 +1742,6 @@
                     "phrase": "Insufficient privileges"
                 }
             ],
-            "responseModel": null,
             "notes": "",
             "documentationUrl": null,
             "deprecated": false,
@@ -1796,6 +1796,7 @@
             "httpMethod": "GET",
             "uri": "\/api\/translations\/{id}\/{locale}",
             "name": "getTranslation",
+            "responseModel": "Translation",
             "parameters": {
                 "key": {
                     "name": "key",
@@ -1833,7 +1834,6 @@
                     "phrase": "Locale not in project"
                 }
             ],
-            "responseModel": null,
             "notes": "",
             "documentationUrl": null,
             "deprecated": false,
@@ -1846,6 +1846,7 @@
             "httpMethod": "POST",
             "uri": "\/api\/translations\/{id}\/{locale}",
             "name": "translate",
+            "responseModel": "Translation",
             "parameters": {
                 "translation": {
                     "name": "translation",
@@ -1886,7 +1887,6 @@
                     "phrase": "Asset not in project"
                 }
             ],
-            "responseModel": null,
             "notes": "",
             "documentationUrl": null,
             "deprecated": false,
@@ -1899,6 +1899,7 @@
             "httpMethod": "DELETE",
             "uri": "\/api\/translations\/{id}\/{locale}",
             "name": "untranslate",
+            "responseModel": "Success",
             "parameters": {
                 "key": {
                     "name": "key",
@@ -1936,7 +1937,6 @@
                     "phrase": "Asset not translated in this locale"
                 }
             ],
-            "responseModel": null,
             "notes": "",
             "documentationUrl": null,
             "deprecated": false,
@@ -1949,6 +1949,7 @@
             "httpMethod": "POST",
             "uri": "\/api\/translations\/{id}\/{locale}\/flag",
             "name": "flagTranslation",
+            "responseModel": "Success",
             "parameters": {
                 "flag": {
                     "name": "flag",
@@ -1997,7 +1998,6 @@
                     "phrase": "Asset not in project"
                 }
             ],
-            "responseModel": null,
             "notes": "",
             "documentationUrl": null,
             "deprecated": false,
@@ -2010,6 +2010,7 @@
             "httpMethod": "DELETE",
             "uri": "\/api\/translations\/{id}\/{locale}\/flag",
             "name": "unflagTranslation",
+            "responseModel": "Success",
             "parameters": {
                 "key": {
                     "name": "key",
@@ -2043,7 +2044,6 @@
                     "phrase": "Asset not in project"
                 }
             ],
-            "responseModel": null,
             "notes": "",
             "documentationUrl": null,
             "deprecated": false,
@@ -2056,9 +2056,9 @@
             "httpMethod": "GET",
             "uri": "\/api\/ping",
             "name": "ping",
+            "responseModel": "Echo",
             "parameters": [],
             "errorResponses": [],
-            "responseModel": null,
             "notes": "",
             "documentationUrl": null,
             "deprecated": false,
@@ -2070,9 +2070,9 @@
             "httpMethod": "GET",
             "uri": "\/api\/ping\/not-found",
             "name": "ping404",
+            "responseModel": "Error",
             "parameters": [],
             "errorResponses": [],
-            "responseModel": null,
             "notes": "",
             "documentationUrl": null,
             "deprecated": false,
@@ -2691,13 +2691,6 @@
             "additionalProperties": false
         },
         "AssetList": {
-            "type": "array",
-            "items": {
-                "$ref": "Asset"
-            },
-            "location": "json"
-        },
-        "AssetPluralList": {
             "type": "array",
             "items": {
                 "$ref": "Asset"
