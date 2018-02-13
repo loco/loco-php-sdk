@@ -34,12 +34,23 @@ class ApiClient extends GuzzleClient
             $serviceConfig['baseUri'] = $config['base_uri'];
         }
         // describe service from included config file.
-        $description = new Description($serviceConfig);
+        // TODO: Add null values handling to Guzzle's formatter and submit a PR to upstream.
+        // Remove NullableSchemaFormatter if they accept PR.
+        $description = new Description(
+            $serviceConfig,
+            ['formatter' => new NullableSchemaFormatter()]
+        );
 
         $clientConfig = [];
         // Prefix Loco identifier to user agent string
         $clientConfig['headers']['User-Agent'] = $description->getName().'/'.$description->getApiVersion().' '
             .\GuzzleHttp\default_user_agent();
+        if (isset($config['httpHandlerStack']) === true) {
+            $clientConfig['handler'] = $config['httpHandlerStack'];
+        }
+        if (isset($config['base_uri']) === true) {
+            $clientConfig['base_uri'] = $config['base_uri'];
+        }
         // Create a new HTTP Client
         $client = new Client($clientConfig);
 

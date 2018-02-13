@@ -91,7 +91,7 @@ abstract class Command extends BaseCommand
                 )
             );
 
-            $config['handler'] = $stack;
+            $config['httpHandlerStack'] = $stack;
         }
 
         $client = $this->getApplication()->getRestClient($config);

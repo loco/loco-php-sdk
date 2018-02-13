@@ -10,9 +10,9 @@ $basedir = \dirname(__DIR__);
 
 require_once $basedir.'/vendor/autoload.php';
 
-$app = new \Loco\Console\Application();
+$app = new \Loco\Console\Application(json_decode(file_get_contents($basedir.'/config.json'), true));
 
-$app->initRestClient(json_decode(file_get_contents($basedir.'/config.json'), true));
+$app->initRestClient();
 
 $app->initApiCommands();
 

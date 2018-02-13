@@ -17,10 +17,16 @@ final class Application extends BaseApplication
     private $restClient;
 
     /**
+     * @var array
+     */
+    private $defaultConfig;
+
+    /**
      * @override
      */
-    public function __construct()
+    public function __construct($defaultConfig)
     {
+        $this->defaultConfig = $defaultConfig;
         parent::__construct('Loco', ApiClient::VERSION);
     }
 
@@ -70,14 +76,16 @@ final class Application extends BaseApplication
      * Get instance of the Loco API client
      *
      * @param array $config client configuration to override current configuration
+     * @param bool $appendConfig should passed config be appended to default one? If false, $config argument will
+     * override default client config.
      *
      * @return ApiClient
      *
      * @throws \InvalidArgumentException
      */
-    public function getRestClient($config = [])
+    public function getRestClient($config = [], $appendConfig = true)
     {
-        $this->initRestClient($config);
+        $this->initRestClient($config, $appendConfig);
 
         return $this->restClient;
     }
@@ -85,13 +93,20 @@ final class Application extends BaseApplication
     /**
      * Init instance of the Loco API client
      *
-     * @param array $config client configuration to override current configuration
+     * @param array $config Client configuration to override current configuration
+     * @param bool $appendConfig should passed config be appended to default one? If false, $config argument will
+     * override default client config.
      *
      * @throws \InvalidArgumentException
      */
-    public function initRestClient($config = [])
+    public function initRestClient(array $config = [], $appendConfig = true)
     {
-        if ($this->restClient === null || empty($config) === false) {
+        if ($this->restClient === null || empty($config) === false || $appendConfig === false) {
+
+            if ($appendConfig === true) {
+                $config = array_merge($this->defaultConfig, $config);
+            }
+
             $this->restClient = ApiClient::factory($config);
         }
     }
