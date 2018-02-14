@@ -68,7 +68,15 @@ class Deserializer extends DefaultDeserializer
      */
     protected function visit(Parameter $model, ResponseInterface $response)
     {
-        $errorMessage = null;
+        // Weird import endpoint behaviour. For async import it returns totally different response.
+        // We need data from response header, so returning raw response.
+        if (
+            $this->command->getName() === 'import'
+            && $this->command->offsetGet('async') === true
+        ) {
+            return $response;
+        }
+
         if ($model->getType() === 'class') {
             if (isset($model->toArray()['class'])) {
                 $class = $model->toArray()['class'];
