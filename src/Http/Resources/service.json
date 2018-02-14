@@ -6,9 +6,6 @@
     "operations": {
         "getTags": {
             "summary": "Get project tags",
-            "items": {
-                "type": "string"
-            },
             "responseNotes": "Lists all tags in currently authenticated project",
             "httpMethod": "GET",
             "uri": "\/api\/tags.json",
@@ -990,9 +987,6 @@
         },
         "getAssets": {
             "summary": "List all translatable assets in your project",
-            "items": {
-                "$ref": "Asset"
-            },
             "responseNotes": "",
             "httpMethod": "GET",
             "uri": "\/api\/assets",
@@ -1285,9 +1279,6 @@
         },
         "getAssetPlurals": {
             "summary": "Get plural forms of an asset",
-            "items": {
-                "$ref": "Asset"
-            },
             "responseNotes": "<p>Lists all assets that are a plural form of the current asset.<\/p>\n           <p>This list does <strong>not<\/strong> include the singular form itself.<\/p>",
             "httpMethod": "GET",
             "uri": "\/api\/assets\/{id}\/plurals",
@@ -1535,9 +1526,6 @@
         },
         "getLocales": {
             "summary": "List all locales in your project",
-            "items": {
-                "$ref": "Locale"
-            },
             "responseNotes": "Lists all locales in currently authenticated project. Your native\/source language will always be the first in the list",
             "httpMethod": "GET",
             "uri": "\/api\/locales",
@@ -1750,9 +1738,6 @@
         },
         "getTranslations": {
             "summary": "Get all translations of an asset",
-            "items": {
-                "$ref": "Translation"
-            },
             "responseNotes": "<p>Gets all translations of an asset across the currently authenticated project's locales.<\/p>\n           <p>Locales not yet translated are included, but their <code>translated<\/code> field will be set to <code>false<\/code>.<\/p>",
             "httpMethod": "GET",
             "uri": "\/api\/translations\/{id}.json",
