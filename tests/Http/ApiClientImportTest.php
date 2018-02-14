@@ -2,16 +2,18 @@
 
 namespace Loco\Tests\Http;
 
+use GuzzleHttp\Command\Result;
 use Loco\Http\ApiClient;
 
 /**
  * Test the live /import API.
+ *
  * @group live
  * @group importer
  */
-class ApiClientImportTest extends ApiClientTest {
-    
-    
+class ApiClientImportTest extends ApiClientTestCase
+{
+
     /**
      * @var ApiClient
      */
@@ -20,134 +22,149 @@ class ApiClientImportTest extends ApiClientTest {
     /**
      * IDs of assets imported
      */
-    private $assets = array();
-    
+    private $assets = [];
+
     /**
-     * Expected translations to test for
-     */    
-    private $expect = array (
-        'example'  => 'exemple',
+     * Expected translations when created from id
+     */
+    private $expect = [
+        'sample' => 'échantillon',
+        'example' => 'exemple',
         'examples' => 'exemples',
-        'sample'   => 'échantillon',
-    );
-         
-    
+        'something' => 'quelque chose de spécifique',
+        "multiple \nlines" => "c'est \nmulti",
+        'something, with, commas' => 'and "quotes" too',
+    ];
+
+    /**
+     * Expected translations when created from text
+     */
+    private $expectFromText = [
+        'sample' => 'échantillon',
+        'example' => 'exemple',
+        'examples' => 'exemples',
+        'specific-something' => 'quelque chose de spécifique',
+        'multiple-lines' => "c'est \nmulti",
+        'something-with-commas' => 'and "quotes" too',
+    ];
+
     /**
      * Ensure client available to all tests
-     */    
-    public function setUp(){
-        if( ! $this->client ){
-            $this->client = $this->getClient();
-        }
-    }     
-    
-    
-    /**
-     * Trash imported assets between each test
-     */    
-    public function tearDown(){
-        while( $id = array_pop( $this->assets ) ){
-            $param = compact('id');
-            $this->client->deleteAsset( $param );
+     */
+    public function setUp()
+    {
+        if (!$this->client) {
+            $this->client = static::getClient();
         }
     }
-    
-    
-    
+
+    /**
+     * Trash imported assets between each test
+     */
+    public function tearDown()
+    {
+        while ($id = array_pop($this->assets)['id']) {
+            $param = compact('id');
+            $this->client->deleteAsset($param);
+        }
+    }
+
     /**
      * Do import from file exported by converter tests.
      */
-    private function _import( $sourcefile, $index = '', $locale = '' ){
-        $sourcefile = __DIR__.'/Fixtures/export/'.$sourcefile;
-        $src = file_get_contents( $sourcefile );
-        $ext = pathinfo( $sourcefile, PATHINFO_EXTENSION );
-        $params = compact('index','locale','src','ext');
-        $model = $this->client->import( $params );
-        // model response should always have assets and locales keys even if nothing imported
-        $this->assertInstanceOf( '\Guzzle\Service\Resource\Model', $model );
-        $this->assertInternalType( 'array', $model['assets'] );
-        $this->assertInternalType( 'array', $model['locales'] );
+    private function import($sourcefile, $index = '', $locale = '')
+    {
+        $sourcefile = __DIR__.'/Fixtures/'.$sourcefile;
+        $src = file_get_contents($sourcefile);
+        $ext = pathinfo($sourcefile, PATHINFO_EXTENSION);
+        $params = compact('index', 'locale', 'src', 'ext');
+        $result = $this->client->import($params);
+        // result response should always have assets and locales keys even if nothing imported
+        $this->assertInstanceOf(Result::class, $result);
+        $this->assertInternalType('array', $result['assets']);
+        $this->assertInternalType('array', $result['locales']);
         // check presence of all assets known to be in file
-        $found = array();
-        foreach( $model['assets'] as $asset ){
-            $this->assertArrayHasKey( 'id', $asset );
-            $found[] = $asset['id'];
+        $foundIds = [];
+        $this->assets = $result['assets'];
+        foreach ($this->assets as $asset) {
+            $this->assertArrayHasKey('id', $asset);
+            $foundIds[] = $asset['id'];
         }
-        $expect = array_keys( $this->expect );
-        $this->assets = array_intersect( $found, $expect );
-        sort( $this->assets );
-        $this->assertEquals( $expect, $this->assets, 'Expected assets were not in response, got '.json_encode($found) );
+        if ($index === 'id') {
+            $expectedIds = array_keys($this->expect);
+        } else {
+            $expectedIds = array_keys($this->expectFromText);
+        }
+
+        sort($foundIds);
+        sort($expectedIds);
+        $this->assertEquals($expectedIds, $foundIds, 'Expected assets were not in response, got '.json_encode($foundIds));
         // assets all imported, check them on the server too
         // will throw with 404 if asset does not exist
-        foreach( $this->assets as $id ){
-            $asset = $this->client->getAsset( compact('id') );
+        foreach ($expectedIds as $id) {
+            $this->client->getAsset(compact('id'));
         }
         // check locales were used
-        if( $locale ){
+        if ($locale) {
             // index them first
-            $locales = array();
-            foreach( $model['locales'] as $l ){
-                $locales[ $l['code'] ] = $l;
+            $locales = [];
+            foreach ($result['locales'] as $l) {
+                $locales[$l['code']] = $l;
             }
             // English should always have been used if any locale is set
-            $this->assertArrayHasKey( 'en-GB', $locales, 'english not returned in locales' );
+            $this->assertArrayHasKey('en', $locales, 'english not returned in locales');
             // check all english translations exist and are correct
-            foreach( $this->assets as $id ){
-                $param = compact('id') + array( 'locale' => 'en-GB' );
-                $trans = $this->client->getTranslation( $param );
-                // english translation same as slug for simpler testing
-                $this->assertEquals( $id, $trans['translation'], 'English not imported correctly' ); 
+            foreach ($this->assets as $asset) {
+                $param = ['id' => $asset['id'], 'locale' => 'en'];
+                $translation = $this->client->getTranslation($param);
+                // check if id is correct
+                $this->assertEquals($asset['id'], $translation['id'], 'English not imported correctly');
             }
             // Specifying english only means no translations should exist in non-english locales
-            if( 0 === strpos($locale,'en') ){
-                $this->assertCount( 1, $locales );
-                foreach( $this->assets as $id ){
-                    $param = compact('id') + array( 'locale' => 'fr' );
-                    $trans = $this->client->getTranslation( $param );
-                    $this->assertFalse( $trans['translated'], 'Should not be translated, but is' ); 
+            if (strpos($locale, 'en') === 0) {
+                $this->assertCount(1, $locales);
+                foreach ($this->assets as $asset) {
+                    $param = ['id' => $asset['id'], 'locale' => 'fr'];
+                    $translation = $this->client->getTranslation($param);
+                    $this->assertFalse($translation['translated'], 'Should not be translated, but is');
                 }
-            }
-            // else check foreign translations as intended to import
-            else {
-                $this->assertCount( 2, $locales );
-                $this->assertArrayHasKey( $locale, $locales, 'foreign locale not returned in locales' );
+            } else { // else check foreign translations as intended to import
+                $this->assertCount(2, $locales);
+                $this->assertArrayHasKey($locale, $locales, 'foreign locale not returned in locales');
                 // check all foreign translations exist and are correct
-                foreach( $this->expect as $id => $foreign ){
-                    $param = compact('id','locale');
-                    $trans = $this->client->getTranslation( $param );
-                    $this->assertEquals( $foreign, $trans['translation'], $locale.' not translated' ); 
+                foreach ($this->expectFromText as $id => $foreign) {
+                    $param = compact('id', 'locale');
+                    $translation = $this->client->getTranslation($param);
+                    $this->assertEquals($foreign, $translation['translation'], $locale.' not translated');
                 }
             }
         }
-        return $model;
-    }      
 
-    
-    
+        return $result;
+    }
+
     /**
      * import YAML with assets only, no translations
      */
-    public function testYamlImportAssetsOnly(){
-        $this->_import('test-fr_FR.yml', 'id' );
+    public function testYamlImportAssetsOnly()
+    {
+        $this->import('test-fr_FR.po', 'id');
     }
 
-    
-    
     /**
      * import YAML with keys as native texts
      */
-    public function testYamlImportEnglish(){
-        $this->_import('test-fr_FR.yml', 'text', 'en-GB' );
+    public function testYamlImportEnglish()
+    {
+        $this->import('test-fr_FR.po', 'text', 'en');
     }
 
-
-    
     /**
      * import YAML with keys as native texts plus french translations
      */
-    public function testYamlImportFrench(){
-        $this->_import('test-fr_FR.yml', 'text', 'fr-FR' );
+    public function testYamlImportFrench()
+    {
+        $this->import('test-fr_FR.po', 'text', 'fr');
     }
 
-    
 }

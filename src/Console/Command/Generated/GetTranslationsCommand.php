@@ -9,13 +9,16 @@ use Symfony\Component\Console\Input\InputArgument;
 /**
  * Auto-generated Loco API console command.
  */
-class GetTranslationsCommand extends Command {
-    
+class GetTranslationsCommand extends Command
+{
     /**
-     * Configure loco:get:translations command
+     * Configure %name% command
+     *
      * @internal
+     * @throws \Symfony\Component\Console\Exception\InvalidArgumentException
      */
-    protected function configure(){
+    protected function configure()
+    {
         $this
             ->setName( 'loco:get:translations' )
             ->setMethod( 'getTranslations' )

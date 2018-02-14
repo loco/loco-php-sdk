@@ -9,13 +9,16 @@ use Symfony\Component\Console\Input\InputArgument;
 /**
  * Auto-generated Loco API console command.
  */
-class GetLocaleCommand extends Command {
-    
+class GetLocaleCommand extends Command
+{
     /**
-     * Configure loco:get:locale command
+     * Configure %name% command
+     *
      * @internal
+     * @throws \Symfony\Component\Console\Exception\InvalidArgumentException
      */
-    protected function configure(){
+    protected function configure()
+    {
         $this
             ->setName( 'loco:get:locale' )
             ->setMethod( 'getLocale' )

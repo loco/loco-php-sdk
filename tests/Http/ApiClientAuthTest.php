@@ -2,60 +2,122 @@
 
 namespace Loco\Tests\Http;
 
-use Loco\Http\ApiClient;
-use Guzzle\Service\Resource\Model;
-
+use GuzzleHttp\Command\Result;
+use GuzzleHttp\HandlerStack;
+use GuzzleHttp\Middleware;
+use Psr\Http\Message\RequestInterface;
 
 /**
  * Test the live /auth API.
+ *
  * @group live
  * @group auth
  * @group readonly
  */
-class ApiClientAuthTest  extends ApiClientTest {
-    
-    private function switchAuth( $mode ){
-        $client = clone $this->getClient();
-        $config = clone $client->getConfig();
-        $config->set( 'auth', $mode );
-        $client->setConfig( $config );
-        return $client;
-    }
-    
-    
-    private function assertAuthed( Model $model ){
-        $this->assertInternalType( 'array', $model->get('user') );
-        $this->assertInternalType( 'array', $model->get('group') );
-        $this->assertInternalType( 'array', $model->get('project') );
-    }
-    
-    
-    public function testDefaultAuthVerifies(){
-        $client = $this->switchAuth('loco');
-        $this->assertAuthed( $client->authVerify() );
+class ApiClientAuthTest extends ApiClientTestCase
+{
+
+    private function assertAuthed(Result $result)
+    {
+        $this->assertInternalType('array', $result->offsetGet('user'));
+        $this->assertInternalType('array', $result->offsetGet('group'));
+        $this->assertInternalType('array', $result->offsetGet('project'));
     }
 
+    public function testDefaultAuthVerifies()
+    {
+        $stack = HandlerStack::create();
+        $key = static::$config['key'];
+        // Create handler to check request was properly serialized
+        $stack->push(
+            Middleware::mapRequest(
+                function (RequestInterface $request) use ($key) {
+                    // Assert key is set in header
+                    $this->assertTrue($request->hasHeader('Authorization'));
+                    $this->assertEquals('Loco '.$key, $request->getHeaderLine('Authorization'));
+                    // Assert key is not passed as a query param
+                    $this->assertEquals('', $request->getUri()->getQuery());
 
-    public function testBasicAuthVerifies(){
-        $client = $this->switchAuth('basic');
-        $this->assertAuthed( $client->authVerify() );
-    }   
+                    return $request;
+                }
+            )
+        );
+
+        $client = static::getClient(
+            [
+                'httpHandlerStack' => $stack,
+                'auth' => 'loco',
+            ]
+        );
+
+        $this->assertAuthed($client->authVerify());
+    }
+
+    public function testBasicAuthVerifies()
+    {
+        $stack = HandlerStack::create();
+        $key = static::$config['key'];
+        // Create handler to chech request was properly serialized
+        $stack->push(
+            Middleware::mapRequest(
+                function (RequestInterface $request) use ($key) {
+                    // Assert key is set in header
+                    $this->assertTrue($request->hasHeader('Authorization'));
+                    $this->assertEquals('Basic '.base64_encode($key.':'), $request->getHeaderLine('Authorization'));
+                    // Assert key is not passed as a query param
+                    $this->assertEquals('', $request->getUri()->getQuery());
+
+                    return $request;
+                }
+            )
+        );
+
+        $client = static::getClient(
+            [
+                'httpHandlerStack' => $stack,
+                'auth' => 'basic',
+            ]
+        );
+
+        $this->assertAuthed($client->authVerify());
+    }
 
 
-    public function testLegacyAuthVerifies(){
-        $client = $this->switchAuth('query');
-        $this->assertAuthed( $client->authVerify() );
-    }   
-    
-    
+    public function testLegacyAuthVerifies()
+    {
+        $stack = HandlerStack::create();
+        $key = static::$config['key'];
+        // Create handler to chech request was properly serialized
+        $stack->push(
+            Middleware::mapRequest(
+                function (RequestInterface $request) use ($key) {
+                    // Assert Authorization header isn't set
+                    $this->assertFalse($request->hasHeader('Authorization'));
+                    // Assert key is passed as a query param
+                    $this->assertEquals("key={$key}", $request->getUri()->getQuery());
+
+                    return $request;
+                }
+            )
+        );
+
+        $client = static::getClient(
+            [
+                'httpHandlerStack' => $stack,
+                'auth' => 'query',
+            ]
+        );
+
+        $this->assertAuthed($client->authVerify());
+    }
+
     /**
-     * @expectedException Guzzle\Common\Exception\InvalidArgumentException
+     * @expectedException \InvalidArgumentException
      */
-    public function testInvalidAuthTypeFails(){
-        $client = $this->switchAuth('fail');
-        $model = $client->authVerify();
+    public function testInvalidAuthTypeFails()
+    {
+        $client = static::getClient(['auth' => 'fail']);
+        $client->authVerify();
     }
-    
-
 
 }

@@ -9,13 +9,16 @@ use Symfony\Component\Console\Input\InputArgument;
 /**
  * Auto-generated Loco API console command.
  */
-class CreatePluralCommand extends Command {
-    
+class CreatePluralCommand extends Command
+{
     /**
-     * Configure loco:create:plural command
+     * Configure %name% command
+     *
      * @internal
+     * @throws \Symfony\Component\Console\Exception\InvalidArgumentException
      */
-    protected function configure(){
+    protected function configure()
+    {
         $this
             ->setName( 'loco:create:plural' )
             ->setMethod( 'createPlural' )

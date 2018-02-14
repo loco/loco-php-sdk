@@ -2,13 +2,14 @@
 /**
  * Check your Loco project key with the REST API.
  */
-require __DIR__.'/../vendor/autoload.php';
+$basedir = \dirname(__DIR__);
 
-// Our project key is in a config file so we instantiate the client via the Guzzle service builder
-$client = Guzzle\Service\Builder\ServiceBuilder::factory( __DIR__.'/../config.json' )->get('loco');
+require_once $basedir.'/vendor/autoload.php';
 
-/* @var $result \Guzzle\Service\Resource\Model */
+$client = Loco\Http\ApiClient::factory(json_decode(file_get_contents($basedir.'/config.json'), true));
+
+/** @var \GuzzleHttp\Command\Result $result */
 $result = $client->authVerify();
 
-printf("Authenticated as '%s'\n", $result['user']['name'] );
-printf("Project name is '%s'\n",  $result['project']['name'] );
+printf("Authenticated as '%s'\n", $result['user']['name']);
+printf("Project name is '%s'\n", $result['project']['name']);

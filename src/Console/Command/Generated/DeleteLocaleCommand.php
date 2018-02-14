@@ -9,13 +9,16 @@ use Symfony\Component\Console\Input\InputArgument;
 /**
  * Auto-generated Loco API console command.
  */
-class DeleteLocaleCommand extends Command {
-    
+class DeleteLocaleCommand extends Command
+{
     /**
-     * Configure loco:delete:locale command
+     * Configure %name% command
+     *
      * @internal
+     * @throws \Symfony\Component\Console\Exception\InvalidArgumentException
      */
-    protected function configure(){
+    protected function configure()
+    {
         $this
             ->setName( 'loco:delete:locale' )
             ->setMethod( 'deleteLocale' )
