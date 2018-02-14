@@ -1,12 +1,6 @@
 {
-    "services": {
-        "loco": {
-            "class": "Loco\\Http\\ApiClient",
-            "params": {
-                "key": "",
-                "auth": "loco",
-                "base_url": "https://localise.biz/api"
-            }
-        }
-    }
+    "key": "",
+    "auth": "loco",
+    "validate_response": false,
+    "base_uri": "https://localise.biz/api"
 }

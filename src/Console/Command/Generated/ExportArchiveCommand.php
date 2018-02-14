@@ -9,13 +9,16 @@ use Symfony\Component\Console\Input\InputArgument;
 /**
  * Auto-generated Loco API console command.
  */
-class ExportArchiveCommand extends Command {
-    
+class ExportArchiveCommand extends Command
+{
     /**
-     * Configure loco:export:archive command
+     * Configure %name% command
+     *
      * @internal
+     * @throws \Symfony\Component\Console\Exception\InvalidArgumentException
      */
-    protected function configure(){
+    protected function configure()
+    {
         $this
             ->setName( 'loco:export:archive' )
             ->setMethod( 'exportArchive' )

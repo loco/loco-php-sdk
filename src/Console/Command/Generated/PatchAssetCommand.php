@@ -9,13 +9,16 @@ use Symfony\Component\Console\Input\InputArgument;
 /**
  * Auto-generated Loco API console command.
  */
-class PatchAssetCommand extends Command {
-    
+class PatchAssetCommand extends Command
+{
     /**
-     * Configure loco:patch:asset command
+     * Configure %name% command
+     *
      * @internal
+     * @throws \Symfony\Component\Console\Exception\InvalidArgumentException
      */
-    protected function configure(){
+    protected function configure()
+    {
         $this
             ->setName( 'loco:patch:asset' )
             ->setMethod( 'patchAsset' )
