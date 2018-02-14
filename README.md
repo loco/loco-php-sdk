@@ -8,7 +8,7 @@ Add the latest stable version of [loco/loco](https://packagist.org/packages/loco
 
 ```json
 "require": {
-  "loco/loco": "~1.0"
+  "loco/loco": "^2.0"
 }
 ```
 
@@ -25,17 +25,15 @@ The SDK includes a REST client for the [Loco API](https://localise.biz/api).
 Basic usage of the client is to construct with your API key and call the endpoint methods directly. The following example simply verifies your credentials:
 
 ```php
-$client = Loco\Http\ApiClient::factory( array( 'key' => 'your_api_key' ) );
+$client = Loco\Http\ApiClient::factory(['key' => 'your_api_key']);
 $result = $client->authVerify();
-printf("Authenticated as '%s'\n", $result['user']['name'] );
+printf("Authenticated as '%s'\n", $result['user']['name']);
 ```
 
-The Loco API client is built on [Guzzle 3](http://guzzle3.readthedocs.org). You can use its factory methods to configure your API Key as above, or you can use a JSON config [like our example](https://github.com/loco/loco-php-sdk/blob/master/config.json.dist). Constructing from the config file can be done as follows:
-
-```php
-$client = Guzzle\Service\Builder\ServiceBuilder::factory('config.json' )->get('loco');
-```
-
+#### Loco\Http\ApiClient::factory options
+* `'key'` - string. API key for your Localize.biz project
+* `'validate_response'` - bool. Default - false. Set to true if you want API response to be validated according to model description on deserialization
+* `'httpHandlerStack'` - \GuzzleHttp\HandlerStack. A custom handler stack for \GuzzleHttp\Client. Use it if you need to inject a middleware and interact with Response/Request in some way. See Guzzle's [Handlers and Middleware](http://docs.guzzlephp.org/en/stable/handlers-and-middleware.html) docs section for details. 
 
 ## Command Line Client
 
