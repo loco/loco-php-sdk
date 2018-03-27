@@ -1,3 +1,12 @@
+# LEGACY BRANCH
+
+A newer version of this library is on the master branch.
+
+This version should continue to work with the live API up to version 1.0.18, but will no longer be maintained.
+
+
+---
+
 # Loco SDK for PHP
 
 ## Installation

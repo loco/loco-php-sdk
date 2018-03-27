@@ -58,7 +58,10 @@ class ApiClient extends Client {
         }
         
         // Prefix Loco identifier to user agent string
-        $client->setUserAgent( $service->getName().'/'.$service->getApiVersion(), true );
+        $client->setUserAgent( $service->getName().'/'.$service->getApiVersion().'-legacy', true );
+        
+        // Send API version such that this library continues to work with live endpoints if/when they change
+        $client->setDefaultOption('headers/X-Api-Version', self::VERSION );
 
         return $client->setDescription( $service );
                 

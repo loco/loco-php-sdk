@@ -878,12 +878,13 @@
                 },
                 "type": {
                     "required": true,
-                    "description": "Media type, defaults to plain old text",
+                    "description": "Media type, defaults to plain \"text\"",
                     "type": "string",
                     "location": "postField",
                     "enum": [
                         "text",
-                        "html"
+                        "html",
+                        "xml"
                     ],
                     "default": "text"
                 },

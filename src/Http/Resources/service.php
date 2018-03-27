@@ -1,6 +1,6 @@
 <?php
 /**
- * Auto-generated with Swizzle at 2017-10-09 16:47:58 +0100
+ * Auto-generated with Swizzle at 2018-03-15 21:04:08 +0000
  */
 return array (
   'name' => 'Loco',
@@ -1063,13 +1063,14 @@ return array (
         'type' => 
         array (
           'required' => true,
-          'description' => 'Media type, defaults to plain old text',
+          'description' => 'Media type, defaults to plain "text"',
           'type' => 'string',
           'location' => 'postField',
           'enum' => 
           array (
             0 => 'text',
             1 => 'html',
+            2 => 'xml',
           ),
           'default' => 'text',
         ),
