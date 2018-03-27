@@ -28,6 +28,8 @@ $result = $client->authVerify();
 printf("Authenticated as '%s'\n", $result['user']['name']);
 ```
 
+See the [example directory](https://github.com/loco/loco-php-sdk/tree/master/example) for more.
+
 ### Advanced options 
 
 Additionally the `ApiClient::factory` method can take any arguments accepted by Guzzle's client constructor.
@@ -55,5 +57,5 @@ bin/console loco:auth:verify -v -k <your_api_key>
 
 Updating from Guzzle 3 to Guzzle 6 brought some necessary breaking changes with it. If you're upgrading from [1.0.18](https://github.com/loco/loco-php-sdk/tree/1.0.18), please note the following:
 
-* The structure of `config.json` has changed. Note in particular a single root object containing your values, and also that `base_url` is now `base_uri`.
+* The structure of `config.json` has changed. Note in particular a single root object containing your values as per the [example config](https://github.com/loco/loco-php-sdk/blob/master/config.json.dist).
 * The version number of the SDK is no longer synced to the version of the API. Each release will however be built against the [latest version](https://localise.biz/api/docs/changelog) of the live service.
