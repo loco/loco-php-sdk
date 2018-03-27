@@ -1,7 +1,0 @@
-source: src
-destination: docs/sdk
-php: no
-main: Loco
-title: Loco SDK - PHP
-baseUrl: https://localise.biz/docs/sdk
-report: docs/sdk/report.xml

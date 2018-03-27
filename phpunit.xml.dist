@@ -17,8 +17,8 @@
 
     <groups>
         <exclude>
-            <group>strict</group>
-            <group>deprecated</group>
+            <group>meta</group>
+            <group>live</group>
         </exclude>
     </groups>
 

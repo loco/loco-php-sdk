@@ -2,134 +2,150 @@
 
 namespace Loco\Dev;
 
+use Loco\Http\Command\LocoCommand;
+use Loco\Http\Command\StrictCommand;
+use Loco\Http\Result\RawResult;
+use Loco\Http\Result\ZipResult;
 use Symfony\Component\Console\Command\Command;
-use Symfony\Component\Console\Input\InputOption;
-use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
-use Loco\Http\ApiClient;
-use Loco\Utils\Swizzle\Swizzle;
-
-
 /**
- * 
+ *
  */
-final class BuildCommand extends Command {
-    
-
-    protected function configure(){
+final class BuildCommand extends Command
+{
+    /**
+     * @throws \Symfony\Component\Console\Exception\InvalidArgumentException
+     */
+    protected function configure()
+    {
         $this
             ->setName('loco:build')
             ->setDescription('Build Loco API service description and generated commands')
             ->addOption(
-                'dev', '',
+                'dev',
+                '',
                 InputOption::VALUE_NONE,
                 'Whether to build local development version for testing'
             );
     }
-    
-    
-    protected function execute( InputInterface $input, OutputInterface $output ){
 
-        $cwd = realpath( __DIR__.'/..' );
-        $verbose = 1 < $output->getVerbosity();
-        
-        if( ! class_exists('\Loco\Utils\Swizzle\Swizzle') ){
-            throw new \RuntimeException("Swizzle not found.\nRun composer install --dev\n");
-        }
-        
-        if( ! file_exists( $confpath = $cwd.'/config.json' ) ){
+    /**
+     * @param InputInterface $input
+     * @param OutputInterface $output
+     *
+     * @return int|null
+     *
+     * @throws \Exception
+     */
+    protected function execute(InputInterface $input, OutputInterface $output)
+    {
+        $cwd = \dirname(__DIR__);
+        $verbose = $output->getVerbosity() > 1;
+
+        if (! file_exists($configPath = $cwd.'/config.json')) {
             throw new \RuntimeException('config.json not found, do ~$ cp config.json.dist config.json');
         }
-        
-        $conf = json_decode( file_get_contents($confpath), true );
-        if( ! isset($conf['services']['loco']['params']['base_url']) ){
-            throw new \RuntimeException('Invalid config.json, need services.loco.params.base_url');
+
+        $conf = json_decode(file_get_contents($configPath), true);
+        if (! is_array($conf)) {
+            throw new \RuntimeException('Malformed config.json, check your JSON syntax');
         }
-        
-        $builder = new Swizzle( 'Loco', 'Loco REST API' );
-        $builder->setDelay( 0 );
-        $verbose and $builder->verbose( STDERR );
-                
+        if (! isset($conf['base_uri'])) {
+            throw new \RuntimeException('Invalid config.json, build operation requires base_uri');
+        }
+        if (! class_exists('Loco\\Utils\\Swizzle\\Swizzle', true)) {
+            $output->writeln("<error>Swizzle not found. Run composer install --dev</error>");
+            return 1;
+        }
+
+        $builder = new Swizzle('Loco', 'Loco REST API');
+        $builder->setDelay(0);
+        if ($verbose === true) {
+            $builder->verbose(STDERR);
+        }
+
         // Register custom Guzzle response classes
-        $raw = '\Loco\Http\Response\RawResponse';
-        $zip = '\Loco\Http\Response\ZipResponse';
-        $builder->registerResponseClass('exportArchive', $zip )
-                ->registerResponseClass('exportTemplate', $raw )
-                ->registerResponseClass('exportLocale', $raw )
-                ->registerResponseClass('exportAll', $raw )
-                ->registerResponseClass('convert', $raw );
+        $builder->registerResponseClass('exportArchive', ZipResult::class)
+            ->registerResponseClass('exportTemplate', RawResult::class)
+            ->registerResponseClass('exportLocale', RawResult::class)
+            ->registerResponseClass('exportAll', RawResult::class)
+            ->registerResponseClass('convert', RawResult::class);
 
         // Enable response validation and locale URL if building for local test
-        $base_url = $conf['services']['loco']['params']['base_url'];
-        $domain = parse_url($base_url,PHP_URL_HOST);
-        if( empty($conf['services']['loco']['strict']) ){
-            $builder->registerCommandClass( '', '\Loco\Http\Command\LocoCommand');
-        }
-        else {
-            $builder->registerCommandClass( '', '\Loco\Http\Command\StrictCommand');
-        }
+        $base_uri = $conf['base_uri'];
+        $domain = parse_url($base_uri, PHP_URL_HOST);
 
-        $base_url .= '/swagger';
-        $output->writeln('<comment>Pulling docs from '.$base_url.'</comment>');
-        $builder->build( $base_url );
+        $base_uri .= '/swagger';
+        $output->writeln('<comment>Pulling docs from '.$base_uri.'</comment>');
+        $builder->build($base_uri);
         
-        $file = $cwd.'/src/Http/Resources/service.php';
-        $blen = file_put_contents( $file, $builder->export() );
-        $verbose and $output->writeln( sprintf("Wrote PHP service description to %s (%s bytes)", $file, $blen ) );
+        // Add undocumented parameters usable by this client
         
+
+        // Write Guzzle service description to locale JSON
         $file = $cwd.'/src/Http/Resources/service.json';
-        $blen = file_put_contents( $file, $builder->toJson() );
-        $verbose and $output->writeln( sprintf("Wrote JSON service description to %s (%s bytes)", $file, $blen ) );
+        $byteLength = file_put_contents($file, $builder->toJson());
+        if ($verbose === true) {
+            $output->writeln(sprintf('Wrote JSON service description to %s (%s bytes)', $file, $byteLength));
+        }
 
         // Service descriptions build for rest client,
         // build console commands from raw service description data
         $output->writeln('<comment>Building Console command classes</comment>');
-        $service = $builder->getServiceDescription()->toArray();
-        foreach( $service['operations'] as $funcname => $operation ){
+        $service = $builder->toArray();
+        /* @var $service array[][] */
+        foreach ($service['operations'] as $functionName => $operation) {
+            $commandName = 'loco:'.strtolower(preg_replace('/[A-Z][a-z]/', ':\\0', $functionName));
+            $className = ucfirst($functionName).'Command';
 
-            $cmdname = 'loco:'.strtolower(preg_replace('/[A-Z][a-z]/',':\\0',$funcname));
-            $classname = strtoupper($funcname{0}).substr($funcname,1).'Command';
-            
-            $options = array();
-            foreach( $operation['parameters'] as $name => $param ){
-                if( 'key' === $name ){
-                    // special override for key as it's configurable
-                    $options[] = "->addOption('key','k',InputOption::VALUE_OPTIONAL,'Override configured API key for this request','')";
+            $options = [];
+            /* @var $operation array[][] */
+            foreach ($operation['parameters'] as $name => $param) {
+                // skip common arguments that will be added at runtime to all commands
+                if ('key' === $name || 'v' === $name) {
                     continue;
                 }
-                $descr = var_export($param['description'],1);
-                $default = isset($param['default']) ? var_export($param['default'],1) : 'null';
-                if( 'uri' === $param['location'] ){
+                $description = var_export($param['description'], true);
+                $default = isset($param['default']) ? var_export($param['default'], true) : 'null';
+                if ('uri' === $param['location']) {
                     $required = 'null' === $default ? 'REQUIRED' : 'OPTIONAL';
-                    $options[] = '->addArgument('.var_export($name,1).",InputArgument::".$required.','.$descr.','.$default.')';
-                }
-                else {
-                    //$required = ! empty($param['required']); // option values are always required. this does not mean mandatory
-                    $options[] = '->addOption('.var_export($name,1).",'',InputOption::VALUE_REQUIRED,".$descr.','.$default.')';
+                    $options[] = "->addArgument('{$name}', InputArgument::{$required}, {$description}, {$default})";
+                } else {
+                    $options[] = "->addOption('{$name}', '', InputOption::VALUE_REQUIRED, {$description}, {$default})";
                 }
             }
-            
-            // write base class, containing all api endpoint configuration
-            $source = file_get_contents($cwd.'/src/Console/Command/Resources/TemplateCommand.tpl');
-            $source = str_replace("%name%", $cmdname, $source );
-            $source = str_replace("%method%", $funcname, $source );
-            $source = str_replace('TemplateCommand', $classname, $source );
-            $source = str_replace("'%description%'", var_export($operation['summary'],1), $source );
-            if( $options ){
-                $source = str_replace('/* %options% */', implode("\n            ",$options), $source );
+            $optionsStr = empty($options) === false ? "\n            ".implode("\n            ", $options) : '';
+
+            // Write Command base class, containing all api endpoint configuration
+            $source = str_replace(
+                [ '{{name}}', '{{method}}', '{{TemplateCommand}}', '{{description}}', '{{options}}'],
+                [ $commandName, $functionName, $className, $operation['summary'], $optionsStr],
+                file_get_contents($cwd.'/src/Console/Command/Resources/TemplateCommand.tpl')
+            );
+            $file = $cwd.'/src/Console/Command/Generated/'.$className.'.php';
+            $byteLength = file_put_contents($file, $source);
+            if ($verbose === true) {
+                $output->writeln(sprintf('Wrote %s to %s (%s bytes)', $className, $file, $byteLength));
             }
-           
-            $file = $cwd.'/src/Console/Command/Generated/'.$classname.'.php';
-            $blen = file_put_contents( $file, $source );
-            $verbose and $output->writeln( sprintf("Wrote %s class to %s (%s bytes)", $cmdname, $file, $blen ) );
             
+            // Write Test case, containing dummy success response and full request
+            $source = str_replace(
+                [ '{{method}}', '{{TemplateCommand}}', '{{description}}', '{{model}}' ],
+                [ $functionName, $className, $operation['summary'], $operation['responseModel'] ],
+                file_get_contents($cwd.'/tests/Http/Resources/TemplateTest.tpl')
+            );
+            $file = $cwd.'/tests/Http/Generated/'.$className.'Test.php';
+            $byteLength = file_put_contents($file, $source);
+            if ($verbose === true) {
+                $output->writeln(sprintf('Wrote %sTest to %s (%s bytes)', $className, $file, $byteLength));
+            }
         }
 
         $output->writeln('<info>OK, all built for '.$domain.'</info>');
+
         return 0;
-    }   
-    
-    
+    }
 }

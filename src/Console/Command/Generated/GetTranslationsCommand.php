@@ -9,20 +9,22 @@ use Symfony\Component\Console\Input\InputArgument;
 /**
  * Auto-generated Loco API console command.
  */
-class GetTranslationsCommand extends Command {
-    
+class GetTranslationsCommand extends Command
+{
     /**
      * Configure loco:get:translations command
+     *
      * @internal
+     * @throws \Symfony\Component\Console\Exception\InvalidArgumentException
      */
-    protected function configure(){
+    protected function configure()
+    {
         $this
-            ->setName( 'loco:get:translations' )
-            ->setMethod( 'getTranslations' )
-            ->setDescription( 'Get all translations of an asset' )
-            ->addOption('key','k',InputOption::VALUE_OPTIONAL,'Override configured API key for this request','')
-            ->addArgument('id',InputArgument::REQUIRED,'Asset ID',null)
+            ->setName('loco:get:translations')
+            ->setMethod('getTranslations')
+            ->setDescription('Get all translations of an asset')
+            ->addArgument('id', InputArgument::REQUIRED, 'Asset ID', null)
         ;
+        parent::configure();
     }
-    
 }
