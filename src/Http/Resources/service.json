@@ -788,8 +788,8 @@
                     "required": true,
                     "description": "File extension for the type of file data you're importing",
                     "enum": [
-                        "ini",
                         "json",
+                        "ini",
                         "mo",
                         "php",
                         "po",
@@ -1875,7 +1875,7 @@
         },
         "untranslate": {
             "summary": "Erase translation data in a single locale",
-            "responseNotes": "<p>Erases translation data of a localised asset in the currently authenticated project.<\/p>\n<p><strong>Warning<\/strong>: Erasing is not the same as setting an empty translation. \nThis operation clears the asset's translation history and user comments for the given locale.<\/p>",
+            "responseNotes": "<p>Erases translation data of a localized asset in the currently authenticated project.<\/p>\n<p><strong>Warning<\/strong>: Erasing is not the same as setting an empty translation. \nThis operation clears the asset's translation history and user comments for the given locale.<\/p>",
             "httpMethod": "DELETE",
             "uri": "\/api\/translations\/{id}\/{locale}",
             "name": "untranslate",

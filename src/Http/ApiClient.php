@@ -8,12 +8,46 @@ use GuzzleHttp\Command\Guzzle\GuzzleClient;
 
 /**
  * Loco REST API Client.
+ * @usage $client = ApiClient::factory( [ 'key' => 'my-api-key' ] );
  *
- * @usage $client = ApiClient::factory( array( 'key' => 'my-api-key' ) );
+ * @method GuzzleHttp\Command\Result getTags()
+ * @method GuzzleHttp\Command\Result createTag(array $params)
+ * @method GuzzleHttp\Command\Result patchTag(array $params)
+ * @method GuzzleHttp\Command\Result deleteTag(array $params)
+ * @method Loco\Http\Result\RawResult exportAll(array $params)
+ * @method Loco\Http\Result\ZipResult exportArchive(array $params)
+ * @method Loco\Http\Result\RawResult exportLocale(array $params)
+ * @method Loco\Http\Result\RawResult exportTemplate(array $params)
+ * @method GuzzleHttp\Command\Result importProgress(array $params)
+ * @method GuzzleHttp\Command\Result import(array $params)
+ * @method GuzzleHttp\Command\Result authVerify()
+ * @method GuzzleHttp\Command\Result getAssets(array $params)
+ * @method GuzzleHttp\Command\Result createAsset(array $params)
+ * @method GuzzleHttp\Command\Result getAsset(array $params)
+ * @method GuzzleHttp\Command\Result patchAsset(array $params)
+ * @method GuzzleHttp\Command\Result deleteAsset(array $params)
+ * @method GuzzleHttp\Command\Result getAssetPlurals(array $params)
+ * @method GuzzleHttp\Command\Result createPlural(array $params)
+ * @method GuzzleHttp\Command\Result unlinkPlural(array $params)
+ * @method GuzzleHttp\Command\Result tagAsset(array $params)
+ * @method GuzzleHttp\Command\Result untagAsset(array $params)
+ * @method GuzzleHttp\Command\Result getLocales()
+ * @method GuzzleHttp\Command\Result createLocale(array $params)
+ * @method GuzzleHttp\Command\Result getLocale(array $params)
+ * @method GuzzleHttp\Command\Result patchLocale(array $params)
+ * @method GuzzleHttp\Command\Result deleteLocale(array $params)
+ * @method GuzzleHttp\Command\Result getTranslations(array $params)
+ * @method GuzzleHttp\Command\Result getTranslation(array $params)
+ * @method GuzzleHttp\Command\Result translate(array $params)
+ * @method GuzzleHttp\Command\Result untranslate(array $params)
+ * @method GuzzleHttp\Command\Result flagTranslation(array $params)
+ * @method GuzzleHttp\Command\Result unflagTranslation(array $params)
+ * @method GuzzleHttp\Command\Result ping()
+ * @method GuzzleHttp\Command\Result ping404()
  */
 class ApiClient extends GuzzleClient
 {
-    const SDK_VERSION = '2.0.0';
+    const SDK_VERSION = '2.0.1';
     const API_VERSION = '1.0.19';
 
     /**
