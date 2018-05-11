@@ -82,8 +82,8 @@ final class BuildCommand extends Command
         $output->writeln('<comment>Pulling docs from '.$base_uri.'</comment>');
         $builder->build($base_uri);
         
-        // Add undocumented parameters usable by this client
-        
+        // Collect magic methods usable by this client via  GuzzleHttp\Command\ServiceClient::__call()
+        $methodTags = [];
 
         // Write Guzzle service description to locale JSON
         $file = $cwd.'/src/Http/Resources/service.json';
@@ -100,7 +100,6 @@ final class BuildCommand extends Command
         foreach ($service['operations'] as $functionName => $operation) {
             $commandName = 'loco:'.strtolower(preg_replace('/[A-Z][a-z]/', ':\\0', $functionName));
             $className = ucfirst($functionName).'Command';
-
             $options = [];
             /* @var $operation array[][] */
             foreach ($operation['parameters'] as $name => $param) {
@@ -142,6 +141,45 @@ final class BuildCommand extends Command
             if ($verbose === true) {
                 $output->writeln(sprintf('Wrote %sTest to %s (%s bytes)', $className, $file, $byteLength));
             }
+            
+            // Collect magic @method definition for PHPDoc tag
+            $responseClass = $builder->getResponseClass($functionName);
+            $methodTags[$functionName] = sprintf(' * @method %s %s(%s)', $responseClass, $functionName, $options?'array $params':'');
+        }
+            
+        // Document ApiClass with magic @method tags
+        $ref = new \ReflectionClass('Loco\\Http\\ApiClient');
+        $lines = preg_split('/\\R/', $ref->getDocComment());
+        array_pop($lines);
+        // index existing method signatures
+        $index = [];
+        foreach ($lines as $line => $text) {
+            if (preg_match('/^ \\* @method [\\\\a-z]+ ([a-z0-9]+).+/i', $text, $match)) {
+                $index[ $match[1] ] = [ 'line' => $line, 'text' => $text ];
+            }
+        }
+        // update docblock if any methods have been added or changed
+        $updateDoc = false;
+        foreach ($methodTags as $name => $text) {
+            if (! isset($index[$name])) {
+                $lines[] = $text;
+                $updateDoc = true;
+                $output->writeln(sprintf('+ %s definition is new', $name));
+            } elseif ($index[$name]['text'] !== $text) {
+                $lines[ $index[$name]['line'] ] = $text;
+                $updateDoc = true;
+                $output->writeln(sprintf('! %s definition has changed', $name));
+            }
+        }
+        if ($updateDoc) {
+            $output->writeln(sprintf('Updating %u @magic methods...', count($methodTags)));
+            // reconstruct doc comment and spice into file
+            $lines[] = ' */';
+            $file = $ref->getFileName();
+            $source = file_get_contents($file);
+            $source = str_replace($ref->getDocComment(), implode("\n", $lines), $source);
+            $bytes = file_put_contents($file, $source);
+            $output->writeln(sprintf('Wrote %u bytes to %s', $bytes, $file));
         }
 
         $output->writeln('<info>OK, all built for '.$domain.'</info>');
