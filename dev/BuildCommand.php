@@ -68,7 +68,8 @@ final class BuildCommand extends Command
         }
 
         // Register custom Guzzle response classes
-        $builder->registerResponseClass('exportArchive', ZipResult::class)
+        $builder
+            ->registerResponseClass('exportArchive', ZipResult::class)
             ->registerResponseClass('exportTemplate', RawResult::class)
             ->registerResponseClass('exportLocale', RawResult::class)
             ->registerResponseClass('exportAll', RawResult::class)
@@ -144,7 +145,8 @@ final class BuildCommand extends Command
             
             // Collect magic @method definition for PHPDoc tag
             $responseClass = $builder->getResponseClass($functionName);
-            $methodTags[$functionName] = sprintf(' * @method %s %s(%s)', $responseClass, $functionName, $options?'array $params':'');
+            $responseClass = 'Loco\\Http\\' === substr($responseClass,0,10) ? substr($responseClass,10) : '\\'.$responseClass;
+            $methodTags[$functionName] = sprintf(' * @method %s %s(%s)', $responseClass, $functionName, $options?'array $params = []':'');
         }
             
         // Document ApiClass with magic @method tags
