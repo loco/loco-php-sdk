@@ -10,7 +10,7 @@ require_once $basedir.'/vendor/autoload.php';
 $config = json_decode(file_get_contents($basedir.'/config.json'), true);
 $client = Loco\Http\ApiClient::factory($config);
 
-// Define a minmal XLIFF 2.0 document with English source and Spanish target, plus a unique identifer.
+// Define a minimal XLIFF 2.0 document with English source and Spanish target, plus a unique identifier.
 $xlfdata = <<<XLIFF
 <xliff version="2.0" srcLang="en" trgLang="es">
     <file>

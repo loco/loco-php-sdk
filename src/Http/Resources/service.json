@@ -27,7 +27,7 @@
                 }
             ],
             "notes": "",
-            "documentationUrl": null,
+            "documentationUrl": "https:\/\/localise.biz\/api\/docs\/tags\/gettags",
             "deprecated": false,
             "data": [],
             "additionalParameters": null
@@ -62,7 +62,7 @@
                 }
             ],
             "notes": "",
-            "documentationUrl": null,
+            "documentationUrl": "https:\/\/localise.biz\/api\/docs\/tags\/createtag",
             "deprecated": false,
             "data": [],
             "additionalParameters": null
@@ -107,7 +107,7 @@
                 }
             ],
             "notes": "",
-            "documentationUrl": null,
+            "documentationUrl": "https:\/\/localise.biz\/api\/docs\/tags\/patchtag",
             "deprecated": false,
             "data": [],
             "additionalParameters": null
@@ -146,7 +146,7 @@
                 }
             ],
             "notes": "",
-            "documentationUrl": null,
+            "documentationUrl": "https:\/\/localise.biz\/api\/docs\/tags\/deletetag",
             "deprecated": false,
             "data": [],
             "additionalParameters": null
@@ -241,7 +241,7 @@
                 }
             ],
             "notes": "",
-            "documentationUrl": null,
+            "documentationUrl": "https:\/\/localise.biz\/api\/docs\/export\/exportall",
             "deprecated": false,
             "data": [],
             "additionalParameters": null
@@ -405,7 +405,7 @@
                 }
             ],
             "notes": "",
-            "documentationUrl": null,
+            "documentationUrl": "https:\/\/localise.biz\/api\/docs\/export\/exportarchive",
             "deprecated": false,
             "data": [],
             "additionalParameters": null
@@ -569,7 +569,7 @@
                 }
             ],
             "notes": "",
-            "documentationUrl": null,
+            "documentationUrl": "https:\/\/localise.biz\/api\/docs\/export\/exportlocale",
             "deprecated": false,
             "data": [],
             "additionalParameters": null
@@ -726,7 +726,7 @@
                 }
             ],
             "notes": "",
-            "documentationUrl": null,
+            "documentationUrl": "https:\/\/localise.biz\/api\/docs\/export\/exporttemplate",
             "deprecated": false,
             "data": [],
             "additionalParameters": null
@@ -769,7 +769,7 @@
                 }
             ],
             "notes": "",
-            "documentationUrl": null,
+            "documentationUrl": "https:\/\/localise.biz\/api\/docs\/import\/importprogress",
             "deprecated": false,
             "data": [],
             "additionalParameters": null
@@ -937,7 +937,7 @@
                 }
             ],
             "notes": "",
-            "documentationUrl": null,
+            "documentationUrl": "https:\/\/localise.biz\/api\/docs\/import\/import",
             "deprecated": false,
             "data": [],
             "additionalParameters": null
@@ -969,7 +969,7 @@
                 }
             ],
             "notes": "",
-            "documentationUrl": null,
+            "documentationUrl": "https:\/\/localise.biz\/api\/docs\/auth\/authverify",
             "deprecated": false,
             "data": [],
             "additionalParameters": null
@@ -1004,7 +1004,7 @@
                 }
             ],
             "notes": "",
-            "documentationUrl": null,
+            "documentationUrl": "https:\/\/localise.biz\/api\/docs\/assets\/getassets",
             "deprecated": false,
             "data": [],
             "additionalParameters": null
@@ -1099,7 +1099,7 @@
                 }
             ],
             "notes": "",
-            "documentationUrl": null,
+            "documentationUrl": "https:\/\/localise.biz\/api\/docs\/assets\/createasset",
             "deprecated": false,
             "data": [],
             "additionalParameters": null
@@ -1138,7 +1138,7 @@
                 }
             ],
             "notes": "",
-            "documentationUrl": null,
+            "documentationUrl": "https:\/\/localise.biz\/api\/docs\/assets\/getasset",
             "deprecated": false,
             "data": [],
             "additionalParameters": null
@@ -1225,7 +1225,7 @@
                 }
             ],
             "notes": "",
-            "documentationUrl": null,
+            "documentationUrl": "https:\/\/localise.biz\/api\/docs\/assets\/patchasset",
             "deprecated": false,
             "data": [],
             "additionalParameters": null
@@ -1268,7 +1268,7 @@
                 }
             ],
             "notes": "",
-            "documentationUrl": null,
+            "documentationUrl": "https:\/\/localise.biz\/api\/docs\/assets\/deleteasset",
             "deprecated": false,
             "data": [],
             "additionalParameters": null
@@ -1307,7 +1307,7 @@
                 }
             ],
             "notes": "",
-            "documentationUrl": null,
+            "documentationUrl": "https:\/\/localise.biz\/api\/docs\/assets\/getassetplurals",
             "deprecated": false,
             "data": [],
             "additionalParameters": null
@@ -1364,7 +1364,7 @@
                 }
             ],
             "notes": "",
-            "documentationUrl": null,
+            "documentationUrl": "https:\/\/localise.biz\/api\/docs\/assets\/createplural",
             "deprecated": false,
             "data": [],
             "additionalParameters": null
@@ -1414,7 +1414,7 @@
                 }
             ],
             "notes": "",
-            "documentationUrl": null,
+            "documentationUrl": "https:\/\/localise.biz\/api\/docs\/assets\/unlinkplural",
             "deprecated": false,
             "data": [],
             "additionalParameters": null
@@ -1464,7 +1464,7 @@
                 }
             ],
             "notes": "",
-            "documentationUrl": null,
+            "documentationUrl": "https:\/\/localise.biz\/api\/docs\/assets\/tagasset",
             "deprecated": false,
             "data": [],
             "additionalParameters": null
@@ -1514,7 +1514,7 @@
                 }
             ],
             "notes": "",
-            "documentationUrl": null,
+            "documentationUrl": "https:\/\/localise.biz\/api\/docs\/assets\/untagasset",
             "deprecated": false,
             "data": [],
             "additionalParameters": null
@@ -1542,7 +1542,7 @@
                 }
             ],
             "notes": "",
-            "documentationUrl": null,
+            "documentationUrl": "https:\/\/localise.biz\/api\/docs\/locales\/getlocales",
             "deprecated": false,
             "data": [],
             "additionalParameters": null
@@ -1589,7 +1589,7 @@
                 }
             ],
             "notes": "",
-            "documentationUrl": null,
+            "documentationUrl": "https:\/\/localise.biz\/api\/docs\/locales\/createlocale",
             "deprecated": false,
             "data": [],
             "additionalParameters": null
@@ -1628,7 +1628,7 @@
                 }
             ],
             "notes": "",
-            "documentationUrl": null,
+            "documentationUrl": "https:\/\/localise.biz\/api\/docs\/locales\/getlocale",
             "deprecated": false,
             "data": [],
             "additionalParameters": null
@@ -1683,7 +1683,7 @@
                 }
             ],
             "notes": "",
-            "documentationUrl": null,
+            "documentationUrl": "https:\/\/localise.biz\/api\/docs\/locales\/patchlocale",
             "deprecated": false,
             "data": [],
             "additionalParameters": null
@@ -1726,7 +1726,7 @@
                 }
             ],
             "notes": "",
-            "documentationUrl": null,
+            "documentationUrl": "https:\/\/localise.biz\/api\/docs\/locales\/deletelocale",
             "deprecated": false,
             "data": [],
             "additionalParameters": null
@@ -1765,7 +1765,7 @@
                 }
             ],
             "notes": "",
-            "documentationUrl": null,
+            "documentationUrl": "https:\/\/localise.biz\/api\/docs\/translations\/gettranslations",
             "deprecated": false,
             "data": [],
             "additionalParameters": null
@@ -1815,7 +1815,7 @@
                 }
             ],
             "notes": "",
-            "documentationUrl": null,
+            "documentationUrl": "https:\/\/localise.biz\/api\/docs\/translations\/gettranslation",
             "deprecated": false,
             "data": [],
             "additionalParameters": null
@@ -1868,7 +1868,7 @@
                 }
             ],
             "notes": "",
-            "documentationUrl": null,
+            "documentationUrl": "https:\/\/localise.biz\/api\/docs\/translations\/translate",
             "deprecated": false,
             "data": [],
             "additionalParameters": null
@@ -1918,7 +1918,7 @@
                 }
             ],
             "notes": "",
-            "documentationUrl": null,
+            "documentationUrl": "https:\/\/localise.biz\/api\/docs\/translations\/untranslate",
             "deprecated": false,
             "data": [],
             "additionalParameters": null
@@ -1979,7 +1979,7 @@
                 }
             ],
             "notes": "",
-            "documentationUrl": null,
+            "documentationUrl": "https:\/\/localise.biz\/api\/docs\/translations\/flagtranslation",
             "deprecated": false,
             "data": [],
             "additionalParameters": null
@@ -2025,7 +2025,7 @@
                 }
             ],
             "notes": "",
-            "documentationUrl": null,
+            "documentationUrl": "https:\/\/localise.biz\/api\/docs\/translations\/unflagtranslation",
             "deprecated": false,
             "data": [],
             "additionalParameters": null
@@ -2040,7 +2040,7 @@
             "parameters": [],
             "errorResponses": [],
             "notes": "",
-            "documentationUrl": null,
+            "documentationUrl": "https:\/\/localise.biz\/api\/docs\/ping\/ping",
             "deprecated": false,
             "data": [],
             "additionalParameters": null
@@ -2055,7 +2055,7 @@
             "parameters": [],
             "errorResponses": [],
             "notes": "",
-            "documentationUrl": null,
+            "documentationUrl": "https:\/\/localise.biz\/api\/docs\/ping\/ping404",
             "deprecated": false,
             "data": [],
             "additionalParameters": null
