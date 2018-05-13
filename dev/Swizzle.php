@@ -27,12 +27,11 @@ class Swizzle extends SwizzleBase
     public function toArray()
     {
         $export = parent::toArray();
-        foreach( $export['operations'] as $i => $op ){
-            $folder = pathinfo( explode('/',ltrim($op['uri'],'/'),3)[1], PATHINFO_FILENAME );
+        foreach ($export['operations'] as $i => $op) {
+            $folder = pathinfo(explode('/', ltrim($op['uri'], '/'), 3)[1], PATHINFO_FILENAME);
             $export['operations'][$i]['documentationUrl'] = $export['baseUri'].'api/docs/'.$folder.'/'.strtolower($op['name']);
         }
 
         return $export;
     }
-
 }

@@ -145,9 +145,9 @@ final class BuildCommand extends Command
             
             // Collect magic @method definition for PHPDoc tag
             $responseClass = $builder->getResponseClass($functionName);
-            $responseClass = 'Loco\\Http\\' === substr($responseClass,0,10) ? substr($responseClass,10) : '\\'.$responseClass;
+            $responseClass = 'Loco\\Http\\' === substr($responseClass, 0, 10) ? substr($responseClass, 10) : '\\'.$responseClass;
             // $description = sprintf('%s {@link %s}', $operation['summary'], $operation['documentationUrl'] );
-            $methodTags[$functionName] = sprintf(' * @method %s %s(%s) %s', $responseClass, $functionName, $options?'array $params = []':'', $operation['summary'] );
+            $methodTags[$functionName] = sprintf(' * @method %s %s(%s) %s', $responseClass, $functionName, $options?'array $params = []':'', $operation['summary']);
         }
             
         // Document ApiClass with magic @method tags
