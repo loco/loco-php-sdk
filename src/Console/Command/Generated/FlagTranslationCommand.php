@@ -22,8 +22,8 @@ class FlagTranslationCommand extends Command
         $this
             ->setName('loco:flag:translation')
             ->setMethod('flagTranslation')
-            ->setDescription('Flag a translation as incomplete')
-            ->addOption('flag', '', InputOption::VALUE_REQUIRED, 'Flag to set', 'fuzzy')
+            ->setDescription('Flag a translation in a given locale')
+            ->addOption('flag', '', InputOption::VALUE_REQUIRED, 'Flag or status to set, e.g. "fuzzy"', 'fuzzy')
             ->addArgument('id', InputArgument::REQUIRED, 'Asset ID', null)
             ->addArgument('locale', InputArgument::REQUIRED, 'Locale short code, or language tag', null)
         ;

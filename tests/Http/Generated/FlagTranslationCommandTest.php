@@ -17,7 +17,7 @@ class FlagTranslationCommandTest extends ApiClientTestCase
 {
 
     /**
-     * Flag a translation as incomplete
+     * Flag a translation in a given locale
      */
     public function testFlagTranslationCommandSuccess()
     {

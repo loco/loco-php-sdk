@@ -23,7 +23,7 @@ class GetAssetsCommand extends Command
             ->setName('loco:get:assets')
             ->setMethod('getAssets')
             ->setDescription('List all translatable assets in your project')
-            ->addOption('filter', '', InputOption::VALUE_REQUIRED, 'Comma-separated list of tags to filter assets. Match any tag with `*` and negate tag names by prefixing with `!`', null)
+            ->addOption('filter', '', InputOption::VALUE_REQUIRED, 'Filter assets by comma-separated tag names. Match any tag with `*` and negate tags by prefixing with `!`', null)
         ;
         parent::configure();
     }

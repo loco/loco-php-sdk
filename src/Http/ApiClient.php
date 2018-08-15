@@ -40,7 +40,7 @@ use GuzzleHttp\Command\Guzzle\GuzzleClient;
  * @method \GuzzleHttp\Command\Result getTranslation(array $params = []) Get a single translation
  * @method \GuzzleHttp\Command\Result translate(array $params = []) Add a new translation in a given locale
  * @method \GuzzleHttp\Command\Result untranslate(array $params = []) Erase translation data in a single locale
- * @method \GuzzleHttp\Command\Result flagTranslation(array $params = []) Flag a translation as incomplete
+ * @method \GuzzleHttp\Command\Result flagTranslation(array $params = []) Flag a translation in a given locale
  * @method \GuzzleHttp\Command\Result unflagTranslation(array $params = []) Clear flag from a translation
  * @method \GuzzleHttp\Command\Result ping() Check the API is up
  * @method \GuzzleHttp\Command\Result ping404() Get a test 404 response

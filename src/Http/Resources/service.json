@@ -4,13 +4,13 @@
     "baseUri": "https:\/\/localise.biz\/",
     "description": "Loco REST API",
     "operations": {
-        "getTags": {
-            "summary": "Get project tags",
-            "responseNotes": "Lists all tags in currently authenticated project",
+        "authVerify": {
+            "summary": "Verify an API project key",
+            "responseNotes": "<p>Loco API keys authenticate your user account for accessing a specific project.<br \/>This endpoint verifies an API key and returns the authenticated user, account and project.<\/p>\n<p>If you want to verify whether the key has write access, just send this endpoint a POST request instead. A read-only key will give 403 for any POST request.<\/p>",
             "httpMethod": "GET",
-            "uri": "\/api\/tags.json",
-            "name": "getTags",
-            "responseModel": "TagList",
+            "uri": "\/api\/auth\/verify",
+            "name": "authVerify",
+            "responseModel": "Credentials",
             "parameters": {
                 "key": {
                     "name": "key",
@@ -24,129 +24,14 @@
                 {
                     "code": 401,
                     "phrase": "Invalid API key"
+                },
+                {
+                    "code": 403,
+                    "phrase": "Insufficient privileges"
                 }
             ],
             "notes": "",
-            "documentationUrl": "https:\/\/localise.biz\/api\/docs\/tags\/gettags",
-            "deprecated": false,
-            "data": [],
-            "additionalParameters": null
-        },
-        "createTag": {
-            "summary": "Create a new tag",
-            "responseNotes": "Adds a new tag to the currently authenticated project",
-            "httpMethod": "POST",
-            "uri": "\/api\/tags.json",
-            "name": "createTag",
-            "responseModel": "Success",
-            "parameters": {
-                "name": {
-                    "name": "name",
-                    "type": "string",
-                    "required": true,
-                    "description": "Name of new tag",
-                    "location": "formParam"
-                },
-                "key": {
-                    "name": "key",
-                    "type": "string",
-                    "required": false,
-                    "description": "API key - required if not sent in Authorization header",
-                    "location": "query"
-                }
-            },
-            "errorResponses": [
-                {
-                    "code": 401,
-                    "phrase": "Invalid API key"
-                }
-            ],
-            "notes": "",
-            "documentationUrl": "https:\/\/localise.biz\/api\/docs\/tags\/createtag",
-            "deprecated": false,
-            "data": [],
-            "additionalParameters": null
-        },
-        "patchTag": {
-            "summary": "Modify a single tag",
-            "responseNotes": "Renames an existing tag in the currently authenticated project",
-            "httpMethod": "PATCH",
-            "uri": "\/api\/tags\/{tag}.json",
-            "name": "patchTag",
-            "responseModel": "Success",
-            "parameters": {
-                "name": {
-                    "description": "Display name of tag",
-                    "type": "string",
-                    "name": "name",
-                    "location": "json"
-                },
-                "key": {
-                    "name": "key",
-                    "type": "string",
-                    "required": false,
-                    "description": "API key - required if not sent in Authorization header",
-                    "location": "query"
-                },
-                "tag": {
-                    "name": "tag",
-                    "type": "string",
-                    "required": false,
-                    "description": "Name of a single asset tag.",
-                    "location": "uri"
-                }
-            },
-            "errorResponses": [
-                {
-                    "code": 401,
-                    "phrase": "Invalid API key"
-                },
-                {
-                    "code": 404,
-                    "phrase": "Tag not in project"
-                }
-            ],
-            "notes": "",
-            "documentationUrl": "https:\/\/localise.biz\/api\/docs\/tags\/patchtag",
-            "deprecated": false,
-            "data": [],
-            "additionalParameters": null
-        },
-        "deleteTag": {
-            "summary": "Delete an existing tag",
-            "responseNotes": "Deletes an existing tag in the currently authenticated project",
-            "httpMethod": "DELETE",
-            "uri": "\/api\/tags\/{tag}.json",
-            "name": "deleteTag",
-            "responseModel": "Success",
-            "parameters": {
-                "key": {
-                    "name": "key",
-                    "type": "string",
-                    "required": false,
-                    "description": "API key - required if not sent in Authorization header",
-                    "location": "query"
-                },
-                "tag": {
-                    "name": "tag",
-                    "type": "string",
-                    "required": false,
-                    "description": "Name of a single asset tag.",
-                    "location": "uri"
-                }
-            },
-            "errorResponses": [
-                {
-                    "code": 401,
-                    "phrase": "Invalid API key"
-                },
-                {
-                    "code": 404,
-                    "phrase": "Tag not in project"
-                }
-            ],
-            "notes": "",
-            "documentationUrl": "https:\/\/localise.biz\/api\/docs\/tags\/deletetag",
+            "documentationUrl": "https:\/\/localise.biz\/api\/docs\/auth\/authverify",
             "deprecated": false,
             "data": [],
             "additionalParameters": null
@@ -165,6 +50,7 @@
                     "required": true,
                     "description": "Target file type specified as a file extension",
                     "enum": [
+                        "json",
                         "csv",
                         "html",
                         "sql",
@@ -173,13 +59,13 @@
                         "yml"
                     ],
                     "location": "uri",
-                    "default": "yml"
+                    "default": "json"
                 },
                 "filter": {
                     "name": "filter",
                     "type": "string",
                     "required": false,
-                    "description": "Comma-separated list of tags to filter assets. Match any tag with `*` and negate tag names by prefixing with `!`",
+                    "description": "Filter assets by comma-separated tag names. Match any tag with `*` and negate tags by prefixing with `!`",
                     "location": "query"
                 },
                 "index": {
@@ -300,6 +186,7 @@
                         "rails",
                         "java",
                         "tizen",
+                        "jed",
                         "gettext",
                         "ng-gettext",
                         "xcode",
@@ -311,7 +198,7 @@
                     "name": "filter",
                     "type": "string",
                     "required": false,
-                    "description": "Comma-separated list of tags to filter assets. Match any tag with `*` and negate tag names by prefixing with `!`",
+                    "description": "Filter assets by comma-separated tag names. Match any tag with `*` and negate tags by prefixing with `!`",
                     "location": "query"
                 },
                 "index": {
@@ -357,18 +244,7 @@
                     "name": "status",
                     "type": "string",
                     "required": false,
-                    "description": "Export only translations with a specific status or flag",
-                    "enum": [
-                        "translated",
-                        "untranslated",
-                        "incorrect",
-                        "provisional",
-                        "unapproved",
-                        "fuzzy",
-                        "incomplete",
-                        "rejected",
-                        "all"
-                    ],
+                    "description": "Export translations with a specific status or flag. Negate values by prefixing with `!`. e.g. \"translated\", or \"!fuzzy\".",
                     "location": "query"
                 },
                 "path": {
@@ -471,6 +347,7 @@
                         "rails",
                         "java",
                         "tizen",
+                        "jed",
                         "gettext",
                         "ng-gettext",
                         "xcode",
@@ -482,7 +359,7 @@
                     "name": "filter",
                     "type": "string",
                     "required": false,
-                    "description": "Comma-separated list of tags to filter assets. Match any tag with `*` and negate tag names by prefixing with `!`",
+                    "description": "Filter assets by comma-separated tag names. Match any tag with `*` and negate tags by prefixing with `!`",
                     "location": "query"
                 },
                 "index": {
@@ -528,18 +405,7 @@
                     "name": "status",
                     "type": "string",
                     "required": false,
-                    "description": "Export only translations with a specific status or flag",
-                    "enum": [
-                        "translated",
-                        "untranslated",
-                        "incorrect",
-                        "provisional",
-                        "unapproved",
-                        "fuzzy",
-                        "incomplete",
-                        "rejected",
-                        "all"
-                    ],
+                    "description": "Export translations with a specific status or flag. Negate values by prefixing with `!`. e.g. \"translated\", or \"!fuzzy\".",
                     "location": "query"
                 },
                 "printf": {
@@ -628,6 +494,7 @@
                         "rails",
                         "java",
                         "tizen",
+                        "jed",
                         "gettext",
                         "ng-gettext",
                         "xcode",
@@ -639,7 +506,7 @@
                     "name": "filter",
                     "type": "string",
                     "required": false,
-                    "description": "Comma-separated list of tags to filter assets. Match any tag with `*` and negate tag names by prefixing with `!`",
+                    "description": "Filter assets by comma-separated tag names. Match any tag with `*` and negate tags by prefixing with `!`",
                     "location": "query"
                 },
                 "index": {
@@ -685,18 +552,7 @@
                     "name": "status",
                     "type": "string",
                     "required": false,
-                    "description": "Export only translations with a specific status or flag",
-                    "enum": [
-                        "translated",
-                        "untranslated",
-                        "incorrect",
-                        "provisional",
-                        "unapproved",
-                        "fuzzy",
-                        "incomplete",
-                        "rejected",
-                        "all"
-                    ],
+                    "description": "Export translations with a specific status or flag. Negate values by prefixing with `!`. e.g. \"translated\", or \"!fuzzy\".",
                     "location": "query"
                 },
                 "printf": {
@@ -942,13 +798,13 @@
             "data": [],
             "additionalParameters": null
         },
-        "authVerify": {
-            "summary": "Verify an API project key",
-            "responseNotes": "<p>Loco API keys authenticate your user account for accessing a specific project.<br \/>This endpoint verifies an API key and returns the authenticated user, account and project.<\/p>\n<p>If you want to verify whether the key has write access, just send this endpoint a POST request instead. A read-only key will give 403 for any POST request.<\/p>",
+        "getTags": {
+            "summary": "Get project tags",
+            "responseNotes": "Lists all tags in currently authenticated project",
             "httpMethod": "GET",
-            "uri": "\/api\/auth\/verify",
-            "name": "authVerify",
-            "responseModel": "Credentials",
+            "uri": "\/api\/tags.json",
+            "name": "getTags",
+            "responseModel": "TagList",
             "parameters": {
                 "key": {
                     "name": "key",
@@ -962,14 +818,129 @@
                 {
                     "code": 401,
                     "phrase": "Invalid API key"
-                },
-                {
-                    "code": 403,
-                    "phrase": "Insufficient privileges"
                 }
             ],
             "notes": "",
-            "documentationUrl": "https:\/\/localise.biz\/api\/docs\/auth\/authverify",
+            "documentationUrl": "https:\/\/localise.biz\/api\/docs\/tags\/gettags",
+            "deprecated": false,
+            "data": [],
+            "additionalParameters": null
+        },
+        "createTag": {
+            "summary": "Create a new tag",
+            "responseNotes": "Adds a new tag to the currently authenticated project",
+            "httpMethod": "POST",
+            "uri": "\/api\/tags.json",
+            "name": "createTag",
+            "responseModel": "Success",
+            "parameters": {
+                "name": {
+                    "name": "name",
+                    "type": "string",
+                    "required": true,
+                    "description": "Name of new tag",
+                    "location": "formParam"
+                },
+                "key": {
+                    "name": "key",
+                    "type": "string",
+                    "required": false,
+                    "description": "API key - required if not sent in Authorization header",
+                    "location": "query"
+                }
+            },
+            "errorResponses": [
+                {
+                    "code": 401,
+                    "phrase": "Invalid API key"
+                }
+            ],
+            "notes": "",
+            "documentationUrl": "https:\/\/localise.biz\/api\/docs\/tags\/createtag",
+            "deprecated": false,
+            "data": [],
+            "additionalParameters": null
+        },
+        "patchTag": {
+            "summary": "Modify a single tag",
+            "responseNotes": "Renames an existing tag in the currently authenticated project",
+            "httpMethod": "PATCH",
+            "uri": "\/api\/tags\/{tag}.json",
+            "name": "patchTag",
+            "responseModel": "Success",
+            "parameters": {
+                "name": {
+                    "description": "Display name of tag",
+                    "type": "string",
+                    "name": "name",
+                    "location": "json"
+                },
+                "key": {
+                    "name": "key",
+                    "type": "string",
+                    "required": false,
+                    "description": "API key - required if not sent in Authorization header",
+                    "location": "query"
+                },
+                "tag": {
+                    "name": "tag",
+                    "type": "string",
+                    "required": false,
+                    "description": "Name of a single asset tag.",
+                    "location": "uri"
+                }
+            },
+            "errorResponses": [
+                {
+                    "code": 401,
+                    "phrase": "Invalid API key"
+                },
+                {
+                    "code": 404,
+                    "phrase": "Tag not in project"
+                }
+            ],
+            "notes": "",
+            "documentationUrl": "https:\/\/localise.biz\/api\/docs\/tags\/patchtag",
+            "deprecated": false,
+            "data": [],
+            "additionalParameters": null
+        },
+        "deleteTag": {
+            "summary": "Delete an existing tag",
+            "responseNotes": "Deletes an existing tag in the currently authenticated project",
+            "httpMethod": "DELETE",
+            "uri": "\/api\/tags\/{tag}.json",
+            "name": "deleteTag",
+            "responseModel": "Success",
+            "parameters": {
+                "key": {
+                    "name": "key",
+                    "type": "string",
+                    "required": false,
+                    "description": "API key - required if not sent in Authorization header",
+                    "location": "query"
+                },
+                "tag": {
+                    "name": "tag",
+                    "type": "string",
+                    "required": false,
+                    "description": "Name of a single asset tag.",
+                    "location": "uri"
+                }
+            },
+            "errorResponses": [
+                {
+                    "code": 401,
+                    "phrase": "Invalid API key"
+                },
+                {
+                    "code": 404,
+                    "phrase": "Tag not in project"
+                }
+            ],
+            "notes": "",
+            "documentationUrl": "https:\/\/localise.biz\/api\/docs\/tags\/deletetag",
             "deprecated": false,
             "data": [],
             "additionalParameters": null
@@ -986,7 +957,7 @@
                     "name": "filter",
                     "type": "string",
                     "required": false,
-                    "description": "Comma-separated list of tags to filter assets. Match any tag with `*` and negate tag names by prefixing with `!`",
+                    "description": "Filter assets by comma-separated tag names. Match any tag with `*` and negate tags by prefixing with `!`",
                     "location": "query"
                 },
                 "key": {
@@ -1064,15 +1035,6 @@
                     "type": "string",
                     "required": false,
                     "description": "Status of the source language translation specified in <code>{text}<\/code>",
-                    "enum": [
-                        "translated",
-                        "untranslated",
-                        "incorrect",
-                        "provisional",
-                        "unapproved",
-                        "fuzzy",
-                        "incomplete"
-                    ],
                     "location": "formParam",
                     "default": "translated"
                 },
@@ -1924,8 +1886,8 @@
             "additionalParameters": null
         },
         "flagTranslation": {
-            "summary": "Flag a translation as incomplete",
-            "responseNotes": "<p>Flag a single translation as being incomplete or in error for the given locale.<\/p>\n<p>Flagged translations reduce your project completeness.<\/p>",
+            "summary": "Flag a translation in a given locale",
+            "responseNotes": "<p>Flag a single translation or set its status in a given locale.<\/p>\n<p>The <code>flag<\/code> parameter can be any flag (e.g. fuzzy) a status (e.g. translated) or a redundant state (e.g. blank translation).\n<a href=\"https:\/\/localise.biz\/help\/glossary\/flag\">See translation states<\/a>.<\/p>",
             "httpMethod": "POST",
             "uri": "\/api\/translations\/{id}\/{locale}\/flag",
             "name": "flagTranslation",
@@ -1935,14 +1897,7 @@
                     "name": "flag",
                     "type": "string",
                     "required": true,
-                    "description": "Flag to set",
-                    "enum": [
-                        "incorrect",
-                        "provisional",
-                        "unapproved",
-                        "fuzzy",
-                        "incomplete"
-                    ],
+                    "description": "Flag or status to set, e.g. \"fuzzy\"",
                     "location": "formParam",
                     "default": "fuzzy"
                 },
@@ -2062,47 +2017,158 @@
         }
     },
     "models": {
-        "Success": {
+        "User": {
             "properties": {
-                "status": {
-                    "description": "HTTP status 2xx code",
+                "id": {
+                    "description": "User id",
                     "type": "integer",
-                    "name": "status",
+                    "name": "id",
                     "required": true,
                     "location": "json"
                 },
-                "message": {
-                    "description": "Descriptive success message",
+                "name": {
+                    "description": "Full user name",
                     "type": "string",
-                    "name": "message",
-                    "required": true,
+                    "name": "name",
+                    "location": "json"
+                },
+                "email": {
+                    "description": "Contact email address if you have permission to see it",
+                    "type": "string",
+                    "name": "email",
                     "location": "json"
                 }
             },
-            "name": "Success",
+            "name": "User",
             "type": "object",
             "additionalProperties": false
         },
-        "TagPatch": {
-            "description": "Patch structure for modifying tags",
+        "Group": {
             "properties": {
+                "id": {
+                    "description": "Loco account id",
+                    "type": "integer",
+                    "name": "id",
+                    "location": "json"
+                },
                 "name": {
-                    "description": "Display name of tag",
+                    "description": "Loco account name",
                     "type": "string",
                     "name": "name",
                     "location": "json"
                 }
             },
-            "name": "TagPatch",
+            "name": "Group",
             "type": "object",
             "additionalProperties": false
         },
-        "TagList": {
-            "type": "array",
-            "items": {
-                "type": "string"
+        "Project": {
+            "properties": {
+                "id": {
+                    "description": "Project id",
+                    "type": "integer",
+                    "name": "id",
+                    "location": "json"
+                },
+                "name": {
+                    "description": "Project name",
+                    "type": "string",
+                    "name": "name",
+                    "location": "json"
+                },
+                "url": {
+                    "description": "Project dashboard URL",
+                    "type": "string",
+                    "name": "url",
+                    "location": "json"
+                }
             },
-            "location": "json"
+            "name": "Project",
+            "type": "object",
+            "additionalProperties": false
+        },
+        "Credentials": {
+            "properties": {
+                "user": {
+                    "properties": {
+                        "id": {
+                            "description": "User id",
+                            "type": "integer",
+                            "name": "id",
+                            "required": true,
+                            "location": "json"
+                        },
+                        "name": {
+                            "description": "Full user name",
+                            "type": "string",
+                            "name": "name",
+                            "location": "json"
+                        },
+                        "email": {
+                            "description": "Contact email address if you have permission to see it",
+                            "type": "string",
+                            "name": "email",
+                            "location": "json"
+                        }
+                    },
+                    "name": "User",
+                    "type": "object",
+                    "additionalProperties": false,
+                    "required": true,
+                    "location": "json"
+                },
+                "group": {
+                    "properties": {
+                        "id": {
+                            "description": "Loco account id",
+                            "type": "integer",
+                            "name": "id",
+                            "location": "json"
+                        },
+                        "name": {
+                            "description": "Loco account name",
+                            "type": "string",
+                            "name": "name",
+                            "location": "json"
+                        }
+                    },
+                    "name": "Group",
+                    "type": "object",
+                    "additionalProperties": false,
+                    "required": true,
+                    "location": "json"
+                },
+                "project": {
+                    "properties": {
+                        "id": {
+                            "description": "Project id",
+                            "type": "integer",
+                            "name": "id",
+                            "location": "json"
+                        },
+                        "name": {
+                            "description": "Project name",
+                            "type": "string",
+                            "name": "name",
+                            "location": "json"
+                        },
+                        "url": {
+                            "description": "Project dashboard URL",
+                            "type": "string",
+                            "name": "url",
+                            "location": "json"
+                        }
+                    },
+                    "name": "Project",
+                    "type": "object",
+                    "additionalProperties": false,
+                    "required": true,
+                    "location": "json"
+                }
+            },
+            "name": "Credentials",
+            "type": "object",
+            "additionalProperties": false
         },
         "exportAll": {
             "type": "class",
@@ -2522,158 +2588,47 @@
             "type": "object",
             "additionalProperties": false
         },
-        "User": {
+        "Success": {
             "properties": {
-                "id": {
-                    "description": "User id",
+                "status": {
+                    "description": "HTTP status 2xx code",
                     "type": "integer",
-                    "name": "id",
+                    "name": "status",
                     "required": true,
                     "location": "json"
                 },
-                "name": {
-                    "description": "Full user name",
+                "message": {
+                    "description": "Descriptive success message",
                     "type": "string",
-                    "name": "name",
-                    "location": "json"
-                },
-                "email": {
-                    "description": "Contact email address if you have permission to see it",
-                    "type": "string",
-                    "name": "email",
+                    "name": "message",
+                    "required": true,
                     "location": "json"
                 }
             },
-            "name": "User",
+            "name": "Success",
             "type": "object",
             "additionalProperties": false
         },
-        "Group": {
+        "TagPatch": {
+            "description": "Patch structure for modifying tags",
             "properties": {
-                "id": {
-                    "description": "Loco account id",
-                    "type": "integer",
-                    "name": "id",
-                    "location": "json"
-                },
                 "name": {
-                    "description": "Loco account name",
+                    "description": "Display name of tag",
                     "type": "string",
                     "name": "name",
                     "location": "json"
                 }
             },
-            "name": "Group",
+            "name": "TagPatch",
             "type": "object",
             "additionalProperties": false
         },
-        "Project": {
-            "properties": {
-                "id": {
-                    "description": "Project id",
-                    "type": "integer",
-                    "name": "id",
-                    "location": "json"
-                },
-                "name": {
-                    "description": "Project name",
-                    "type": "string",
-                    "name": "name",
-                    "location": "json"
-                },
-                "url": {
-                    "description": "Project dashboard URL",
-                    "type": "string",
-                    "name": "url",
-                    "location": "json"
-                }
+        "TagList": {
+            "type": "array",
+            "items": {
+                "type": "string"
             },
-            "name": "Project",
-            "type": "object",
-            "additionalProperties": false
-        },
-        "Credentials": {
-            "properties": {
-                "user": {
-                    "properties": {
-                        "id": {
-                            "description": "User id",
-                            "type": "integer",
-                            "name": "id",
-                            "required": true,
-                            "location": "json"
-                        },
-                        "name": {
-                            "description": "Full user name",
-                            "type": "string",
-                            "name": "name",
-                            "location": "json"
-                        },
-                        "email": {
-                            "description": "Contact email address if you have permission to see it",
-                            "type": "string",
-                            "name": "email",
-                            "location": "json"
-                        }
-                    },
-                    "name": "User",
-                    "type": "object",
-                    "additionalProperties": false,
-                    "required": true,
-                    "location": "json"
-                },
-                "group": {
-                    "properties": {
-                        "id": {
-                            "description": "Loco account id",
-                            "type": "integer",
-                            "name": "id",
-                            "location": "json"
-                        },
-                        "name": {
-                            "description": "Loco account name",
-                            "type": "string",
-                            "name": "name",
-                            "location": "json"
-                        }
-                    },
-                    "name": "Group",
-                    "type": "object",
-                    "additionalProperties": false,
-                    "required": true,
-                    "location": "json"
-                },
-                "project": {
-                    "properties": {
-                        "id": {
-                            "description": "Project id",
-                            "type": "integer",
-                            "name": "id",
-                            "location": "json"
-                        },
-                        "name": {
-                            "description": "Project name",
-                            "type": "string",
-                            "name": "name",
-                            "location": "json"
-                        },
-                        "url": {
-                            "description": "Project dashboard URL",
-                            "type": "string",
-                            "name": "url",
-                            "location": "json"
-                        }
-                    },
-                    "name": "Project",
-                    "type": "object",
-                    "additionalProperties": false,
-                    "required": true,
-                    "location": "json"
-                }
-            },
-            "name": "Credentials",
-            "type": "object",
-            "additionalProperties": false
+            "location": "json"
         },
         "AssetPatch": {
             "description": "Patch structure for modifying assets",
@@ -2777,7 +2732,7 @@
                     "location": "json"
                 },
                 "flagged": {
-                    "description": "Whether translation is flagged by user action",
+                    "description": "Whether translation is flagged as requiring attention",
                     "type": "boolean",
                     "name": "flagged",
                     "default": false,
@@ -2896,7 +2851,7 @@
                     "location": "json"
                 },
                 "flagged": {
-                    "description": "Whether translation is flagged by user action",
+                    "description": "Whether translation is flagged as requiring attention",
                     "type": "boolean",
                     "name": "flagged",
                     "default": false,
