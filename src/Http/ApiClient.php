@@ -11,37 +11,37 @@ use GuzzleHttp\Command\Guzzle\GuzzleClient;
  * @usage $client = ApiClient::factory( [ 'key' => 'my-api-key' ] );
  *
  * @method \GuzzleHttp\Command\Result getTags() Get project tags
- * @method \GuzzleHttp\Command\Result createTag(array $params = []) Create a new tag
- * @method \GuzzleHttp\Command\Result patchTag(array $params = []) Modify a single tag
- * @method \GuzzleHttp\Command\Result deleteTag(array $params = []) Delete an existing tag
- * @method Result\RawResult exportAll(array $params = []) Export your whole project to a multi-locale language pack
- * @method Result\ZipResult exportArchive(array $params = []) Export all locales to a zip archive
- * @method Result\RawResult exportLocale(array $params = []) Export a single locale to a language pack.
- * @method Result\RawResult exportTemplate(array $params = []) Export a template containing only source keys
- * @method \GuzzleHttp\Command\Result importProgress(array $params = []) Check the progress of an asynchronous import
- * @method \GuzzleHttp\Command\Result import(array $params = []) Import assets and translations from a language pack file
+ * @method \GuzzleHttp\Command\Result createTag(array $params) Create a new tag
+ * @method \GuzzleHttp\Command\Result patchTag(array $params) Modify a single tag
+ * @method \GuzzleHttp\Command\Result deleteTag(array $params) Delete an existing tag
+ * @method Result\RawResult exportAll(array $params) Export your whole project to a multi-locale language pack
+ * @method Result\ZipResult exportArchive(array $params) Export all locales to a zip archive
+ * @method Result\RawResult exportLocale(array $params) Export a single locale to a language pack.
+ * @method Result\RawResult exportTemplate(array $params) Export a template containing only source keys
+ * @method \GuzzleHttp\Command\Result importProgress(array $params) Check the progress of an asynchronous import
+ * @method \GuzzleHttp\Command\Result import(array $params) Import assets and translations from a language pack file
  * @method \GuzzleHttp\Command\Result authVerify() Verify an API project key
- * @method \GuzzleHttp\Command\Result getAssets(array $params = []) List all translatable assets in your project
- * @method \GuzzleHttp\Command\Result createAsset(array $params = []) Add a new translatable asset
- * @method \GuzzleHttp\Command\Result getAsset(array $params = []) Get a project asset
- * @method \GuzzleHttp\Command\Result patchAsset(array $params = []) Modify a single asset
- * @method \GuzzleHttp\Command\Result deleteAsset(array $params = []) Delete an asset permanently
- * @method \GuzzleHttp\Command\Result getAssetPlurals(array $params = []) Get plural forms of an asset
- * @method \GuzzleHttp\Command\Result createPlural(array $params = []) Add a new plural form of an existing asset
- * @method \GuzzleHttp\Command\Result unlinkPlural(array $params = []) Unlinks a plural form of an existing asset
- * @method \GuzzleHttp\Command\Result tagAsset(array $params = []) Tag an asset
- * @method \GuzzleHttp\Command\Result untagAsset(array $params = []) Untag an asset
+ * @method \GuzzleHttp\Command\Result getAssets(array $params) List all translatable assets in your project
+ * @method \GuzzleHttp\Command\Result createAsset(array $params) Add a new translatable asset
+ * @method \GuzzleHttp\Command\Result getAsset(array $params) Get a project asset
+ * @method \GuzzleHttp\Command\Result patchAsset(array $params) Modify a single asset
+ * @method \GuzzleHttp\Command\Result deleteAsset(array $params) Delete an asset permanently
+ * @method \GuzzleHttp\Command\Result getAssetPlurals(array $params) Get plural forms of an asset
+ * @method \GuzzleHttp\Command\Result createPlural(array $params) Add a new plural form of an existing asset
+ * @method \GuzzleHttp\Command\Result unlinkPlural(array $params) Unlinks a plural form of an existing asset
+ * @method \GuzzleHttp\Command\Result tagAsset(array $params) Tag an asset
+ * @method \GuzzleHttp\Command\Result untagAsset(array $params) Untag an asset
  * @method \GuzzleHttp\Command\Result getLocales() List all locales in your project
- * @method \GuzzleHttp\Command\Result createLocale(array $params = []) Add a new project locale
- * @method \GuzzleHttp\Command\Result getLocale(array $params = []) Get a project locale
- * @method \GuzzleHttp\Command\Result patchLocale(array $params = []) Modify a project locale
- * @method \GuzzleHttp\Command\Result deleteLocale(array $params = []) Delete a project locale
- * @method \GuzzleHttp\Command\Result getTranslations(array $params = []) Get all translations of an asset
- * @method \GuzzleHttp\Command\Result getTranslation(array $params = []) Get a single translation
- * @method \GuzzleHttp\Command\Result translate(array $params = []) Add a new translation in a given locale
- * @method \GuzzleHttp\Command\Result untranslate(array $params = []) Erase translation data in a single locale
- * @method \GuzzleHttp\Command\Result flagTranslation(array $params = []) Flag a translation in a given locale
- * @method \GuzzleHttp\Command\Result unflagTranslation(array $params = []) Clear flag from a translation
+ * @method \GuzzleHttp\Command\Result createLocale(array $params) Add a new project locale
+ * @method \GuzzleHttp\Command\Result getLocale(array $params) Get a project locale
+ * @method \GuzzleHttp\Command\Result patchLocale(array $params) Modify a project locale
+ * @method \GuzzleHttp\Command\Result deleteLocale(array $params) Delete a project locale
+ * @method \GuzzleHttp\Command\Result getTranslations(array $params) Get all translations of an asset
+ * @method \GuzzleHttp\Command\Result getTranslation(array $params) Get a single translation
+ * @method \GuzzleHttp\Command\Result translate(array $params) Add a new translation in a given locale
+ * @method \GuzzleHttp\Command\Result untranslate(array $params) Erase translation data in a single locale
+ * @method \GuzzleHttp\Command\Result flagTranslation(array $params) Flag a translation in a given locale
+ * @method \GuzzleHttp\Command\Result unflagTranslation(array $params) Clear flag from a translation
  * @method \GuzzleHttp\Command\Result ping() Check the API is up
  * @method \GuzzleHttp\Command\Result ping404() Get a test 404 response
  */
