@@ -23,7 +23,7 @@ class TranslateCommand extends Command
             ->setName('loco:translate')
             ->setMethod('translate')
             ->setDescription('Add a new translation in a given locale')
-            ->addOption('translation', '', InputOption::VALUE_REQUIRED, 'Raw value of new translation. Leaving empty puts a blank translation.', null)
+            ->addOption('data', '', InputOption::VALUE_REQUIRED, 'Raw value of new translation. Sending empty marks as \'untranslated\'', null)
             ->addArgument('id', InputArgument::REQUIRED, 'Asset ID', null)
             ->addArgument('locale', InputArgument::REQUIRED, 'Locale short code, or language tag', null)
         ;

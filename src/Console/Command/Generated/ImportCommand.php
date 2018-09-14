@@ -24,7 +24,7 @@ class ImportCommand extends Command
             ->setMethod('import')
             ->setDescription('Import assets and translations from a language pack file')
             ->addArgument('ext', InputArgument::REQUIRED, 'File extension for the type of file data you\'re importing', null)
-            ->addOption('src', '', InputOption::VALUE_REQUIRED, 'Raw source of file being imported', '{}')
+            ->addOption('data', '', InputOption::VALUE_REQUIRED, 'Raw source of file being imported', '{}')
             ->addOption('index', '', InputOption::VALUE_REQUIRED, 'Specify whether translations in your file are indexed by generic IDs or human-readable source text', null)
             ->addOption('locale', '', InputOption::VALUE_REQUIRED, 'Specify target locale if importing translations', null)
             ->addOption('async', '', InputOption::VALUE_REQUIRED, 'Specify that import should be done asynchronously (recommended)', null)

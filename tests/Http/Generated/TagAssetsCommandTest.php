@@ -13,24 +13,24 @@ use Loco\Tests\Http\Model\MockResponse;
  *
  * @group built
  */
-class ExportLocaleCommandTest extends ApiClientTestCase
+class TagAssetsCommandTest extends ApiClientTestCase
 {
 
     /**
-     * Export a single locale to a language pack
+     * Add multiple assets to an existing tag
      */
-    public function testExportLocaleCommandSuccess()
+    public function testTagAssetsCommandSuccess()
     {
         $service = $this->getServiceDescription();
-        $query = new MockRequest('exportLocale', $service);
-        $model = new MockResponse('exportLocale', $service);
+        $query = new MockRequest('tagAssets', $service);
+        $model = new MockResponse('Success', $service);
     
         $client = $this->getClientWithMockedResponse(
             [ 'base_uri' => 'https://example.com/api' ],
             $model->toArray()
         );
 
-        $result = $client->exportLocale($query->toArray());
-        $this->assertInstanceOf($model->getResponseClass(), $result, 'Bad class for "exportLocale" model');
+        $result = $client->tagAssets($query->toArray());
+        $this->assertInstanceOf($model->getResponseClass(), $result, 'Bad class for "Success" model');
     }
 }

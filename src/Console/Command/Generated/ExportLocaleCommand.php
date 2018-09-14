@@ -22,7 +22,7 @@ class ExportLocaleCommand extends Command
         $this
             ->setName('loco:export:locale')
             ->setMethod('exportLocale')
-            ->setDescription('Export a single locale to a language pack.')
+            ->setDescription('Export a single locale to a language pack')
             ->addArgument('locale', InputArgument::REQUIRED, 'Locale to export, specified as short code or language tag. e.g. `en` or `en_GB`', null)
             ->addArgument('ext', InputArgument::OPTIONAL, 'Target file type specified as a file extension', 'json')
             ->addOption('format', '', InputOption::VALUE_REQUIRED, 'More specific format of file type. e.g. <code>symfony</code> applies to <code>php</code>, <code>xlf</code> &amp; <code>yml</code>', null)

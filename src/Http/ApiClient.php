@@ -16,7 +16,7 @@ use GuzzleHttp\Command\Guzzle\GuzzleClient;
  * @method \GuzzleHttp\Command\Result deleteTag(array $params) Delete an existing tag
  * @method Result\RawResult exportAll(array $params) Export your whole project to a multi-locale language pack
  * @method Result\ZipResult exportArchive(array $params) Export all locales to a zip archive
- * @method Result\RawResult exportLocale(array $params) Export a single locale to a language pack.
+ * @method Result\RawResult exportLocale(array $params) Export a single locale to a language pack
  * @method Result\RawResult exportTemplate(array $params) Export a template containing only source keys
  * @method \GuzzleHttp\Command\Result importProgress(array $params) Check the progress of an asynchronous import
  * @method \GuzzleHttp\Command\Result import(array $params) Import assets and translations from a language pack file
@@ -44,11 +44,12 @@ use GuzzleHttp\Command\Guzzle\GuzzleClient;
  * @method \GuzzleHttp\Command\Result unflagTranslation(array $params) Clear flag from a translation
  * @method \GuzzleHttp\Command\Result ping() Check the API is up
  * @method \GuzzleHttp\Command\Result ping404() Get a test 404 response
+ * @method \GuzzleHttp\Command\Result tagAssets(array $params) Add multiple assets to an existing tag
  */
 class ApiClient extends GuzzleClient
 {
-    const SDK_VERSION = '2.0.1';
-    const API_VERSION = '1.0.19';
+    const SDK_VERSION = '2.0.2';
+    const API_VERSION = '1.0.20';
 
     /**
      * Factory method to create a new Loco API client.

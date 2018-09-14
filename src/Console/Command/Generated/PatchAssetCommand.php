@@ -28,7 +28,6 @@ class PatchAssetCommand extends Command
             ->addOption('context', '', InputOption::VALUE_REQUIRED, 'Optional context descriptor', null)
             ->addOption('notes', '', InputOption::VALUE_REQUIRED, 'Optional notes for translators', null)
             ->addOption('aliases', '', InputOption::VALUE_REQUIRED, 'Generic object', null)
-            ->addOption('name', '', InputOption::VALUE_REQUIRED, 'DEPRECATED: patch `aliases.name` instead', null)
             ->addArgument('id', InputArgument::REQUIRED, 'Asset ID', null)
         ;
         parent::configure();

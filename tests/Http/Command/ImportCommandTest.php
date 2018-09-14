@@ -60,7 +60,7 @@ class ImportCommandTest extends ApiClientTestCase
             'ext' => 'json',
             'index' => 'id',
             'locale' => 'en',
-            'src' => '{"foo":"Foo","bar":"Bar","baz":"Baz"}',
+            'data' => '{"foo":"Foo","bar":"Bar","baz":"Baz"}',
         ]);
         $this->assertCount(1, $mocked);
         $request = $mocked[0]['request'];

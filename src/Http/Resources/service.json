@@ -1,6 +1,6 @@
 {
     "name": "Loco",
-    "apiVersion": "1.0.19",
+    "apiVersion": "1.0.20",
     "baseUri": "https:\/\/localise.biz\/",
     "description": "Loco REST API",
     "operations": {
@@ -157,6 +157,7 @@
                         "pot",
                         "plist",
                         "bplist",
+                        "properties",
                         "resx",
                         "sql",
                         "strings",
@@ -287,7 +288,7 @@
             "additionalParameters": null
         },
         "exportLocale": {
-            "summary": "Export a single locale to a language pack.",
+            "summary": "Export a single locale to a language pack",
             "responseNotes": "<p>Export translations from your project to a locale-specific language pack.<\/p>\n<p>Various export file types are supported with format variations for some types.\n<a href=\"https:\/\/localise.biz\/api#formats\">See the full list of supported export formats<\/a>.<\/p>",
             "httpMethod": "GET",
             "uri": "\/api\/export\/locale\/{locale}.{ext}",
@@ -318,6 +319,7 @@
                         "pot",
                         "plist",
                         "bplist",
+                        "properties",
                         "resx",
                         "sql",
                         "strings",
@@ -465,6 +467,7 @@
                         "pot",
                         "plist",
                         "bplist",
+                        "properties",
                         "resx",
                         "sql",
                         "strings",
@@ -663,8 +666,8 @@
                     ],
                     "location": "uri"
                 },
-                "src": {
-                    "name": "src",
+                "data": {
+                    "name": "data",
                     "type": "string",
                     "required": true,
                     "description": "Raw source of file being imported",
@@ -857,6 +860,52 @@
             ],
             "notes": "",
             "documentationUrl": "https:\/\/localise.biz\/api\/docs\/tags\/createtag",
+            "deprecated": false,
+            "data": [],
+            "additionalParameters": null
+        },
+        "tagAssets": {
+            "summary": "Add multiple assets to an existing tag",
+            "responseNotes": "Tag multiple assets at once by posting their unique IDs to the tag's resource",
+            "httpMethod": "POST",
+            "uri": "\/api\/tags\/{tag}.json",
+            "name": "tagAssets",
+            "responseModel": "Success",
+            "parameters": {
+                "data": {
+                    "name": "data",
+                    "type": "string",
+                    "required": true,
+                    "description": "Comma separated list of unique asset IDs",
+                    "location": "body"
+                },
+                "key": {
+                    "name": "key",
+                    "type": "string",
+                    "required": false,
+                    "description": "API key - required if not sent in Authorization header",
+                    "location": "query"
+                },
+                "tag": {
+                    "name": "tag",
+                    "type": "string",
+                    "required": false,
+                    "description": "Name of a single asset tag.",
+                    "location": "uri"
+                }
+            },
+            "errorResponses": [
+                {
+                    "code": 401,
+                    "phrase": "Invalid API key"
+                },
+                {
+                    "code": 404,
+                    "phrase": "Tag not in project"
+                }
+            ],
+            "notes": "",
+            "documentationUrl": "https:\/\/localise.biz\/api\/docs\/tags\/tagassets",
             "deprecated": false,
             "data": [],
             "additionalParameters": null
@@ -1149,12 +1198,6 @@
                     "name": "stdClass",
                     "type": "object",
                     "additionalProperties": false,
-                    "location": "json"
-                },
-                "name": {
-                    "description": "DEPRECATED: patch `aliases.name` instead",
-                    "type": "string",
-                    "name": "name",
                     "location": "json"
                 },
                 "id": {
@@ -1790,11 +1833,11 @@
             "name": "translate",
             "responseModel": "Translation",
             "parameters": {
-                "translation": {
-                    "name": "translation",
+                "data": {
+                    "name": "data",
                     "type": "string",
                     "required": false,
-                    "description": "Raw value of new translation. Leaving empty puts a blank translation.",
+                    "description": "Raw value of new translation. Sending empty marks as 'untranslated'",
                     "location": "body"
                 },
                 "key": {
@@ -2529,13 +2572,6 @@
                     "type": "object",
                     "additionalProperties": false,
                     "location": "json"
-                },
-                "name": {
-                    "description": "DEPRECATED: access `aliases.name` instead",
-                    "type": "string",
-                    "name": "name",
-                    "required": true,
-                    "location": "json"
                 }
             },
             "name": "Asset",
@@ -2668,12 +2704,6 @@
                     "name": "stdClass",
                     "type": "object",
                     "additionalProperties": false,
-                    "location": "json"
-                },
-                "name": {
-                    "description": "DEPRECATED: patch `aliases.name` instead",
-                    "type": "string",
-                    "name": "name",
                     "location": "json"
                 }
             },
