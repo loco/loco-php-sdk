@@ -28,7 +28,7 @@ try {
     /* @var \GuzzleHttp\Command\Result $result */
     $result = $client->import([
         'ext' => 'xlf',
-        'src' => $xlfdata,
+        'data' => $xlfdata,
         'locale' => 'es',
         'index' => 'text',
     ]);

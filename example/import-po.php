@@ -25,7 +25,7 @@ try {
     /* @var \GuzzleHttp\Command\Result $result */
     $result = $client->import([
         'ext' => 'po',
-        'src' => $podata,
+        'data' => $podata,
         'locale' => 'es',
     ]);
     // Response model implements ArrayAccess

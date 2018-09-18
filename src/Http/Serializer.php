@@ -64,7 +64,22 @@ class Serializer extends DefaultSerializer
                 $command->offsetUnset('key');
             }
         }
-
+        
+        // Remap legacy parameters to common `data` binding on request body
+        static $remap = [
+            'import' => ['src'=>'data'],
+            'translate' => ['translation'=>'data'],
+        ];
+        $name = $command->getName();
+        if (isset($remap[$name])) {
+            foreach ($remap[$name] as $old => $new) {
+                if ($command->offsetExists($old)) {
+                    $command->offsetSet($new, $command->offsetGet($old));
+                    $command->offsetUnset($old);
+                }
+            }
+        }
+        
         return parent::prepareRequest($command, $request);
     }
 }

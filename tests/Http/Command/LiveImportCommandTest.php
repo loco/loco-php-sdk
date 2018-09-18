@@ -12,14 +12,27 @@ use GuzzleHttp\Command\Result;
  */
 class LiveImportCommmandTest extends ApiClientTestCase
 {
-    public function testLiveImportPostsValidJson()
+    public function testLiveImportPostsValidYaml()
     {
         $client = static::getClient();
         $result = $client->import([
-            'ext' => 'json',
+            'ext' => 'yml',
             'index' => 'id',
             'locale' => 'en',
-            'src' => '{"foo":"Foo","bar":"Bar","baz":"Baz"}',
+            'data' => 'foo: Foo',
+        ]);
+        $this->assertInstanceOf(Result::class, $result);
+    }
+
+
+    public function testLiveImportSupportsLegacyBinding()
+    {
+        $client = static::getClient();
+        $result = $client->import([
+            'ext' => 'pot',
+            'index' => 'text',
+            'locale' => 'en',
+            'src' => "msgid \"\"\nmsgstr \"\"\n\nmsgid \"Foo\"\nmsgstr \"\"",
         ]);
         $this->assertInstanceOf(Result::class, $result);
     }
