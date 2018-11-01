@@ -1,6 +1,6 @@
 {
     "name": "Loco",
-    "apiVersion": "1.0.20",
+    "apiVersion": "1.0.21",
     "baseUri": "https:\/\/localise.biz\/",
     "description": "Loco REST API",
     "operations": {
@@ -108,8 +108,16 @@
                     "enum": [
                         "php",
                         "java",
-                        "objc"
+                        "objc",
+                        "icu"
                     ],
+                    "location": "query"
+                },
+                "no-folding": {
+                    "name": "no-folding",
+                    "type": "boolean",
+                    "required": false,
+                    "description": "Protect <a href=\"https:\/\/localise.biz\/help\/developers\/asset-ids#folding\">dot-separated keys<\/a> so that `foo.bar` is not folded into object properties.",
                     "location": "query"
                 },
                 "key": {
@@ -158,12 +166,14 @@
                         "plist",
                         "bplist",
                         "properties",
+                        "res",
                         "resx",
                         "sql",
                         "strings",
                         "stringsdict",
                         "tmx",
                         "ts",
+                        "txt",
                         "xlf",
                         "xliff",
                         "xml",
@@ -263,8 +273,16 @@
                     "enum": [
                         "php",
                         "java",
-                        "objc"
+                        "objc",
+                        "icu"
                     ],
+                    "location": "query"
+                },
+                "no-folding": {
+                    "name": "no-folding",
+                    "type": "boolean",
+                    "required": false,
+                    "description": "Protect <a href=\"https:\/\/localise.biz\/help\/developers\/asset-ids#folding\">dot-separated keys<\/a> so that `foo.bar` is not folded into object properties.",
                     "location": "query"
                 },
                 "key": {
@@ -320,12 +338,14 @@
                         "plist",
                         "bplist",
                         "properties",
+                        "res",
                         "resx",
                         "sql",
                         "strings",
                         "stringsdict",
                         "tmx",
                         "ts",
+                        "txt",
                         "xlf",
                         "xliff",
                         "xml",
@@ -418,8 +438,16 @@
                     "enum": [
                         "php",
                         "java",
-                        "objc"
+                        "objc",
+                        "icu"
                     ],
+                    "location": "query"
+                },
+                "no-folding": {
+                    "name": "no-folding",
+                    "type": "boolean",
+                    "required": false,
+                    "description": "Protect <a href=\"https:\/\/localise.biz\/help\/developers\/asset-ids#folding\">dot-separated keys<\/a> so that `foo.bar` is not folded into object properties.",
                     "location": "query"
                 },
                 "key": {
@@ -468,12 +496,14 @@
                         "plist",
                         "bplist",
                         "properties",
+                        "res",
                         "resx",
                         "sql",
                         "strings",
                         "stringsdict",
                         "tmx",
                         "ts",
+                        "txt",
                         "xlf",
                         "xliff",
                         "xml",
@@ -566,8 +596,16 @@
                     "enum": [
                         "php",
                         "java",
-                        "objc"
+                        "objc",
+                        "icu"
                     ],
+                    "location": "query"
+                },
+                "no-folding": {
+                    "name": "no-folding",
+                    "type": "boolean",
+                    "required": false,
+                    "description": "Protect <a href=\"https:\/\/localise.biz\/help\/developers\/asset-ids#folding\">dot-separated keys<\/a> so that `foo.bar` is not folded into object properties.",
                     "location": "query"
                 },
                 "key": {
@@ -656,10 +694,12 @@
                         "plist",
                         "bplist",
                         "properties",
+                        "res",
                         "resx",
                         "strings",
                         "tmx",
                         "ts",
+                        "txt",
                         "xlf",
                         "xml",
                         "yml"

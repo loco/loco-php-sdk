@@ -49,7 +49,7 @@ use GuzzleHttp\Command\Guzzle\GuzzleClient;
 class ApiClient extends GuzzleClient
 {
     const SDK_VERSION = '2.0.3';
-    const API_VERSION = '1.0.20';
+    const API_VERSION = '1.0.21';
 
     /**
      * Factory method to create a new Loco API client.

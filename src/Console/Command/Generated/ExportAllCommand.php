@@ -30,6 +30,7 @@ class ExportAllCommand extends Command
             ->addOption('fallback', '', InputOption::VALUE_REQUIRED, 'Fallback locale for untranslated assets, specified as short code. e.g. `en` or `en_GB`', null)
             ->addOption('order', '', InputOption::VALUE_REQUIRED, 'Export translations according to asset order', null)
             ->addOption('printf', '', InputOption::VALUE_REQUIRED, 'Force alternative "printf" style. <a href="https://localise.biz/help/developers/printf">See string formatting</a>', null)
+            ->addOption('no-folding', '', InputOption::VALUE_REQUIRED, 'Protect <a href="https://localise.biz/help/developers/asset-ids#folding">dot-separated keys</a> so that `foo.bar` is not folded into object properties.', null)
         ;
         parent::configure();
     }
