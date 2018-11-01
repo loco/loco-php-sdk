@@ -10,7 +10,7 @@
 >
 
     <testsuites>
-        <testsuite>
+        <testsuite name="Loco SDK">
             <directory>./tests</directory>
         </testsuite>
     </testsuites>
