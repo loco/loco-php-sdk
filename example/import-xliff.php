@@ -1,6 +1,7 @@
 <?php
 /**
  * Add translations from a XLIFF file via the import method
+ * https://localise.biz/help/formats/importing/xliff
  * https://localise.biz/api/docs/import/import
  */
 $basedir = \dirname(__DIR__);
@@ -29,8 +30,7 @@ try {
     $result = $client->import([
         'ext' => 'xlf',
         'data' => $xlfdata,
-        'locale' => 'es',
-        'index' => 'text',
+        'locale' => 'auto',
     ]);
     // Response model implements ArrayAccess
     printf("Import completed with message: '%s'\n", $result['message']);

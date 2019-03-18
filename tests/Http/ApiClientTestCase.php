@@ -14,7 +14,7 @@ use GuzzleHttp\Psr7\Response;
  *
  * @group client
  */
-abstract class ApiClientTestCase extends \PHPUnit_Framework_TestCase
+abstract class ApiClientTestCase extends \PHPUnit\Framework\TestCase
 {
     /**
      * @var array

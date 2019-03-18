@@ -1,6 +1,6 @@
 {
     "name": "Loco",
-    "apiVersion": "1.0.21",
+    "apiVersion": "1.0.22",
     "baseUri": "https:\/\/localise.biz\/",
     "description": "Loco REST API",
     "operations": {
@@ -61,6 +61,18 @@
                     "location": "uri",
                     "default": "json"
                 },
+                "format": {
+                    "name": "format",
+                    "type": "string",
+                    "required": false,
+                    "description": "More specific format of multi-locale file type. e.g. <code>rails<\/code> applies to <code>yml<\/code>",
+                    "enum": [
+                        "rails",
+                        "i18next",
+                        "i18next3"
+                    ],
+                    "location": "query"
+                },
                 "filter": {
                     "name": "filter",
                     "type": "string",
@@ -111,6 +123,13 @@
                         "objc",
                         "icu"
                     ],
+                    "location": "query"
+                },
+                "charset": {
+                    "name": "charset",
+                    "type": "string",
+                    "required": false,
+                    "description": "Specify preferred character encoding. Alternative to `Accept-Charset` header but accepts a single value which must be valid.",
                     "location": "query"
                 },
                 "no-folding": {
@@ -278,6 +297,13 @@
                     ],
                     "location": "query"
                 },
+                "charset": {
+                    "name": "charset",
+                    "type": "string",
+                    "required": false,
+                    "description": "Specify preferred character encoding. Alternative to `Accept-Charset` header but accepts a single value which must be valid.",
+                    "location": "query"
+                },
                 "no-folding": {
                     "name": "no-folding",
                     "type": "boolean",
@@ -443,6 +469,13 @@
                     ],
                     "location": "query"
                 },
+                "charset": {
+                    "name": "charset",
+                    "type": "string",
+                    "required": false,
+                    "description": "Specify preferred character encoding. Alternative to `Accept-Charset` header but accepts a single value which must be valid.",
+                    "location": "query"
+                },
                 "no-folding": {
                     "name": "no-folding",
                     "type": "boolean",
@@ -601,6 +634,13 @@
                     ],
                     "location": "query"
                 },
+                "charset": {
+                    "name": "charset",
+                    "type": "string",
+                    "required": false,
+                    "description": "Specify preferred character encoding. Alternative to `Accept-Charset` header but accepts a single value which must be valid.",
+                    "location": "query"
+                },
                 "no-folding": {
                     "name": "no-folding",
                     "type": "boolean",
@@ -736,7 +776,14 @@
                     "name": "async",
                     "type": "boolean",
                     "required": false,
-                    "description": "Specify that import should be done asynchronously (recommended)",
+                    "description": "Specify that import should be done asynchronously (recommended for large files)",
+                    "location": "query"
+                },
+                "path": {
+                    "name": "path",
+                    "type": "string",
+                    "required": false,
+                    "description": "Specify original file path for source code references (excluding line number)",
                     "location": "query"
                 },
                 "ignore-new": {

@@ -7,7 +7,7 @@ namespace Loco\Tests\Meta;
  *
  * @group meta
  */
-class CodeStyleTest extends \PHPUnit_Framework_TestCase
+class CodeStyleTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * Find path to php-cs-fixer executable
