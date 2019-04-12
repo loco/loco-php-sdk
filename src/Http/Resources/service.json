@@ -1,6 +1,6 @@
 {
     "name": "Loco",
-    "apiVersion": "1.0.22",
+    "apiVersion": "1.0.23",
     "baseUri": "https:\/\/localise.biz\/",
     "description": "Loco REST API",
     "operations": {
@@ -132,6 +132,25 @@
                     "description": "Specify preferred character encoding. Alternative to `Accept-Charset` header but accepts a single value which must be valid.",
                     "location": "query"
                 },
+                "breaks": {
+                    "name": "breaks",
+                    "type": "string",
+                    "required": false,
+                    "description": "Force platform-specific line-endings. Default is Unix (LF) breaks.",
+                    "enum": [
+                        "Unix",
+                        "DOS",
+                        "Mac"
+                    ],
+                    "location": "query"
+                },
+                "no-comments": {
+                    "name": "no-comments",
+                    "type": "boolean",
+                    "required": false,
+                    "description": "Disable rendering of redundant inline comments including the banner. Annotations that are part of the file schema are still included.",
+                    "location": "query"
+                },
                 "no-folding": {
                     "name": "no-folding",
                     "type": "boolean",
@@ -173,10 +192,10 @@
                     "required": true,
                     "description": "Target file type specified as a file extension",
                     "enum": [
+                        "arb",
                         "csv",
                         "html",
                         "ini",
-                        "js",
                         "json",
                         "mo",
                         "php",
@@ -304,6 +323,25 @@
                     "description": "Specify preferred character encoding. Alternative to `Accept-Charset` header but accepts a single value which must be valid.",
                     "location": "query"
                 },
+                "breaks": {
+                    "name": "breaks",
+                    "type": "string",
+                    "required": false,
+                    "description": "Force platform-specific line-endings. Default is Unix (LF) breaks.",
+                    "enum": [
+                        "Unix",
+                        "DOS",
+                        "Mac"
+                    ],
+                    "location": "query"
+                },
+                "no-comments": {
+                    "name": "no-comments",
+                    "type": "boolean",
+                    "required": false,
+                    "description": "Disable rendering of redundant inline comments including the banner. Annotations that are part of the file schema are still included.",
+                    "location": "query"
+                },
                 "no-folding": {
                     "name": "no-folding",
                     "type": "boolean",
@@ -352,10 +390,10 @@
                     "required": true,
                     "description": "Target file type specified as a file extension",
                     "enum": [
+                        "arb",
                         "csv",
                         "html",
                         "ini",
-                        "js",
                         "json",
                         "mo",
                         "php",
@@ -474,6 +512,25 @@
                     "type": "string",
                     "required": false,
                     "description": "Specify preferred character encoding. Alternative to `Accept-Charset` header but accepts a single value which must be valid.",
+                    "location": "query"
+                },
+                "breaks": {
+                    "name": "breaks",
+                    "type": "string",
+                    "required": false,
+                    "description": "Force platform-specific line-endings. Default is Unix (LF) breaks.",
+                    "enum": [
+                        "Unix",
+                        "DOS",
+                        "Mac"
+                    ],
+                    "location": "query"
+                },
+                "no-comments": {
+                    "name": "no-comments",
+                    "type": "boolean",
+                    "required": false,
+                    "description": "Disable rendering of redundant inline comments including the banner. Annotations that are part of the file schema are still included.",
                     "location": "query"
                 },
                 "no-folding": {
@@ -517,10 +574,10 @@
                     "required": true,
                     "description": "Target file type specified as a file extension",
                     "enum": [
+                        "arb",
                         "csv",
                         "html",
                         "ini",
-                        "js",
                         "json",
                         "mo",
                         "php",
@@ -639,6 +696,25 @@
                     "type": "string",
                     "required": false,
                     "description": "Specify preferred character encoding. Alternative to `Accept-Charset` header but accepts a single value which must be valid.",
+                    "location": "query"
+                },
+                "breaks": {
+                    "name": "breaks",
+                    "type": "string",
+                    "required": false,
+                    "description": "Force platform-specific line-endings. Default is Unix (LF) breaks.",
+                    "enum": [
+                        "Unix",
+                        "DOS",
+                        "Mac"
+                    ],
+                    "location": "query"
+                },
+                "no-comments": {
+                    "name": "no-comments",
+                    "type": "boolean",
+                    "required": false,
+                    "description": "Disable rendering of redundant inline comments including the banner. Annotations that are part of the file schema are still included.",
                     "location": "query"
                 },
                 "no-folding": {
@@ -725,14 +801,16 @@
                     "required": true,
                     "description": "File extension for the type of file data you're importing",
                     "enum": [
-                        "json",
+                        "arb",
+                        "bplist",
+                        "csv",
                         "ini",
+                        "json",
                         "mo",
                         "php",
+                        "plist",
                         "po",
                         "pot",
-                        "plist",
-                        "bplist",
                         "properties",
                         "res",
                         "resx",
@@ -1613,7 +1691,7 @@
         },
         "getLocales": {
             "summary": "List all locales in your project",
-            "responseNotes": "Lists all locales in currently authenticated project. Your native\/source language will always be the first in the list",
+            "responseNotes": "Lists all locales in currently authenticated project. Your source language will always be the first in the list",
             "httpMethod": "GET",
             "uri": "\/api\/locales",
             "name": "getLocales",
@@ -1782,7 +1860,7 @@
         },
         "deleteLocale": {
             "summary": "Delete a project locale",
-            "responseNotes": "<p>Delete a locale from currently authenticated project.<\/p>\n<p><strong>Warning<\/strong>: This will permanently delete any translations made in the specified locale across your project<\/p>\n<p>Note that you cannot delete your native\/source locale.<\/p>",
+            "responseNotes": "<p>Delete a locale from currently authenticated project.<\/p>\n<p><strong>Warning<\/strong>: This will permanently delete any translations made in the specified locale across your project<\/p>\n<p>Note that you cannot delete your source locale.<\/p>",
             "httpMethod": "DELETE",
             "uri": "\/api\/locales\/{locale}",
             "name": "deleteLocale",
@@ -2386,6 +2464,12 @@
                     "name": "flagged",
                     "required": true,
                     "location": "json"
+                },
+                "words": {
+                    "description": "Approximate word count for translated texts in this language",
+                    "type": "integer",
+                    "name": "words",
+                    "location": "json"
                 }
             },
             "name": "LocaleProgress",
@@ -2473,8 +2557,14 @@
                     "required": true,
                     "location": "json"
                 },
+                "source": {
+                    "description": "Whether the default\/source locale of the project",
+                    "type": "boolean",
+                    "name": "source",
+                    "location": "json"
+                },
                 "native": {
-                    "description": "Whether the source locale of project",
+                    "description": "DEPRECATED: alias of \"source\" will be removed in future",
                     "type": "boolean",
                     "name": "native",
                     "required": true,
@@ -2547,6 +2637,12 @@
                             "type": "integer",
                             "name": "flagged",
                             "required": true,
+                            "location": "json"
+                        },
+                        "words": {
+                            "description": "Approximate word count for translated texts in this language",
+                            "type": "integer",
+                            "name": "words",
                             "location": "json"
                         }
                     },
@@ -3082,8 +3178,14 @@
                             "required": true,
                             "location": "json"
                         },
+                        "source": {
+                            "description": "Whether the default\/source locale of the project",
+                            "type": "boolean",
+                            "name": "source",
+                            "location": "json"
+                        },
                         "native": {
-                            "description": "Whether the source locale of project",
+                            "description": "DEPRECATED: alias of \"source\" will be removed in future",
                             "type": "boolean",
                             "name": "native",
                             "required": true,
@@ -3156,6 +3258,12 @@
                                     "type": "integer",
                                     "name": "flagged",
                                     "required": true,
+                                    "location": "json"
+                                },
+                                "words": {
+                                    "description": "Approximate word count for translated texts in this language",
+                                    "type": "integer",
+                                    "name": "words",
                                     "location": "json"
                                 }
                             },

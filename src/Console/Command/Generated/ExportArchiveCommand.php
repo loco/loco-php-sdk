@@ -35,6 +35,8 @@ class ExportArchiveCommand extends Command
             ->addOption('path', '', InputOption::VALUE_REQUIRED, 'Custom pattern for file paths. <a href="https://localise.biz/help/developers/locales/export-paths">See syntax</a>', null)
             ->addOption('printf', '', InputOption::VALUE_REQUIRED, 'Force alternative "printf" style. <a href="https://localise.biz/help/developers/printf">See string formatting</a>', null)
             ->addOption('charset', '', InputOption::VALUE_REQUIRED, 'Specify preferred character encoding. Alternative to `Accept-Charset` header but accepts a single value which must be valid.', null)
+            ->addOption('breaks', '', InputOption::VALUE_REQUIRED, 'Force platform-specific line-endings. Default is Unix (LF) breaks.', null)
+            ->addOption('no-comments', '', InputOption::VALUE_REQUIRED, 'Disable rendering of redundant inline comments including the banner. Annotations that are part of the file schema are still included.', null)
             ->addOption('no-folding', '', InputOption::VALUE_REQUIRED, 'Protect <a href="https://localise.biz/help/developers/asset-ids#folding">dot-separated keys</a> so that `foo.bar` is not folded into object properties.', null)
         ;
         parent::configure();
