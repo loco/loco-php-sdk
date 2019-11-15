@@ -42,7 +42,7 @@
             "httpMethod": "GET",
             "uri": "\/api\/export\/all.{ext}",
             "name": "exportAll",
-            "responseModel": "exportAll",
+            "responseModel": "RawResult",
             "parameters": {
                 "ext": {
                     "name": "ext",
@@ -121,7 +121,8 @@
                         "php",
                         "java",
                         "objc",
-                        "icu"
+                        "icu",
+                        "python"
                     ],
                     "location": "query"
                 },
@@ -148,7 +149,7 @@
                     "name": "no-comments",
                     "type": "boolean",
                     "required": false,
-                    "description": "Disable rendering of redundant inline comments including the banner. Annotations that are part of the file schema are still included.",
+                    "description": "Disable rendering of redundant inline comments including the Loco banner.",
                     "location": "query"
                 },
                 "no-folding": {
@@ -184,7 +185,7 @@
             "httpMethod": "GET",
             "uri": "\/api\/export\/archive\/{ext}.zip",
             "name": "exportArchive",
-            "responseModel": "exportArchive",
+            "responseModel": "ZipResult",
             "parameters": {
                 "ext": {
                     "name": "ext",
@@ -312,7 +313,8 @@
                         "php",
                         "java",
                         "objc",
-                        "icu"
+                        "icu",
+                        "python"
                     ],
                     "location": "query"
                 },
@@ -339,7 +341,7 @@
                     "name": "no-comments",
                     "type": "boolean",
                     "required": false,
-                    "description": "Disable rendering of redundant inline comments including the banner. Annotations that are part of the file schema are still included.",
+                    "description": "Disable rendering of redundant inline comments including the Loco banner.",
                     "location": "query"
                 },
                 "no-folding": {
@@ -371,11 +373,11 @@
         },
         "exportLocale": {
             "summary": "Export a single locale to a language pack",
-            "responseNotes": "<p>Export translations from your project to a locale-specific language pack.<\/p>\n<p>Various export file types are supported with format variations for some types.\n<a href=\"https:\/\/localise.biz\/api#formats\">See the full list of supported export formats<\/a>.<\/p>",
+            "responseNotes": "<p>Various export file types are supported with format variations for some types. <a href=\"https:\/\/localise.biz\/api#formats\">See supported formats<\/a>.<\/p>\n<p>See <a href=\"https:\/\/localise.biz\/help\/formats\/exporting#options\">available export options<\/a> for more detail on these parameters.<\/p>",
             "httpMethod": "GET",
             "uri": "\/api\/export\/locale\/{locale}.{ext}",
             "name": "exportLocale",
-            "responseModel": "exportLocale",
+            "responseModel": "RawResult",
             "parameters": {
                 "locale": {
                     "name": "locale",
@@ -503,7 +505,8 @@
                         "php",
                         "java",
                         "objc",
-                        "icu"
+                        "icu",
+                        "python"
                     ],
                     "location": "query"
                 },
@@ -530,7 +533,7 @@
                     "name": "no-comments",
                     "type": "boolean",
                     "required": false,
-                    "description": "Disable rendering of redundant inline comments including the banner. Annotations that are part of the file schema are still included.",
+                    "description": "Disable rendering of redundant inline comments including the Loco banner.",
                     "location": "query"
                 },
                 "no-folding": {
@@ -562,11 +565,11 @@
         },
         "exportTemplate": {
             "summary": "Export a template containing only source keys",
-            "responseNotes": "<p>Export only the source keys from your project to a language pack.<\/p>\n<p>This is different to exporting just your source language translations, because it only exports the left hand side of each mapping.<\/p>\n<p><a href=\"https:\/\/localise.biz\/api#formats\">See the full list of supported export formats<\/a>.<\/p>",
+            "responseNotes": "<p>This is different to exporting just your source language translations, because it only exports the left hand side of each mapping.<\/p>\n<p>See <a href=\"https:\/\/localise.biz\/api#formats\">supported export formats<\/a> and more detail on <a href=\"https:\/\/localise.biz\/help\/formats\/exporting#options\">the available options<\/a>.<\/p>",
             "httpMethod": "GET",
             "uri": "\/api\/export\/template.{ext}",
             "name": "exportTemplate",
-            "responseModel": "exportTemplate",
+            "responseModel": "RawResult",
             "parameters": {
                 "ext": {
                     "name": "ext",
@@ -687,7 +690,8 @@
                         "php",
                         "java",
                         "objc",
-                        "icu"
+                        "icu",
+                        "python"
                     ],
                     "location": "query"
                 },
@@ -714,7 +718,7 @@
                     "name": "no-comments",
                     "type": "boolean",
                     "required": false,
-                    "description": "Disable rendering of redundant inline comments including the banner. Annotations that are part of the file schema are still included.",
+                    "description": "Disable rendering of redundant inline comments including the Loco banner.",
                     "location": "query"
                 },
                 "no-folding": {
@@ -931,7 +935,7 @@
                     "name": "delete-absent",
                     "type": "boolean",
                     "required": false,
-                    "description": "Permanently DELETES project assets NOT found in the file (use with extreme caution) ",
+                    "description": "Permanently DELETES project assets NOT found in the file (use with extreme caution)",
                     "location": "query"
                 },
                 "key": {
@@ -2378,25 +2382,17 @@
             "type": "object",
             "additionalProperties": false
         },
-        "exportAll": {
+        "RawResult": {
+            "name": "RawResult",
             "type": "class",
-            "name": "exportAll",
-            "class": "Loco\\Http\\Result\\RawResult"
+            "class": "Loco\\Http\\Result\\RawResult",
+            "description": "Custom response class"
         },
-        "exportArchive": {
+        "ZipResult": {
+            "name": "ZipResult",
             "type": "class",
-            "name": "exportArchive",
-            "class": "Loco\\Http\\Result\\ZipResult"
-        },
-        "exportLocale": {
-            "type": "class",
-            "name": "exportLocale",
-            "class": "Loco\\Http\\Result\\RawResult"
-        },
-        "exportTemplate": {
-            "type": "class",
-            "name": "exportTemplate",
-            "class": "Loco\\Http\\Result\\RawResult"
+            "class": "Loco\\Http\\Result\\ZipResult",
+            "description": "Custom response class"
         },
         "PluralRules": {
             "properties": {
@@ -2473,71 +2469,6 @@
                 }
             },
             "name": "LocaleProgress",
-            "type": "object",
-            "additionalProperties": false
-        },
-        "stdClass": {
-            "description": "Generic object",
-            "properties": [],
-            "name": "stdClass",
-            "type": "object",
-            "additionalProperties": false
-        },
-        "AssetProgress": {
-            "description": "Statistical summary of translation progress for an individual locale",
-            "properties": {
-                "translated": {
-                    "description": "Number of locales for which a translation exists (including those flagged)",
-                    "type": "integer",
-                    "name": "translated",
-                    "required": true,
-                    "location": "json"
-                },
-                "untranslated": {
-                    "description": "Number of locales that do not yet have a translation of this asset",
-                    "type": "integer",
-                    "name": "untranslated",
-                    "required": true,
-                    "location": "json"
-                },
-                "flagged": {
-                    "description": "Number of locales whose translations are flagged as requiring attention",
-                    "type": "integer",
-                    "name": "flagged",
-                    "required": true,
-                    "location": "json"
-                }
-            },
-            "name": "AssetProgress",
-            "type": "object",
-            "additionalProperties": false
-        },
-        "AsyncProgress": {
-            "description": "Job progress for checking asynchronous operations",
-            "properties": {
-                "progress": {
-                    "description": "Percentage progress through asynchronous operation",
-                    "type": "integer",
-                    "minimum": 0,
-                    "maximum": 100,
-                    "name": "progress",
-                    "required": true,
-                    "location": "json"
-                },
-                "success": {
-                    "description": "Message populated after successful completion",
-                    "type": "string",
-                    "name": "success",
-                    "location": "json"
-                },
-                "error": {
-                    "description": "Description of any error that prevented the operation from finishing",
-                    "type": "string",
-                    "name": "error",
-                    "location": "json"
-                }
-            },
-            "name": "AsyncProgress",
             "type": "object",
             "additionalProperties": false
         },
@@ -2654,6 +2585,42 @@
                 }
             },
             "name": "Locale",
+            "type": "object",
+            "additionalProperties": false
+        },
+        "stdClass": {
+            "description": "Generic object",
+            "properties": [],
+            "name": "stdClass",
+            "type": "object",
+            "additionalProperties": false
+        },
+        "AssetProgress": {
+            "description": "Statistical summary of translation progress for an individual locale",
+            "properties": {
+                "translated": {
+                    "description": "Number of locales for which a translation exists (including those flagged)",
+                    "type": "integer",
+                    "name": "translated",
+                    "required": true,
+                    "location": "json"
+                },
+                "untranslated": {
+                    "description": "Number of locales that do not yet have a translation of this asset",
+                    "type": "integer",
+                    "name": "untranslated",
+                    "required": true,
+                    "location": "json"
+                },
+                "flagged": {
+                    "description": "Number of locales whose translations are flagged as requiring attention",
+                    "type": "integer",
+                    "name": "flagged",
+                    "required": true,
+                    "location": "json"
+                }
+            },
+            "name": "AssetProgress",
             "type": "object",
             "additionalProperties": false
         },
@@ -2804,6 +2771,35 @@
                 }
             },
             "name": "ImportResult",
+            "type": "object",
+            "additionalProperties": false
+        },
+        "AsyncProgress": {
+            "description": "Job progress for checking asynchronous operations",
+            "properties": {
+                "progress": {
+                    "description": "Percentage progress through asynchronous operation",
+                    "type": "integer",
+                    "minimum": 0,
+                    "maximum": 100,
+                    "name": "progress",
+                    "required": true,
+                    "location": "json"
+                },
+                "success": {
+                    "description": "Message populated after successful completion",
+                    "type": "string",
+                    "name": "success",
+                    "location": "json"
+                },
+                "error": {
+                    "description": "Description of any error that prevented the operation from finishing",
+                    "type": "string",
+                    "name": "error",
+                    "location": "json"
+                }
+            },
+            "name": "AsyncProgress",
             "type": "object",
             "additionalProperties": false
         },

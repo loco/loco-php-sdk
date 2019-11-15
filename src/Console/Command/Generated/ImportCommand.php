@@ -38,7 +38,7 @@ class ImportCommand extends Command
             ->addOption('untag-updated', '', InputOption::VALUE_REQUIRED, 'Remove existing tags from assets that are MODIFIED during import', null)
             ->addOption('tag-absent', '', InputOption::VALUE_REQUIRED, 'Tag existing assets in the project that are NOT found in the imported file', null)
             ->addOption('untag-absent', '', InputOption::VALUE_REQUIRED, 'Remove existing tags from assets NOT found in the imported file', null)
-            ->addOption('delete-absent', '', InputOption::VALUE_REQUIRED, 'Permanently DELETES project assets NOT found in the file (use with extreme caution) ', null)
+            ->addOption('delete-absent', '', InputOption::VALUE_REQUIRED, 'Permanently DELETES project assets NOT found in the file (use with extreme caution)', null)
         ;
         parent::configure();
     }

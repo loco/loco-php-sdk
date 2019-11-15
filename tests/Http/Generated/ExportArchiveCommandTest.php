@@ -23,7 +23,7 @@ class ExportArchiveCommandTest extends ApiClientTestCase
     {
         $service = $this->getServiceDescription();
         $query = new MockRequest('exportArchive', $service);
-        $model = new MockResponse('exportArchive', $service);
+        $model = new MockResponse('ZipResult', $service);
     
         $client = $this->getClientWithMockedResponse(
             [ 'base_uri' => 'https://example.com/api' ],
@@ -31,6 +31,6 @@ class ExportArchiveCommandTest extends ApiClientTestCase
         );
 
         $result = $client->exportArchive($query->toArray());
-        $this->assertInstanceOf($model->getResponseClass(), $result, 'Bad class for "exportArchive" model');
+        $this->assertInstanceOf($model->getResponseClass(), $result, 'Bad class for "ZipResult" model');
     }
 }

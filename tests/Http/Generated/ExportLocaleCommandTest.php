@@ -23,7 +23,7 @@ class ExportLocaleCommandTest extends ApiClientTestCase
     {
         $service = $this->getServiceDescription();
         $query = new MockRequest('exportLocale', $service);
-        $model = new MockResponse('exportLocale', $service);
+        $model = new MockResponse('RawResult', $service);
     
         $client = $this->getClientWithMockedResponse(
             [ 'base_uri' => 'https://example.com/api' ],
@@ -31,6 +31,6 @@ class ExportLocaleCommandTest extends ApiClientTestCase
         );
 
         $result = $client->exportLocale($query->toArray());
-        $this->assertInstanceOf($model->getResponseClass(), $result, 'Bad class for "exportLocale" model');
+        $this->assertInstanceOf($model->getResponseClass(), $result, 'Bad class for "RawResult" model');
     }
 }

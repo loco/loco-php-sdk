@@ -23,7 +23,7 @@ class ExportTemplateCommandTest extends ApiClientTestCase
     {
         $service = $this->getServiceDescription();
         $query = new MockRequest('exportTemplate', $service);
-        $model = new MockResponse('exportTemplate', $service);
+        $model = new MockResponse('RawResult', $service);
     
         $client = $this->getClientWithMockedResponse(
             [ 'base_uri' => 'https://example.com/api' ],
@@ -31,6 +31,6 @@ class ExportTemplateCommandTest extends ApiClientTestCase
         );
 
         $result = $client->exportTemplate($query->toArray());
-        $this->assertInstanceOf($model->getResponseClass(), $result, 'Bad class for "exportTemplate" model');
+        $this->assertInstanceOf($model->getResponseClass(), $result, 'Bad class for "RawResult" model');
     }
 }
