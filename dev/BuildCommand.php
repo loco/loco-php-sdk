@@ -2,13 +2,10 @@
 
 namespace Loco\Dev;
 
-use Loco\Http\Command\LocoCommand;
-use Loco\Http\Command\StrictCommand;
 use Loco\Http\Result\RawResult;
 use Loco\Http\Result\ZipResult;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
 /**
@@ -17,19 +14,13 @@ use Symfony\Component\Console\Output\OutputInterface;
 final class BuildCommand extends Command
 {
     /**
-     * @throws \Symfony\Component\Console\Exception\InvalidArgumentException
+     * {@inheritDoc}
      */
     protected function configure()
     {
         $this
             ->setName('loco:build')
-            ->setDescription('Build Loco API service description and generated commands')
-            ->addOption(
-                'dev',
-                '',
-                InputOption::VALUE_NONE,
-                'Whether to build local development version for testing'
-            );
+            ->setDescription('Build Loco API service description and generated commands');
     }
 
     /**
