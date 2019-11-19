@@ -64,7 +64,7 @@ class ApiClient extends GuzzleClient
      */
     public static function factory(array $config = [])
     {
-        // Validate passed in configuraton options
+        // Validate passed in configuration options
         $config = static::processFactoryConfig($config);
 
         // Describe service from included config file.
