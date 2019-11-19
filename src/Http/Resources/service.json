@@ -1,6 +1,6 @@
 {
     "name": "Loco",
-    "apiVersion": "1.0.23",
+    "apiVersion": "1.0.24",
     "baseUri": "https:\/\/localise.biz\/",
     "description": "Loco REST API",
     "operations": {
@@ -1362,11 +1362,9 @@
                     "location": "json"
                 },
                 "aliases": {
-                    "description": "Generic object",
-                    "properties": [],
-                    "name": "stdClass",
-                    "type": "object",
-                    "additionalProperties": false,
+                    "description": "Hash of additional asset identifiers to set",
+                    "$ref": "object",
+                    "name": "aliases",
                     "location": "json"
                 },
                 "id": {
@@ -1905,6 +1903,76 @@
             "data": [],
             "additionalParameters": null
         },
+        "getLocaleErrors": {
+            "summary": "Get validation errors for a project locale",
+            "responseNotes": "",
+            "httpMethod": "GET",
+            "uri": "\/api\/locales\/{locale}\/errors",
+            "name": "getLocaleErrors",
+            "responseModel": "TranslationErrorList",
+            "parameters": {
+                "key": {
+                    "name": "key",
+                    "type": "string",
+                    "required": false,
+                    "description": "API key - required if not sent in Authorization header",
+                    "location": "query"
+                },
+                "locale": {
+                    "name": "locale",
+                    "type": "string",
+                    "required": true,
+                    "description": "Locale short code, or language tag",
+                    "location": "uri"
+                }
+            },
+            "errorResponses": [
+                {
+                    "code": 401,
+                    "phrase": "Invalid API key"
+                }
+            ],
+            "notes": "",
+            "documentationUrl": "https:\/\/localise.biz\/api\/docs\/locales\/getlocaleerrors",
+            "deprecated": false,
+            "data": [],
+            "additionalParameters": null
+        },
+        "getLocaleProgress": {
+            "summary": "Get more detailed translation progress for a project locale",
+            "responseNotes": "<p>Response model is dynamic according to the status\/flags available in your project.<\/p>\n<p>Status keys such as 'translated' or 'fuzzy' are only included when there are assets with that status and in future may be user-defined.<\/p>",
+            "httpMethod": "GET",
+            "uri": "\/api\/locales\/{locale}\/progress",
+            "name": "getLocaleProgress",
+            "responseModel": "object",
+            "parameters": {
+                "key": {
+                    "name": "key",
+                    "type": "string",
+                    "required": false,
+                    "description": "API key - required if not sent in Authorization header",
+                    "location": "query"
+                },
+                "locale": {
+                    "name": "locale",
+                    "type": "string",
+                    "required": true,
+                    "description": "Locale short code, or language tag",
+                    "location": "uri"
+                }
+            },
+            "errorResponses": [
+                {
+                    "code": 401,
+                    "phrase": "Invalid API key"
+                }
+            ],
+            "notes": "",
+            "documentationUrl": "https:\/\/localise.biz\/api\/docs\/locales\/getlocaleprogress",
+            "deprecated": false,
+            "data": [],
+            "additionalParameters": null
+        },
         "getTranslations": {
             "summary": "Get all translations of an asset",
             "responseNotes": "<p>Gets all translations of an asset across the currently authenticated project's locales.<\/p>\n<p>Locales not yet translated are included, but their <code>translated<\/code> field will be set to <code>false<\/code>.<\/p>",
@@ -2302,78 +2370,23 @@
         "Credentials": {
             "properties": {
                 "user": {
-                    "properties": {
-                        "id": {
-                            "description": "User id",
-                            "type": "integer",
-                            "name": "id",
-                            "required": true,
-                            "location": "json"
-                        },
-                        "name": {
-                            "description": "Full user name",
-                            "type": "string",
-                            "name": "name",
-                            "location": "json"
-                        },
-                        "email": {
-                            "description": "Contact email address if you have permission to see it",
-                            "type": "string",
-                            "name": "email",
-                            "location": "json"
-                        }
-                    },
-                    "name": "User",
-                    "type": "object",
-                    "additionalProperties": false,
+                    "description": "Authenticated user",
+                    "$ref": "User",
+                    "name": "user",
                     "required": true,
                     "location": "json"
                 },
                 "group": {
-                    "properties": {
-                        "id": {
-                            "description": "Loco account id",
-                            "type": "integer",
-                            "name": "id",
-                            "location": "json"
-                        },
-                        "name": {
-                            "description": "Loco account name",
-                            "type": "string",
-                            "name": "name",
-                            "location": "json"
-                        }
-                    },
-                    "name": "Group",
-                    "type": "object",
-                    "additionalProperties": false,
+                    "description": "Authenticated account",
+                    "$ref": "Group",
+                    "name": "group",
                     "required": true,
                     "location": "json"
                 },
                 "project": {
-                    "properties": {
-                        "id": {
-                            "description": "Project id",
-                            "type": "integer",
-                            "name": "id",
-                            "location": "json"
-                        },
-                        "name": {
-                            "description": "Project name",
-                            "type": "string",
-                            "name": "name",
-                            "location": "json"
-                        },
-                        "url": {
-                            "description": "Project dashboard URL",
-                            "type": "string",
-                            "name": "url",
-                            "location": "json"
-                        }
-                    },
-                    "name": "Project",
-                    "type": "object",
-                    "additionalProperties": false,
+                    "description": "Project associated with authentication key",
+                    "$ref": "Project",
+                    "name": "project",
                     "required": true,
                     "location": "json"
                 }
@@ -2502,84 +2515,16 @@
                     "location": "json"
                 },
                 "plurals": {
-                    "properties": {
-                        "length": {
-                            "description": "Number of forms including singular",
-                            "type": "integer",
-                            "minimum": 1,
-                            "maximum": 6,
-                            "name": "length",
-                            "default": 2,
-                            "required": true,
-                            "location": "json"
-                        },
-                        "equation": {
-                            "description": "Equation for calculating offset in forms. The formula takes a multiplier <code>(n)<\/code> to yield a plural form offset. <code>( 0 <= offset < length )<\/code>.",
-                            "type": "string",
-                            "name": "equation",
-                            "default": "n != 1",
-                            "required": true,
-                            "location": "json"
-                        },
-                        "forms": {
-                            "description": "Plural form names. See <a href=\"http:\/\/unicode.org\/reports\/tr35\/tr35-numbers.html#Language_Plural_Rules\">Unicode tr35<\/a>.",
-                            "type": "array",
-                            "items": {
-                                "type": "string"
-                            },
-                            "enum": [
-                                "zero",
-                                "one",
-                                "two",
-                                "few",
-                                "many",
-                                "other"
-                            ],
-                            "name": "forms",
-                            "required": true,
-                            "location": "json"
-                        }
-                    },
-                    "name": "PluralRules",
-                    "type": "object",
-                    "additionalProperties": false,
+                    "description": "Plural rules for current language",
+                    "$ref": "PluralRules",
+                    "name": "plurals",
                     "required": true,
                     "location": "json"
                 },
                 "progress": {
-                    "description": "Statistical summary of translation progress for an individual locale",
-                    "properties": {
-                        "translated": {
-                            "description": "Number of assets for which a translation exists (including those flagged)",
-                            "type": "integer",
-                            "name": "translated",
-                            "required": true,
-                            "location": "json"
-                        },
-                        "untranslated": {
-                            "description": "Number of assets that are not yet translated to this language",
-                            "type": "integer",
-                            "name": "untranslated",
-                            "required": true,
-                            "location": "json"
-                        },
-                        "flagged": {
-                            "description": "Number of translations that are flagged as requiring attention",
-                            "type": "integer",
-                            "name": "flagged",
-                            "required": true,
-                            "location": "json"
-                        },
-                        "words": {
-                            "description": "Approximate word count for translated texts in this language",
-                            "type": "integer",
-                            "name": "words",
-                            "location": "json"
-                        }
-                    },
-                    "name": "LocaleProgress",
-                    "type": "object",
-                    "additionalProperties": false,
+                    "description": "Translation progress summary",
+                    "$ref": "LocaleProgress",
+                    "name": "progress",
                     "required": true,
                     "location": "json"
                 }
@@ -2588,12 +2533,14 @@
             "type": "object",
             "additionalProperties": false
         },
-        "stdClass": {
-            "description": "Generic object",
+        "object": {
             "properties": [],
-            "name": "stdClass",
+            "description": "Generic object",
+            "name": "object",
             "type": "object",
-            "additionalProperties": false
+            "additionalProperties": {
+                "location": "json"
+            }
         },
         "AssetProgress": {
             "description": "Statistical summary of translation progress for an individual locale",
@@ -2686,41 +2633,15 @@
                     "location": "json"
                 },
                 "aliases": {
-                    "description": "Generic object",
-                    "properties": [],
-                    "name": "stdClass",
-                    "type": "object",
-                    "additionalProperties": false,
+                    "description": "Hash of additional asset identifiers, e.g. {\"android\":\"myId\"}",
+                    "$ref": "object",
+                    "name": "aliases",
                     "location": "json"
                 },
                 "progress": {
-                    "description": "Statistical summary of translation progress for an individual locale",
-                    "properties": {
-                        "translated": {
-                            "description": "Number of locales for which a translation exists (including those flagged)",
-                            "type": "integer",
-                            "name": "translated",
-                            "required": true,
-                            "location": "json"
-                        },
-                        "untranslated": {
-                            "description": "Number of locales that do not yet have a translation of this asset",
-                            "type": "integer",
-                            "name": "untranslated",
-                            "required": true,
-                            "location": "json"
-                        },
-                        "flagged": {
-                            "description": "Number of locales whose translations are flagged as requiring attention",
-                            "type": "integer",
-                            "name": "flagged",
-                            "required": true,
-                            "location": "json"
-                        }
-                    },
-                    "name": "AssetProgress",
-                    "type": "object",
-                    "additionalProperties": false,
+                    "description": "Translation progress summary",
+                    "$ref": "AssetProgress",
+                    "name": "progress",
                     "location": "json"
                 }
             },
@@ -2824,71 +2745,12 @@
             "type": "object",
             "additionalProperties": false
         },
-        "TagPatch": {
-            "description": "Patch structure for modifying tags",
-            "properties": {
-                "name": {
-                    "description": "Display name of tag",
-                    "type": "string",
-                    "name": "name",
-                    "location": "json"
-                }
-            },
-            "name": "TagPatch",
-            "type": "object",
-            "additionalProperties": false
-        },
         "TagList": {
             "type": "array",
             "items": {
                 "type": "string"
             },
             "location": "json"
-        },
-        "AssetPatch": {
-            "description": "Patch structure for modifying assets",
-            "properties": {
-                "id": {
-                    "description": "Unique asset identifier",
-                    "type": "string",
-                    "name": "id",
-                    "location": "json"
-                },
-                "type": {
-                    "description": "Broad content type to set",
-                    "type": "string",
-                    "enum": [
-                        "text",
-                        "html",
-                        "xml"
-                    ],
-                    "name": "type",
-                    "location": "json"
-                },
-                "context": {
-                    "description": "Optional context descriptor",
-                    "type": "string",
-                    "name": "context",
-                    "location": "json"
-                },
-                "notes": {
-                    "description": "Optional notes for translators",
-                    "type": "string",
-                    "name": "notes",
-                    "location": "json"
-                },
-                "aliases": {
-                    "description": "Generic object",
-                    "properties": [],
-                    "name": "stdClass",
-                    "type": "object",
-                    "additionalProperties": false,
-                    "location": "json"
-                }
-            },
-            "name": "AssetPatch",
-            "type": "object",
-            "additionalProperties": false
         },
         "AssetList": {
             "type": "array",
@@ -2897,23 +2759,47 @@
             },
             "location": "json"
         },
-        "LocalePatch": {
-            "description": "Patch structure for modifying locales",
+        "TranslationError": {
             "properties": {
-                "code": {
-                    "description": "Locale short code",
+                "id": {
+                    "description": "Unique asset ID for current translation",
                     "type": "string",
-                    "name": "code",
+                    "name": "id",
+                    "required": true,
                     "location": "json"
                 },
-                "name": {
-                    "description": "Friendly display name",
+                "status": {
+                    "description": "Status of translation as string compatible with export status parameter",
                     "type": "string",
-                    "name": "name",
+                    "name": "status",
+                    "required": true,
+                    "location": "json"
+                },
+                "source": {
+                    "description": "Source text in default project locale",
+                    "type": "string",
+                    "name": "source",
+                    "required": true,
+                    "location": "json"
+                },
+                "target": {
+                    "description": "Translated text in current target locale (unless locale is source)",
+                    "type": "string",
+                    "name": "target",
+                    "location": "json"
+                },
+                "errors": {
+                    "description": "Validation errors as simple message strings",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "name": "errors",
+                    "required": true,
                     "location": "json"
                 }
             },
-            "name": "LocalePatch",
+            "name": "TranslationError",
             "type": "object",
             "additionalProperties": false
         },
@@ -2921,6 +2807,13 @@
             "type": "array",
             "items": {
                 "$ref": "Locale"
+            },
+            "location": "json"
+        },
+        "TranslationErrorList": {
+            "type": "array",
+            "items": {
+                "$ref": "TranslationError"
             },
             "location": "json"
         },
@@ -2986,57 +2879,15 @@
                     "location": "json"
                 },
                 "author": {
-                    "properties": {
-                        "id": {
-                            "description": "User id",
-                            "type": "integer",
-                            "name": "id",
-                            "required": true,
-                            "location": "json"
-                        },
-                        "name": {
-                            "description": "Full user name",
-                            "type": "string",
-                            "name": "name",
-                            "location": "json"
-                        },
-                        "email": {
-                            "description": "Contact email address if you have permission to see it",
-                            "type": "string",
-                            "name": "email",
-                            "location": "json"
-                        }
-                    },
-                    "name": "User",
-                    "type": "object",
-                    "additionalProperties": false,
+                    "description": "Team member that edited this most recent revision",
+                    "$ref": "User",
+                    "name": "author",
                     "location": "json"
                 },
                 "flagger": {
-                    "properties": {
-                        "id": {
-                            "description": "User id",
-                            "type": "integer",
-                            "name": "id",
-                            "required": true,
-                            "location": "json"
-                        },
-                        "name": {
-                            "description": "Full user name",
-                            "type": "string",
-                            "name": "name",
-                            "location": "json"
-                        },
-                        "email": {
-                            "description": "Contact email address if you have permission to see it",
-                            "type": "string",
-                            "name": "email",
-                            "location": "json"
-                        }
-                    },
-                    "name": "User",
-                    "type": "object",
-                    "additionalProperties": false,
+                    "description": "Team member that flagged the translation, if flagged is set",
+                    "$ref": "User",
+                    "name": "flagger",
                     "location": "json"
                 }
             },
@@ -3105,174 +2956,21 @@
                     "location": "json"
                 },
                 "author": {
-                    "properties": {
-                        "id": {
-                            "description": "User id",
-                            "type": "integer",
-                            "name": "id",
-                            "required": true,
-                            "location": "json"
-                        },
-                        "name": {
-                            "description": "Full user name",
-                            "type": "string",
-                            "name": "name",
-                            "location": "json"
-                        },
-                        "email": {
-                            "description": "Contact email address if you have permission to see it",
-                            "type": "string",
-                            "name": "email",
-                            "location": "json"
-                        }
-                    },
-                    "name": "User",
-                    "type": "object",
-                    "additionalProperties": false,
+                    "description": "Team member that edited this most recent revision",
+                    "$ref": "User",
+                    "name": "author",
                     "location": "json"
                 },
                 "flagger": {
-                    "properties": {
-                        "id": {
-                            "description": "User id",
-                            "type": "integer",
-                            "name": "id",
-                            "required": true,
-                            "location": "json"
-                        },
-                        "name": {
-                            "description": "Full user name",
-                            "type": "string",
-                            "name": "name",
-                            "location": "json"
-                        },
-                        "email": {
-                            "description": "Contact email address if you have permission to see it",
-                            "type": "string",
-                            "name": "email",
-                            "location": "json"
-                        }
-                    },
-                    "name": "User",
-                    "type": "object",
-                    "additionalProperties": false,
+                    "description": "Team member that flagged the translation, if flagged is set",
+                    "$ref": "User",
+                    "name": "flagger",
                     "location": "json"
                 },
                 "locale": {
-                    "properties": {
-                        "code": {
-                            "description": "Locale short code, or language tag",
-                            "type": "string",
-                            "name": "code",
-                            "required": true,
-                            "location": "json"
-                        },
-                        "name": {
-                            "description": "Friendly display name",
-                            "type": "string",
-                            "name": "name",
-                            "required": true,
-                            "location": "json"
-                        },
-                        "source": {
-                            "description": "Whether the default\/source locale of the project",
-                            "type": "boolean",
-                            "name": "source",
-                            "location": "json"
-                        },
-                        "native": {
-                            "description": "DEPRECATED: alias of \"source\" will be removed in future",
-                            "type": "boolean",
-                            "name": "native",
-                            "required": true,
-                            "location": "json"
-                        },
-                        "plurals": {
-                            "properties": {
-                                "length": {
-                                    "description": "Number of forms including singular",
-                                    "type": "integer",
-                                    "minimum": 1,
-                                    "maximum": 6,
-                                    "name": "length",
-                                    "default": 2,
-                                    "required": true,
-                                    "location": "json"
-                                },
-                                "equation": {
-                                    "description": "Equation for calculating offset in forms. The formula takes a multiplier <code>(n)<\/code> to yield a plural form offset. <code>( 0 <= offset < length )<\/code>.",
-                                    "type": "string",
-                                    "name": "equation",
-                                    "default": "n != 1",
-                                    "required": true,
-                                    "location": "json"
-                                },
-                                "forms": {
-                                    "description": "Plural form names. See <a href=\"http:\/\/unicode.org\/reports\/tr35\/tr35-numbers.html#Language_Plural_Rules\">Unicode tr35<\/a>.",
-                                    "type": "array",
-                                    "items": {
-                                        "type": "string"
-                                    },
-                                    "enum": [
-                                        "zero",
-                                        "one",
-                                        "two",
-                                        "few",
-                                        "many",
-                                        "other"
-                                    ],
-                                    "name": "forms",
-                                    "required": true,
-                                    "location": "json"
-                                }
-                            },
-                            "name": "PluralRules",
-                            "type": "object",
-                            "additionalProperties": false,
-                            "required": true,
-                            "location": "json"
-                        },
-                        "progress": {
-                            "description": "Statistical summary of translation progress for an individual locale",
-                            "properties": {
-                                "translated": {
-                                    "description": "Number of assets for which a translation exists (including those flagged)",
-                                    "type": "integer",
-                                    "name": "translated",
-                                    "required": true,
-                                    "location": "json"
-                                },
-                                "untranslated": {
-                                    "description": "Number of assets that are not yet translated to this language",
-                                    "type": "integer",
-                                    "name": "untranslated",
-                                    "required": true,
-                                    "location": "json"
-                                },
-                                "flagged": {
-                                    "description": "Number of translations that are flagged as requiring attention",
-                                    "type": "integer",
-                                    "name": "flagged",
-                                    "required": true,
-                                    "location": "json"
-                                },
-                                "words": {
-                                    "description": "Approximate word count for translated texts in this language",
-                                    "type": "integer",
-                                    "name": "words",
-                                    "location": "json"
-                                }
-                            },
-                            "name": "LocaleProgress",
-                            "type": "object",
-                            "additionalProperties": false,
-                            "required": true,
-                            "location": "json"
-                        }
-                    },
-                    "name": "Locale",
-                    "type": "object",
-                    "additionalProperties": false,
+                    "description": "Locale this is translated to",
+                    "$ref": "Locale",
+                    "name": "locale",
                     "required": true,
                     "location": "json"
                 },
