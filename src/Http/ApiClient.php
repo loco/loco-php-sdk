@@ -45,11 +45,13 @@ use GuzzleHttp\Command\Guzzle\GuzzleClient;
  * @method \GuzzleHttp\Command\Result ping() Check the API is up
  * @method \GuzzleHttp\Command\Result ping404() Get a test 404 response
  * @method \GuzzleHttp\Command\Result tagAssets(array $params) Add multiple assets to an existing tag
+ * @method \GuzzleHttp\Command\Result getLocaleErrors(array $params) Get validation errors for a project locale
+ * @method \GuzzleHttp\Command\Result getLocaleProgress(array $params) Get more detailed translation progress for a project locale
  */
 class ApiClient extends GuzzleClient
 {
-    const SDK_VERSION = '2.0.7-alpha';
-    const API_VERSION = '1.0.23';
+    const SDK_VERSION = '2.0.7';
+    const API_VERSION = '1.0.24';
 
     /**
      * Factory method to create a new Loco API client.

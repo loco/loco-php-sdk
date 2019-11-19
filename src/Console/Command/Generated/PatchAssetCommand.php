@@ -27,7 +27,7 @@ class PatchAssetCommand extends Command
             ->addOption('type', '', InputOption::VALUE_REQUIRED, 'Broad content type to set', null)
             ->addOption('context', '', InputOption::VALUE_REQUIRED, 'Optional context descriptor', null)
             ->addOption('notes', '', InputOption::VALUE_REQUIRED, 'Optional notes for translators', null)
-            ->addOption('aliases', '', InputOption::VALUE_REQUIRED, 'Generic object', null)
+            ->addOption('aliases', '', InputOption::VALUE_REQUIRED, 'Hash of additional asset identifiers to set', null)
             ->addArgument('id', InputArgument::REQUIRED, 'Asset ID', null)
         ;
         parent::configure();
