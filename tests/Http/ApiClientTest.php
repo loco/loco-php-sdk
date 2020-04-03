@@ -36,11 +36,10 @@ class ApiClientTest extends ApiClientTestCase
         return $client;
     }
 
-    /**
-     * @expectedException \InvalidArgumentException
-     */
+
     public function testClientRejectsInvalidAuthType()
     {
+        $this->expectException(\InvalidArgumentException::class);
         ApiClient::factory(['auth' => 'Foo']);
     }
 

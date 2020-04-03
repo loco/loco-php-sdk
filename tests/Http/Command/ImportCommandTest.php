@@ -34,12 +34,10 @@ class ImportCommandTest extends ApiClientTestCase
     }
 
 
-    /**
-     * @expectedException GuzzleHttp\Command\Exception\CommandException
-     * @expectedExceptionMessage [ext] is a required string
-     */
     public function testFileExtensionParameterMandatory()
     {
+        $this->expectException(\GuzzleHttp\Command\Exception\CommandException::class);
+        $this->expectExceptionMessage('[ext] is a required string');
         $client = $this->getClientWithMockedResponse([], []);
         $client->import([]);
     }

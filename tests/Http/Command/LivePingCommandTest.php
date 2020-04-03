@@ -29,12 +29,11 @@ class LivePingCommmandTest extends ApiClientTestCase
 
     /**
      * Live 404 test via custom endpoint
-     *
-     * @expectedException \GuzzleHttp\Exception\ClientException
-     * @expectExceptionCode 404
      */
     public function testLivePingNotFound()
     {
+        $this->expectException(\GuzzleHttp\Exception\ClientException::class);
+        $this->expectExceptionCode(404);
         $client = static::getClient();
         $client->getHttpClient()->get('ping/not-found.json')->send();
     }
