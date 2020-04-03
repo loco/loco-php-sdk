@@ -7,7 +7,6 @@ use GuzzleHttp\Command\Exception\CommandException;
 use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\HandlerStack;
 use GuzzleHttp\Middleware;
-use Loco\Http\ApiClient;
 use Loco\Console\Application;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
@@ -15,7 +14,6 @@ use Symfony\Component\Console\Command\Command as BaseCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Input\InputOption;
-use Symfony\Component\Console\Input\InputArgument;
 
 /**
  * Base command for all loco API calls
@@ -56,13 +54,14 @@ abstract class Command extends BaseCommand
             ->addOption('key', 'k', InputOption::VALUE_OPTIONAL, 'Override configured API key for this request', '')
         ;
     }
-    
+
 
     /**
      * Execute call to endpoint
      *
      * @param InputInterface $input
      * @param OutputInterface $output
+     * @return int
      *
      * @throws \InvalidArgumentException
      * @throws \GuzzleHttp\Exception\BadResponseException
@@ -141,6 +140,7 @@ abstract class Command extends BaseCommand
         catch (RequestException $e) {
             $this->handleBadResponse($output, $e);
         }
+        return 0;
     }
 
     /**
