@@ -27,6 +27,7 @@ class PatchAssetCommand extends Command
             ->addOption('type', '', InputOption::VALUE_REQUIRED, 'Broad content type to set', null)
             ->addOption('context', '', InputOption::VALUE_REQUIRED, 'Optional context descriptor', null)
             ->addOption('notes', '', InputOption::VALUE_REQUIRED, 'Optional notes for translators', null)
+            ->addOption('printf', '', InputOption::VALUE_REQUIRED, 'String formatting style. <a href="/help/developers/printf">See string formatting</a>', null)
             ->addOption('aliases', '', InputOption::VALUE_REQUIRED, 'Hash of additional asset identifiers to set', null)
             ->addArgument('id', InputArgument::REQUIRED, 'Asset ID', null)
         ;

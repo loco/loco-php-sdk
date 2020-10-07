@@ -9,10 +9,10 @@ use Symfony\Component\Console\Input\InputArgument;
 /**
  * Auto-generated Loco API console command.
  */
-class GetLocaleProgressCommand extends Command
+class GetRevisionsCommand extends Command
 {
     /**
-     * Configure loco:get:locale:progress command
+     * Configure loco:get:revisions command
      *
      * @internal
      * @throws \Symfony\Component\Console\Exception\InvalidArgumentException
@@ -20,10 +20,10 @@ class GetLocaleProgressCommand extends Command
     protected function configure()
     {
         $this
-            ->setName('loco:get:locale:progress')
-            ->setMethod('getLocaleProgress')
-            ->setDescription('Get more detailed translation progress for a project locale')
-            ->addOption('filter', '', InputOption::VALUE_REQUIRED, 'Filter assets by comma-separated tag names. Match any tag with `*` and negate tags by prefixing with `!`', null)
+            ->setName('loco:get:revisions')
+            ->setMethod('getRevisions')
+            ->setDescription('Get previous revisions of a translation')
+            ->addArgument('id', InputArgument::REQUIRED, 'Asset ID', null)
             ->addArgument('locale', InputArgument::REQUIRED, 'Locale short code, or language tag', null)
         ;
         parent::configure();

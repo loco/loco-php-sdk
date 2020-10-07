@@ -1,6 +1,6 @@
 {
     "name": "Loco",
-    "apiVersion": "1.0.24",
+    "apiVersion": "1.0.25",
     "baseUri": "https:\/\/localise.biz\/",
     "description": "Loco REST API",
     "operations": {
@@ -1361,6 +1361,20 @@
                     "name": "notes",
                     "location": "json"
                 },
+                "printf": {
+                    "description": "String formatting style. <a href=\"\/help\/developers\/printf\">See string formatting<\/a>",
+                    "type": "string",
+                    "enum": [
+                        "",
+                        "php",
+                        "java",
+                        "objc",
+                        "icu",
+                        "python"
+                    ],
+                    "name": "printf",
+                    "location": "json"
+                },
                 "aliases": {
                     "description": "Hash of additional asset identifiers to set",
                     "$ref": "object",
@@ -1946,6 +1960,13 @@
             "name": "getLocaleProgress",
             "responseModel": "object",
             "parameters": {
+                "filter": {
+                    "name": "filter",
+                    "type": "string",
+                    "required": false,
+                    "description": "Filter assets by comma-separated tag names. Match any tag with `*` and negate tags by prefixing with `!`",
+                    "location": "query"
+                },
                 "key": {
                     "name": "key",
                     "type": "string",
@@ -2261,6 +2282,52 @@
             ],
             "notes": "",
             "documentationUrl": "https:\/\/localise.biz\/api\/docs\/translations\/unflagtranslation",
+            "deprecated": false,
+            "data": [],
+            "additionalParameters": null
+        },
+        "getRevisions": {
+            "summary": "Get previous revisions of a translation",
+            "responseNotes": "",
+            "httpMethod": "GET",
+            "uri": "\/api\/translations\/{id}\/{locale}\/revisions",
+            "name": "getRevisions",
+            "responseModel": "RevisionList",
+            "parameters": {
+                "key": {
+                    "name": "key",
+                    "type": "string",
+                    "required": false,
+                    "description": "API key - required if not sent in Authorization header",
+                    "location": "query"
+                },
+                "id": {
+                    "name": "id",
+                    "type": "string",
+                    "required": true,
+                    "description": "Asset ID",
+                    "location": "uri"
+                },
+                "locale": {
+                    "name": "locale",
+                    "type": "string",
+                    "required": true,
+                    "description": "Locale short code, or language tag",
+                    "location": "uri"
+                }
+            },
+            "errorResponses": [
+                {
+                    "code": 401,
+                    "phrase": "Invalid API key"
+                },
+                {
+                    "code": 404,
+                    "phrase": "Asset not in project"
+                }
+            ],
+            "notes": "",
+            "documentationUrl": "https:\/\/localise.biz\/api\/docs\/translations\/getrevisions",
             "deprecated": false,
             "data": [],
             "additionalParameters": null
@@ -2605,6 +2672,12 @@
                     "type": "string",
                     "name": "notes",
                     "required": true,
+                    "location": "json"
+                },
+                "printf": {
+                    "description": "String formatting style. <a href=\"\/help\/developers\/printf\">See string formatting<\/a>",
+                    "type": "string",
+                    "name": "printf",
                     "location": "json"
                 },
                 "modified": {
@@ -2989,10 +3062,80 @@
             "type": "object",
             "additionalProperties": false
         },
+        "Revision": {
+            "properties": {
+                "status": {
+                    "description": "Status of translation as string compatible with export status parameter",
+                    "type": "string",
+                    "name": "status",
+                    "location": "json"
+                },
+                "flagged": {
+                    "description": "Whether translation is flagged as requiring attention",
+                    "type": "boolean",
+                    "name": "flagged",
+                    "default": false,
+                    "required": true,
+                    "location": "json"
+                },
+                "translated": {
+                    "description": "Whether the translation exists (even if flagged)",
+                    "type": "boolean",
+                    "name": "translated",
+                    "default": false,
+                    "required": true,
+                    "location": "json"
+                },
+                "translation": {
+                    "description": "Translated text in specified locale",
+                    "type": "string",
+                    "name": "translation",
+                    "required": true,
+                    "location": "json"
+                },
+                "revision": {
+                    "description": "Number of edits made, zero if never translated",
+                    "type": "integer",
+                    "name": "revision",
+                    "default": 0,
+                    "required": true,
+                    "location": "json"
+                },
+                "modified": {
+                    "description": "Time last modified in UTC, null if translation doesn't exist",
+                    "type": "string",
+                    "format": "date-time",
+                    "name": "modified",
+                    "location": "json"
+                },
+                "author": {
+                    "description": "Team member that edited this most recent revision",
+                    "$ref": "User",
+                    "name": "author",
+                    "location": "json"
+                },
+                "flagger": {
+                    "description": "Team member that flagged the translation, if flagged is set",
+                    "$ref": "User",
+                    "name": "flagger",
+                    "location": "json"
+                }
+            },
+            "name": "Revision",
+            "type": "object",
+            "additionalProperties": false
+        },
         "TranslationList": {
             "type": "array",
             "items": {
                 "$ref": "Translation"
+            },
+            "location": "json"
+        },
+        "RevisionList": {
+            "type": "array",
+            "items": {
+                "$ref": "Revision"
             },
             "location": "json"
         },

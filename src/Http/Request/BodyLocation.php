@@ -32,6 +32,7 @@ class BodyLocation extends AbstractLocation
      * @param Parameter        $param
      *
      * @return MessageInterface
+     * @throws \RuntimeException
      */
     public function visit(
         CommandInterface $command,
@@ -47,6 +48,6 @@ class BodyLocation extends AbstractLocation
         $value = $command[$param->getName()];
         $request = $request->withHeader('Content-Type', 'application/octet-stream');
 
-        return $request->withBody(Psr7\stream_for($value));
+        return $request->withBody(Psr7\Utils::streamFor($value));
     }
 }

@@ -130,7 +130,8 @@ abstract class Command extends BaseCommand
         }
         // request exception contains useful response data, but is buried in command exception
         catch (CommandException $e) {
-            if (($re = $e->getPrevious()) instanceof RequestException) {
+            $re = $e->getPrevious();
+            if ($re instanceof RequestException) {
                 $this->handleBadResponse($output, $re);
             } else {
                 throw $e;
@@ -144,6 +145,8 @@ abstract class Command extends BaseCommand
     }
 
     /**
+     * @param OutputInterface $output
+     * @param RequestException $e
      * @return void
      * @throws RequestException
      */
@@ -161,6 +164,8 @@ abstract class Command extends BaseCommand
     }
 
     /**
+     * @param OutputInterface $output
+     * @param array $result
      * @return void
      */
     private function prettyJson(OutputInterface $output, array $result)

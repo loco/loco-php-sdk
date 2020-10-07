@@ -29,7 +29,7 @@ class Deserializer extends DefaultDeserializer
     /**
      * @param DescriptionInterface $description
      * @param bool $process
-     * @param ResponseLocationInterface[] $responseLocations Extra response locations
+     * @param \GuzzleHttp\Command\Guzzle\ResponseLocation\ResponseLocationInterface[] $responseLocations Extra response locations
      * @param bool $validateResponse optionally specify response validation
      */
     public function __construct(
@@ -74,7 +74,8 @@ class Deserializer extends DefaultDeserializer
      */
     protected function visit(Parameter $model, ResponseInterface $response)
     {
-        if ($model->getType() === 'class') {
+        $modelType = $model->getType();
+        if ('class' === $modelType) {
             if (isset($model->toArray()['class'])) {
                 $class = $model->toArray()['class'];
                 if (is_subclass_of($class, ClassResultInterface::class)) {
@@ -90,7 +91,7 @@ class Deserializer extends DefaultDeserializer
                     "Model type is \"class\", but \"class\" parameter isn't defined for model {$model->getName()}"
                 );
             }
-        } elseif ($model->getType() === 'response') {
+        } elseif ('response' === $modelType) {
             return $response;
         } else {
             $result = parent::visit($model, $response);

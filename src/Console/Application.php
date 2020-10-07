@@ -23,6 +23,7 @@ final class Application extends BaseApplication
 
     /**
      * @override
+     * @param array
      */
     public function __construct($defaultConfig)
     {

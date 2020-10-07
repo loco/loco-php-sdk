@@ -65,7 +65,7 @@ class ZipResult extends RawResult
             // fatal server error might still respond 200 (e.g. memory exhaustion) so need to ensure Zip was valid
             if (true !== $valid) {
                 $sniff = substr($bin, 0, 100);
-                trigger_error('Invalid zip data begins: '.$bin, E_USER_WARNING);
+                trigger_error('Invalid zip data begins: '.json_encode($sniff), E_USER_WARNING);
                 throw new \Exception('Response data was invalid zip archive');
             }
         }

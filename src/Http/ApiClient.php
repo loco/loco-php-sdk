@@ -47,11 +47,12 @@ use GuzzleHttp\Command\Guzzle\GuzzleClient;
  * @method \GuzzleHttp\Command\Result tagAssets(array $params) Add multiple assets to an existing tag
  * @method \GuzzleHttp\Command\Result getLocaleErrors(array $params) Get validation errors for a project locale
  * @method \GuzzleHttp\Command\Result getLocaleProgress(array $params) Get more detailed translation progress for a project locale
+ * @method \GuzzleHttp\Command\Result getRevisions(array $params) Get previous revisions of a translation
  */
 class ApiClient extends GuzzleClient
 {
-    const SDK_VERSION = '2.0.7';
-    const API_VERSION = '1.0.24';
+    const SDK_VERSION = '2.0.8';
+    const API_VERSION = '1.0.25';
 
     /**
      * Factory method to create a new Loco API client.
@@ -59,8 +60,6 @@ class ApiClient extends GuzzleClient
      * @param array $config User defined configuration options
      *
      * @return ApiClient
-     *
-     * @throws \InvalidArgumentException
      */
     public static function factory(array $config = [])
     {
