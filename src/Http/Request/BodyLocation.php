@@ -48,6 +48,8 @@ class BodyLocation extends AbstractLocation
         $value = $command[$param->getName()];
         $request = $request->withHeader('Content-Type', 'application/octet-stream');
 
-        return $request->withBody(Psr7\Utils::streamFor($value));
+        // TODO Replace deprecated function with Psr7\Utils::streamFor
+        //      https://github.com/loco/loco-php-sdk/issues/12
+        return $request->withBody(Psr7\stream_for($value));
     }
 }
