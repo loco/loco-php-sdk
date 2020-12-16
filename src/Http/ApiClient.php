@@ -51,7 +51,7 @@ use GuzzleHttp\Command\Guzzle\GuzzleClient;
  */
 class ApiClient extends GuzzleClient
 {
-    const SDK_VERSION = '2.0.8';
+    const SDK_VERSION = '2.0.9';
     const API_VERSION = '1.0.25';
 
     /**
