@@ -81,6 +81,10 @@ class ApiClient extends GuzzleClient
 
         // Define Guzzle client configuration
         $clientConfig['base_uri'] = $serviceConfig['baseUri'];
+        // Pass optional Guzzle client configs from config.json under "guzzle" key
+        if (isset($config['guzzle']) && is_array($config['guzzle'])) {
+            $clientConfig += $config['guzzle'];
+        }
         // Prefix Loco identifier to user agent string
         $clientConfig['headers']['User-Agent'] = 'Loco/'.self::SDK_VERSION.' '.\GuzzleHttp\default_user_agent();
         // Handlers may be defined in config for listing on requests and responses.
