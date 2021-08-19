@@ -226,22 +226,6 @@
                     "type": "string",
                     "required": false,
                     "description": "More specific format of file type. e.g. <code>symfony<\/code> applies to <code>php<\/code>, <code>xlf<\/code> &amp; <code>yml<\/code>",
-                    "enum": [
-                        "symfony",
-                        "zend",
-                        "codeigniter",
-                        "constants",
-                        "chrome",
-                        "nested",
-                        "rails",
-                        "java",
-                        "tizen",
-                        "jed",
-                        "gettext",
-                        "ng-gettext",
-                        "xcode",
-                        "script"
-                    ],
                     "location": "query"
                 },
                 "filter": {
@@ -425,22 +409,6 @@
                     "type": "string",
                     "required": false,
                     "description": "More specific format of file type. e.g. <code>symfony<\/code> applies to <code>php<\/code>, <code>xlf<\/code> &amp; <code>yml<\/code>",
-                    "enum": [
-                        "symfony",
-                        "zend",
-                        "codeigniter",
-                        "constants",
-                        "chrome",
-                        "nested",
-                        "rails",
-                        "java",
-                        "tizen",
-                        "jed",
-                        "gettext",
-                        "ng-gettext",
-                        "xcode",
-                        "script"
-                    ],
                     "location": "query"
                 },
                 "filter": {
@@ -610,22 +578,6 @@
                     "type": "string",
                     "required": false,
                     "description": "More specific format of file type. e.g. <code>symfony<\/code> applies to <code>php<\/code>, <code>xlf<\/code> &amp; <code>yml<\/code>",
-                    "enum": [
-                        "symfony",
-                        "zend",
-                        "codeigniter",
-                        "constants",
-                        "chrome",
-                        "nested",
-                        "rails",
-                        "java",
-                        "tizen",
-                        "jed",
-                        "gettext",
-                        "ng-gettext",
-                        "xcode",
-                        "script"
-                    ],
                     "location": "query"
                 },
                 "filter": {
