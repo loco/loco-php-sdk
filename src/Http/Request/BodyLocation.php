@@ -43,13 +43,11 @@ class BodyLocation extends AbstractLocation
         if ('' !== $value) {
             throw new \RuntimeException('Only one "body" location may exist per operation');
         }
-        
+
         // binary string data from bound parameter
         $value = $command[$param->getName()];
         $request = $request->withHeader('Content-Type', 'application/octet-stream');
 
-        // TODO Replace deprecated function with Psr7\Utils::streamFor
-        //      https://github.com/loco/loco-php-sdk/issues/12
-        return $request->withBody(Psr7\stream_for($value));
+        return $request->withBody(Psr7\Utils::streamFor($value));
     }
 }
