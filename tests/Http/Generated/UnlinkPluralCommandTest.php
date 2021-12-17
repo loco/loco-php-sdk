@@ -15,7 +15,6 @@ use Loco\Tests\Http\Model\MockResponse;
  */
 class UnlinkPluralCommandTest extends ApiClientTestCase
 {
-
     /**
      * Unlinks a plural form of an existing asset
      */
@@ -24,7 +23,7 @@ class UnlinkPluralCommandTest extends ApiClientTestCase
         $service = $this->getServiceDescription();
         $query = new MockRequest('unlinkPlural', $service);
         $model = new MockResponse('Success', $service);
-    
+
         $client = $this->getClientWithMockedResponse(
             [ 'base_uri' => 'https://example.com/api' ],
             $model->toArray()

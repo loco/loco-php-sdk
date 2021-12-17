@@ -15,7 +15,6 @@ use Loco\Tests\Http\Model\MockResponse;
  */
 class GetLocaleCommandTest extends ApiClientTestCase
 {
-
     /**
      * Get a project locale
      */
@@ -24,7 +23,7 @@ class GetLocaleCommandTest extends ApiClientTestCase
         $service = $this->getServiceDescription();
         $query = new MockRequest('getLocale', $service);
         $model = new MockResponse('Locale', $service);
-    
+
         $client = $this->getClientWithMockedResponse(
             [ 'base_uri' => 'https://example.com/api' ],
             $model->toArray()

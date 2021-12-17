@@ -15,7 +15,6 @@ use Loco\Tests\Http\Model\MockResponse;
  */
 class AuthVerifyCommandTest extends ApiClientTestCase
 {
-
     /**
      * Verify an API project key
      */
@@ -24,7 +23,7 @@ class AuthVerifyCommandTest extends ApiClientTestCase
         $service = $this->getServiceDescription();
         $query = new MockRequest('authVerify', $service);
         $model = new MockResponse('Credentials', $service);
-    
+
         $client = $this->getClientWithMockedResponse(
             [ 'base_uri' => 'https://example.com/api' ],
             $model->toArray()

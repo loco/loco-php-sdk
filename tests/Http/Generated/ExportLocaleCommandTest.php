@@ -15,7 +15,6 @@ use Loco\Tests\Http\Model\MockResponse;
  */
 class ExportLocaleCommandTest extends ApiClientTestCase
 {
-
     /**
      * Export a single locale to a language pack
      */
@@ -24,7 +23,7 @@ class ExportLocaleCommandTest extends ApiClientTestCase
         $service = $this->getServiceDescription();
         $query = new MockRequest('exportLocale', $service);
         $model = new MockResponse('RawResult', $service);
-    
+
         $client = $this->getClientWithMockedResponse(
             [ 'base_uri' => 'https://example.com/api' ],
             $model->toArray()

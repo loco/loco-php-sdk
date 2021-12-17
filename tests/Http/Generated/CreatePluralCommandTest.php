@@ -15,7 +15,6 @@ use Loco\Tests\Http\Model\MockResponse;
  */
 class CreatePluralCommandTest extends ApiClientTestCase
 {
-
     /**
      * Add a new plural form of an existing asset
      */
@@ -24,7 +23,7 @@ class CreatePluralCommandTest extends ApiClientTestCase
         $service = $this->getServiceDescription();
         $query = new MockRequest('createPlural', $service);
         $model = new MockResponse('Asset', $service);
-    
+
         $client = $this->getClientWithMockedResponse(
             [ 'base_uri' => 'https://example.com/api' ],
             $model->toArray()

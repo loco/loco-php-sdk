@@ -15,7 +15,6 @@ use GuzzleHttp\Exception\ClientException;
  */
 class LivePingCommmandTest extends ApiClientTestCase
 {
-
     /**
      * Live ping test via overloaded service method
      */

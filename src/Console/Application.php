@@ -10,7 +10,6 @@ use Symfony\Component\Console\Application as BaseApplication;
  */
 final class Application extends BaseApplication
 {
-
     /**
      * @var ApiClient
      */
@@ -67,7 +66,7 @@ final class Application extends BaseApplication
                     continue;
                 }
             }
-            $this->add(new $className);
+            $this->add(new $className());
         }
 
         return $this;

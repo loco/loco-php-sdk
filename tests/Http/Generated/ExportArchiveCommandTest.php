@@ -15,7 +15,6 @@ use Loco\Tests\Http\Model\MockResponse;
  */
 class ExportArchiveCommandTest extends ApiClientTestCase
 {
-
     /**
      * Export all locales to a zip archive
      */
@@ -24,7 +23,7 @@ class ExportArchiveCommandTest extends ApiClientTestCase
         $service = $this->getServiceDescription();
         $query = new MockRequest('exportArchive', $service);
         $model = new MockResponse('ZipResult', $service);
-    
+
         $client = $this->getClientWithMockedResponse(
             [ 'base_uri' => 'https://example.com/api' ],
             $model->toArray()

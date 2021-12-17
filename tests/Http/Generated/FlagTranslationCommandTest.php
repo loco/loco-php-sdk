@@ -15,7 +15,6 @@ use Loco\Tests\Http\Model\MockResponse;
  */
 class FlagTranslationCommandTest extends ApiClientTestCase
 {
-
     /**
      * Flag a translation in a given locale
      */
@@ -24,7 +23,7 @@ class FlagTranslationCommandTest extends ApiClientTestCase
         $service = $this->getServiceDescription();
         $query = new MockRequest('flagTranslation', $service);
         $model = new MockResponse('Success', $service);
-    
+
         $client = $this->getClientWithMockedResponse(
             [ 'base_uri' => 'https://example.com/api' ],
             $model->toArray()

@@ -12,6 +12,6 @@ if (!is_dir($basedir.'/vendor')) {
 require_once $basedir.'/vendor/autoload.php';
 
 // Set up API test case with Loco service
-use \Loco\Tests\Http\ApiClientTestCase;
+use Loco\Tests\Http\ApiClientTestCase;
 
 ApiClientTestCase::parseJsonConfig(__DIR__.'/../config.json');

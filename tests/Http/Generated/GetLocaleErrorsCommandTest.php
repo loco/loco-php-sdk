@@ -15,7 +15,6 @@ use Loco\Tests\Http\Model\MockResponse;
  */
 class GetLocaleErrorsCommandTest extends ApiClientTestCase
 {
-
     /**
      * Get validation errors for a project locale
      */
@@ -24,7 +23,7 @@ class GetLocaleErrorsCommandTest extends ApiClientTestCase
         $service = $this->getServiceDescription();
         $query = new MockRequest('getLocaleErrors', $service);
         $model = new MockResponse('TranslationErrorList', $service);
-    
+
         $client = $this->getClientWithMockedResponse(
             [ 'base_uri' => 'https://example.com/api' ],
             $model->toArray()

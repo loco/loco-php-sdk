@@ -12,7 +12,6 @@ use Loco\Tests\Http\Model\MockRequest;
  */
 class ApiClientTest extends ApiClientTestCase
 {
-
     /**
      * @covers \Loco\Http\ApiClient::factory
      * @return ApiClient

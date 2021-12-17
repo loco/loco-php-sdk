@@ -28,7 +28,7 @@ class ZipResult extends RawResult
      */
     public static function fromResponse(ResponseInterface $response)
     {
-        $me = new self;
+        $me = new self();
 
         return $me->init($response);
     }
@@ -60,7 +60,7 @@ class ZipResult extends RawResult
             $this->tmp = tempnam(sys_get_temp_dir(), 'loco_zip_');
             file_put_contents($this->tmp, $bin);
             // should be able to read zip from disk now
-            $this->zip = new \ZipArchive;
+            $this->zip = new \ZipArchive();
             $valid = $this->zip->open($this->tmp, \ZipArchive::CHECKCONS);
             // fatal server error might still respond 200 (e.g. memory exhaustion) so need to ensure Zip was valid
             if (true !== $valid) {

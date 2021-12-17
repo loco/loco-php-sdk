@@ -15,7 +15,6 @@ use Loco\Tests\Http\Model\MockResponse;
  */
 class CreateTagCommandTest extends ApiClientTestCase
 {
-
     /**
      * Create a new tag
      */
@@ -24,7 +23,7 @@ class CreateTagCommandTest extends ApiClientTestCase
         $service = $this->getServiceDescription();
         $query = new MockRequest('createTag', $service);
         $model = new MockResponse('Success', $service);
-    
+
         $client = $this->getClientWithMockedResponse(
             [ 'base_uri' => 'https://example.com/api' ],
             $model->toArray()

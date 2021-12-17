@@ -15,7 +15,6 @@ use Loco\Tests\Http\Model\MockResponse;
  */
 class TagAssetCommandTest extends ApiClientTestCase
 {
-
     /**
      * Tag an asset
      */
@@ -24,7 +23,7 @@ class TagAssetCommandTest extends ApiClientTestCase
         $service = $this->getServiceDescription();
         $query = new MockRequest('tagAsset', $service);
         $model = new MockResponse('Asset', $service);
-    
+
         $client = $this->getClientWithMockedResponse(
             [ 'base_uri' => 'https://example.com/api' ],
             $model->toArray()

@@ -20,7 +20,7 @@ abstract class ApiClientTestCase extends \PHPUnit\Framework\TestCase
      * @var array
      */
     protected static $config = [];
-    
+
     /**
      * @var GuzzleHttp\Command\Guzzle\DescriptionInterface
      */
@@ -66,7 +66,7 @@ abstract class ApiClientTestCase extends \PHPUnit\Framework\TestCase
         $response = new Response($status, [], json_encode($responseBody));
         $handlerStack = MockHandler::createWithMiddleware([$response]);
         $config['httpHandlerStack'] = $handlerStack;
-        
+
         if ($container) {
             $handlerStack->push(Middleware::history($container));
         }
@@ -77,7 +77,7 @@ abstract class ApiClientTestCase extends \PHPUnit\Framework\TestCase
         return static::getClient($config + $defaults);
     }
 
-     
+
     /**
      * @return GuzzleHttp\Command\Guzzle\DescriptionInterface
      */

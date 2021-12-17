@@ -6,7 +6,6 @@ use GuzzleHttp\Command\Guzzle\SchemaFormatter;
 
 class NullableSchemaFormatter extends SchemaFormatter
 {
-
     /**
      * Don't try to format null value. Pass all other values to default Guzzle's formatter.
      */

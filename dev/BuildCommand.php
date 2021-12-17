@@ -73,7 +73,7 @@ final class BuildCommand extends Command
         $base_uri .= '/swagger';
         $output->writeln('<comment>Pulling docs from '.$base_uri.'</comment>');
         $builder->build($base_uri);
-        
+
         // Collect magic methods usable by this client via  GuzzleHttp\Command\ServiceClient::__call()
         $methodTags = [];
 
@@ -121,7 +121,7 @@ final class BuildCommand extends Command
             if ($verbose === true) {
                 $output->writeln(sprintf('Wrote %s to %s (%s bytes)', $className, $file, $byteLength));
             }
-            
+
             // Write Test case, containing dummy success response and full request
             $source = str_replace(
                 [ '{{method}}', '{{TemplateCommand}}', '{{description}}', '{{model}}' ],
@@ -133,14 +133,14 @@ final class BuildCommand extends Command
             if ($verbose === true) {
                 $output->writeln(sprintf('Wrote %sTest to %s (%s bytes)', $className, $file, $byteLength));
             }
-            
+
             // Collect magic @method definition for PHPDoc tag
             $responseClass = $builder->getResponseClass($functionName);
             $responseClass = 'Loco\\Http\\' === substr($responseClass, 0, 10) ? substr($responseClass, 10) : '\\'.$responseClass;
             // $description = sprintf('%s {@link %s}', $operation['summary'], $operation['documentationUrl'] );
-            $methodTags[$functionName] = sprintf(' * @method %s %s(%s) %s', $responseClass, $functionName, $options?'array $params':'', $operation['summary']);
+            $methodTags[$functionName] = sprintf(' * @method %s %s(%s) %s', $responseClass, $functionName, $options ? 'array $params' : '', $operation['summary']);
         }
-            
+
         // Document ApiClass with magic @method tags
         $ref = new \ReflectionClass('Loco\\Http\\ApiClient');
         $lines = preg_split('/\\R/', $ref->getDocComment());

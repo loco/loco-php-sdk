@@ -9,7 +9,6 @@ use GuzzleHttp\Command\Guzzle\DescriptionInterface;
  */
 class MockResponse extends MockModel
 {
-
     /**
      * @var string
      */

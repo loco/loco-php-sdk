@@ -15,7 +15,6 @@ use Loco\Tests\Http\Model\MockResponse;
  */
 class DeleteTagCommandTest extends ApiClientTestCase
 {
-
     /**
      * Delete an existing tag
      */
@@ -24,7 +23,7 @@ class DeleteTagCommandTest extends ApiClientTestCase
         $service = $this->getServiceDescription();
         $query = new MockRequest('deleteTag', $service);
         $model = new MockResponse('Success', $service);
-    
+
         $client = $this->getClientWithMockedResponse(
             [ 'base_uri' => 'https://example.com/api' ],
             $model->toArray()

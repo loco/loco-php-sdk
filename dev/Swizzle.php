@@ -9,7 +9,6 @@ use Loco\Utils\Swizzle\Swizzle as SwizzleBase;
  */
 class Swizzle extends SwizzleBase
 {
-
     /**
      * Override with default response class
      * {@inheritDoc}

@@ -15,7 +15,6 @@ use Loco\Tests\Http\Model\MockResponse;
  */
 class ExportTemplateCommandTest extends ApiClientTestCase
 {
-
     /**
      * Export a template containing only source keys
      */
@@ -24,7 +23,7 @@ class ExportTemplateCommandTest extends ApiClientTestCase
         $service = $this->getServiceDescription();
         $query = new MockRequest('exportTemplate', $service);
         $model = new MockResponse('RawResult', $service);
-    
+
         $client = $this->getClientWithMockedResponse(
             [ 'base_uri' => 'https://example.com/api' ],
             $model->toArray()

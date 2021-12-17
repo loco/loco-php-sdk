@@ -21,7 +21,7 @@ class Serializer extends DefaultSerializer
         array $requestLocations = []
     ) {
         // Override Guzzle's body location as it isn't raw binary data
-        $requestLocations['body'] = new Request\BodyLocation;
+        $requestLocations['body'] = new Request\BodyLocation();
         parent::__construct($description, $requestLocations);
     }
 
@@ -64,7 +64,7 @@ class Serializer extends DefaultSerializer
                 $command->offsetUnset('key');
             }
         }
-        
+
         // Remap legacy parameters to common `data` binding on request body
         static $remap = [
             'import' => ['src'=>'data'],
@@ -79,7 +79,7 @@ class Serializer extends DefaultSerializer
                 }
             }
         }
-        
+
         return parent::prepareRequest($command, $request);
     }
 }

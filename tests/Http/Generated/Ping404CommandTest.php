@@ -15,7 +15,6 @@ use Loco\Tests\Http\Model\MockResponse;
  */
 class Ping404CommandTest extends ApiClientTestCase
 {
-
     /**
      * Get a test 404 response
      */
@@ -24,7 +23,7 @@ class Ping404CommandTest extends ApiClientTestCase
         $service = $this->getServiceDescription();
         $query = new MockRequest('ping404', $service);
         $model = new MockResponse('Error', $service);
-    
+
         $client = $this->getClientWithMockedResponse(
             [ 'base_uri' => 'https://example.com/api' ],
             $model->toArray()

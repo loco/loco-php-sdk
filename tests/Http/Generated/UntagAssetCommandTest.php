@@ -15,7 +15,6 @@ use Loco\Tests\Http\Model\MockResponse;
  */
 class UntagAssetCommandTest extends ApiClientTestCase
 {
-
     /**
      * Untag an asset
      */
@@ -24,7 +23,7 @@ class UntagAssetCommandTest extends ApiClientTestCase
         $service = $this->getServiceDescription();
         $query = new MockRequest('untagAsset', $service);
         $model = new MockResponse('Success', $service);
-    
+
         $client = $this->getClientWithMockedResponse(
             [ 'base_uri' => 'https://example.com/api' ],
             $model->toArray()

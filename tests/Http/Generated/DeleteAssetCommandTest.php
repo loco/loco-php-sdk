@@ -15,7 +15,6 @@ use Loco\Tests\Http\Model\MockResponse;
  */
 class DeleteAssetCommandTest extends ApiClientTestCase
 {
-
     /**
      * Delete an asset permanently
      */
@@ -24,7 +23,7 @@ class DeleteAssetCommandTest extends ApiClientTestCase
         $service = $this->getServiceDescription();
         $query = new MockRequest('deleteAsset', $service);
         $model = new MockResponse('Success', $service);
-    
+
         $client = $this->getClientWithMockedResponse(
             [ 'base_uri' => 'https://example.com/api' ],
             $model->toArray()

@@ -15,7 +15,6 @@ use Loco\Tests\Http\Model\MockResponse;
  */
 class PatchAssetCommandTest extends ApiClientTestCase
 {
-
     /**
      * Modify a single asset
      */
@@ -24,7 +23,7 @@ class PatchAssetCommandTest extends ApiClientTestCase
         $service = $this->getServiceDescription();
         $query = new MockRequest('patchAsset', $service);
         $model = new MockResponse('Asset', $service);
-    
+
         $client = $this->getClientWithMockedResponse(
             [ 'base_uri' => 'https://example.com/api' ],
             $model->toArray()

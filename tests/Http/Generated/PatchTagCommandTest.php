@@ -15,7 +15,6 @@ use Loco\Tests\Http\Model\MockResponse;
  */
 class PatchTagCommandTest extends ApiClientTestCase
 {
-
     /**
      * Modify a single tag
      */
@@ -24,7 +23,7 @@ class PatchTagCommandTest extends ApiClientTestCase
         $service = $this->getServiceDescription();
         $query = new MockRequest('patchTag', $service);
         $model = new MockResponse('Success', $service);
-    
+
         $client = $this->getClientWithMockedResponse(
             [ 'base_uri' => 'https://example.com/api' ],
             $model->toArray()

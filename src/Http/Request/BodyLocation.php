@@ -15,7 +15,6 @@ use Psr\Http\Message\RequestInterface;
  */
 class BodyLocation extends AbstractLocation
 {
-
     /**
      * Set the name of the location
      *
@@ -43,7 +42,7 @@ class BodyLocation extends AbstractLocation
         if ('' !== $value) {
             throw new \RuntimeException('Only one "body" location may exist per operation');
         }
-        
+
         // binary string data from bound parameter
         $value = $command[$param->getName()];
         $request = $request->withHeader('Content-Type', 'application/octet-stream');

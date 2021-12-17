@@ -15,7 +15,6 @@ use Loco\Tests\Http\Model\MockResponse;
  */
 class GetRevisionsCommandTest extends ApiClientTestCase
 {
-
     /**
      * Get previous revisions of a translation
      */
@@ -24,7 +23,7 @@ class GetRevisionsCommandTest extends ApiClientTestCase
         $service = $this->getServiceDescription();
         $query = new MockRequest('getRevisions', $service);
         $model = new MockResponse('RevisionList', $service);
-    
+
         $client = $this->getClientWithMockedResponse(
             [ 'base_uri' => 'https://example.com/api' ],
             $model->toArray()

@@ -15,7 +15,6 @@ use Loco\Tests\Http\Model\MockResponse;
  */
 class CreateAssetCommandTest extends ApiClientTestCase
 {
-
     /**
      * Add a new translatable asset
      */
@@ -24,7 +23,7 @@ class CreateAssetCommandTest extends ApiClientTestCase
         $service = $this->getServiceDescription();
         $query = new MockRequest('createAsset', $service);
         $model = new MockResponse('Asset', $service);
-    
+
         $client = $this->getClientWithMockedResponse(
             [ 'base_uri' => 'https://example.com/api' ],
             $model->toArray()

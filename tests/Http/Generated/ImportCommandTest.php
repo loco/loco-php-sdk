@@ -15,7 +15,6 @@ use Loco\Tests\Http\Model\MockResponse;
  */
 class ImportCommandTest extends ApiClientTestCase
 {
-
     /**
      * Import assets and translations from a language pack file
      */
@@ -24,7 +23,7 @@ class ImportCommandTest extends ApiClientTestCase
         $service = $this->getServiceDescription();
         $query = new MockRequest('import', $service);
         $model = new MockResponse('ImportResult', $service);
-    
+
         $client = $this->getClientWithMockedResponse(
             [ 'base_uri' => 'https://example.com/api' ],
             $model->toArray()

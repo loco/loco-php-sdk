@@ -22,7 +22,6 @@ use Symfony\Component\Console\Input\InputOption;
  */
 abstract class Command extends BaseCommand
 {
-
     /**
      * @var string
      */
@@ -118,7 +117,7 @@ abstract class Command extends BaseCommand
         if (OutputInterface::VERBOSITY_NORMAL < $verbosity) {
             $output->writeln(sprintf('Calling <comment>%s</comment>', $this->method));
         }
-        
+
         // call overloaded function and show body on error
         try {
             $error = null;
@@ -206,7 +205,7 @@ abstract class Command extends BaseCommand
     protected function requestToString(RequestInterface $request)
     {
         $protocolVersion = $request->getProtocolVersion() ?: '1.1';
-        
+
         $requestString = trim($request->getMethod().' '.$request->getRequestTarget()).' '
             .strtoupper(str_replace('https', 'http', $request->getUri()->getScheme()))
             .'/'.$protocolVersion."\r\n".implode("\r\n", $this->getHeaderLines($request->getHeaders()));

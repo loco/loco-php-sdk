@@ -15,7 +15,6 @@ use Loco\Tests\Http\Model\MockResponse;
  */
 class GetTranslationsCommandTest extends ApiClientTestCase
 {
-
     /**
      * Get all translations of an asset
      */
@@ -24,7 +23,7 @@ class GetTranslationsCommandTest extends ApiClientTestCase
         $service = $this->getServiceDescription();
         $query = new MockRequest('getTranslations', $service);
         $model = new MockResponse('TranslationList', $service);
-    
+
         $client = $this->getClientWithMockedResponse(
             [ 'base_uri' => 'https://example.com/api' ],
             $model->toArray()

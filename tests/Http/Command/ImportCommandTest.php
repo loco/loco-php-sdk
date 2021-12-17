@@ -16,7 +16,7 @@ class ImportCommandTest extends ApiClientTestCase
         $service = $this->getServiceDescription();
         $query = new MockRequest('import', $service);
         $model = new MockResponse('ImportResult', $service);
-    
+
         $client = $this->getClientWithMockedResponse(
             [ 'base_uri' => 'https://example.com/api' ],
             $model->toArray()
@@ -46,7 +46,7 @@ class ImportCommandTest extends ApiClientTestCase
     public function testSourceFieldPostsRawBody()
     {
         $model = new MockResponse('ImportResult', $this->getServiceDescription());
-        $mocked = new \ArrayIterator;
+        $mocked = new \ArrayIterator();
 
         $client = $this->getClientWithMockedResponse(
             [ 'base_uri' => 'https://example.com/api' ],

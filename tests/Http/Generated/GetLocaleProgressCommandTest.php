@@ -15,7 +15,6 @@ use Loco\Tests\Http\Model\MockResponse;
  */
 class GetLocaleProgressCommandTest extends ApiClientTestCase
 {
-
     /**
      * Get more detailed translation progress for a project locale
      */
@@ -24,7 +23,7 @@ class GetLocaleProgressCommandTest extends ApiClientTestCase
         $service = $this->getServiceDescription();
         $query = new MockRequest('getLocaleProgress', $service);
         $model = new MockResponse('object', $service);
-    
+
         $client = $this->getClientWithMockedResponse(
             [ 'base_uri' => 'https://example.com/api' ],
             $model->toArray()

@@ -15,7 +15,6 @@ use Loco\Tests\Http\Model\MockResponse;
  */
 class ImportProgressCommandTest extends ApiClientTestCase
 {
-
     /**
      * Check the progress of an asynchronous import
      */
@@ -24,7 +23,7 @@ class ImportProgressCommandTest extends ApiClientTestCase
         $service = $this->getServiceDescription();
         $query = new MockRequest('importProgress', $service);
         $model = new MockResponse('AsyncProgress', $service);
-    
+
         $client = $this->getClientWithMockedResponse(
             [ 'base_uri' => 'https://example.com/api' ],
             $model->toArray()

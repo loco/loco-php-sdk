@@ -15,7 +15,6 @@ use Loco\Tests\Http\Model\MockResponse;
  */
 class ExportAllCommandTest extends ApiClientTestCase
 {
-
     /**
      * Export your whole project to a multi-locale language pack
      */
@@ -24,7 +23,7 @@ class ExportAllCommandTest extends ApiClientTestCase
         $service = $this->getServiceDescription();
         $query = new MockRequest('exportAll', $service);
         $model = new MockResponse('RawResult', $service);
-    
+
         $client = $this->getClientWithMockedResponse(
             [ 'base_uri' => 'https://example.com/api' ],
             $model->toArray()

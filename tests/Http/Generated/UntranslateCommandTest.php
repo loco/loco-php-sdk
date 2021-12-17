@@ -15,7 +15,6 @@ use Loco\Tests\Http\Model\MockResponse;
  */
 class UntranslateCommandTest extends ApiClientTestCase
 {
-
     /**
      * Erase translation data in a single locale
      */
@@ -24,7 +23,7 @@ class UntranslateCommandTest extends ApiClientTestCase
         $service = $this->getServiceDescription();
         $query = new MockRequest('untranslate', $service);
         $model = new MockResponse('Success', $service);
-    
+
         $client = $this->getClientWithMockedResponse(
             [ 'base_uri' => 'https://example.com/api' ],
             $model->toArray()

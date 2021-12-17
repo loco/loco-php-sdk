@@ -26,7 +26,7 @@ class RawResult implements ClassResultInterface
         if (204 === $response->getStatusCode()) {
             throw new BadResponseException('Response contains no data');
         }
-        $result = new self;
+        $result = new self();
 
         return $result->init($response);
     }

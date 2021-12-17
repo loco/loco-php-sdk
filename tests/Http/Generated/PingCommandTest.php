@@ -15,7 +15,6 @@ use Loco\Tests\Http\Model\MockResponse;
  */
 class PingCommandTest extends ApiClientTestCase
 {
-
     /**
      * Check the API is up
      */
@@ -24,7 +23,7 @@ class PingCommandTest extends ApiClientTestCase
         $service = $this->getServiceDescription();
         $query = new MockRequest('ping', $service);
         $model = new MockResponse('PingResponse', $service);
-    
+
         $client = $this->getClientWithMockedResponse(
             [ 'base_uri' => 'https://example.com/api' ],
             $model->toArray()
