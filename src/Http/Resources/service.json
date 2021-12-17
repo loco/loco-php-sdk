@@ -1,6 +1,6 @@
 {
     "name": "Loco",
-    "apiVersion": "1.0.25",
+    "apiVersion": "1.0.26",
     "baseUri": "https:\/\/localise.biz\/",
     "description": "Loco REST API",
     "operations": {
@@ -66,11 +66,6 @@
                     "type": "string",
                     "required": false,
                     "description": "More specific format of multi-locale file type. e.g. <code>rails<\/code> applies to <code>yml<\/code>",
-                    "enum": [
-                        "rails",
-                        "i18next",
-                        "i18next3"
-                    ],
                     "location": "query"
                 },
                 "filter": {
@@ -806,6 +801,13 @@
                     "description": "Specify target locale if importing translations",
                     "location": "query"
                 },
+                "format": {
+                    "name": "format",
+                    "type": "string",
+                    "required": false,
+                    "description": "Hint for generic file types (like JSON) that don't declare their schema. Reciprocal to the export parameter of the same name",
+                    "location": "query"
+                },
                 "async": {
                     "name": "async",
                     "type": "boolean",
@@ -888,6 +890,13 @@
                     "type": "boolean",
                     "required": false,
                     "description": "Permanently DELETES project assets NOT found in the file (use with extreme caution)",
+                    "location": "query"
+                },
+                "flag-new": {
+                    "name": "flag-new",
+                    "type": "string",
+                    "required": false,
+                    "description": "Set this flag on any NEW (non-empty) translations imported into the current locale.",
                     "location": "query"
                 },
                 "key": {

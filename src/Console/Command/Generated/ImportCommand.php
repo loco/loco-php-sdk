@@ -27,6 +27,7 @@ class ImportCommand extends Command
             ->addOption('data', '', InputOption::VALUE_REQUIRED, 'Raw source of file being imported', '{}')
             ->addOption('index', '', InputOption::VALUE_REQUIRED, 'Specify whether translations in your file are indexed by generic IDs or human-readable source text', null)
             ->addOption('locale', '', InputOption::VALUE_REQUIRED, 'Specify target locale if importing translations', null)
+            ->addOption('format', '', InputOption::VALUE_REQUIRED, 'Hint for generic file types (like JSON) that don\'t declare their schema. Reciprocal to the export parameter of the same name', null)
             ->addOption('async', '', InputOption::VALUE_REQUIRED, 'Specify that import should be done asynchronously (recommended for large files)', null)
             ->addOption('path', '', InputOption::VALUE_REQUIRED, 'Specify original file path for source code references (excluding line number)', null)
             ->addOption('ignore-new', '', InputOption::VALUE_REQUIRED, 'Specify that new assets will NOT be added to the project', null)
@@ -39,6 +40,7 @@ class ImportCommand extends Command
             ->addOption('tag-absent', '', InputOption::VALUE_REQUIRED, 'Tag existing assets in the project that are NOT found in the imported file', null)
             ->addOption('untag-absent', '', InputOption::VALUE_REQUIRED, 'Remove existing tags from assets NOT found in the imported file', null)
             ->addOption('delete-absent', '', InputOption::VALUE_REQUIRED, 'Permanently DELETES project assets NOT found in the file (use with extreme caution)', null)
+            ->addOption('flag-new', '', InputOption::VALUE_REQUIRED, 'Set this flag on any NEW (non-empty) translations imported into the current locale.', null)
         ;
         parent::configure();
     }
