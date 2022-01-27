@@ -5,7 +5,6 @@ namespace Loco\Http\Request;
 use GuzzleHttp\Command\Guzzle\RequestLocation\AbstractLocation;
 use GuzzleHttp\Command\CommandInterface;
 use GuzzleHttp\Command\Guzzle\Parameter;
-use GuzzleHttp\Psr7;
 use Psr\Http\Message\MessageInterface;
 use Psr\Http\Message\RequestInterface;
 
@@ -47,8 +46,15 @@ class BodyLocation extends AbstractLocation
         $value = $command[$param->getName()];
         $request = $request->withHeader('Content-Type', 'application/octet-stream');
 
-        // TODO Replace deprecated function with Psr7\Utils::streamFor
-        //      https://github.com/loco/loco-php-sdk/issues/12
-        return $request->withBody(Psr7\stream_for($value));
+        // guzzle-services composer.json has guzzlehttp/psr7: ^1.7 || ^2.0
+        // https://github.com/loco/loco-php-sdk/issues/12
+        $createBody = ['\\GuzzleHttp\\Psr7\\Utils','streamFor'];
+        if (! is_callable($createBody)) {
+            $createBody = '\\GuzzleHttp\\Psr7\\stream_for';
+            if (! function_exists($createBody)) {
+                throw new \RuntimeException('Unknown \\GuzzleHttp\\Psr7 version');
+            }
+        }
+        return $request->withBody(call_user_func($createBody, $value));
     }
 }
