@@ -65,7 +65,7 @@ abstract class Command extends BaseCommand
      * @throws \InvalidArgumentException
      * @throws \GuzzleHttp\Exception\BadResponseException
      */
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $args = $input->getArguments() + $input->getOptions();
         $verbosity = $output->getVerbosity();

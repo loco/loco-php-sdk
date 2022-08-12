@@ -31,7 +31,7 @@ final class BuildCommand extends Command
      *
      * @throws \Exception
      */
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $cwd = \dirname(__DIR__);
         $verbose = $output->getVerbosity() > 1;
