@@ -1,14 +1,14 @@
 {
     "name": "Loco",
-    "apiVersion": "1.0.26",
-    "baseUri": "https:\/\/localise.biz\/",
+    "apiVersion": "1.0.27",
+    "baseUri": "https://localise.biz/",
     "description": "Loco REST API",
     "operations": {
         "authVerify": {
             "summary": "Verify an API project key",
-            "responseNotes": "<p>Loco API keys authenticate your user account for accessing a specific project.<br \/>This endpoint verifies an API key and returns the authenticated user, account and project.<\/p>\n<p>If you want to verify whether the key has write access, just send this endpoint a POST request instead. A read-only key will give 403 for any POST request.<\/p>",
+            "responseNotes": "<p>Loco API keys authenticate your user account for accessing a specific project.<br />This endpoint verifies an API key and returns the authenticated user, account and project.</p>\n<p>If you want to verify whether the key has write access, just send this endpoint a POST request instead. A read-only key will give 403 for any POST request.</p>",
             "httpMethod": "GET",
-            "uri": "\/api\/auth\/verify",
+            "uri": "/api/auth/verify",
             "name": "authVerify",
             "responseModel": "Credentials",
             "parameters": {
@@ -31,16 +31,16 @@
                 }
             ],
             "notes": "",
-            "documentationUrl": "https:\/\/localise.biz\/api\/docs\/auth\/authverify",
+            "documentationUrl": "https://localise.biz/api/docs/auth/authverify",
             "deprecated": false,
             "data": [],
             "additionalParameters": null
         },
         "exportAll": {
             "summary": "Export your whole project to a multi-locale language pack",
-            "responseNotes": "<p>Export all translations from your project to a multi-locale language pack.<\/p>\n<p>Note that not all formats support multiple locales in the same file. See <code>\/api\/export\/archive<\/code> for exporting separate files,\nand <code>\/api\/export\/locale<\/code> for exporting one language at a time.<\/p>",
+            "responseNotes": "<p>Export all translations from your project to a multi-locale language pack.</p>\n<p>Note that not all formats support multiple locales in the same file. See <code>/api/export/archive</code> for exporting separate files,\nand <code>/api/export/locale</code> for exporting one language at a time.</p>",
             "httpMethod": "GET",
-            "uri": "\/api\/export\/all.{ext}",
+            "uri": "/api/export/all.{ext}",
             "name": "exportAll",
             "responseModel": "RawResult",
             "parameters": {
@@ -65,7 +65,7 @@
                     "name": "format",
                     "type": "string",
                     "required": false,
-                    "description": "More specific format of multi-locale file type. e.g. <code>rails<\/code> applies to <code>yml<\/code>",
+                    "description": "More specific format of multi-locale file type. e.g. <code>rails</code> applies to <code>yml</code>",
                     "location": "query"
                 },
                 "filter": {
@@ -107,11 +107,18 @@
                     ],
                     "location": "query"
                 },
+                "status": {
+                    "name": "status",
+                    "type": "string",
+                    "required": false,
+                    "description": "Export translations with a specific status or flag. Negate values by prefixing with `!`. e.g. \"translated\", or \"!fuzzy\".",
+                    "location": "query"
+                },
                 "printf": {
                     "name": "printf",
                     "type": "string",
                     "required": false,
-                    "description": "Force alternative \"printf\" style. <a href=\"https:\/\/localise.biz\/help\/developers\/printf\">See string formatting<\/a>",
+                    "description": "Force alternative \"printf\" style. <a href=\"https://localise.biz/help/developers/printf\">See string formatting</a>",
                     "enum": [
                         "php",
                         "java",
@@ -151,7 +158,7 @@
                     "name": "no-folding",
                     "type": "boolean",
                     "required": false,
-                    "description": "Protect <a href=\"https:\/\/localise.biz\/help\/developers\/asset-ids#folding\">dot-separated keys<\/a> so that `foo.bar` is not folded into object properties.",
+                    "description": "Protect <a href=\"https://localise.biz/help/developers/asset-ids#folding\">dot-separated keys</a> so that `foo.bar` is not folded into object properties.",
                     "location": "query"
                 },
                 "key": {
@@ -169,16 +176,16 @@
                 }
             ],
             "notes": "",
-            "documentationUrl": "https:\/\/localise.biz\/api\/docs\/export\/exportall",
+            "documentationUrl": "https://localise.biz/api/docs/export/exportall",
             "deprecated": false,
             "data": [],
             "additionalParameters": null
         },
         "exportArchive": {
             "summary": "Export all locales to a zip archive",
-            "responseNotes": "Export all translations from your project to an archive of individual locale files. You can also specify .tar instead of .zip.<br \/>If you're exporting to a format that supports multiple locales per file, you can use the <code>\/export\/all<\/code> method instead.",
+            "responseNotes": "Export all translations from your project to an archive of individual locale files. You can also specify .tar instead of .zip.<br />If you're exporting to a format that supports multiple locales per file, you can use the <code>/export/all</code> method instead.",
             "httpMethod": "GET",
-            "uri": "\/api\/export\/archive\/{ext}.zip",
+            "uri": "/api/export/archive/{ext}.zip",
             "name": "exportArchive",
             "responseModel": "ZipResult",
             "parameters": {
@@ -220,7 +227,7 @@
                     "name": "format",
                     "type": "string",
                     "required": false,
-                    "description": "More specific format of file type. e.g. <code>symfony<\/code> applies to <code>php<\/code>, <code>xlf<\/code> &amp; <code>yml<\/code>",
+                    "description": "More specific format of file type. e.g. <code>symfony</code> applies to <code>php</code>, <code>xlf</code> &amp; <code>yml</code>",
                     "location": "query"
                 },
                 "filter": {
@@ -280,14 +287,14 @@
                     "name": "path",
                     "type": "string",
                     "required": false,
-                    "description": "Custom pattern for file paths. <a href=\"https:\/\/localise.biz\/help\/developers\/locales\/export-paths\">See syntax<\/a>",
+                    "description": "Custom pattern for file paths. <a href=\"https://localise.biz/help/developers/locales/export-paths\">See syntax</a>",
                     "location": "query"
                 },
                 "printf": {
                     "name": "printf",
                     "type": "string",
                     "required": false,
-                    "description": "Force alternative \"printf\" style. <a href=\"https:\/\/localise.biz\/help\/developers\/printf\">See string formatting<\/a>",
+                    "description": "Force alternative \"printf\" style. <a href=\"https://localise.biz/help/developers/printf\">See string formatting</a>",
                     "enum": [
                         "php",
                         "java",
@@ -327,7 +334,7 @@
                     "name": "no-folding",
                     "type": "boolean",
                     "required": false,
-                    "description": "Protect <a href=\"https:\/\/localise.biz\/help\/developers\/asset-ids#folding\">dot-separated keys<\/a> so that `foo.bar` is not folded into object properties.",
+                    "description": "Protect <a href=\"https://localise.biz/help/developers/asset-ids#folding\">dot-separated keys</a> so that `foo.bar` is not folded into object properties.",
                     "location": "query"
                 },
                 "key": {
@@ -345,16 +352,16 @@
                 }
             ],
             "notes": "",
-            "documentationUrl": "https:\/\/localise.biz\/api\/docs\/export\/exportarchive",
+            "documentationUrl": "https://localise.biz/api/docs/export/exportarchive",
             "deprecated": false,
             "data": [],
             "additionalParameters": null
         },
         "exportLocale": {
             "summary": "Export a single locale to a language pack",
-            "responseNotes": "<p>Various export file types are supported with format variations for some types. <a href=\"https:\/\/localise.biz\/api#formats\">See supported formats<\/a>.<\/p>\n<p>See <a href=\"https:\/\/localise.biz\/help\/formats\/exporting#options\">available export options<\/a> for more detail on these parameters.<\/p>",
+            "responseNotes": "<p>Various export file types are supported with format variations for some types. <a href=\"https://localise.biz/api#formats\">See supported formats</a>.</p>\n<p>See <a href=\"https://localise.biz/help/formats/exporting#options\">available export options</a> for more detail on these parameters.</p>",
             "httpMethod": "GET",
-            "uri": "\/api\/export\/locale\/{locale}.{ext}",
+            "uri": "/api/export/locale/{locale}.{ext}",
             "name": "exportLocale",
             "responseModel": "RawResult",
             "parameters": {
@@ -403,7 +410,7 @@
                     "name": "format",
                     "type": "string",
                     "required": false,
-                    "description": "More specific format of file type. e.g. <code>symfony<\/code> applies to <code>php<\/code>, <code>xlf<\/code> &amp; <code>yml<\/code>",
+                    "description": "More specific format of file type. e.g. <code>symfony</code> applies to <code>php</code>, <code>xlf</code> &amp; <code>yml</code>",
                     "location": "query"
                 },
                 "filter": {
@@ -463,7 +470,7 @@
                     "name": "printf",
                     "type": "string",
                     "required": false,
-                    "description": "Force alternative \"printf\" style. <a href=\"https:\/\/localise.biz\/help\/developers\/printf\">See string formatting<\/a>",
+                    "description": "Force alternative \"printf\" style. <a href=\"https://localise.biz/help/developers/printf\">See string formatting</a>",
                     "enum": [
                         "php",
                         "java",
@@ -503,7 +510,7 @@
                     "name": "no-folding",
                     "type": "boolean",
                     "required": false,
-                    "description": "Protect <a href=\"https:\/\/localise.biz\/help\/developers\/asset-ids#folding\">dot-separated keys<\/a> so that `foo.bar` is not folded into object properties.",
+                    "description": "Protect <a href=\"https://localise.biz/help/developers/asset-ids#folding\">dot-separated keys</a> so that `foo.bar` is not folded into object properties.",
                     "location": "query"
                 },
                 "key": {
@@ -521,16 +528,16 @@
                 }
             ],
             "notes": "",
-            "documentationUrl": "https:\/\/localise.biz\/api\/docs\/export\/exportlocale",
+            "documentationUrl": "https://localise.biz/api/docs/export/exportlocale",
             "deprecated": false,
             "data": [],
             "additionalParameters": null
         },
         "exportTemplate": {
             "summary": "Export a template containing only source keys",
-            "responseNotes": "<p>This is different to exporting just your source language translations, because it only exports the left hand side of each mapping.<\/p>\n<p>See <a href=\"https:\/\/localise.biz\/api#formats\">supported export formats<\/a> and more detail on <a href=\"https:\/\/localise.biz\/help\/formats\/exporting#options\">the available options<\/a>.<\/p>",
+            "responseNotes": "<p>This is different to exporting just your source language translations, because it only exports the left hand side of each mapping.</p>\n<p>See <a href=\"https://localise.biz/api#formats\">supported export formats</a> and more detail on <a href=\"https://localise.biz/help/formats/exporting#options\">the available options</a>.</p>",
             "httpMethod": "GET",
-            "uri": "\/api\/export\/template.{ext}",
+            "uri": "/api/export/template.{ext}",
             "name": "exportTemplate",
             "responseModel": "RawResult",
             "parameters": {
@@ -572,7 +579,7 @@
                     "name": "format",
                     "type": "string",
                     "required": false,
-                    "description": "More specific format of file type. e.g. <code>symfony<\/code> applies to <code>php<\/code>, <code>xlf<\/code> &amp; <code>yml<\/code>",
+                    "description": "More specific format of file type. e.g. <code>symfony</code> applies to <code>php</code>, <code>xlf</code> &amp; <code>yml</code>",
                     "location": "query"
                 },
                 "filter": {
@@ -632,7 +639,7 @@
                     "name": "printf",
                     "type": "string",
                     "required": false,
-                    "description": "Force alternative \"printf\" style. <a href=\"https:\/\/localise.biz\/help\/developers\/printf\">See string formatting<\/a>",
+                    "description": "Force alternative \"printf\" style. <a href=\"https://localise.biz/help/developers/printf\">See string formatting</a>",
                     "enum": [
                         "php",
                         "java",
@@ -672,7 +679,7 @@
                     "name": "no-folding",
                     "type": "boolean",
                     "required": false,
-                    "description": "Protect <a href=\"https:\/\/localise.biz\/help\/developers\/asset-ids#folding\">dot-separated keys<\/a> so that `foo.bar` is not folded into object properties.",
+                    "description": "Protect <a href=\"https://localise.biz/help/developers/asset-ids#folding\">dot-separated keys</a> so that `foo.bar` is not folded into object properties.",
                     "location": "query"
                 },
                 "key": {
@@ -690,16 +697,16 @@
                 }
             ],
             "notes": "",
-            "documentationUrl": "https:\/\/localise.biz\/api\/docs\/export\/exporttemplate",
+            "documentationUrl": "https://localise.biz/api/docs/export/exporttemplate",
             "deprecated": false,
             "data": [],
             "additionalParameters": null
         },
         "importProgress": {
             "summary": "Check the progress of an asynchronous import",
-            "responseNotes": "<p>If you specified <code>async=1<\/code> in your original import API request, you can check on its progress with this endpoint.<\/p>\n<p>The full URL including job identifier will have been provided in the Location header of your original import response<\/p>",
+            "responseNotes": "<p>If you specified <code>async=1</code> in your original import API request, you can check on its progress with this endpoint.</p>\n<p>The full URL including job identifier will have been provided in the Location header of your original import response</p>",
             "httpMethod": "GET",
-            "uri": "\/api\/import\/progress\/{id}",
+            "uri": "/api/import/progress/{id}",
             "name": "importProgress",
             "responseModel": "AsyncProgress",
             "parameters": {
@@ -733,16 +740,16 @@
                 }
             ],
             "notes": "",
-            "documentationUrl": "https:\/\/localise.biz\/api\/docs\/import\/importprogress",
+            "documentationUrl": "https://localise.biz/api/docs/import/importprogress",
             "deprecated": false,
             "data": [],
             "additionalParameters": null
         },
         "import": {
             "summary": "Import assets and translations from a language pack file",
-            "responseNotes": "<p>The import API loads translations from various language pack formats into the currently authenticated project.<\/p>\n<p>Take note of how the <code>index<\/code> and <code>locale<\/code> parameters are used to describe how your file will be imported. \nBy leaving these fields empty Loco will try to guess your intentions, but it's advisable to specify all parameters if in any doubt.\n<a href=\"https:\/\/localise.biz\/api#imports\">See examples<\/a>.<\/p>\n<p>It's recommended that you set <code>async=1<\/code> for large files. This will cause the import to run in the background.\nWhen running asynchronously you will receive a 201 code (instead of 200) and the <code>Location<\/code> header will contain a URI for checking progress.<\/p>\n<p>When running synchronously the response object will include a list of all new assets add to the project. \nAdditionally all responses will include the state of each locale referenced by the import (source and target).<\/p>\n<p>See <a href=\"https:\/\/localise.biz\/help\/formats\/importing\/settings\">Import settings<\/a> for full details on all these options.<\/p>",
+            "responseNotes": "<p>The import API loads translations from various language pack formats into the currently authenticated project.</p>\n<p>Take note of how the <code>index</code> and <code>locale</code> parameters are used to describe how your file will be imported. \nBy leaving these fields empty Loco will try to guess your intentions, but it's advisable to specify all parameters if in any doubt.\n<a href=\"https://localise.biz/api#imports\">See examples</a>.</p>\n<p>It's recommended that you set <code>async=1</code> for large files. This will cause the import to run in the background.\nWhen running asynchronously you will receive a 201 code (instead of 200) and the <code>Location</code> header will contain a URI for checking progress.</p>\n<p>When running synchronously the response object will include the state of each locale affected by the import.</p>\n<p>See <a href=\"https://localise.biz/help/formats/importing/settings\">Import settings</a> for full details on all these options.</p>",
             "httpMethod": "POST",
-            "uri": "\/api\/import\/{ext}",
+            "uri": "/api/import/{ext}",
             "name": "import",
             "responseModel": "ImportResult",
             "parameters": {
@@ -896,7 +903,14 @@
                     "name": "flag-new",
                     "type": "string",
                     "required": false,
-                    "description": "Set this flag on any NEW (non-empty) translations imported into the current locale.",
+                    "description": "Set this flag on any NEW translations imported into the current locale",
+                    "location": "query"
+                },
+                "flag-updated": {
+                    "name": "flag-updated",
+                    "type": "string",
+                    "required": false,
+                    "description": "Set this flag on any translations MODIFIED during import to the current locale",
                     "location": "query"
                 },
                 "key": {
@@ -926,7 +940,7 @@
                 }
             ],
             "notes": "",
-            "documentationUrl": "https:\/\/localise.biz\/api\/docs\/import\/import",
+            "documentationUrl": "https://localise.biz/api/docs/import/import",
             "deprecated": false,
             "data": [],
             "additionalParameters": null
@@ -935,7 +949,7 @@
             "summary": "Get project tags",
             "responseNotes": "Lists all tags in currently authenticated project",
             "httpMethod": "GET",
-            "uri": "\/api\/tags.json",
+            "uri": "/api/tags.json",
             "name": "getTags",
             "responseModel": "TagList",
             "parameters": {
@@ -954,7 +968,7 @@
                 }
             ],
             "notes": "",
-            "documentationUrl": "https:\/\/localise.biz\/api\/docs\/tags\/gettags",
+            "documentationUrl": "https://localise.biz/api/docs/tags/gettags",
             "deprecated": false,
             "data": [],
             "additionalParameters": null
@@ -963,7 +977,7 @@
             "summary": "Create a new tag",
             "responseNotes": "Adds a new tag to the currently authenticated project",
             "httpMethod": "POST",
-            "uri": "\/api\/tags.json",
+            "uri": "/api/tags.json",
             "name": "createTag",
             "responseModel": "Success",
             "parameters": {
@@ -989,7 +1003,7 @@
                 }
             ],
             "notes": "",
-            "documentationUrl": "https:\/\/localise.biz\/api\/docs\/tags\/createtag",
+            "documentationUrl": "https://localise.biz/api/docs/tags/createtag",
             "deprecated": false,
             "data": [],
             "additionalParameters": null
@@ -998,7 +1012,7 @@
             "summary": "Add multiple assets to an existing tag",
             "responseNotes": "Tag multiple assets at once by posting their unique IDs to the tag's resource",
             "httpMethod": "POST",
-            "uri": "\/api\/tags\/{tag}.json",
+            "uri": "/api/tags/{tag}.json",
             "name": "tagAssets",
             "responseModel": "Success",
             "parameters": {
@@ -1035,7 +1049,7 @@
                 }
             ],
             "notes": "",
-            "documentationUrl": "https:\/\/localise.biz\/api\/docs\/tags\/tagassets",
+            "documentationUrl": "https://localise.biz/api/docs/tags/tagassets",
             "deprecated": false,
             "data": [],
             "additionalParameters": null
@@ -1044,7 +1058,7 @@
             "summary": "Modify a single tag",
             "responseNotes": "Renames an existing tag in the currently authenticated project",
             "httpMethod": "PATCH",
-            "uri": "\/api\/tags\/{tag}.json",
+            "uri": "/api/tags/{tag}.json",
             "name": "patchTag",
             "responseModel": "Success",
             "parameters": {
@@ -1080,7 +1094,7 @@
                 }
             ],
             "notes": "",
-            "documentationUrl": "https:\/\/localise.biz\/api\/docs\/tags\/patchtag",
+            "documentationUrl": "https://localise.biz/api/docs/tags/patchtag",
             "deprecated": false,
             "data": [],
             "additionalParameters": null
@@ -1089,7 +1103,7 @@
             "summary": "Delete an existing tag",
             "responseNotes": "Deletes an existing tag in the currently authenticated project",
             "httpMethod": "DELETE",
-            "uri": "\/api\/tags\/{tag}.json",
+            "uri": "/api/tags/{tag}.json",
             "name": "deleteTag",
             "responseModel": "Success",
             "parameters": {
@@ -1119,7 +1133,7 @@
                 }
             ],
             "notes": "",
-            "documentationUrl": "https:\/\/localise.biz\/api\/docs\/tags\/deletetag",
+            "documentationUrl": "https://localise.biz/api/docs/tags/deletetag",
             "deprecated": false,
             "data": [],
             "additionalParameters": null
@@ -1128,7 +1142,7 @@
             "summary": "List all translatable assets in your project",
             "responseNotes": "",
             "httpMethod": "GET",
-            "uri": "\/api\/assets",
+            "uri": "/api/assets",
             "name": "getAssets",
             "responseModel": "AssetList",
             "parameters": {
@@ -1154,16 +1168,16 @@
                 }
             ],
             "notes": "",
-            "documentationUrl": "https:\/\/localise.biz\/api\/docs\/assets\/getassets",
+            "documentationUrl": "https://localise.biz/api/docs/assets/getassets",
             "deprecated": false,
             "data": [],
             "additionalParameters": null
         },
         "createAsset": {
             "summary": "Add a new translatable asset",
-            "responseNotes": "<p>Adds a new asset to the currently authenticated project. When created successfully the response will be 201 (created).<\/p>\n<p>Specifying <code>{text}<\/code> also creates an initial source language translation (unless you also specify <code>default=untranslated<\/code>).\nNote that the <code>{text}<\/code> parameter was previously called \"name\". For legacy compatibility the old parameter will continue to work.<\/p>",
+            "responseNotes": "<p>Adds a new asset to the currently authenticated project. When created successfully the response will be 201 (created).</p>\n<p>Specifying <code>{text}</code> also creates an initial source language translation (unless you also specify <code>default=untranslated</code>).</p>",
             "httpMethod": "POST",
-            "uri": "\/api\/assets",
+            "uri": "/api/assets",
             "name": "createAsset",
             "responseModel": "Asset",
             "parameters": {
@@ -1179,7 +1193,7 @@
                     "name": "text",
                     "type": "string",
                     "required": false,
-                    "description": "Initial source language translation (required if <code>{id}<\/code> is empty)",
+                    "description": "Initial source language translation (required if <code>{id}</code> is empty)",
                     "location": "formParam"
                 },
                 "type": {
@@ -1213,7 +1227,7 @@
                     "name": "default",
                     "type": "string",
                     "required": false,
-                    "description": "Status of the source language translation specified in <code>{text}<\/code>",
+                    "description": "Status of the source language translation specified in <code>{text}</code>",
                     "location": "formParam",
                     "default": "translated"
                 },
@@ -1240,7 +1254,7 @@
                 }
             ],
             "notes": "",
-            "documentationUrl": "https:\/\/localise.biz\/api\/docs\/assets\/createasset",
+            "documentationUrl": "https://localise.biz/api/docs/assets/createasset",
             "deprecated": false,
             "data": [],
             "additionalParameters": null
@@ -1249,7 +1263,7 @@
             "summary": "Get a project asset",
             "responseNotes": "Gets a single asset in currently authenticated project",
             "httpMethod": "GET",
-            "uri": "\/api\/assets\/{id}.json",
+            "uri": "/api/assets/{id}.json",
             "name": "getAsset",
             "responseModel": "Asset",
             "parameters": {
@@ -1279,16 +1293,16 @@
                 }
             ],
             "notes": "",
-            "documentationUrl": "https:\/\/localise.biz\/api\/docs\/assets\/getasset",
+            "documentationUrl": "https://localise.biz/api/docs/assets/getasset",
             "deprecated": false,
             "data": [],
             "additionalParameters": null
         },
         "patchAsset": {
             "summary": "Modify a single asset",
-            "responseNotes": "<p>Modifies the properties of an asset in the currently authenticated project and returns the full, modified object.<\/p>\n<p>To modify tags, see the <a href=\"https:\/\/localise.biz\/api\/docs\/assets#tagasset\">tagging endpoints<\/a>.\nTo modify plural forms, see the <a href=\"https:\/\/localise.biz\/api\/docs\/assets#getassetplurals\">plural endpoints<\/a><\/p>",
+            "responseNotes": "<p>Modifies the properties of an asset in the currently authenticated project and returns the full, modified object.</p>\n<p>To modify tags, see the <a href=\"https://localise.biz/api/docs/assets#tagasset\">tagging endpoints</a>.\nTo modify plural forms, see the <a href=\"https://localise.biz/api/docs/assets#getassetplurals\">plural endpoints</a></p>",
             "httpMethod": "PATCH",
-            "uri": "\/api\/assets\/{id}.json",
+            "uri": "/api/assets/{id}.json",
             "name": "patchAsset",
             "responseModel": "Asset",
             "parameters": {
@@ -1323,7 +1337,7 @@
                     "location": "json"
                 },
                 "printf": {
-                    "description": "String formatting style. <a href=\"\/help\/developers\/printf\">See string formatting<\/a>",
+                    "description": "String formatting style. <a href=\"/help/developers/printf\">See string formatting</a>",
                     "type": "string",
                     "enum": [
                         "",
@@ -1372,16 +1386,16 @@
                 }
             ],
             "notes": "",
-            "documentationUrl": "https:\/\/localise.biz\/api\/docs\/assets\/patchasset",
+            "documentationUrl": "https://localise.biz/api/docs/assets/patchasset",
             "deprecated": false,
             "data": [],
             "additionalParameters": null
         },
         "deleteAsset": {
             "summary": "Delete an asset permanently",
-            "responseNotes": "<p>Deletes an asset from the currently authenticated project.<\/p>\n<p><strong>Warning<\/strong>: This will permanently delete all translations made of this asset across all locales<\/p>",
+            "responseNotes": "<p>Deletes an asset from the currently authenticated project.</p>\n<p><strong>Warning</strong>: This will permanently delete all translations made of this asset across all locales</p>",
             "httpMethod": "DELETE",
-            "uri": "\/api\/assets\/{id}.json",
+            "uri": "/api/assets/{id}.json",
             "name": "deleteAsset",
             "responseModel": "Success",
             "parameters": {
@@ -1415,16 +1429,16 @@
                 }
             ],
             "notes": "",
-            "documentationUrl": "https:\/\/localise.biz\/api\/docs\/assets\/deleteasset",
+            "documentationUrl": "https://localise.biz/api/docs/assets/deleteasset",
             "deprecated": false,
             "data": [],
             "additionalParameters": null
         },
         "getAssetPlurals": {
             "summary": "Get plural forms of an asset",
-            "responseNotes": "<p>Lists all assets that are a plural form of the current asset.<\/p>\n<p>This list does <strong>not<\/strong> include the singular form itself.<\/p>",
+            "responseNotes": "<p>Lists all assets that are a plural form of the current asset.</p>\n<p>This list does <strong>not</strong> include the singular form itself.</p>",
             "httpMethod": "GET",
-            "uri": "\/api\/assets\/{id}\/plurals",
+            "uri": "/api/assets/{id}/plurals",
             "name": "getAssetPlurals",
             "responseModel": "AssetList",
             "parameters": {
@@ -1454,16 +1468,16 @@
                 }
             ],
             "notes": "",
-            "documentationUrl": "https:\/\/localise.biz\/api\/docs\/assets\/getassetplurals",
+            "documentationUrl": "https://localise.biz/api/docs/assets/getassetplurals",
             "deprecated": false,
             "data": [],
             "additionalParameters": null
         },
         "createPlural": {
             "summary": "Add a new plural form of an existing asset",
-            "responseNotes": "<p>Creates a translatable asset that's a plural form of an existing asset.<\/p>\n<p>The singular form asset specified as <code>{id}<\/code> must already exist, but the plural form will created as a new asset.<\/p>\n<p>You can bind an existing asset as the new plural by specifying <code>{pid}<\/code> in which case <code>{text}<\/code> will be ignored.<\/p>",
+            "responseNotes": "<p>Creates a translatable asset that's a plural form of an existing asset.</p>\n<p>The singular form asset specified as <code>{id}</code> must already exist, but the plural form will created as a new asset.</p>\n<p>You can bind an existing asset as the new plural by specifying <code>{pid}</code> in which case <code>{text}</code> will be ignored.</p>",
             "httpMethod": "POST",
-            "uri": "\/api\/assets\/{id}\/plurals",
+            "uri": "/api/assets/{id}/plurals",
             "name": "createPlural",
             "responseModel": "Asset",
             "parameters": {
@@ -1511,16 +1525,16 @@
                 }
             ],
             "notes": "",
-            "documentationUrl": "https:\/\/localise.biz\/api\/docs\/assets\/createplural",
+            "documentationUrl": "https://localise.biz/api/docs/assets/createplural",
             "deprecated": false,
             "data": [],
             "additionalParameters": null
         },
         "unlinkPlural": {
             "summary": "Unlinks a plural form of an existing asset",
-            "responseNotes": "<p>Reverts an asset from being a plural form to being a singular asset on its own.<\/p>\n<p>This action does <strong>not<\/strong> delete any assets.<\/p>",
+            "responseNotes": "<p>Reverts an asset from being a plural form to being a singular asset on its own.</p>\n<p>This action does <strong>not</strong> delete any assets.</p>",
             "httpMethod": "DELETE",
-            "uri": "\/api\/assets\/{id}\/plurals\/{pid}.json",
+            "uri": "/api/assets/{id}/plurals/{pid}.json",
             "name": "unlinkPlural",
             "responseModel": "Success",
             "parameters": {
@@ -1561,16 +1575,16 @@
                 }
             ],
             "notes": "",
-            "documentationUrl": "https:\/\/localise.biz\/api\/docs\/assets\/unlinkplural",
+            "documentationUrl": "https://localise.biz/api/docs/assets/unlinkplural",
             "deprecated": false,
             "data": [],
             "additionalParameters": null
         },
         "tagAsset": {
             "summary": "Tag an asset",
-            "responseNotes": "<p>Tags an asset with a new or existing term. If the tag doesn't exist it will be created.<\/p>",
+            "responseNotes": "<p>Tags an asset with a new or existing term. If the tag doesn't exist it will be created.</p>",
             "httpMethod": "POST",
-            "uri": "\/api\/assets\/{id}\/tags",
+            "uri": "/api/assets/{id}/tags",
             "name": "tagAsset",
             "responseModel": "Asset",
             "parameters": {
@@ -1611,16 +1625,16 @@
                 }
             ],
             "notes": "",
-            "documentationUrl": "https:\/\/localise.biz\/api\/docs\/assets\/tagasset",
+            "documentationUrl": "https://localise.biz/api/docs/assets/tagasset",
             "deprecated": false,
             "data": [],
             "additionalParameters": null
         },
         "untagAsset": {
             "summary": "Untag an asset",
-            "responseNotes": "<p>Removes a single tag from the given asset.<\/p>",
+            "responseNotes": "<p>Removes a single tag from the given asset.</p>",
             "httpMethod": "DELETE",
-            "uri": "\/api\/assets\/{id}\/tags\/{tag}.json",
+            "uri": "/api/assets/{id}/tags/{tag}.json",
             "name": "untagAsset",
             "responseModel": "Success",
             "parameters": {
@@ -1661,7 +1675,7 @@
                 }
             ],
             "notes": "",
-            "documentationUrl": "https:\/\/localise.biz\/api\/docs\/assets\/untagasset",
+            "documentationUrl": "https://localise.biz/api/docs/assets/untagasset",
             "deprecated": false,
             "data": [],
             "additionalParameters": null
@@ -1670,7 +1684,7 @@
             "summary": "List all locales in your project",
             "responseNotes": "Lists all locales in currently authenticated project. Your source language will always be the first in the list",
             "httpMethod": "GET",
-            "uri": "\/api\/locales",
+            "uri": "/api/locales",
             "name": "getLocales",
             "responseModel": "LocaleList",
             "parameters": {
@@ -1689,16 +1703,16 @@
                 }
             ],
             "notes": "",
-            "documentationUrl": "https:\/\/localise.biz\/api\/docs\/locales\/getlocales",
+            "documentationUrl": "https://localise.biz/api/docs/locales/getlocales",
             "deprecated": false,
             "data": [],
             "additionalParameters": null
         },
         "createLocale": {
             "summary": "Add a new project locale",
-            "responseNotes": "<p>Adds a new locale to the currently authenticated project.<\/p>\n<p>If the locale is created successfully the response will be 201 (created).<\/p>\n<p>If the locale already exists the response will be 409 (conflict).<\/p>",
+            "responseNotes": "<p>Adds a new locale to the currently authenticated project.</p>\n<p>If the locale is created successfully the response will be 201 (created).</p>\n<p>If the locale already exists the response will be 409 (conflict).</p>",
             "httpMethod": "POST",
-            "uri": "\/api\/locales",
+            "uri": "/api/locales",
             "name": "createLocale",
             "responseModel": "Locale",
             "parameters": {
@@ -1736,7 +1750,7 @@
                 }
             ],
             "notes": "",
-            "documentationUrl": "https:\/\/localise.biz\/api\/docs\/locales\/createlocale",
+            "documentationUrl": "https://localise.biz/api/docs/locales/createlocale",
             "deprecated": false,
             "data": [],
             "additionalParameters": null
@@ -1745,7 +1759,7 @@
             "summary": "Get a project locale",
             "responseNotes": "Gets a single locale in currently authenticated project",
             "httpMethod": "GET",
-            "uri": "\/api\/locales\/{locale}",
+            "uri": "/api/locales/{locale}",
             "name": "getLocale",
             "responseModel": "Locale",
             "parameters": {
@@ -1775,16 +1789,16 @@
                 }
             ],
             "notes": "",
-            "documentationUrl": "https:\/\/localise.biz\/api\/docs\/locales\/getlocale",
+            "documentationUrl": "https://localise.biz/api/docs/locales/getlocale",
             "deprecated": false,
             "data": [],
             "additionalParameters": null
         },
         "patchLocale": {
             "summary": "Modify a project locale",
-            "responseNotes": "<p>Modifies the properties of a locale in the currently authenticated project.<\/p>\n<p>The full, modified locale object is returned.<\/p>",
+            "responseNotes": "<p>Modifies the properties of a locale in the currently authenticated project.</p>\n<p>The full, modified locale object is returned.</p>",
             "httpMethod": "PATCH",
-            "uri": "\/api\/locales\/{locale}",
+            "uri": "/api/locales/{locale}",
             "name": "patchLocale",
             "responseModel": "Locale",
             "parameters": {
@@ -1830,16 +1844,16 @@
                 }
             ],
             "notes": "",
-            "documentationUrl": "https:\/\/localise.biz\/api\/docs\/locales\/patchlocale",
+            "documentationUrl": "https://localise.biz/api/docs/locales/patchlocale",
             "deprecated": false,
             "data": [],
             "additionalParameters": null
         },
         "deleteLocale": {
             "summary": "Delete a project locale",
-            "responseNotes": "<p>Delete a locale from currently authenticated project.<\/p>\n<p><strong>Warning<\/strong>: This will permanently delete any translations made in the specified locale across your project<\/p>\n<p>Note that you cannot delete your source locale.<\/p>",
+            "responseNotes": "<p>Delete a locale from currently authenticated project.</p>\n<p><strong>Warning</strong>: This will permanently delete any translations made in the specified locale across your project</p>\n<p>Note that you cannot delete your source locale.</p>",
             "httpMethod": "DELETE",
-            "uri": "\/api\/locales\/{locale}",
+            "uri": "/api/locales/{locale}",
             "name": "deleteLocale",
             "responseModel": "Success",
             "parameters": {
@@ -1873,7 +1887,7 @@
                 }
             ],
             "notes": "",
-            "documentationUrl": "https:\/\/localise.biz\/api\/docs\/locales\/deletelocale",
+            "documentationUrl": "https://localise.biz/api/docs/locales/deletelocale",
             "deprecated": false,
             "data": [],
             "additionalParameters": null
@@ -1882,7 +1896,7 @@
             "summary": "Get validation errors for a project locale",
             "responseNotes": "",
             "httpMethod": "GET",
-            "uri": "\/api\/locales\/{locale}\/errors",
+            "uri": "/api/locales/{locale}/errors",
             "name": "getLocaleErrors",
             "responseModel": "TranslationErrorList",
             "parameters": {
@@ -1908,16 +1922,16 @@
                 }
             ],
             "notes": "",
-            "documentationUrl": "https:\/\/localise.biz\/api\/docs\/locales\/getlocaleerrors",
+            "documentationUrl": "https://localise.biz/api/docs/locales/getlocaleerrors",
             "deprecated": false,
             "data": [],
             "additionalParameters": null
         },
         "getLocaleProgress": {
             "summary": "Get more detailed translation progress for a project locale",
-            "responseNotes": "<p>Response model is dynamic according to the status\/flags available in your project.<\/p>\n<p>Status keys such as 'translated' or 'fuzzy' are only included when there are assets with that status and in future may be user-defined.<\/p>",
+            "responseNotes": "<p>Response model is dynamic according to the status/flags available in your project.</p>\n<p>Status keys such as 'translated' or 'fuzzy' are only included when there are assets with that status and in future may be user-defined.</p>",
             "httpMethod": "GET",
-            "uri": "\/api\/locales\/{locale}\/progress",
+            "uri": "/api/locales/{locale}/progress",
             "name": "getLocaleProgress",
             "responseModel": "object",
             "parameters": {
@@ -1950,16 +1964,16 @@
                 }
             ],
             "notes": "",
-            "documentationUrl": "https:\/\/localise.biz\/api\/docs\/locales\/getlocaleprogress",
+            "documentationUrl": "https://localise.biz/api/docs/locales/getlocaleprogress",
             "deprecated": false,
             "data": [],
             "additionalParameters": null
         },
         "getTranslations": {
             "summary": "Get all translations of an asset",
-            "responseNotes": "<p>Gets all translations of an asset across the currently authenticated project's locales.<\/p>\n<p>Locales not yet translated are included, but their <code>translated<\/code> field will be set to <code>false<\/code>.<\/p>",
+            "responseNotes": "<p>Gets all translations of an asset across the currently authenticated project's locales.</p>\n<p>Locales not yet translated are included, but their <code>translated</code> field will be set to <code>false</code>.</p>",
             "httpMethod": "GET",
-            "uri": "\/api\/translations\/{id}.json",
+            "uri": "/api/translations/{id}.json",
             "name": "getTranslations",
             "responseModel": "TranslationList",
             "parameters": {
@@ -1989,16 +2003,16 @@
                 }
             ],
             "notes": "",
-            "documentationUrl": "https:\/\/localise.biz\/api\/docs\/translations\/gettranslations",
+            "documentationUrl": "https://localise.biz/api/docs/translations/gettranslations",
             "deprecated": false,
             "data": [],
             "additionalParameters": null
         },
         "getTranslation": {
             "summary": "Get a single translation",
-            "responseNotes": "<p>Gets a single translation in currently authenticated project.<\/p>\n<p>Translations implicitly exist as long as the asset and locale are in your project.<\/p>\n<p>Translations marked as complete have the <code>translated<\/code> field set to <code>true<\/code>.<\/p>",
+            "responseNotes": "<p>Gets a single translation in currently authenticated project.</p>\n<p>Translations implicitly exist as long as the asset and locale are in your project.</p>\n<p>Translations marked as complete have the <code>translated</code> field set to <code>true</code>.</p>",
             "httpMethod": "GET",
-            "uri": "\/api\/translations\/{id}\/{locale}",
+            "uri": "/api/translations/{id}/{locale}",
             "name": "getTranslation",
             "responseModel": "Translation",
             "parameters": {
@@ -2039,16 +2053,16 @@
                 }
             ],
             "notes": "",
-            "documentationUrl": "https:\/\/localise.biz\/api\/docs\/translations\/gettranslation",
+            "documentationUrl": "https://localise.biz/api/docs/translations/gettranslation",
             "deprecated": false,
             "data": [],
             "additionalParameters": null
         },
         "translate": {
             "summary": "Add a new translation in a given locale",
-            "responseNotes": "<p>Translates a single asset in a single locale in the currently authenticated project.<\/p>\n<p>If the asset is already translated, a new revision will be added and the <code>revision<\/code> field incremented.<\/p>\n<p>If the asset is untranslated the locale must have already been added to the project.<\/p>",
+            "responseNotes": "<p>Translates a single asset in a single locale in the currently authenticated project.</p>\n<p>If the asset is already translated, a new revision will be added and the <code>revision</code> field incremented.</p>\n<p>If the asset is untranslated the locale must have already been added to the project.</p>",
             "httpMethod": "POST",
-            "uri": "\/api\/translations\/{id}\/{locale}",
+            "uri": "/api/translations/{id}/{locale}",
             "name": "translate",
             "responseModel": "Translation",
             "parameters": {
@@ -2092,16 +2106,16 @@
                 }
             ],
             "notes": "",
-            "documentationUrl": "https:\/\/localise.biz\/api\/docs\/translations\/translate",
+            "documentationUrl": "https://localise.biz/api/docs/translations/translate",
             "deprecated": false,
             "data": [],
             "additionalParameters": null
         },
         "untranslate": {
             "summary": "Erase translation data in a single locale",
-            "responseNotes": "<p>Erases translation data of a localized asset in the currently authenticated project.<\/p>\n<p><strong>Warning<\/strong>: Erasing is not the same as setting an empty translation. \nThis operation clears the asset's translation history and user comments for the given locale.<\/p>",
+            "responseNotes": "<p>Erases translation data of a localized asset in the currently authenticated project.</p>\n<p><strong>Warning</strong>: Erasing is not the same as setting an empty translation. \nThis operation clears the asset's translation history and user comments for the given locale.</p>",
             "httpMethod": "DELETE",
-            "uri": "\/api\/translations\/{id}\/{locale}",
+            "uri": "/api/translations/{id}/{locale}",
             "name": "untranslate",
             "responseModel": "Success",
             "parameters": {
@@ -2142,16 +2156,16 @@
                 }
             ],
             "notes": "",
-            "documentationUrl": "https:\/\/localise.biz\/api\/docs\/translations\/untranslate",
+            "documentationUrl": "https://localise.biz/api/docs/translations/untranslate",
             "deprecated": false,
             "data": [],
             "additionalParameters": null
         },
         "flagTranslation": {
             "summary": "Flag a translation in a given locale",
-            "responseNotes": "<p>Flag a single translation or set its status in a given locale.<\/p>\n<p>The <code>flag<\/code> parameter can be any flag (e.g. fuzzy) a status (e.g. translated) or a redundant state (e.g. blank translation).\n<a href=\"https:\/\/localise.biz\/help\/glossary\/flag\">See translation states<\/a>.<\/p>",
+            "responseNotes": "<p>Flag a single translation or set its status in a given locale.</p>\n<p>The <code>flag</code> parameter can be any flag (e.g. fuzzy) a status (e.g. translated) or a redundant state (e.g. blank translation).\n<a href=\"https://localise.biz/help/glossary/flag\">See translation states</a>.</p>",
             "httpMethod": "POST",
-            "uri": "\/api\/translations\/{id}\/{locale}\/flag",
+            "uri": "/api/translations/{id}/{locale}/flag",
             "name": "flagTranslation",
             "responseModel": "Success",
             "parameters": {
@@ -2196,16 +2210,16 @@
                 }
             ],
             "notes": "",
-            "documentationUrl": "https:\/\/localise.biz\/api\/docs\/translations\/flagtranslation",
+            "documentationUrl": "https://localise.biz/api/docs/translations/flagtranslation",
             "deprecated": false,
             "data": [],
             "additionalParameters": null
         },
         "unflagTranslation": {
             "summary": "Clear flag from a translation",
-            "responseNotes": "<p>Removes current flag from a translation marked as incomplete or in error.<\/p>\n<p>It's not necessary to specify which flag to remove, because there can be only one.<\/p>",
+            "responseNotes": "<p>Removes current flag from a translation marked as incomplete or in error.</p>\n<p>It's not necessary to specify which flag to remove, because there can be only one.</p>",
             "httpMethod": "DELETE",
-            "uri": "\/api\/translations\/{id}\/{locale}\/flag",
+            "uri": "/api/translations/{id}/{locale}/flag",
             "name": "unflagTranslation",
             "responseModel": "Success",
             "parameters": {
@@ -2242,7 +2256,7 @@
                 }
             ],
             "notes": "",
-            "documentationUrl": "https:\/\/localise.biz\/api\/docs\/translations\/unflagtranslation",
+            "documentationUrl": "https://localise.biz/api/docs/translations/unflagtranslation",
             "deprecated": false,
             "data": [],
             "additionalParameters": null
@@ -2251,7 +2265,7 @@
             "summary": "Get previous revisions of a translation",
             "responseNotes": "",
             "httpMethod": "GET",
-            "uri": "\/api\/translations\/{id}\/{locale}\/revisions",
+            "uri": "/api/translations/{id}/{locale}/revisions",
             "name": "getRevisions",
             "responseModel": "RevisionList",
             "parameters": {
@@ -2288,7 +2302,7 @@
                 }
             ],
             "notes": "",
-            "documentationUrl": "https:\/\/localise.biz\/api\/docs\/translations\/getrevisions",
+            "documentationUrl": "https://localise.biz/api/docs/translations/getrevisions",
             "deprecated": false,
             "data": [],
             "additionalParameters": null
@@ -2297,13 +2311,13 @@
             "summary": "Check the API is up",
             "responseNotes": "",
             "httpMethod": "GET",
-            "uri": "\/api\/ping",
+            "uri": "/api/ping",
             "name": "ping",
             "responseModel": "PingResponse",
             "parameters": [],
             "errorResponses": [],
             "notes": "",
-            "documentationUrl": "https:\/\/localise.biz\/api\/docs\/ping\/ping",
+            "documentationUrl": "https://localise.biz/api/docs/ping/ping",
             "deprecated": false,
             "data": [],
             "additionalParameters": null
@@ -2312,13 +2326,13 @@
             "summary": "Get a test 404 response",
             "responseNotes": "",
             "httpMethod": "GET",
-            "uri": "\/api\/ping\/not-found",
+            "uri": "/api/ping/not-found",
             "name": "ping404",
             "responseModel": "Error",
             "parameters": [],
             "errorResponses": [],
             "notes": "",
-            "documentationUrl": "https:\/\/localise.biz\/api\/docs\/ping\/ping404",
+            "documentationUrl": "https://localise.biz/api/docs/ping/ping404",
             "deprecated": false,
             "data": [],
             "additionalParameters": null
@@ -2363,6 +2377,12 @@
                     "description": "Loco account name",
                     "type": "string",
                     "name": "name",
+                    "location": "json"
+                },
+                "url": {
+                    "description": "Dashboard URL",
+                    "type": "string",
+                    "name": "url",
                     "location": "json"
                 }
             },
@@ -2448,7 +2468,7 @@
                     "location": "json"
                 },
                 "equation": {
-                    "description": "Equation for calculating offset in forms. The formula takes a multiplier <code>(n)<\/code> to yield a plural form offset. <code>( 0 <= offset < length )<\/code>.",
+                    "description": "Equation for calculating offset in forms. The formula takes a multiplier <code>(n)</code> to yield a plural form offset. <code>( 0 <= offset < length )</code>.",
                     "type": "string",
                     "name": "equation",
                     "default": "n != 1",
@@ -2456,7 +2476,7 @@
                     "location": "json"
                 },
                 "forms": {
-                    "description": "Plural form names. See <a href=\"http:\/\/unicode.org\/reports\/tr35\/tr35-numbers.html#Language_Plural_Rules\">Unicode tr35<\/a>.",
+                    "description": "Plural form names. See <a href=\"http://unicode.org/reports/tr35/tr35-numbers.html#Language_Plural_Rules\">Unicode tr35</a>.",
                     "type": "array",
                     "items": {
                         "type": "string"
@@ -2530,7 +2550,7 @@
                     "location": "json"
                 },
                 "source": {
-                    "description": "Whether the default\/source locale of the project",
+                    "description": "Whether the default/source locale of the project",
                     "type": "boolean",
                     "name": "source",
                     "location": "json"
@@ -2636,7 +2656,7 @@
                     "location": "json"
                 },
                 "printf": {
-                    "description": "String formatting style. <a href=\"\/help\/developers\/printf\">See string formatting<\/a>",
+                    "description": "String formatting style. <a href=\"/help/developers/printf\">See string formatting</a>",
                     "type": "string",
                     "name": "printf",
                     "location": "json"
@@ -2705,7 +2725,7 @@
                     "location": "json"
                 },
                 "locales": {
-                    "description": "Locales identified according to `index` and `locale` parameters",
+                    "description": "Locales identified during import with their progress statistics",
                     "type": "array",
                     "items": {
                         "$ref": "Locale"
@@ -2715,13 +2735,12 @@
                     "location": "json"
                 },
                 "assets": {
-                    "description": "New assets added to project (always empty when async=1)",
+                    "description": "DEPRECATED: Assets added to project; empty when async=1",
                     "type": "array",
                     "items": {
                         "$ref": "Asset"
                     },
                     "name": "assets",
-                    "required": true,
                     "location": "json"
                 }
             },

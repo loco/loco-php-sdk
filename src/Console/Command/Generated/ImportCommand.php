@@ -40,7 +40,8 @@ class ImportCommand extends Command
             ->addOption('tag-absent', '', InputOption::VALUE_REQUIRED, 'Tag existing assets in the project that are NOT found in the imported file', null)
             ->addOption('untag-absent', '', InputOption::VALUE_REQUIRED, 'Remove existing tags from assets NOT found in the imported file', null)
             ->addOption('delete-absent', '', InputOption::VALUE_REQUIRED, 'Permanently DELETES project assets NOT found in the file (use with extreme caution)', null)
-            ->addOption('flag-new', '', InputOption::VALUE_REQUIRED, 'Set this flag on any NEW (non-empty) translations imported into the current locale.', null)
+            ->addOption('flag-new', '', InputOption::VALUE_REQUIRED, 'Set this flag on any NEW translations imported into the current locale', null)
+            ->addOption('flag-updated', '', InputOption::VALUE_REQUIRED, 'Set this flag on any translations MODIFIED during import to the current locale', null)
         ;
         parent::configure();
     }

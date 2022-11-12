@@ -51,8 +51,8 @@ use GuzzleHttp\Command\Guzzle\GuzzleClient;
  */
 class ApiClient extends GuzzleClient
 {
-    public const SDK_VERSION = '2.0.10';
-    public const API_VERSION = '1.0.26';
+    public const SDK_VERSION = '2.0.11';
+    public const API_VERSION = '1.0.27';
 
     /**
      * Factory method to create a new Loco API client.
