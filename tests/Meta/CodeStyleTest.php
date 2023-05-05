@@ -11,9 +11,8 @@ class CodeStyleTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * Find path to php-cs-fixer executable
-     * @return string
      */
-    private function findLinter()
+    private function findLinter(): string
     {
         foreach (['cs-fixer','php-cs-fixer','php-cs-fixer.phar'] as $name) {
             if ($command = rtrim(shell_exec('which '.$name))) {
@@ -23,7 +22,7 @@ class CodeStyleTest extends \PHPUnit\Framework\TestCase
         $this->markTestSkipped('Install php-cs-fixer or run with --exclude-group meta');
     }
 
-    public function testCodeStyleLinterPasses()
+    public function testCodeStyleLinterPasses(): void
     {
         $executable = $this->findLinter();
         foreach (['src','dev','tests','example'] as $name) {

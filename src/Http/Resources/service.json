@@ -1,6 +1,6 @@
 {
     "name": "Loco",
-    "apiVersion": "1.0.27",
+    "apiVersion": "1.0.28",
     "baseUri": "https://localise.biz/",
     "description": "Loco REST API",
     "operations": {
@@ -843,6 +843,13 @@
                     "description": "Specify that existing assets encountered in the file will NOT be updated",
                     "location": "query"
                 },
+                "ignore-blank": {
+                    "name": "ignore-blank",
+                    "type": "boolean",
+                    "required": false,
+                    "description": "Specify that blank translations should NOT be imported",
+                    "location": "query"
+                },
                 "tag-new": {
                     "name": "tag-new",
                     "type": "string",
@@ -949,7 +956,7 @@
             "summary": "Get project tags",
             "responseNotes": "Lists all tags in currently authenticated project",
             "httpMethod": "GET",
-            "uri": "/api/tags.json",
+            "uri": "/api/tags",
             "name": "getTags",
             "responseModel": "TagList",
             "parameters": {
@@ -977,7 +984,7 @@
             "summary": "Create a new tag",
             "responseNotes": "Adds a new tag to the currently authenticated project",
             "httpMethod": "POST",
-            "uri": "/api/tags.json",
+            "uri": "/api/tags",
             "name": "createTag",
             "responseModel": "Success",
             "parameters": {
@@ -2581,6 +2588,99 @@
             "type": "object",
             "additionalProperties": false
         },
+        "ImportResult": {
+            "properties": {
+                "status": {
+                    "description": "Whether import was synchronous (200) or asynchronous (201)",
+                    "type": "integer",
+                    "enum": [
+                        200,
+                        201
+                    ],
+                    "name": "status",
+                    "default": 200,
+                    "required": true,
+                    "location": "json"
+                },
+                "message": {
+                    "description": "Summary of import result",
+                    "type": "string",
+                    "name": "message",
+                    "required": true,
+                    "location": "json"
+                },
+                "locales": {
+                    "description": "Locales identified during import with their progress statistics",
+                    "type": "array",
+                    "items": {
+                        "$ref": "Locale"
+                    },
+                    "name": "locales",
+                    "required": true,
+                    "location": "json"
+                }
+            },
+            "name": "ImportResult",
+            "type": "object",
+            "additionalProperties": false
+        },
+        "AsyncProgress": {
+            "description": "Job progress for checking asynchronous operations",
+            "properties": {
+                "progress": {
+                    "description": "Percentage progress through asynchronous operation",
+                    "type": "integer",
+                    "minimum": 0,
+                    "maximum": 100,
+                    "name": "progress",
+                    "required": true,
+                    "location": "json"
+                },
+                "success": {
+                    "description": "Message populated after successful completion",
+                    "type": "string",
+                    "name": "success",
+                    "location": "json"
+                },
+                "error": {
+                    "description": "Description of any error that prevented the operation from finishing",
+                    "type": "string",
+                    "name": "error",
+                    "location": "json"
+                }
+            },
+            "name": "AsyncProgress",
+            "type": "object",
+            "additionalProperties": false
+        },
+        "Success": {
+            "properties": {
+                "status": {
+                    "description": "HTTP status 2xx code",
+                    "type": "integer",
+                    "name": "status",
+                    "required": true,
+                    "location": "json"
+                },
+                "message": {
+                    "description": "Descriptive success message",
+                    "type": "string",
+                    "name": "message",
+                    "required": true,
+                    "location": "json"
+                }
+            },
+            "name": "Success",
+            "type": "object",
+            "additionalProperties": false
+        },
+        "TagList": {
+            "type": "array",
+            "items": {
+                "type": "string"
+            },
+            "location": "json"
+        },
         "object": {
             "properties": [],
             "description": "Generic object",
@@ -2702,108 +2802,6 @@
             "name": "Asset",
             "type": "object",
             "additionalProperties": false
-        },
-        "ImportResult": {
-            "properties": {
-                "status": {
-                    "description": "Whether import was synchronous (200) or asynchronous (201)",
-                    "type": "integer",
-                    "enum": [
-                        200,
-                        201
-                    ],
-                    "name": "status",
-                    "default": 200,
-                    "required": true,
-                    "location": "json"
-                },
-                "message": {
-                    "description": "Summary of import result",
-                    "type": "string",
-                    "name": "message",
-                    "required": true,
-                    "location": "json"
-                },
-                "locales": {
-                    "description": "Locales identified during import with their progress statistics",
-                    "type": "array",
-                    "items": {
-                        "$ref": "Locale"
-                    },
-                    "name": "locales",
-                    "required": true,
-                    "location": "json"
-                },
-                "assets": {
-                    "description": "DEPRECATED: Assets added to project; empty when async=1",
-                    "type": "array",
-                    "items": {
-                        "$ref": "Asset"
-                    },
-                    "name": "assets",
-                    "location": "json"
-                }
-            },
-            "name": "ImportResult",
-            "type": "object",
-            "additionalProperties": false
-        },
-        "AsyncProgress": {
-            "description": "Job progress for checking asynchronous operations",
-            "properties": {
-                "progress": {
-                    "description": "Percentage progress through asynchronous operation",
-                    "type": "integer",
-                    "minimum": 0,
-                    "maximum": 100,
-                    "name": "progress",
-                    "required": true,
-                    "location": "json"
-                },
-                "success": {
-                    "description": "Message populated after successful completion",
-                    "type": "string",
-                    "name": "success",
-                    "location": "json"
-                },
-                "error": {
-                    "description": "Description of any error that prevented the operation from finishing",
-                    "type": "string",
-                    "name": "error",
-                    "location": "json"
-                }
-            },
-            "name": "AsyncProgress",
-            "type": "object",
-            "additionalProperties": false
-        },
-        "Success": {
-            "properties": {
-                "status": {
-                    "description": "HTTP status 2xx code",
-                    "type": "integer",
-                    "name": "status",
-                    "required": true,
-                    "location": "json"
-                },
-                "message": {
-                    "description": "Descriptive success message",
-                    "type": "string",
-                    "name": "message",
-                    "required": true,
-                    "location": "json"
-                }
-            },
-            "name": "Success",
-            "type": "object",
-            "additionalProperties": false
-        },
-        "TagList": {
-            "type": "array",
-            "items": {
-                "type": "string"
-            },
-            "location": "json"
         },
         "AssetList": {
             "type": "array",

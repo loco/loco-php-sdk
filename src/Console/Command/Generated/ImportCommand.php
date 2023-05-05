@@ -32,6 +32,7 @@ class ImportCommand extends Command
             ->addOption('path', '', InputOption::VALUE_REQUIRED, 'Specify original file path for source code references (excluding line number)', null)
             ->addOption('ignore-new', '', InputOption::VALUE_REQUIRED, 'Specify that new assets will NOT be added to the project', null)
             ->addOption('ignore-existing', '', InputOption::VALUE_REQUIRED, 'Specify that existing assets encountered in the file will NOT be updated', null)
+            ->addOption('ignore-blank', '', InputOption::VALUE_REQUIRED, 'Specify that blank translations should NOT be imported', null)
             ->addOption('tag-new', '', InputOption::VALUE_REQUIRED, 'Tag any NEW assets added during the import with the given tags (comma separated)', null)
             ->addOption('tag-all', '', InputOption::VALUE_REQUIRED, 'Tag ALL assets in the file with the given tags (comma separated)', null)
             ->addOption('untag-all', '', InputOption::VALUE_REQUIRED, 'Remove existing tags from any assets matched in the imported file (comma separated)', null)
