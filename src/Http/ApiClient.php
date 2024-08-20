@@ -130,7 +130,7 @@ class ApiClient extends GuzzleClient
         $config += [
             'key' => '',
             'auth' => 'loco',
-            'version' => '1.0',
+            'version' => self::API_VERSION,
             'validate_response' => true,
         ];
 
