@@ -169,7 +169,7 @@ abstract class Command extends BaseCommand
      */
     private function prettyJson(OutputInterface $output, array $result)
     {
-        $output->writeln(json_encode($result, JSON_PRETTY_PRINT|JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE));
+        $output->writeln(json_encode($result, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE));
     }
 
     /**

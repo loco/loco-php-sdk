@@ -6,7 +6,7 @@
 $basedir = dirname(__DIR__);
 
 if (!is_dir($basedir.'/vendor')) {
-    die("\nDependencies must be installed using composer:\nSee http://getcomposer.org\n\n");
+    die("\nDependencies must be installed using composer:\nSee https://getcomposer.org\n\n");
 }
 
 require_once $basedir.'/vendor/autoload.php';

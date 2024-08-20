@@ -67,8 +67,8 @@ class Serializer extends DefaultSerializer
 
         // Remap legacy parameters to common `data` binding on request body
         static $remap = [
-            'import' => ['src'=>'data'],
-            'translate' => ['translation'=>'data'],
+            'import' => ['src' => 'data'],
+            'translate' => ['translation' => 'data'],
         ];
         $name = $command->getName();
         if (isset($remap[$name])) {
