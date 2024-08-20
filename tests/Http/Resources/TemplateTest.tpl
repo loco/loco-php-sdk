@@ -15,7 +15,6 @@ use Loco\Tests\Http\Model\MockResponse;
  */
 class {{TemplateCommand}}Test extends ApiClientTestCase
 {
-
     /**
      * {{description}}
      */
@@ -24,7 +23,7 @@ class {{TemplateCommand}}Test extends ApiClientTestCase
         $service = $this->getServiceDescription();
         $query = new MockRequest('{{method}}', $service);
         $model = new MockResponse('{{model}}', $service);
-    
+
         $client = $this->getClientWithMockedResponse(
             [ 'base_uri' => 'https://example.com/api' ],
             $model->toArray()
