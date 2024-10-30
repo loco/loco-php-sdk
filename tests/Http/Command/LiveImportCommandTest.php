@@ -10,7 +10,7 @@ use GuzzleHttp\Command\Result;
  *
  * @group live
  */
-class LiveImportCommmandTest extends ApiClientTestCase
+class LiveImportCommandTest extends ApiClientTestCase
 {
     public function testLiveImportPostsValidYaml()
     {

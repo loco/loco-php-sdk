@@ -13,7 +13,7 @@ use GuzzleHttp\Exception\ClientException;
  * @group noauth
  * @group readonly
  */
-class LivePingCommmandTest extends ApiClientTestCase
+class LivePingCommandTest extends ApiClientTestCase
 {
     /**
      * Live ping test via overloaded service method

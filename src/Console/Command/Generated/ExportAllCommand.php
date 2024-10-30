@@ -35,7 +35,9 @@ class ExportAllCommand extends Command
             ->addOption('charset', '', InputOption::VALUE_REQUIRED, 'Specify preferred character encoding. Alternative to `Accept-Charset` header but accepts a single value which must be valid.', null)
             ->addOption('breaks', '', InputOption::VALUE_REQUIRED, 'Force platform-specific line-endings. Default is Unix (LF) breaks.', null)
             ->addOption('no-comments', '', InputOption::VALUE_REQUIRED, 'Disable rendering of redundant inline comments including the Loco banner.', null)
-            ->addOption('no-folding', '', InputOption::VALUE_REQUIRED, 'Protect <a href="https://localise.biz/help/developers/asset-ids#folding">dot-separated keys</a> so that `foo.bar` is not folded into object properties.', null)
+            ->addOption('no-expand', '', InputOption::VALUE_REQUIRED, 'Protect <a href="https://localise.biz/help/developers/asset-ids#folding">dot notation in keys</a> so that `foo.bar` is not expanded to an object.', null)
+            ->addOption('collisions', '', InputOption::VALUE_REQUIRED, 'Override the default strategy for handling conflicting keys. <a href="https://localise.biz/help/developers/key-collisions">See key collisions</a>.', null)
+            ->addOption('no-folding', '', InputOption::VALUE_REQUIRED, 'DEPRECATED: alias of `no-expand` for backward compatibility.', null)
         ;
         parent::configure();
     }

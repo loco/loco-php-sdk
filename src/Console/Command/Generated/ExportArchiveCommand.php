@@ -23,7 +23,7 @@ class ExportArchiveCommand extends Command
             ->setName('loco:export:archive')
             ->setMethod('exportArchive')
             ->setDescription('Export all locales to a zip archive')
-            ->addArgument('ext', InputArgument::OPTIONAL, 'Target file type specified as a file extension', 'json')
+            ->addArgument('ext', InputArgument::OPTIONAL, 'Target file type specified as a file extension. <a href="https://localise.biz/api#formats">See available options</a>.', 'json')
             ->addOption('format', '', InputOption::VALUE_REQUIRED, 'More specific format of file type. e.g. <code>symfony</code> applies to <code>php</code>, <code>xlf</code> &amp; <code>yml</code>', null)
             ->addOption('filter', '', InputOption::VALUE_REQUIRED, 'Filter assets by comma-separated tag names. Match any tag with `*` and negate tags by prefixing with `!`', null)
             ->addOption('index', '', InputOption::VALUE_REQUIRED, 'Override default lookup key for the file format: "id", "text" or a custom alias', null)
@@ -37,7 +37,9 @@ class ExportArchiveCommand extends Command
             ->addOption('charset', '', InputOption::VALUE_REQUIRED, 'Specify preferred character encoding. Alternative to `Accept-Charset` header but accepts a single value which must be valid.', null)
             ->addOption('breaks', '', InputOption::VALUE_REQUIRED, 'Force platform-specific line-endings. Default is Unix (LF) breaks.', null)
             ->addOption('no-comments', '', InputOption::VALUE_REQUIRED, 'Disable rendering of redundant inline comments including the Loco banner.', null)
-            ->addOption('no-folding', '', InputOption::VALUE_REQUIRED, 'Protect <a href="https://localise.biz/help/developers/asset-ids#folding">dot-separated keys</a> so that `foo.bar` is not folded into object properties.', null)
+            ->addOption('no-expand', '', InputOption::VALUE_REQUIRED, 'Protect <a href="https://localise.biz/help/developers/asset-ids#folding">dot notation in keys</a> so that `foo.bar` is not expanded to an object.', null)
+            ->addOption('collisions', '', InputOption::VALUE_REQUIRED, 'Override the default strategy for handling conflicting keys. <a href="https://localise.biz/help/developers/key-collisions">See key collisions</a>.', null)
+            ->addOption('no-folding', '', InputOption::VALUE_REQUIRED, 'DEPRECATED: alias of `no-expand` for backward compatibility.', null)
         ;
         parent::configure();
     }

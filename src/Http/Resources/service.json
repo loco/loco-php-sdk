@@ -1,6 +1,6 @@
 {
     "name": "Loco",
-    "apiVersion": "1.0.28",
+    "apiVersion": "1.0.29",
     "baseUri": "https://localise.biz/",
     "description": "Loco REST API",
     "operations": {
@@ -154,11 +154,32 @@
                     "description": "Disable rendering of redundant inline comments including the Loco banner.",
                     "location": "query"
                 },
+                "no-expand": {
+                    "name": "no-expand",
+                    "type": "boolean",
+                    "required": false,
+                    "description": "Protect <a href=\"https://localise.biz/help/developers/asset-ids#folding\">dot notation in keys</a> so that `foo.bar` is not expanded to an object.",
+                    "location": "query"
+                },
+                "collisions": {
+                    "name": "collisions",
+                    "type": "string",
+                    "required": false,
+                    "description": "Override the default strategy for handling conflicting keys. <a href=\"https://localise.biz/help/developers/key-collisions\">See key collisions</a>.",
+                    "enum": [
+                        "overwrite",
+                        "ignore",
+                        "fail",
+                        "auto",
+                        "legacy"
+                    ],
+                    "location": "query"
+                },
                 "no-folding": {
                     "name": "no-folding",
                     "type": "boolean",
                     "required": false,
-                    "description": "Protect <a href=\"https://localise.biz/help/developers/asset-ids#folding\">dot-separated keys</a> so that `foo.bar` is not folded into object properties.",
+                    "description": "DEPRECATED: alias of `no-expand` for backward compatibility.",
                     "location": "query"
                 },
                 "key": {
@@ -193,33 +214,7 @@
                     "name": "ext",
                     "type": "string",
                     "required": true,
-                    "description": "Target file type specified as a file extension",
-                    "enum": [
-                        "arb",
-                        "csv",
-                        "html",
-                        "ini",
-                        "json",
-                        "mo",
-                        "php",
-                        "po",
-                        "pot",
-                        "plist",
-                        "bplist",
-                        "properties",
-                        "res",
-                        "resx",
-                        "sql",
-                        "strings",
-                        "stringsdict",
-                        "tmx",
-                        "ts",
-                        "txt",
-                        "xlf",
-                        "xliff",
-                        "xml",
-                        "yml"
-                    ],
+                    "description": "Target file type specified as a file extension. <a href=\"https://localise.biz/api#formats\">See available options</a>.",
                     "location": "uri",
                     "default": "json"
                 },
@@ -330,11 +325,32 @@
                     "description": "Disable rendering of redundant inline comments including the Loco banner.",
                     "location": "query"
                 },
+                "no-expand": {
+                    "name": "no-expand",
+                    "type": "boolean",
+                    "required": false,
+                    "description": "Protect <a href=\"https://localise.biz/help/developers/asset-ids#folding\">dot notation in keys</a> so that `foo.bar` is not expanded to an object.",
+                    "location": "query"
+                },
+                "collisions": {
+                    "name": "collisions",
+                    "type": "string",
+                    "required": false,
+                    "description": "Override the default strategy for handling conflicting keys. <a href=\"https://localise.biz/help/developers/key-collisions\">See key collisions</a>.",
+                    "enum": [
+                        "overwrite",
+                        "ignore",
+                        "fail",
+                        "auto",
+                        "legacy"
+                    ],
+                    "location": "query"
+                },
                 "no-folding": {
                     "name": "no-folding",
                     "type": "boolean",
                     "required": false,
-                    "description": "Protect <a href=\"https://localise.biz/help/developers/asset-ids#folding\">dot-separated keys</a> so that `foo.bar` is not folded into object properties.",
+                    "description": "DEPRECATED: alias of `no-expand` for backward compatibility.",
                     "location": "query"
                 },
                 "key": {
@@ -376,33 +392,7 @@
                     "name": "ext",
                     "type": "string",
                     "required": true,
-                    "description": "Target file type specified as a file extension",
-                    "enum": [
-                        "arb",
-                        "csv",
-                        "html",
-                        "ini",
-                        "json",
-                        "mo",
-                        "php",
-                        "po",
-                        "pot",
-                        "plist",
-                        "bplist",
-                        "properties",
-                        "res",
-                        "resx",
-                        "sql",
-                        "strings",
-                        "stringsdict",
-                        "tmx",
-                        "ts",
-                        "txt",
-                        "xlf",
-                        "xliff",
-                        "xml",
-                        "yml"
-                    ],
+                    "description": "Target file type specified as a file extension. <a href=\"https://localise.biz/api#formats\">See available options</a>.",
                     "location": "uri",
                     "default": "json"
                 },
@@ -506,11 +496,32 @@
                     "description": "Disable rendering of redundant inline comments including the Loco banner.",
                     "location": "query"
                 },
+                "no-expand": {
+                    "name": "no-expand",
+                    "type": "boolean",
+                    "required": false,
+                    "description": "Protect <a href=\"https://localise.biz/help/developers/asset-ids#folding\">dot notation in keys</a> so that `foo.bar` is not expanded to an object.",
+                    "location": "query"
+                },
+                "collisions": {
+                    "name": "collisions",
+                    "type": "string",
+                    "required": false,
+                    "description": "Override the default strategy for handling conflicting keys. <a href=\"https://localise.biz/help/developers/key-collisions\">See key collisions</a>.",
+                    "enum": [
+                        "overwrite",
+                        "ignore",
+                        "fail",
+                        "auto",
+                        "legacy"
+                    ],
+                    "location": "query"
+                },
                 "no-folding": {
                     "name": "no-folding",
                     "type": "boolean",
                     "required": false,
-                    "description": "Protect <a href=\"https://localise.biz/help/developers/asset-ids#folding\">dot-separated keys</a> so that `foo.bar` is not folded into object properties.",
+                    "description": "DEPRECATED: alias of `no-expand` for backward compatibility.",
                     "location": "query"
                 },
                 "key": {
@@ -545,33 +556,7 @@
                     "name": "ext",
                     "type": "string",
                     "required": true,
-                    "description": "Target file type specified as a file extension",
-                    "enum": [
-                        "arb",
-                        "csv",
-                        "html",
-                        "ini",
-                        "json",
-                        "mo",
-                        "php",
-                        "po",
-                        "pot",
-                        "plist",
-                        "bplist",
-                        "properties",
-                        "res",
-                        "resx",
-                        "sql",
-                        "strings",
-                        "stringsdict",
-                        "tmx",
-                        "ts",
-                        "txt",
-                        "xlf",
-                        "xliff",
-                        "xml",
-                        "yml"
-                    ],
+                    "description": "Target file type specified as a file extension. <a href=\"https://localise.biz/api#formats\">See available options</a>.",
                     "location": "uri",
                     "default": "json"
                 },
@@ -608,13 +593,6 @@
                     "type": "string",
                     "required": false,
                     "description": "Override the project name for some language packs that use it as a key prefix",
-                    "location": "query"
-                },
-                "fallback": {
-                    "name": "fallback",
-                    "type": "string",
-                    "required": false,
-                    "description": "Fallback locale for untranslated assets, specified as short code. e.g. `en` or `en_GB`",
                     "location": "query"
                 },
                 "order": {
@@ -675,11 +653,32 @@
                     "description": "Disable rendering of redundant inline comments including the Loco banner.",
                     "location": "query"
                 },
+                "no-expand": {
+                    "name": "no-expand",
+                    "type": "boolean",
+                    "required": false,
+                    "description": "Protect <a href=\"https://localise.biz/help/developers/asset-ids#folding\">dot notation in keys</a> so that `foo.bar` is not expanded to an object.",
+                    "location": "query"
+                },
+                "collisions": {
+                    "name": "collisions",
+                    "type": "string",
+                    "required": false,
+                    "description": "Override the default strategy for handling conflicting keys. <a href=\"https://localise.biz/help/developers/key-collisions\">See key collisions</a>.",
+                    "enum": [
+                        "overwrite",
+                        "ignore",
+                        "fail",
+                        "auto",
+                        "legacy"
+                    ],
+                    "location": "query"
+                },
                 "no-folding": {
                     "name": "no-folding",
                     "type": "boolean",
                     "required": false,
-                    "description": "Protect <a href=\"https://localise.biz/help/developers/asset-ids#folding\">dot-separated keys</a> so that `foo.bar` is not folded into object properties.",
+                    "description": "DEPRECATED: alias of `no-expand` for backward compatibility.",
                     "location": "query"
                 },
                 "key": {
@@ -2759,6 +2758,13 @@
                     "description": "String formatting style. <a href=\"/help/developers/printf\">See string formatting</a>",
                     "type": "string",
                     "name": "printf",
+                    "location": "json"
+                },
+                "created": {
+                    "description": "Time first added in UTC",
+                    "type": "string",
+                    "format": "date-time",
+                    "name": "created",
                     "location": "json"
                 },
                 "modified": {
