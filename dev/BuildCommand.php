@@ -44,16 +44,7 @@ final class BuildCommand extends Command
         if (! is_array($conf)) {
             throw new \RuntimeException('Malformed config.json, check your JSON syntax');
         }
-        if (! isset($conf['base_uri'])) {
-            throw new \RuntimeException('Invalid config.json, build operation requires base_uri');
-        }
-        if (! class_exists('Loco\\Utils\\Swizzle\\Swizzle', true)) {
-            $output->writeln("<error>Swizzle not found. Run composer install --dev</error>");
-            return 1;
-        }
-
-        $builder = new Swizzle('Loco', 'Loco REST API');
-        $builder->setDelay(0);
+        $builder = new OpenApiBuilder('Loco', 'Loco REST API');
         if ($verbose === true) {
             $builder->verbose(STDERR);
         }
@@ -66,13 +57,12 @@ final class BuildCommand extends Command
             ->registerResponseClass('exportAll', RawResult::class)
             ->registerResponseClass('convert', RawResult::class);
 
-        // Enable response validation and locale URL if building for local test
-        $base_uri = $conf['base_uri'];
+        $base_uri = $conf['base_uri'] ?? 'https://localise.biz/api';
         $domain = parse_url($base_uri, PHP_URL_HOST);
-
-        $base_uri .= '/swagger';
-        $output->writeln('<comment>Pulling docs from '.$base_uri.'</comment>');
-        $builder->build($base_uri);
+        $specUrl = 'https://' . $domain . '/api/spec.json';
+        $output->writeln('<comment>Pulling docs from ' . $specUrl . '</comment>');
+        $sslVerify = $conf['guzzle']['verify'] ?? true;
+        $builder->build($specUrl, $sslVerify);
 
         // Collect magic methods usable by this client via  GuzzleHttp\Command\ServiceClient::__call()
         $methodTags = [];
@@ -125,7 +115,7 @@ final class BuildCommand extends Command
             // Write Test case, containing dummy success response and full request
             $source = str_replace(
                 [ '{{method}}', '{{TemplateCommand}}', '{{description}}', '{{model}}' ],
-                [ $functionName, $className, $operation['summary'], $operation['responseModel'] ],
+                [ $functionName, $className, $operation['summary'], $operation['responseModel'] ?? '' ],
                 file_get_contents($cwd.'/tests/Http/Resources/TemplateTest.tpl')
             );
             $file = $cwd.'/tests/Http/Generated/'.$className.'Test.php';
